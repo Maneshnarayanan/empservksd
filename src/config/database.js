@@ -1,0 +1,90 @@
+const { Pool } = require('pg');
+const path = require('path');
+const fs = require('fs');
+
+let pool = null;
+let isInMemory = false;
+let memDb = null;
+
+function initDatabase() {
+  if (pool) return pool;
+
+  const connectionString = process.env.DATABASE_URL;
+  const usePgMem = process.env.NODE_ENV === 'test' || process.env.USE_PG_MEM === 'true';
+
+  if (!usePgMem && (connectionString || process.env.DB_HOST)) {
+    const config = connectionString
+      ? { connectionString }
+      : {
+          host: process.env.DB_HOST || 'localhost',
+          port: parseInt(process.env.DB_PORT || '5432', 10),
+          user: process.env.DB_USER || 'postgres',
+          password: process.env.DB_PASSWORD || 'postgres',
+          database: process.env.DB_NAME || 'employeeserviceksd',
+          ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
+          max: 20,
+          idleTimeoutMillis: 30000,
+          connectionTimeoutMillis: 5000,
+        };
+
+    pool = new Pool(config);
+
+    pool.on('error', (err) => {
+      console.error('Unexpected error on idle PostgreSQL client:', err);
+    });
+
+    return pool;
+  }
+
+  // Fallback to in-memory PG emulator (pg-mem) for tests or standalone environments
+  return initInMemoryDatabase();
+}
+
+function initInMemoryDatabase() {
+  try {
+    const { newDb } = require('pg-mem');
+    memDb = newDb();
+    
+    // Register custom functions if needed (e.g. current_timestamp)
+    memDb.public.registerFunction({
+      name: 'version',
+      implementation: () => 'PostgreSQL 15.0 (pg-mem simulated)'
+    });
+
+    const pgMock = memDb.adapters.createPg();
+    pool = new pgMock.Pool();
+    isInMemory = true;
+    console.log('Database initialized in in-memory mode (pg-mem).');
+    return pool;
+  } catch (err) {
+    console.error('Failed to initialize in-memory database:', err);
+    throw err;
+  }
+}
+
+async function query(text, params) {
+  const p = initDatabase();
+  return p.query(text, params);
+}
+
+async function getClient() {
+  const p = initDatabase();
+  return p.connect();
+}
+
+function isDbInMemory() {
+  return isInMemory;
+}
+
+function getPool() {
+  return initDatabase();
+}
+
+module.exports = {
+  query,
+  getClient,
+  getPool,
+  initDatabase,
+  initInMemoryDatabase,
+  isDbInMemory,
+};

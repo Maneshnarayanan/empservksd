@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employees Service, Kasaragod — Employee Services & Community Portal</title>
+  <meta name="description" content="Official employee resource portal for Kasaragod. Quick access to SPARK, BIMS, Treasury, Education, PF, KITE, Medisep, Downloads, and internal community blogs.">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+  <!-- Top Utility Contact Bar -->
+  <header class="bg-emerald-950 text-emerald-100 text-xs py-2 px-4 border-b border-emerald-900">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+          Bank Road, Near Mallikarjuna Temple, Kasaragod
+        </span>
+        <span class="hidden md:inline text-emerald-700">•</span>
+        <a href="mailto:esksd31@gmail.com" class="hover:text-white flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+          esksd31@gmail.com
+        </a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="tel:9447396181" class="hover:text-white flex items-center gap-1">
+          <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
+          9447396181
+        </a>
+        <a href="https://wa.me/919447396181" target="_blank" rel="noopener noreferrer" class="bg-emerald-700 hover:bg-emerald-600 text-white px-2 py-0.5 rounded text-[11px] font-semibold flex items-center gap-1 transition">
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Navigation Bar -->
+  <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="/" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-emerald-800 text-white flex items-center justify-center font-bold text-xl shadow-md">
+            ES
+          </div>
+          <div>
+            <span class="block text-base font-bold text-slate-900 tracking-tight leading-tight">EMPLOYEES SERVICE</span>
+            <span class="block text-xs font-medium text-emerald-700 uppercase tracking-wider">Kasaragod</span>
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-1 lg:space-x-3 text-sm font-medium">
+          <a href="/" class="text-emerald-700 font-semibold px-3 py-2 rounded-md bg-emerald-50">Home</a>
+          <a href="/services" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">Services Directory</a>
+          <a href="/downloads" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">Downloads</a>
+          <a href="/blogs" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">Blogs & Web</a>
+          <a href="/about" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">About Us</a>
+          <a href="/contact" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">Contact</a>
+          <a href="/admin/login" class="ml-2 text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-800 hover:text-white hover:border-slate-800 transition">Admin Login</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100" aria-label="Toggle navigation menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4 pt-2 border-t border-slate-100 space-y-1">
+        <a href="/" class="block px-3 py-2 rounded-md text-base font-semibold text-emerald-800 bg-emerald-50">Home</a>
+        <a href="/services" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Services Directory</a>
+        <a href="/downloads" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Downloads</a>
+        <a href="/blogs" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Blogs & Web</a>
+        <a href="/about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">About Us</a>
+        <a href="/contact" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Contact</a>
+        <a href="/admin/login" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-100">Admin Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <main class="flex-grow">
+    <section class="bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div class="max-w-5xl mx-auto text-center relative z-10">
+        <span class="inline-block px-3 py-1 bg-emerald-700/60 backdrop-blur-sm rounded-full text-xs font-semibold uppercase tracking-wider text-emerald-200 mb-4 border border-emerald-500/30">
+          Kerala State Employees Resource Center
+        </span>
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">
+          Employees Service, Kasaragod
+        </h1>
+        <p class="text-lg sm:text-xl text-emerald-100 max-w-3xl mx-auto mb-8 font-light leading-relaxed">
+          Your unified directory for SPARK, BIMS, e-Treasury, Tax Portals, Education Services, PF, KITE, Downloads, and internal community blogs.
+        </p>
+
+        <!-- Quick Search Bar -->
+        <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-2xl p-2 flex items-center gap-2">
+          <svg class="w-5 h-5 text-slate-400 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <input type="text" id="hero-search-input" placeholder="Search employee services (e.g., SPARK, BIMS, GPF, Sampoorna)..." class="w-full py-2 px-2 text-slate-800 focus:outline-none text-sm">
+          <button id="hero-search-btn" class="bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2.5 rounded-lg font-medium text-sm transition shrink-0">
+            Search
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Categories Grid Section -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-3 border-b border-slate-200 gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Employee Service Portals</h2>
+          <p class="text-sm text-slate-600 mt-1">Official categorization of external employee resources and department portals.</p>
+        </div>
+        <a href="/services" class="text-sm font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 group">
+          View Complete Directory
+          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+
+      <!-- Categories Container -->
+      <div id="home-categories-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <!-- Rendered dynamically -->
+        <div class="col-span-full py-8 text-center text-slate-400 text-sm animate-pulse">Loading service categories...</div>
+      </div>
+    </section>
+
+    <!-- Quick Access Highlights Section -->
+    <section class="bg-slate-100 py-12 px-4 sm:px-6 lg:px-8 border-y border-slate-200">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Card 1: Services -->
+          <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">Service Directory</h3>
+              <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                Direct access to SPARK, BIMS, Treasury, Income Tax, General Education, GPF, and KITE portals.
+              </p>
+            </div>
+            <a href="/services" class="inline-block text-sm font-semibold text-emerald-700 hover:text-emerald-800">Browse all services &rarr;</a>
+          </div>
+
+          <!-- Card 2: Downloads -->
+          <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center font-bold mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">Download Center</h3>
+              <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                Download verified government forms, circulars, calculators, order copies, and employee templates.
+              </p>
+            </div>
+            <a href="/downloads" class="inline-block text-sm font-semibold text-blue-700 hover:text-blue-800">Browse downloads &rarr;</a>
+          </div>
+
+          <!-- Card 3: Community Blogs -->
+          <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center font-bold mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">Blogs & Web Resources</h3>
+              <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                Read educational articles, salary updates, and administrative guides from HM Blog, Muttam Blog, and Maths Blog.
+              </p>
+            </div>
+            <a href="/blogs" class="inline-block text-sm font-semibold text-amber-700 hover:text-amber-800">Explore articles &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Articles Section -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="flex items-center justify-between mb-8 pb-3 border-b border-slate-200">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Recent Community Articles</h2>
+          <p class="text-sm text-slate-600 mt-1">Articles and guidance hosted on employeeserviceksd.com</p>
+        </div>
+        <a href="/blogs" class="text-sm font-semibold text-emerald-700 hover:text-emerald-800">All Blogs &rarr;</a>
+      </div>
+
+      <div id="home-articles-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="col-span-full py-8 text-center text-slate-400 text-sm">Loading recent articles...</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-sm border-t border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded bg-emerald-700 text-white flex items-center justify-center font-bold text-base">ES</div>
+            <span class="text-white font-bold text-lg tracking-tight">EMPLOYEES SERVICE, KASARAGOD</span>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed max-w-md mb-4">
+            An independent resource and community information portal dedicated to employees, teachers, and staff across Kasaragod and Kerala.
+          </p>
+          <div class="text-xs text-slate-400 space-y-1">
+            <p><strong>Address:</strong> Bank Road, Near Mallikarjuna Temple, Kasaragod</p>
+            <p><strong>Email:</strong> <a href="mailto:esksd31@gmail.com" class="text-emerald-400 hover:underline">esksd31@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:9447396181" class="text-emerald-400 hover:underline">9447396181</a></p>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-3 uppercase tracking-wider">Quick Links</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/" class="hover:text-emerald-400 transition">Home</a></li>
+            <li><a href="/services" class="hover:text-emerald-400 transition">Service Directory</a></li>
+            <li><a href="/downloads" class="hover:text-emerald-400 transition">Download Center</a></li>
+            <li><a href="/blogs" class="hover:text-emerald-400 transition">Blogs & Web</a></li>
+            <li><a href="/about" class="hover:text-emerald-400 transition">About Us</a></li>
+            <li><a href="/contact" class="hover:text-emerald-400 transition">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-3 uppercase tracking-wider">Portal Access</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/admin/login" class="hover:text-emerald-400 transition">Administrator Login</a></li>
+            <li><a href="/privacy-policy" class="hover:text-emerald-400 transition">Privacy Policy</a></li>
+          </ul>
+          <div class="mt-6 pt-4 border-t border-slate-800 text-xs text-slate-500">
+            Helpline: 9447396181 (WhatsApp Available)
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+        <p>&copy; 2026 Employees Service, Kasaragod. All rights reserved.</p>
+        <p>employeeserviceksd.com — Community Portal</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Fetch & display Categories
+      try {
+        const catRes = await fetch('/api/v1/services/categories');
+        const catData = await catRes.json();
+        const container = document.getElementById('home-categories-grid');
+        if (catData.success && catData.data.length > 0) {
+          container.innerHTML = catData.data.map(cat => `
+            <a href="/services?category=${cat.id}" class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 hover:border-emerald-600 hover:shadow-md transition text-center group flex flex-col items-center justify-center">
+              <div class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-800 flex items-center justify-center font-bold text-sm mb-2 group-hover:bg-emerald-700 group-hover:text-white transition">
+                ${cat.name.substring(0, 2).toUpperCase()}
+              </div>
+              <span class="font-bold text-sm text-slate-900 group-hover:text-emerald-700 transition">${cat.name}</span>
+              <span class="text-xs text-slate-400 mt-1">${cat.links_count} portals</span>
+            </a>
+          `).join('');
+        } else {
+          container.innerHTML = '<div class="col-span-full py-4 text-center text-slate-500 text-sm">No service categories active at the moment.</div>';
+        }
+      } catch (err) {
+        console.error('Failed to load categories:', err);
+      }
+
+      // 2. Fetch Recent Articles
+      try {
+        const blogRes = await fetch('/api/v1/blogs?limit=3');
+        const blogData = await blogRes.json();
+        const articlesContainer = document.getElementById('home-articles-container');
+        if (blogData.success && blogData.articles.length > 0) {
+          articlesContainer.innerHTML = blogData.articles.map(art => `
+            <article class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+              <div class="p-6">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">${art.category_name}</span>
+                  <span class="text-xs text-slate-400">•</span>
+                  <time class="text-xs text-slate-500">${formatDate(art.published_at)}</time>
+                </div>
+                <h3 class="text-base font-bold text-slate-900 mb-2 leading-snug hover:text-emerald-700 transition">
+                  <a href="/blogs/${art.slug}">${art.title}</a>
+                </h3>
+                <p class="text-sm text-slate-600 line-clamp-3 mb-4 leading-relaxed">${art.summary || 'Click to view full guidance and notes.'}</p>
+              </div>
+              <div class="px-6 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>By ${art.author_name}</span>
+                <a href="/blogs/${art.slug}" class="font-semibold text-emerald-700 hover:text-emerald-800">Read &rarr;</a>
+              </div>
+            </article>
+          `).join('');
+        } else {
+          articlesContainer.innerHTML = `
+            <div class="col-span-full bg-slate-50 border border-dashed border-slate-300 rounded-xl p-8 text-center text-slate-500">
+              <svg class="w-8 h-8 text-slate-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+              <p class="font-medium text-slate-700">No articles published yet</p>
+              <p class="text-xs text-slate-500 mt-1">Check back soon for community updates from HM Blog, Muttam Blog, and Maths Blog.</p>
+            </div>
+          `;
+        }
+      } catch (err) {
+        console.error('Failed to load articles:', err);
+      }
+
+      // Hero Search handler
+      const searchBtn = document.getElementById('hero-search-btn');
+      const searchInput = document.getElementById('hero-search-input');
+      const handleSearch = () => {
+        const query = searchInput.value.trim();
+        if (query) {
+          window.location.href = `/services?search=${encodeURIComponent(query)}`;
+        }
+      };
+      if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', handleSearch);
+        searchInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') handleSearch();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

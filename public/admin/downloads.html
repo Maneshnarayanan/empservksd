@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Downloads — Admin Portal</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body class="bg-slate-100 text-slate-800 flex h-screen overflow-hidden">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between shrink-0 border-r border-slate-800">
+    <div>
+      <div class="h-16 flex items-center gap-3 px-6 border-b border-slate-800">
+        <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-base shadow">ES</div>
+        <div>
+          <span class="block text-sm font-bold text-white tracking-tight">Admin Portal</span>
+          <span class="block text-[11px] text-emerald-400 font-medium">ESKSD Control</span>
+        </div>
+      </div>
+
+      <nav class="p-4 space-y-1 text-sm font-medium">
+        <a href="/admin/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+          Dashboard
+        </a>
+        <a href="/admin/services" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+          Service Portals
+        </a>
+        <a href="/admin/service-categories" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          Categories
+        </a>
+        <a href="/admin/downloads" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          Downloads
+        </a>
+        <a href="/admin/blogs" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+          Blog Articles
+        </a>
+        <a href="/admin/blog-categories" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+          Blog Categories
+        </a>
+        <a href="/admin/settings" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          Settings
+        </a>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-slate-800">
+      <div class="flex items-center justify-between mb-3">
+        <div class="text-xs">
+          <span class="block text-white font-semibold admin-username-display">Administrator</span>
+          <span class="text-slate-500">Super Admin</span>
+        </div>
+        <button id="admin-logout-btn" class="p-2 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+        </button>
+      </div>
+      <a href="/" target="_blank" class="block w-full text-center text-xs font-semibold py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+        View Live Website &rarr;
+      </a>
+    </div>
+  </aside>
+
+  <!-- Content View -->
+  <main class="flex-grow flex flex-col overflow-y-auto">
+    <header class="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0">
+      <div>
+        <h1 class="text-lg font-bold text-slate-900">Download Resources</h1>
+        <p class="text-xs text-slate-500">Manage downloadable files, circulars, forms, and calculators</p>
+      </div>
+      <button onclick="openUploadModal()" class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition shadow-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+        Upload File
+      </button>
+    </header>
+
+    <div class="p-8 max-w-7xl w-full mx-auto space-y-6">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase font-semibold">
+            <tr>
+              <th class="px-6 py-3.5">Title</th>
+              <th class="px-6 py-3.5">Category</th>
+              <th class="px-6 py-3.5">File Details</th>
+              <th class="px-6 py-3.5">Downloads</th>
+              <th class="px-6 py-3.5">Status</th>
+              <th class="px-6 py-3.5 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="downloads-table-body" class="divide-y divide-slate-100 text-slate-700">
+            <tr>
+              <td colspan="6" class="px-6 py-8 text-center text-slate-400">Loading resources...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Upload/Edit Modal -->
+  <div id="download-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 text-slate-800">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100 mb-4">
+        <h3 id="modal-title" class="font-bold text-base text-slate-900">Upload File Resource</h3>
+        <button onclick="closeModal('download-modal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+
+      <form id="download-form" class="space-y-4">
+        <input type="hidden" id="download-id">
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Title *</label>
+          <input type="text" id="download-title" required placeholder="e.g., SPARK Salary Calculator Form" class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Category</label>
+          <input type="text" id="download-category" placeholder="e.g., Forms, Circulars, Salary, Orders" class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1" id="file-label">Select File *</label>
+          <input type="file" id="download-file" class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none">
+          <p class="text-[11px] text-slate-400 mt-1">Allowed: PDF, DOCX, XLSX, ZIP, JPG, PNG (Max 15MB)</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Description</label>
+          <textarea id="download-desc" rows="2" placeholder="Summary or instructions for this download..." class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Active Status</label>
+          <select id="download-status" class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none">
+            <option value="true">Active (Publicly Downloadable)</option>
+            <option value="false">Inactive (Hidden)</option>
+          </select>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
+          <button type="button" onclick="closeModal('download-modal')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium hover:bg-slate-50 transition">Cancel</button>
+          <button type="submit" id="download-save-btn" class="px-5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-semibold transition shadow-sm">Save Resource</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/admin.js"></script>
+  <script>
+    let downloadItems = [];
+
+    async function loadDownloads() {
+      try {
+        const res = await fetch('/api/v1/admin/downloads');
+        const data = await res.json();
+        if (data.success) {
+          downloadItems = data.data;
+          renderTable();
+        }
+      } catch (err) {
+        console.error('Failed to load downloads:', err);
+      }
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('downloads-table-body');
+      if (downloadItems.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-8 text-center text-slate-400">No download resources uploaded yet.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = downloadItems.map(item => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="px-6 py-3.5">
+            <span class="font-bold text-slate-900 block">${item.title}</span>
+            <span class="text-[11px] text-slate-400 font-mono">${item.original_filename}</span>
+          </td>
+          <td class="px-6 py-3.5">
+            <span class="bg-slate-100 text-slate-700 text-[11px] font-semibold px-2 py-0.5 rounded-full">
+              ${item.category || 'General'}
+            </span>
+          </td>
+          <td class="px-6 py-3.5 font-mono text-[11px] text-slate-600">
+            ${formatBytes(item.file_size)}
+          </td>
+          <td class="px-6 py-3.5 font-bold text-slate-900">${item.download_count}</td>
+          <td class="px-6 py-3.5">
+            ${item.is_active
+              ? `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-100 text-emerald-800">Active</span>`
+              : `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600">Inactive</span>`
+            }
+          </td>
+          <td class="px-6 py-3.5 text-right space-x-2">
+            <a href="/api/v1/downloads/${item.id}/file" class="text-blue-600 hover:text-blue-800 font-semibold" target="_blank">Download</a>
+            <button onclick="openEditDownloadModal(${item.id})" class="text-emerald-700 hover:text-emerald-900 font-semibold">Edit</button>
+            <button onclick="handleDeleteDownload(${item.id}, '${item.title.replace(/'/g, "\\'")}')" class="text-rose-600 hover:text-rose-800 font-semibold">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openUploadModal() {
+      document.getElementById('modal-title').textContent = 'Upload File Resource';
+      document.getElementById('download-id').value = '';
+      document.getElementById('download-title').value = '';
+      document.getElementById('download-category').value = 'Forms';
+      document.getElementById('download-desc').value = '';
+      document.getElementById('download-status').value = 'true';
+      document.getElementById('download-file').value = '';
+      document.getElementById('download-file').required = true;
+      document.getElementById('file-label').textContent = 'Select File *';
+      openModal('download-modal');
+    }
+
+    function openEditDownloadModal(id) {
+      const item = downloadItems.find(d => d.id === id);
+      if (!item) return;
+
+      document.getElementById('modal-title').textContent = 'Edit Resource / Replace File';
+      document.getElementById('download-id').value = item.id;
+      document.getElementById('download-title').value = item.title;
+      document.getElementById('download-category').value = item.category || '';
+      document.getElementById('download-desc').value = item.description || '';
+      document.getElementById('download-status').value = item.is_active ? 'true' : 'false';
+      document.getElementById('download-file').value = '';
+      document.getElementById('download-file').required = false;
+      document.getElementById('file-label').textContent = 'Replace File (Optional)';
+      openModal('download-modal');
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('download-id').value;
+      const fileInput = document.getElementById('download-file');
+      const saveBtn = document.getElementById('download-save-btn');
+
+      const formData = new FormData();
+      formData.append('title', document.getElementById('download-title').value.trim());
+      formData.append('category', document.getElementById('download-category').value.trim());
+      formData.append('description', document.getElementById('download-desc').value.trim());
+      formData.append('is_active', document.getElementById('download-status').value);
+
+      if (fileInput.files.length > 0) {
+        formData.append('file', fileInput.files[0]);
+      }
+
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Uploading...';
+
+      try {
+        const url = id ? `/api/v1/admin/downloads/${id}` : '/api/v1/admin/downloads';
+        const method = id ? 'PUT' : 'POST';
+
+        const token = await getCsrfToken();
+        const headers = {};
+        if (token) headers['X-CSRF-Token'] = token;
+
+        const res = await fetch(url, {
+          method,
+          headers,
+          body: formData,
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast(id ? 'Resource updated successfully.' : 'File uploaded successfully.', 'success');
+          closeModal('download-modal');
+          loadDownloads();
+        } else {
+          showToast(data.message || (data.errors ? data.errors.join(' ') : 'Upload failed.'), 'error');
+        }
+      } catch (err) {
+        showToast('Network error during upload.', 'error');
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Resource';
+      }
+    }
+
+    function handleDeleteDownload(id, title) {
+      confirmAction('Delete Resource', `Are you sure you want to delete "${title}"? The file will be permanently removed from disk.`, async () => {
+        try {
+          const res = await apiFetch(`/api/v1/admin/downloads/${id}`, { method: 'DELETE' });
+          const data = await res.json();
+          if (res.ok && data.success) {
+            showToast('Resource deleted successfully.', 'success');
+            loadDownloads();
+          } else {
+            showToast(data.message || 'Failed to delete download.', 'error');
+          }
+        } catch (err) {
+          showToast('Network error during deletion.', 'error');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadDownloads();
+      document.getElementById('download-form').addEventListener('submit', handleFormSubmit);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+node_modules/
+.env
+storage/downloads/*
+!storage/downloads/.gitkeep
+storage/blog-images/*
+!storage/blog-images/.gitkeep
+*.log
+.DS_Store
+Thumbs.db

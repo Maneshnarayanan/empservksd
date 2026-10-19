@@ -1,0 +1,28 @@
+[Unit]
+Description=employeeserviceksd.com Node.js Express Application
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/employeeserviceksd
+Environment=NODE_ENV=production
+EnvironmentFile=/var/www/employeeserviceksd/.env
+ExecStart=/usr/bin/node /var/www/employeeserviceksd/src/server.js
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=empservksd
+
+# Sandboxing and Security hardening
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/www/employeeserviceksd/storage
+
+[Install]
+WantedBy=multi-user.target

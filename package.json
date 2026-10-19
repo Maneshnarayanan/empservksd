@@ -1,0 +1,44 @@
+{
+  "name": "empservksd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "build:css": "tailwindcss -i src/styles/input.css -o public/assets/css/styles.css --minify",
+    "watch:css": "tailwindcss -i src/styles/input.css -o public/assets/css/styles.css --watch",
+    "build": "npm run build:css",
+    "migrate": "node scripts/migrate.js",
+    "seed": "node scripts/seed.js",
+    "create-admin": "node scripts/create-admin.js",
+    "test": "vitest run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "argon2": "^0.45.1",
+    "connect-pg-simple": "^10.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "csurf": "^1.11.0",
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
+    "express-session": "^1.19.0",
+    "helmet": "^8.3.0",
+    "multer": "^2.4.0",
+    "pg": "^8.23.1",
+    "sanitize-html": "^2.18.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "autoprefixer": "^10.6.1",
+    "pg-mem": "^3.0.14",
+    "postcss": "^8.5.31",
+    "supertest": "^7.3.1",
+    "tailwindcss": "^4.3.3",
+    "vitest": "^5.0.5"
+  }
+}

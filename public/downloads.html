@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Center — Employees Service, Kasaragod</title>
+  <meta name="description" content="Download official Kerala employee forms, government circulars, order copies, salary templates, and administrative resources.">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+  <!-- Top Utility Bar -->
+  <header class="bg-emerald-950 text-emerald-100 text-xs py-2 px-4 border-b border-emerald-900">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-4">
+        <span>Bank Road, Near Mallikarjuna Temple, Kasaragod</span>
+        <span class="hidden sm:inline text-emerald-700">•</span>
+        <a href="mailto:esksd31@gmail.com" class="hover:text-white">esksd31@gmail.com</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="tel:9447396181" class="hover:text-white">9447396181</a>
+        <a href="https://wa.me/919447396181" target="_blank" rel="noopener noreferrer" class="bg-emerald-700 hover:bg-emerald-600 text-white px-2 py-0.5 rounded text-[11px] font-semibold transition">WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="/" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-emerald-800 text-white flex items-center justify-center font-bold text-xl shadow-md">ES</div>
+          <div>
+            <span class="block text-base font-bold text-slate-900 tracking-tight leading-tight">EMPLOYEES SERVICE</span>
+            <span class="block text-xs font-medium text-emerald-700 uppercase tracking-wider">Kasaragod</span>
+          </div>
+        </a>
+
+        <div class="hidden md:flex items-center space-x-1 lg:space-x-3 text-sm font-medium">
+          <a href="/" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">Home</a>
+          <a href="/services" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">Services Directory</a>
+          <a href="/downloads" class="text-emerald-700 font-semibold px-3 py-2 rounded-md bg-emerald-50">Downloads</a>
+          <a href="/blogs" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">Blogs & Web</a>
+          <a href="/about" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">About Us</a>
+          <a href="/contact" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">Contact</a>
+          <a href="/admin/login" class="ml-2 text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-800 hover:text-white transition">Admin Login</a>
+        </div>
+
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100" aria-label="Toggle navigation">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+
+      <div id="mobile-menu" class="hidden md:hidden pb-4 pt-2 border-t border-slate-100 space-y-1">
+        <a href="/" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Home</a>
+        <a href="/services" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Services Directory</a>
+        <a href="/downloads" class="block px-3 py-2 rounded-md text-base font-semibold text-emerald-800 bg-emerald-50">Downloads</a>
+        <a href="/blogs" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Blogs & Web</a>
+        <a href="/about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">About Us</a>
+        <a href="/contact" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Contact</a>
+        <a href="/admin/login" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-100">Admin Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Banner -->
+  <main class="flex-grow">
+    <div class="bg-slate-900 text-white py-10 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+      <div class="max-w-7xl mx-auto">
+        <span class="inline-block px-3 py-1 bg-emerald-900/60 text-emerald-300 text-xs font-semibold rounded-full mb-3 border border-emerald-700/50">
+          Official File Repository
+        </span>
+        <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-2">Resource Download Center</h1>
+        <p class="text-sm sm:text-base text-slate-300 max-w-2xl font-light">
+          Access and download verified employee service forms, circulars, order copies, formats, and salary calculation spreadsheets.
+        </p>
+
+        <!-- Search input -->
+        <div class="mt-6 max-w-xl relative">
+          <input type="text" id="download-search-input" placeholder="Search forms, circulars, orders..." class="w-full bg-white text-slate-900 placeholder-slate-400 text-sm rounded-lg pl-10 pr-4 py-2.5 shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          <svg class="w-5 h-5 text-slate-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Downloads Listing Container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-200">
+        <div id="downloads-count" class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+          Available Resources
+        </div>
+      </div>
+
+      <div id="downloads-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="col-span-full py-12 text-center text-slate-400 text-sm">Loading download resources...</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-sm border-t border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+      <p>&copy; 2026 Employees Service, Kasaragod. Bank Road, Near Mallikarjuna Temple, Kasaragod.</p>
+      <div class="flex items-center gap-4">
+        <a href="/privacy-policy" class="hover:text-emerald-400">Privacy Policy</a>
+        <a href="/admin/login" class="hover:text-emerald-400">Admin Portal</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+  <script>
+    let downloadsList = [];
+
+    async function fetchDownloads() {
+      try {
+        const res = await fetch('/api/v1/downloads');
+        const data = await res.json();
+        if (data.success) {
+          downloadsList = data.data;
+          renderDownloads();
+        }
+      } catch (err) {
+        console.error('Failed to load downloads:', err);
+      }
+    }
+
+    function renderDownloads() {
+      const searchInput = document.getElementById('download-search-input');
+      const searchTerm = searchInput ? searchInput.value.trim().toLowerCase() : '';
+      const container = document.getElementById('downloads-grid');
+      const countEl = document.getElementById('downloads-count');
+
+      const filtered = downloadsList.filter(item => {
+        return !searchTerm ||
+          item.title.toLowerCase().includes(searchTerm) ||
+          (item.description && item.description.toLowerCase().includes(searchTerm)) ||
+          (item.category && item.category.toLowerCase().includes(searchTerm));
+      });
+
+      countEl.textContent = `Showing ${filtered.length} of ${downloadsList.length} resources`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full bg-white rounded-xl border border-slate-200 p-12 text-center text-slate-500">
+            <svg class="w-12 h-12 text-slate-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            <h3 class="text-base font-bold text-slate-800">No resources available</h3>
+            <p class="text-xs text-slate-500 mt-1">Check back later or contact the administrator for requested circulars and forms.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const ext = item.original_filename ? item.original_filename.split('.').pop().toUpperCase() : 'FILE';
+        return `
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 flex flex-col justify-between hover:shadow-md transition">
+            <div>
+              <div class="flex items-start justify-between gap-2 mb-3">
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-slate-100 text-slate-700 uppercase tracking-wider">
+                  ${ext}
+                </span>
+                <span class="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+                  ${item.category || 'General'}
+                </span>
+              </div>
+              <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1.5">${item.title}</h3>
+              <p class="text-xs text-slate-600 line-clamp-2 mb-4 leading-relaxed">${item.description || 'Downloadable resource file.'}</p>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+              <div class="flex items-center gap-2">
+                <span>${formatBytes(item.file_size)}</span>
+                <span>•</span>
+                <span>${item.download_count} downloads</span>
+              </div>
+              <a href="/api/v1/downloads/${item.id}/file" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1.5 transition">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Download
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchDownloads();
+      const searchInput = document.getElementById('download-search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', renderDownloads);
+      }
+    });
+  </script>
+</body>
+</html>
