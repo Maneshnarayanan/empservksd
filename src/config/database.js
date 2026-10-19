@@ -40,6 +40,22 @@ function initDatabase() {
   return initInMemoryDatabase();
 }
 
+async function testOrFallback() {
+  if (process.env.USE_PG_MEM === 'true' || process.env.NODE_ENV === 'test') {
+    return initInMemoryDatabase();
+  }
+  try {
+    const p = initDatabase();
+    await p.query('SELECT 1');
+    return p;
+  } catch (err) {
+    console.warn(`[WARN] Could not connect to PostgreSQL at ${process.env.DB_HOST || 'localhost'}:${process.env.DB_PORT || 5432} (${err.code || err.message}).`);
+    console.warn('[WARN] Falling back to in-memory PostgreSQL emulator (pg-mem) for local preview.');
+    pool = null;
+    return initInMemoryDatabase();
+  }
+}
+
 function initInMemoryDatabase() {
   try {
     const { newDb } = require('pg-mem');
@@ -86,5 +102,6 @@ module.exports = {
   getPool,
   initDatabase,
   initInMemoryDatabase,
+  testOrFallback,
   isDbInMemory,
 };
