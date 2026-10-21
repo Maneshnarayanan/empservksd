@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Announcements & Ticker — Admin Portal</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body class="bg-slate-100 text-slate-800 flex h-screen overflow-hidden">
+
+  <!-- Sidebar -->
+  <aside class="w-64 admin-sidebar text-slate-300 flex flex-col justify-between shrink-0 shadow-2xl">
+    <div>
+      <div class="h-16 flex items-center gap-3 px-6 border-b border-white/10 bg-black/20">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 text-white flex items-center justify-center font-extrabold text-base shadow-lg shadow-emerald-950/60 ring-2 ring-emerald-500/20">ES</div>
+        <div>
+          <span class="block text-sm font-bold text-white tracking-tight font-heading">Admin Portal</span>
+          <span class="block text-[11px] text-emerald-400 font-medium">ESKSD Control</span>
+        </div>
+      </div>
+
+      <nav class="p-4 space-y-1.5 text-sm font-medium">
+        <a href="/admin/dashboard" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+          Dashboard
+        </a>
+        <a href="/admin/services" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+          Service Portals
+        </a>
+        <a href="/admin/service-categories" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          Categories
+        </a>
+        <a href="/admin/downloads" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          Downloads
+        </a>
+        <a href="/admin/blogs" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+          Blog Articles
+        </a>
+        <a href="/admin/blog-categories" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+          Blog Categories
+        </a>
+        <a href="/admin/announcements" class="admin-nav-link active">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+          Announcements & Ticker
+        </a>
+        <a href="/admin/settings" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          Settings
+        </a>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-white/10 bg-black/20">
+      <div class="flex items-center justify-between mb-3 px-1">
+        <div class="text-xs">
+          <span class="block text-white font-semibold admin-username-display font-heading">Administrator</span>
+          <span class="text-emerald-400/80 text-[11px] font-medium">Super Admin</span>
+        </div>
+        <button id="admin-logout-btn" class="p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-white/10 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+        </button>
+      </div>
+      <a href="/" target="_blank" class="block w-full text-center text-xs font-semibold py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 transition border border-white/10">
+        View Live Website &rarr;
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content View -->
+  <main class="flex-grow flex flex-col overflow-y-auto">
+    <header class="h-16 glass-header border-b border-slate-200/80 px-8 flex items-center justify-between shrink-0 sticky top-0 z-20">
+      <div>
+        <h1 class="text-lg font-bold text-slate-900 font-heading">Announcements & Ticker Banner</h1>
+        <p class="text-xs text-slate-500">Configure breaking news, high-priority notifications, and the top website ticker</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="toggle-ticker-btn" onclick="toggleSiteTicker()" class="px-3.5 py-2 rounded-xl text-xs font-semibold border border-slate-200 bg-white/80 hover:bg-white flex items-center gap-2 shadow-sm transition">
+          <span id="ticker-status-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="ticker-status-text">Ticker: Enabled</span>
+        </button>
+        <button onclick="openCreateModal()" class="btn-gradient text-white px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          Add Announcement
+        </button>
+      </div>
+    </header>
+
+    <div class="p-8 max-w-7xl w-full mx-auto space-y-6">
+
+      <!-- Summary Stats -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div class="stat-card-gradient p-5 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100/70 border border-emerald-200 flex items-center justify-center text-emerald-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+          </div>
+          <div>
+            <span class="block text-2xl font-bold text-slate-900 font-heading" id="stat-total">0</span>
+            <span class="text-xs text-slate-500 font-medium">Total Announcements</span>
+          </div>
+        </div>
+
+        <div class="stat-card-gradient p-5 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-blue-100/70 border border-blue-200 flex items-center justify-center text-blue-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <div>
+            <span class="block text-2xl font-bold text-slate-900 font-heading" id="stat-active">0</span>
+            <span class="text-xs text-slate-500 font-medium">Active in Top Ticker</span>
+          </div>
+        </div>
+
+        <div class="stat-card-gradient p-5 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-rose-100/70 border border-rose-200 flex items-center justify-center text-rose-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          </div>
+          <div>
+            <span class="block text-2xl font-bold text-slate-900 font-heading" id="stat-urgent">0</span>
+            <span class="text-xs text-slate-500 font-medium">Urgent / Breaking Alerts</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Announcements Table -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+        <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+          <span id="announcements-summary-badge" class="badge-pill badge-pill-slate">All Announcements</span>
+          <span class="text-[11px] text-slate-400 font-medium">Ordered by display order and priority</span>
+        </div>
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase font-semibold">
+            <tr>
+              <th class="px-6 py-3.5">Type</th>
+              <th class="px-6 py-3.5">Title & Link</th>
+              <th class="px-6 py-3.5">Message Content</th>
+              <th class="px-6 py-3.5">Order</th>
+              <th class="px-6 py-3.5">Status</th>
+              <th class="px-6 py-3.5 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="announcements-tbody" class="divide-y divide-slate-100 text-slate-700">
+            <tr>
+              <td colspan="6" class="px-6 py-8 text-center text-slate-400">Loading announcements...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Add / Edit Modal -->
+  <div id="announcement-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 text-slate-800">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100 mb-4">
+        <h3 id="modal-title" class="font-bold text-base text-slate-900">Add Announcement</h3>
+        <button onclick="closeModal('announcement-modal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+
+      <form id="announcement-form" class="space-y-4">
+        <input type="hidden" id="item-id">
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Announcement Title *</label>
+          <input type="text" id="item-title" required placeholder="e.g., SPARK Property Return Deadline Extended" class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Ticker Message / Details *</label>
+          <textarea id="item-message" rows="3" required placeholder="Enter the text that scrolls across the top ticker banner..." class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none"></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Alert Type / Badge *</label>
+            <select id="item-type" class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none">
+              <option value="urgent">🔴 Urgent / Breaking</option>
+              <option value="warning">🟡 Important Notice</option>
+              <option value="info">🔵 General Info</option>
+              <option value="success">🟢 Update / Circular</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Display Order</label>
+            <input type="number" id="item-order" value="0" class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Optional Link (Internal or External URL)</label>
+          <input type="text" id="item-link" placeholder="e.g., /downloads or https://www.spark.gov.in" class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none">
+          <p class="text-[10px] text-slate-400 mt-1">Visitors can click on the announcement to navigate directly to this link.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Ticker Visibility</label>
+          <select id="item-status" class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none">
+            <option value="true">Active (Display in Ticker Banner)</option>
+            <option value="false">Inactive (Hidden)</option>
+          </select>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
+          <button type="button" onclick="closeModal('announcement-modal')" class="px-4 py-2 border border-slate-300 rounded-lg text-xs font-medium hover:bg-slate-50 transition">Cancel</button>
+          <button type="submit" id="save-btn" class="px-5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-semibold transition shadow-sm">Save Announcement</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/admin.js"></script>
+  <script>
+    let announcementsList = [];
+    let isTickerEnabled = true;
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/v1/admin/announcements');
+        const data = await res.json();
+        if (data.success) {
+          announcementsList = data.data || [];
+          isTickerEnabled = data.enabled !== false;
+          updateTickerToggleButton();
+          updateStats();
+          renderTable();
+        }
+      } catch (err) {
+        console.error('Failed to load announcements:', err);
+      }
+    }
+
+    function updateTickerToggleButton() {
+      const btn = document.getElementById('toggle-ticker-btn');
+      const dot = document.getElementById('ticker-status-dot');
+      const text = document.getElementById('ticker-status-text');
+
+      if (isTickerEnabled) {
+        btn.className = 'px-3 py-2 rounded-lg text-xs font-semibold border bg-emerald-50 border-emerald-300 text-emerald-800 flex items-center gap-2 hover:bg-emerald-100 transition';
+        dot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+        text.textContent = 'Banner Ticker: Active';
+      } else {
+        btn.className = 'px-3 py-2 rounded-lg text-xs font-semibold border bg-slate-100 border-slate-300 text-slate-600 flex items-center gap-2 hover:bg-slate-200 transition';
+        dot.className = 'w-2 h-2 rounded-full bg-slate-400';
+        text.textContent = 'Banner Ticker: Disabled';
+      }
+    }
+
+    async function toggleSiteTicker() {
+      const newState = !isTickerEnabled;
+      try {
+        const res = await apiFetch('/api/v1/admin/announcements/toggle-ticker', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ enabled: newState }),
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          isTickerEnabled = newState;
+          updateTickerToggleButton();
+          showToast(data.message, 'success');
+        } else {
+          showToast(data.message || 'Failed to toggle ticker status.', 'error');
+        }
+      } catch (err) {
+        showToast('Network error updating ticker status.', 'error');
+      }
+    }
+
+    function updateStats() {
+      document.getElementById('stat-total').textContent = announcementsList.length;
+      document.getElementById('stat-active').textContent = announcementsList.filter(a => a.is_active).length;
+      document.getElementById('stat-urgent').textContent = announcementsList.filter(a => a.type === 'urgent').length;
+    }
+
+    function getTypeBadge(type) {
+      switch (type) {
+        case 'urgent':
+          return '<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-200 uppercase tracking-wide">🔴 Urgent</span>';
+        case 'warning':
+          return '<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200 uppercase tracking-wide">🟡 Notice</span>';
+        case 'info':
+          return '<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-200 uppercase tracking-wide">🔵 Info</span>';
+        case 'success':
+          return '<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 uppercase tracking-wide">🟢 Update</span>';
+        default:
+          return '<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-800 uppercase tracking-wide">Notice</span>';
+      }
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('announcements-tbody');
+      if (announcementsList.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-8 text-center text-slate-400">No announcements added yet. Click "+ Add Announcement" to create one.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = announcementsList.map(item => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="px-6 py-3.5 whitespace-nowrap">
+            ${getTypeBadge(item.type)}
+          </td>
+          <td class="px-6 py-3.5 max-w-xs">
+            <span class="font-bold text-slate-900 block">${item.title}</span>
+            ${item.link_url
+              ? `<a href="${item.link_url}" target="_blank" class="text-[11px] text-emerald-700 hover:underline font-mono truncate block">${item.link_url}</a>`
+              : '<span class="text-[11px] text-slate-400 italic">No link</span>'
+            }
+          </td>
+          <td class="px-6 py-3.5 text-slate-600 max-w-md">
+            <p class="line-clamp-2 leading-relaxed">${item.message}</p>
+          </td>
+          <td class="px-6 py-3.5 font-mono text-slate-500">${item.display_order}</td>
+          <td class="px-6 py-3.5 whitespace-nowrap">
+            ${item.is_active
+              ? '<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-100 text-emerald-800">Active</span>'
+              : '<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600">Hidden</span>'
+            }
+          </td>
+          <td class="px-6 py-3.5 text-right whitespace-nowrap space-x-2">
+            <button onclick="openEditModal(${item.id})" class="text-emerald-700 hover:text-emerald-900 font-semibold">Edit</button>
+            <button onclick="handleDeleteAnnouncement(${item.id}, '${item.title.replace(/'/g, "\\'")}')" class="text-rose-600 hover:text-rose-800 font-semibold">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openCreateModal() {
+      document.getElementById('modal-title').textContent = 'Add Announcement';
+      document.getElementById('item-id').value = '';
+      document.getElementById('item-title').value = '';
+      document.getElementById('item-message').value = '';
+      document.getElementById('item-type').value = 'urgent';
+      document.getElementById('item-order').value = '0';
+      document.getElementById('item-link').value = '';
+      document.getElementById('item-status').value = 'true';
+      openModal('announcement-modal');
+    }
+
+    function openEditModal(id) {
+      const item = announcementsList.find(a => a.id === id);
+      if (!item) return;
+
+      document.getElementById('modal-title').textContent = 'Edit Announcement';
+      document.getElementById('item-id').value = item.id;
+      document.getElementById('item-title').value = item.title;
+      document.getElementById('item-message').value = item.message;
+      document.getElementById('item-type').value = item.type || 'urgent';
+      document.getElementById('item-order').value = item.display_order || 0;
+      document.getElementById('item-link').value = item.link_url || '';
+      document.getElementById('item-status').value = item.is_active ? 'true' : 'false';
+      openModal('announcement-modal');
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('item-id').value;
+      const saveBtn = document.getElementById('save-btn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving...';
+
+      const payload = {
+        title: document.getElementById('item-title').value.trim(),
+        message: document.getElementById('item-message').value.trim(),
+        type: document.getElementById('item-type').value,
+        display_order: parseInt(document.getElementById('item-order').value || 0, 10),
+        link_url: document.getElementById('item-link').value.trim() || null,
+        is_active: document.getElementById('item-status').value === 'true',
+      };
+
+      try {
+        const url = id ? `/api/v1/admin/announcements/${id}` : '/api/v1/admin/announcements';
+        const method = id ? 'PUT' : 'POST';
+
+        const res = await apiFetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast(id ? 'Announcement updated successfully.' : 'Announcement added successfully.', 'success');
+          closeModal('announcement-modal');
+          loadData();
+        } else {
+          showToast(data.message || 'Operation failed.', 'error');
+        }
+      } catch (err) {
+        showToast('Network error while saving announcement.', 'error');
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Announcement';
+      }
+    }
+
+    function handleDeleteAnnouncement(id, title) {
+      confirmAction('Delete Announcement', `Are you sure you want to delete "${title}"? It will no longer appear on the website ticker.`, async () => {
+        try {
+          const res = await apiFetch(`/api/v1/admin/announcements/${id}`, { method: 'DELETE' });
+          const data = await res.json();
+          if (res.ok && data.success) {
+            showToast('Announcement deleted successfully.', 'success');
+            loadData();
+          } else {
+            showToast(data.message || 'Failed to delete announcement.', 'error');
+          }
+        } catch (err) {
+          showToast('Network error during deletion.', 'error');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadData();
+      document.getElementById('announcement-form').addEventListener('submit', handleFormSubmit);
+    });
+  </script>
+</body>
+</html>

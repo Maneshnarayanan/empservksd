@@ -10,6 +10,7 @@ const downloadController = require('../../../controllers/downloadController');
 const blogCategoryController = require('../../../controllers/blogCategoryController');
 const blogArticleController = require('../../../controllers/blogArticleController');
 const settingsController = require('../../../controllers/settingsController');
+const announcementController = require('../../../controllers/announcementController');
 
 // All admin routes require authentication
 router.use(requireAuth);
@@ -60,5 +61,13 @@ router.post('/blogs/upload-image', uploadBlogImage.single('image'), blogArticleC
 // Website Settings
 router.get('/settings', settingsController.getAllSettings);
 router.put('/settings', settingsController.updateSettings);
+
+// Announcements & Ticker CRUD
+router.get('/announcements', announcementController.getAllAnnouncements);
+router.get('/announcements/:id', announcementController.getAnnouncementById);
+router.post('/announcements', announcementController.createAnnouncement);
+router.put('/announcements/:id', announcementController.updateAnnouncement);
+router.delete('/announcements/:id', announcementController.deleteAnnouncement);
+router.post('/announcements/toggle-ticker', announcementController.toggleTickerStatus);
 
 module.exports = router;

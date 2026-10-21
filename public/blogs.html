@@ -25,76 +25,80 @@
   </header>
 
   <!-- Navigation Bar -->
-  <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
+  <nav class="sticky top-0 z-40 glass-header border-b border-slate-200/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <a href="/" class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-lg bg-emerald-800 text-white flex items-center justify-center font-bold text-xl shadow-md">ES</div>
+      <div class="flex justify-between items-center h-16 sm:h-20">
+        <a href="/" class="flex items-center gap-3.5 group">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-800 to-emerald-600 text-white flex items-center justify-center font-extrabold text-xl shadow-lg shadow-emerald-950/20 ring-2 ring-emerald-500/20 group-hover:scale-105 transition duration-200">ES</div>
           <div>
-            <span class="block text-base font-bold text-slate-900 tracking-tight leading-tight">EMPLOYEES SERVICE</span>
-            <span class="block text-xs font-medium text-emerald-700 uppercase tracking-wider">Kasaragod</span>
+            <span class="block text-base font-extrabold text-slate-900 tracking-tight leading-tight font-heading">EMPLOYEES SERVICE</span>
+            <span class="block text-xs font-semibold text-emerald-700 uppercase tracking-widest">Kasaragod</span>
           </div>
         </a>
 
-        <div class="hidden md:flex items-center space-x-1 lg:space-x-3 text-sm font-medium">
-          <a href="/" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">Home</a>
-          <a href="/services" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">Services Directory</a>
-          <a href="/downloads" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">Downloads</a>
-          <a href="/blogs" class="text-emerald-700 font-semibold px-3 py-2 rounded-md bg-emerald-50">Blogs & Web</a>
-          <a href="/about" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">About Us</a>
-          <a href="/contact" class="text-slate-700 hover:text-emerald-700 px-3 py-2 rounded-md hover:bg-slate-100 transition">Contact</a>
-          <a href="/admin/login" class="ml-2 text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-800 hover:text-white transition">Admin Login</a>
+        <div class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-medium">
+          <a href="/" class="text-slate-700 hover:text-emerald-700 px-3.5 py-2 rounded-xl hover:bg-slate-100 transition">Home</a>
+          <a href="/services" class="text-slate-700 hover:text-emerald-700 px-3.5 py-2 rounded-xl hover:bg-slate-100 transition">Services Directory</a>
+          <a href="/downloads" class="text-slate-700 hover:text-emerald-700 px-3.5 py-2 rounded-xl hover:bg-slate-100 transition">Downloads</a>
+          <a href="/blogs" class="text-emerald-800 font-bold px-3.5 py-2 rounded-xl bg-emerald-50 ring-1 ring-emerald-200/60">Blogs & Web</a>
+          <a href="/about" class="text-slate-700 hover:text-emerald-700 px-3.5 py-2 rounded-xl hover:bg-slate-100 transition">About Us</a>
+          <a href="/contact" class="text-slate-700 hover:text-emerald-700 px-3.5 py-2 rounded-xl hover:bg-slate-100 transition">Contact</a>
+          <a href="/admin/login" class="ml-3 text-xs font-semibold px-4 py-2 rounded-xl bg-slate-900 text-white hover:bg-emerald-700 transition shadow-sm">Admin Portal</a>
         </div>
 
-        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100" aria-label="Toggle navigation">
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl text-slate-600 hover:bg-slate-100" aria-label="Toggle navigation">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
       </div>
 
       <div id="mobile-menu" class="hidden md:hidden pb-4 pt-2 border-t border-slate-100 space-y-1">
-        <a href="/" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Home</a>
-        <a href="/services" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Services Directory</a>
-        <a href="/downloads" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Downloads</a>
-        <a href="/blogs" class="block px-3 py-2 rounded-md text-base font-semibold text-emerald-800 bg-emerald-50">Blogs & Web</a>
-        <a href="/about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">About Us</a>
-        <a href="/contact" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-100">Contact</a>
-        <a href="/admin/login" class="block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-100">Admin Login</a>
+        <a href="/" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-100">Home</a>
+        <a href="/services" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-100">Services Directory</a>
+        <a href="/downloads" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-100">Downloads</a>
+        <a href="/blogs" class="block px-3 py-2 rounded-xl text-base font-semibold text-emerald-800 bg-emerald-50">Blogs & Web</a>
+        <a href="/about" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-100">About Us</a>
+        <a href="/contact" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-100">Contact</a>
+        <a href="/admin/login" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-600 hover:bg-slate-100">Admin Login</a>
       </div>
     </div>
   </nav>
 
   <!-- Page Header -->
   <main class="flex-grow">
-    <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-slate-900 text-white py-10 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
-      <div class="max-w-7xl mx-auto">
-        <span class="inline-block px-3 py-1 bg-emerald-800/60 text-emerald-300 text-xs font-semibold rounded-full mb-3 border border-emerald-600/40">
+    <div class="subpage-hero text-white py-14 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <!-- Ambient blur orb -->
+      <div class="absolute -top-20 -right-20 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto relative z-10">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-emerald-200 border border-white/10 mb-4 backdrop-blur-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
           Internal Community Publishing
         </span>
-        <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-2">Blogs & Web Resources</h1>
-        <p class="text-sm sm:text-base text-slate-300 max-w-2xl font-light">
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-3 font-heading">Blogs & Web Resources</h1>
+        <p class="text-sm sm:text-base text-emerald-100 max-w-2xl font-normal leading-relaxed">
           Official community repository for HM Blog, Muttam Blog, Maths Blog, Alrahman, and Renjithkumar articles.
         </p>
 
         <!-- Search input -->
-        <div class="mt-6 max-w-xl relative">
-          <input type="text" id="blog-search-input" placeholder="Search articles by title or keyword..." class="w-full bg-white text-slate-900 placeholder-slate-400 text-sm rounded-lg pl-10 pr-4 py-2.5 shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
-          <svg class="w-5 h-5 text-slate-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <div class="mt-8 max-w-xl relative">
+          <input type="text" id="blog-search-input" placeholder="Search articles by title or keyword..." class="w-full bg-white/95 backdrop-blur-md text-slate-900 placeholder-slate-400 text-sm rounded-2xl pl-11 pr-4 py-3.5 shadow-lg border border-white/30 focus:outline-none focus:ring-4 focus:ring-emerald-400/30 transition">
+          <svg class="w-5 h-5 text-emerald-700 absolute left-4 top-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </div>
       </div>
     </div>
 
     <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <!-- Category Tabs -->
-      <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 border-b border-slate-200 scrollbar-none" id="blog-category-tabs">
-        <button class="blog-tab active bg-emerald-800 text-white px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition" data-slug="">
+      <div class="flex items-center gap-2.5 overflow-x-auto pb-4 mb-8 border-b border-slate-200/80 scrollbar-none" id="blog-category-tabs">
+        <button class="blog-tab active bg-emerald-700 text-white shadow-md shadow-emerald-900/20 px-5 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition" data-slug="">
           All Articles
         </button>
         <!-- Injected dynamically -->
       </div>
 
       <!-- Articles Grid -->
-      <div id="blogs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div id="blogs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
         <div class="col-span-full py-12 text-center text-slate-400 text-sm">Loading articles...</div>
       </div>
 
@@ -189,27 +193,28 @@
           }
 
           grid.innerHTML = data.articles.map(art => `
-            <article class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+            <article class="card-hover-effect bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm flex flex-col justify-between">
               ${art.featured_image ? `
-                <div class="h-44 w-full bg-slate-100 overflow-hidden">
-                  <img src="${art.featured_image}" alt="${art.title}" class="w-full h-full object-cover" loading="lazy">
+                <div class="h-48 w-full bg-slate-100 overflow-hidden relative">
+                  <img src="${art.featured_image}" alt="${art.title}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
                 </div>
               ` : ''}
               <div class="p-6">
-                <div class="flex items-center gap-2 mb-2.5">
-                  <span class="bg-emerald-100 text-emerald-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">${art.category_name}</span>
-                  <span class="text-xs text-slate-400">•</span>
-                  <time class="text-xs text-slate-500">${formatDate(art.published_at)}</time>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="badge-pill badge-pill-emerald">${art.category_name}</span>
+                  <span class="text-xs text-slate-300">•</span>
+                  <time class="text-xs text-slate-400 font-medium">${formatDate(art.published_at)}</time>
                 </div>
-                <h2 class="text-base font-bold text-slate-900 leading-snug mb-2 hover:text-emerald-700 transition">
+                <h2 class="text-lg font-bold text-slate-900 leading-snug mb-2 font-heading hover:text-emerald-700 transition">
                   <a href="/blogs/${art.slug}">${art.title}</a>
                 </h2>
-                <p class="text-xs text-slate-600 line-clamp-3 mb-4 leading-relaxed">${art.summary || 'Click below to read the full community article.'}</p>
+                <p class="text-xs text-slate-500 line-clamp-3 mb-4 leading-relaxed">${art.summary || 'Click below to read the full community article.'}</p>
               </div>
-              <div class="px-6 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                <span>By ${art.author_name}</span>
-                <a href="/blogs/${art.slug}" class="font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1">
-                  Read Article &rarr;
+              <div class="px-6 py-4 bg-slate-50/60 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span class="font-medium text-slate-600">By ${art.author_name}</span>
+                <a href="/blogs/${art.slug}" class="font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 transition">
+                  Read Article
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </a>
               </div>
             </article>

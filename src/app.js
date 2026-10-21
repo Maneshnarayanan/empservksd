@@ -17,6 +17,7 @@ const serviceRoutes = require('./routes/api/v1/serviceRoutes');
 const downloadRoutes = require('./routes/api/v1/downloadRoutes');
 const blogRoutes = require('./routes/api/v1/blogRoutes');
 const settingsRoutes = require('./routes/api/v1/settingsRoutes');
+const announcementRoutes = require('./routes/api/v1/announcementRoutes');
 const adminRoutes = require('./routes/api/v1/adminRoutes');
 const pageRoutes = require('./routes/pageRoutes');
 
@@ -28,8 +29,10 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'"], // Allow modular frontend logic & event handlers
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        scriptSrcAttr: ["'unsafe-inline'"], // Enable inline event handlers (onclick, onchange, etc.)
         styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+        styleSrcAttr: ["'unsafe-inline'"],
         fontSrc: ["'self'", 'https://fonts.gstatic.com'],
         imgSrc: ["'self'", 'data:', 'blob:'],
         connectSrc: ["'self'"],
@@ -60,7 +63,10 @@ try {
     sessionStore = new pgSession({
       pool: db.getPool(),
       tableName: 'session',
-      createTableIfMissing: true,
+      createTableIfMissing: false,
+    });
+    sessionStore.on('error', (err) => {
+      console.warn('PostgreSQL session store error:', err.message);
     });
   }
 } catch (err) {
@@ -103,6 +109,7 @@ app.use('/api/v1/services', serviceRoutes);
 app.use('/api/v1/downloads', downloadRoutes);
 app.use('/api/v1/blogs', blogRoutes);
 app.use('/api/v1/settings', settingsRoutes);
+app.use('/api/v1/announcements', announcementRoutes);
 app.use('/api/v1/admin', adminRoutes);
 
 // Frontend Page Routes

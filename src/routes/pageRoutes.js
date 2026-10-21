@@ -23,6 +23,7 @@ router.get('/admin/service-categories', (req, res) => res.sendFile(path.join(PUB
 router.get('/admin/downloads', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/downloads.html')));
 router.get('/admin/blogs', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/blogs.html')));
 router.get('/admin/blog-categories', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/blog-categories.html')));
+router.get('/admin/announcements', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/announcements.html')));
 router.get('/admin/settings', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/settings.html')));
 
 module.exports = router;

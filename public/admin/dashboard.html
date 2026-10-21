@@ -9,60 +9,64 @@
 <body class="bg-slate-100 text-slate-800 flex h-screen overflow-hidden">
 
   <!-- Sidebar -->
-  <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between shrink-0 border-r border-slate-800">
+  <aside class="w-64 admin-sidebar text-slate-300 flex flex-col justify-between shrink-0 shadow-2xl">
     <div>
-      <div class="h-16 flex items-center gap-3 px-6 border-b border-slate-800">
-        <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-base shadow">ES</div>
+      <div class="h-16 flex items-center gap-3 px-6 border-b border-white/10 bg-black/20">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 text-white flex items-center justify-center font-extrabold text-base shadow-lg shadow-emerald-950/60 ring-2 ring-emerald-500/20">ES</div>
         <div>
-          <span class="block text-sm font-bold text-white tracking-tight">Admin Portal</span>
+          <span class="block text-sm font-bold text-white tracking-tight font-heading">Admin Portal</span>
           <span class="block text-[11px] text-emerald-400 font-medium">ESKSD Control</span>
         </div>
       </div>
 
-      <nav class="p-4 space-y-1 text-sm font-medium">
-        <a href="/admin/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
-          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+      <nav class="p-4 space-y-1.5 text-sm font-medium">
+        <a href="/admin/dashboard" class="admin-nav-link active">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
           Dashboard
         </a>
-        <a href="/admin/services" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
-          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+        <a href="/admin/services" class="admin-nav-link">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
           Service Portals
         </a>
-        <a href="/admin/service-categories" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
-          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+        <a href="/admin/service-categories" class="admin-nav-link">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
           Categories
         </a>
-        <a href="/admin/downloads" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
-          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+        <a href="/admin/downloads" class="admin-nav-link">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
           Downloads
         </a>
-        <a href="/admin/blogs" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
-          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+        <a href="/admin/blogs" class="admin-nav-link">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
           Blog Articles
         </a>
-        <a href="/admin/blog-categories" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
-          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+        <a href="/admin/blog-categories" class="admin-nav-link">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
           Blog Categories
         </a>
-        <a href="/admin/settings" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition">
-          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        <a href="/admin/announcements" class="admin-nav-link">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+          Announcements & Ticker
+        </a>
+        <a href="/admin/settings" class="admin-nav-link">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
           Settings
         </a>
       </nav>
     </div>
 
     <!-- Bottom user profile & actions -->
-    <div class="p-4 border-t border-slate-800">
-      <div class="flex items-center justify-between mb-3">
+    <div class="p-4 border-t border-white/10 bg-black/20">
+      <div class="flex items-center justify-between mb-3 px-1">
         <div class="text-xs">
-          <span class="block text-white font-semibold admin-username-display">Administrator</span>
-          <span class="text-slate-500">Super Admin</span>
+          <span class="block text-white font-semibold admin-username-display font-heading">Administrator</span>
+          <span class="text-emerald-400/80 text-[11px] font-medium">Super Admin</span>
         </div>
-        <button id="admin-logout-btn" class="p-2 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition" title="Log Out">
+        <button id="admin-logout-btn" class="p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-white/10 transition" title="Log Out">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
         </button>
       </div>
-      <a href="/" target="_blank" class="block w-full text-center text-xs font-semibold py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+      <a href="/" target="_blank" class="block w-full text-center text-xs font-semibold py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 transition border border-white/10">
         View Live Website &rarr;
       </a>
     </div>
@@ -71,15 +75,15 @@
   <!-- Main Content View -->
   <main class="flex-grow flex flex-col overflow-y-auto">
     <!-- Topbar -->
-    <header class="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0">
+    <header class="h-16 glass-header border-b border-slate-200/80 px-8 flex items-center justify-between shrink-0 sticky top-0 z-20">
       <div>
-        <h1 class="text-lg font-bold text-slate-900">Administrative Dashboard</h1>
+        <h1 class="text-lg font-bold text-slate-900 font-heading">Administrative Dashboard</h1>
         <p class="text-xs text-slate-500">Overview & Portal Operational Metrics</p>
       </div>
       <div class="flex items-center gap-3">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
-          <span class="w-2 h-2 rounded-full bg-emerald-600 animate-ping"></span>
-          System Live
+        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+          System Online
         </span>
       </div>
     </header>
@@ -88,88 +92,105 @@
     <div class="p-8 max-w-7xl w-full mx-auto space-y-8">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Metric 1 -->
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-          <div class="flex items-center justify-between mb-2">
+        <div class="stat-card-gradient p-6">
+          <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Service Categories</span>
-            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold">
+            <div class="w-9 h-9 rounded-xl bg-emerald-100/70 text-emerald-700 flex items-center justify-center font-bold ring-1 ring-emerald-200">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
             </div>
           </div>
-          <div class="text-2xl font-extrabold text-slate-900" id="stat-categories">—</div>
-          <p class="text-xs text-slate-500 mt-1">SPARK, BIMS, Treasury, Tax, etc.</p>
+          <div class="text-3xl font-extrabold text-slate-900 font-heading" id="stat-categories">—</div>
+          <p class="text-xs text-slate-500 mt-1.5">SPARK, BIMS, Treasury, Tax, etc.</p>
         </div>
 
         <!-- Metric 2 -->
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-          <div class="flex items-center justify-between mb-2">
+        <div class="stat-card-gradient p-6">
+          <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Service Portals</span>
-            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold">
+            <div class="w-9 h-9 rounded-xl bg-blue-100/70 text-blue-700 flex items-center justify-center font-bold ring-1 ring-blue-200">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
             </div>
           </div>
-          <div class="text-2xl font-extrabold text-slate-900" id="stat-links">—</div>
-          <p class="text-xs text-amber-600 mt-1" id="stat-unconfigured">—</p>
+          <div class="text-3xl font-extrabold text-slate-900 font-heading" id="stat-links">—</div>
+          <p class="text-xs text-amber-600 mt-1.5 font-medium" id="stat-unconfigured">—</p>
         </div>
 
         <!-- Metric 3 -->
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-          <div class="flex items-center justify-between mb-2">
+        <div class="stat-card-gradient p-6">
+          <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Download Resources</span>
-            <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-700 flex items-center justify-center font-bold">
+            <div class="w-9 h-9 rounded-xl bg-purple-100/70 text-purple-700 flex items-center justify-center font-bold ring-1 ring-purple-200">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
             </div>
           </div>
-          <div class="text-2xl font-extrabold text-slate-900" id="stat-downloads">—</div>
-          <p class="text-xs text-slate-500 mt-1" id="stat-active-downloads">— active files</p>
+          <div class="text-3xl font-extrabold text-slate-900 font-heading" id="stat-downloads">—</div>
+          <p class="text-xs text-slate-500 mt-1.5" id="stat-active-downloads">— active files</p>
         </div>
 
         <!-- Metric 4 -->
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-          <div class="flex items-center justify-between mb-2">
+        <div class="stat-card-gradient p-6">
+          <div class="flex items-center justify-between mb-3">
             <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Blog Articles</span>
-            <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center font-bold">
+            <div class="w-9 h-9 rounded-xl bg-amber-100/70 text-amber-700 flex items-center justify-center font-bold ring-1 ring-amber-200">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
             </div>
           </div>
-          <div class="text-2xl font-extrabold text-slate-900" id="stat-blogs">—</div>
-          <p class="text-xs text-slate-500 mt-1" id="stat-blog-breakdown">— published, — drafts</p>
+          <div class="text-3xl font-extrabold text-slate-900 font-heading" id="stat-blogs">—</div>
+          <p class="text-xs text-slate-500 mt-1.5" id="stat-blog-breakdown">— published, — drafts</p>
         </div>
       </div>
 
       <!-- Quick Action Shortcuts -->
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-        <h2 class="text-base font-bold text-slate-900 mb-4">Quick Management Actions</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-          <a href="/admin/services" class="p-4 rounded-xl border border-slate-200 hover:border-emerald-600 hover:bg-emerald-50/30 transition flex flex-col justify-between">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-6 sm:p-8">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="text-lg font-bold text-slate-900 font-heading">Quick Management Actions</h2>
+            <p class="text-xs text-slate-500">Common administrative workflows and portal configuration</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+          <a href="/admin/services" class="card-hover-effect p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-emerald-500/50 transition flex flex-col justify-between">
             <div>
-              <h3 class="font-bold text-sm text-slate-900 mb-1">Configure Portals</h3>
-              <p class="text-xs text-slate-500">Add or edit destination URLs for SPARK, BIMS, e-Treasury, etc.</p>
+              <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mb-3">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+              </div>
+              <h3 class="font-bold text-sm text-slate-900 mb-1 font-heading">Configure Portals</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Add or edit destination URLs for SPARK, BIMS, e-Treasury, and Tax.</p>
             </div>
-            <span class="text-xs font-semibold text-emerald-700 mt-3 inline-block">Manage Links &rarr;</span>
+            <span class="text-xs font-semibold text-emerald-700 mt-4 inline-flex items-center gap-1">Manage Links &rarr;</span>
           </a>
 
-          <a href="/admin/downloads" class="p-4 rounded-xl border border-slate-200 hover:border-emerald-600 hover:bg-emerald-50/30 transition flex flex-col justify-between">
+          <a href="/admin/downloads" class="card-hover-effect p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-emerald-500/50 transition flex flex-col justify-between">
             <div>
-              <h3 class="font-bold text-sm text-slate-900 mb-1">Upload Downloads</h3>
-              <p class="text-xs text-slate-500">Upload PDF forms, government circulars, order copies, and spreadsheets.</p>
+              <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold mb-3">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              </div>
+              <h3 class="font-bold text-sm text-slate-900 mb-1 font-heading">Upload Downloads</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Upload PDF forms, government circulars, order copies, and spreadsheets.</p>
             </div>
-            <span class="text-xs font-semibold text-emerald-700 mt-3 inline-block">Upload Files &rarr;</span>
+            <span class="text-xs font-semibold text-emerald-700 mt-4 inline-flex items-center gap-1">Upload Files &rarr;</span>
           </a>
 
-          <a href="/admin/blogs" class="p-4 rounded-xl border border-slate-200 hover:border-emerald-600 hover:bg-emerald-50/30 transition flex flex-col justify-between">
+          <a href="/admin/blogs" class="card-hover-effect p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-emerald-500/50 transition flex flex-col justify-between">
             <div>
-              <h3 class="font-bold text-sm text-slate-900 mb-1">Publish Blog Post</h3>
-              <p class="text-xs text-slate-500">Write articles for HM Blog, Muttam Blog, Maths Blog, Alrahman, or Renjithkumar.</p>
+              <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold mb-3">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+              </div>
+              <h3 class="font-bold text-sm text-slate-900 mb-1 font-heading">Publish Blog Post</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Write articles for HM Blog, Muttam Blog, Maths Blog, Alrahman, or Renjithkumar.</p>
             </div>
-            <span class="text-xs font-semibold text-emerald-700 mt-3 inline-block">Write Article &rarr;</span>
+            <span class="text-xs font-semibold text-emerald-700 mt-4 inline-flex items-center gap-1">Write Article &rarr;</span>
           </a>
 
-          <a href="/admin/settings" class="p-4 rounded-xl border border-slate-200 hover:border-emerald-600 hover:bg-emerald-50/30 transition flex flex-col justify-between">
+          <a href="/admin/settings" class="card-hover-effect p-5 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-emerald-500/50 transition flex flex-col justify-between">
             <div>
-              <h3 class="font-bold text-sm text-slate-900 mb-1">Website Settings</h3>
-              <p class="text-xs text-slate-500">Update verified contact details, email, phone, and office address.</p>
+              <div class="w-8 h-8 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center font-bold mb-3">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              </div>
+              <h3 class="font-bold text-sm text-slate-900 mb-1 font-heading">Website Settings</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Update verified contact details, email, phone, and office address.</p>
             </div>
-            <span class="text-xs font-semibold text-emerald-700 mt-3 inline-block">Update Settings &rarr;</span>
+            <span class="text-xs font-semibold text-emerald-700 mt-4 inline-flex items-center gap-1">Update Settings &rarr;</span>
           </a>
         </div>
       </div>

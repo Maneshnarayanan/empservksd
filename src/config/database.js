@@ -58,13 +58,40 @@ async function testOrFallback() {
 
 function initInMemoryDatabase() {
   try {
-    const { newDb } = require('pg-mem');
+    const { newDb, DataType } = require('pg-mem');
     memDb = newDb();
     
     // Register custom functions if needed (e.g. current_timestamp)
     memDb.public.registerFunction({
       name: 'version',
       implementation: () => 'PostgreSQL 15.0 (pg-mem simulated)'
+    });
+
+    memDb.public.registerFunction({
+      name: 'to_regclass',
+      args: [DataType.text],
+      implementation: (name) => {
+        if (!name) return null;
+        const cleanName = name.replace(/^"|"$/g, '').toLowerCase();
+        try {
+          const table = memDb.public.getTable(cleanName, null);
+          return table ? name : null;
+        } catch {
+          return null;
+        }
+      }
+    });
+
+    memDb.public.registerFunction({
+      name: 'to_timestamp',
+      args: [DataType.text],
+      implementation: (epochSec) => new Date(parseFloat(epochSec) * 1000)
+    });
+
+    memDb.public.registerFunction({
+      name: 'to_timestamp',
+      args: [DataType.float],
+      implementation: (epochSec) => new Date(epochSec * 1000)
     });
 
     const pgMock = memDb.adapters.createPg();
@@ -89,7 +116,7 @@ async function getClient() {
 }
 
 function isDbInMemory() {
-  return isInMemory;
+  return isInMemory || process.env.USE_PG_MEM === 'true' || process.env.NODE_ENV === 'test';
 }
 
 function getPool() {

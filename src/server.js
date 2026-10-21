@@ -1,5 +1,4 @@
 require('dotenv').config();
-const app = require('./app');
 const logger = require('./utils/logger');
 const db = require('./config/database');
 
@@ -24,6 +23,8 @@ async function startServer() {
       );
       logger.info('In-memory database ready with default administrator credentials (admin / AdminKsd@2026!).');
     }
+
+    const app = require('./app');
 
     server = app.listen(PORT, () => {
       logger.info(`Employees Service Kasaragod portal running at http://localhost:${PORT}`);
