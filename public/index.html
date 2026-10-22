@@ -3,277 +3,581 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Employees Service, Kasaragod — Employee Services & Community Portal</title>
-  <meta name="description" content="Official employee resource portal for Kasaragod. Quick access to SPARK, BIMS, Treasury, Education, PF, KITE, Medisep, Downloads, and internal community blogs.">
+  <title>Employees Service, Kasaragod — Official Government Employee Services & Community Portal</title>
+  <meta name="description" content="Official single-window portal for Kerala State Government Employees in Kasaragod. Access SPARK, BIMS, e-Treasury, PRISM, MEDISEP, GPF, Education Portals, circulars, and downloads.">
   <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
 </head>
-<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+<body class="bg-slate-100 text-slate-800 flex flex-col min-h-screen font-sans selection:bg-amber-400 selection:text-slate-900">
 
-  <!-- Top Utility Contact Bar -->
-  <header class="bg-emerald-950 text-emerald-100 text-xs py-2 px-4 border-b border-emerald-900">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div class="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
-        <span class="flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
-          Bank Road, Near Mallikarjuna Temple, Kasaragod
+  <!-- 1. Top Government Utility & Accessibility Bar (PRISM / TRACES Style) -->
+  <header class="gov-topbar text-xs py-1.5 px-4 border-b border-slate-700/60">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-3 flex-wrap justify-center md:justify-start">
+        <span class="inline-flex items-center gap-1.5 text-slate-300 font-medium">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Government of Kerala Employee Services Portal | Kasaragod District
         </span>
-        <span class="hidden md:inline text-emerald-700">•</span>
-        <a href="mailto:esksd31@gmail.com" class="hover:text-white flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-          esksd31@gmail.com
-        </a>
+        <span class="hidden md:inline text-slate-500">•</span>
+        <span class="text-amber-300 font-semibold flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
+          Helpline: 9447396181 / 1800-425-1857
+        </span>
       </div>
+
+      <!-- Accessibility & Support Toggles -->
       <div class="flex items-center gap-3">
-        <a href="tel:9447396181" class="hover:text-white flex items-center gap-1">
-          <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
-          9447396181
+        <!-- Font Resize Controls -->
+        <div class="flex items-center gap-1 bg-slate-800/80 rounded px-1.5 py-0.5 border border-slate-700 text-[11px] font-bold">
+          <button id="btn-font-dec" class="px-1 text-slate-400 hover:text-white" title="Decrease font size">A-</button>
+          <button id="btn-font-reset" class="px-1 text-amber-400 hover:text-white" title="Reset font size">A</button>
+          <button id="btn-font-inc" class="px-1 text-slate-400 hover:text-white" title="Increase font size">A+</button>
+        </div>
+
+        <a href="mailto:esksd31@gmail.com" class="text-slate-300 hover:text-white flex items-center gap-1 text-[11px]">
+          <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+          <span>esksd31@gmail.com</span>
         </a>
-        <a href="https://wa.me/919447396181" target="_blank" rel="noopener noreferrer" class="bg-emerald-700 hover:bg-emerald-600 text-white px-2 py-0.5 rounded text-[11px] font-semibold flex items-center gap-1 transition">
-          WhatsApp
+
+        <a href="https://wa.me/919447396181" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-white px-2 py-0.5 rounded text-[10px] font-bold tracking-wide flex items-center gap-1 transition shadow-xs">
+          WhatsApp Desk
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Main Navigation Bar -->
-  <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200/70 transition-all">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <a href="/" class="flex items-center gap-3 group">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-700 to-teal-800 text-white flex items-center justify-center font-bold text-xl shadow-md group-hover:shadow-emerald-500/25 group-hover:scale-105 transition duration-300">
-            ES
+  <!-- 2. Official Emblem Brand Header (PRISM & MEDISEP & SPARK Model) -->
+  <section class="bg-white py-3.5 px-4 sm:px-6 lg:px-8 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+      <!-- Kerala Emblem / Brand Seal -->
+      <div class="flex items-center gap-4 text-center sm:text-left">
+        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-900 to-indigo-950 flex items-center justify-center text-amber-400 font-extrabold text-2xl shadow-md border-2 border-amber-400/60 shrink-0">
+          🏛️
+        </div>
+        <div>
+          <div class="flex items-center gap-2 justify-center sm:justify-start">
+            <span class="text-xs font-bold tracking-wider uppercase text-blue-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">Kasaragod District</span>
+            <span class="text-[11px] font-semibold text-slate-500">Government Employee Portal</span>
+          </div>
+          <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-tight mt-0.5 font-heading">
+            EMPLOYEES SERVICE <span class="text-blue-900">KASARAGOD</span>
+          </h1>
+          <p class="text-xs text-slate-600 font-medium">Bank Road, Near Mallikarjuna Temple, Kasaragod, Kerala — 671121</p>
+        </div>
+      </div>
+
+      <!-- Quick Contact & Helpline Badges -->
+      <div class="hidden lg:flex items-center gap-3">
+        <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2">
+          <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center font-bold">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
           </div>
           <div>
-            <span class="block text-base font-extrabold text-slate-900 tracking-tight leading-tight font-heading">EMPLOYEES SERVICE</span>
-            <span class="block text-[11px] font-bold text-emerald-700 uppercase tracking-widest">Kasaragod</span>
+            <div class="text-[10px] uppercase font-bold text-slate-500">Employee Help Desk</div>
+            <div class="text-sm font-extrabold text-blue-900 leading-tight">9447396181</div>
           </div>
-        </a>
+        </div>
 
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-semibold">
-          <a href="/" class="text-emerald-800 font-bold px-3.5 py-2 rounded-xl bg-emerald-50/80 border border-emerald-100 shadow-xs">Home</a>
-          <a href="/services" class="text-slate-700 hover:text-emerald-700 px-3.5 py-2 rounded-xl hover:bg-slate-100/80 transition">Services Directory</a>
-          <a href="/downloads" class="text-slate-700 hover:text-emerald-700 px-3.5 py-2 rounded-xl hover:bg-slate-100/80 transition">Downloads</a>
-          <a href="/blogs" class="text-slate-700 hover:text-emerald-700 px-3.5 py-2 rounded-xl hover:bg-slate-100/80 transition">Blogs & Web</a>
-          <a href="/about" class="text-slate-700 hover:text-emerald-700 px-3.5 py-2 rounded-xl hover:bg-slate-100/80 transition">About Us</a>
-          <a href="/contact" class="text-slate-700 hover:text-emerald-700 px-3.5 py-2 rounded-xl hover:bg-slate-100/80 transition">Contact</a>
-          <a href="/admin/login" class="ml-2 text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition shadow-xs flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-            <span>Admin Portal</span>
+        <a href="/admin/login" class="gov-gold-btn px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm">
+          <svg class="w-4 h-4 text-amber-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          <span>Admin Login</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Primary Government Navigation Bar (PRISM / TRACES Royal Blue Bar) -->
+  <nav class="gov-nav-bg sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-12">
+        <!-- Desktop Nav Links -->
+        <div class="hidden md:flex items-center space-x-1 text-xs uppercase tracking-wide">
+          <a href="/" class="gov-nav-item active font-bold">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+            <span>Home</span>
+          </a>
+          <a href="/services" class="gov-nav-item">Services Directory</a>
+          <a href="/downloads" class="gov-nav-item">Downloads & Orders</a>
+          <a href="/blogs" class="gov-nav-item">Blogs & Web</a>
+          <a href="/about" class="gov-nav-item">About Us</a>
+          <a href="/contact" class="gov-nav-item">Contact</a>
+        </div>
+
+        <div class="hidden md:flex items-center gap-2">
+          <a href="/services" class="text-amber-300 hover:text-amber-200 text-xs font-bold flex items-center gap-1 px-2.5 py-1 rounded bg-black/20 border border-amber-400/40">
+            <span>SPARK / BIMS Quick Jump</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
           </a>
         </div>
 
-        <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100" aria-label="Toggle navigation menu">
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="md:hidden p-1.5 rounded text-white hover:bg-white/10" aria-label="Toggle navigation">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
       </div>
 
       <!-- Mobile Dropdown -->
-      <div id="mobile-menu" class="hidden md:hidden pb-4 pt-2 border-t border-slate-100 space-y-1">
-        <a href="/" class="block px-3.5 py-2 rounded-lg text-base font-bold text-emerald-800 bg-emerald-50">Home</a>
-        <a href="/services" class="block px-3.5 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100">Services Directory</a>
-        <a href="/downloads" class="block px-3.5 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100">Downloads</a>
-        <a href="/blogs" class="block px-3.5 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100">Blogs & Web</a>
-        <a href="/about" class="block px-3.5 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100">About Us</a>
-        <a href="/contact" class="block px-3.5 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100">Contact</a>
-        <a href="/admin/login" class="block px-3.5 py-2 rounded-lg text-base font-medium text-slate-600 hover:bg-slate-100">Admin Portal</a>
+      <div id="mobile-menu" class="hidden md:hidden pb-3 pt-2 border-t border-blue-900/60 space-y-1 text-sm font-semibold">
+        <a href="/" class="block px-3 py-2 rounded text-white bg-blue-900/60">Home</a>
+        <a href="/services" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Services Directory</a>
+        <a href="/downloads" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Downloads & Orders</a>
+        <a href="/blogs" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Blogs & Web</a>
+        <a href="/about" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">About Us</a>
+        <a href="/contact" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Contact</a>
+        <a href="/admin/login" class="block px-3 py-2 rounded text-amber-300 hover:bg-white/10">Admin Portal</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- 4. Interactive Government Circular / Ticker Bar (TRACES & MEDISEP Model) -->
+  <section class="gov-ticker-wrap py-2 px-4 shadow-inner">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="bg-amber-500 text-slate-950 font-extrabold px-2 py-0.5 rounded text-[11px] uppercase tracking-wider flex items-center gap-1 shadow-xs">
+          <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping"></span>
+          Latest Circulars
+        </span>
+        <!-- Prev / Next Ticker Controls -->
+        <div class="hidden sm:flex items-center gap-1 text-slate-400">
+          <button id="ticker-prev" class="px-1.5 py-0.5 rounded hover:bg-slate-700 hover:text-white" title="Previous circular">&larr; Prev</button>
+          <span id="ticker-counter" class="text-[11px] font-mono text-amber-300">1/3</span>
+          <button id="ticker-next" class="px-1.5 py-0.5 rounded hover:bg-slate-700 hover:text-white" title="Next circular">Next &rarr;</button>
+          <button id="ticker-toggle-pause" class="px-1.5 py-0.5 rounded hover:bg-slate-700 hover:text-white" title="Pause or Resume">&#10074;&#10074;</button>
+        </div>
+      </div>
+
+      <!-- Live Ticker Message Container -->
+      <div class="flex-grow overflow-hidden relative h-5">
+        <div id="ticker-content" class="transition-all duration-300 text-slate-200 font-medium truncate flex items-center gap-2">
+          <span class="text-amber-400 font-bold">[SPARK]:</span>
+          <span>Annual Property Return (APR) submission window is open for Kerala State Employees.</span>
+          <a href="/services" class="underline text-amber-300 hover:text-white ml-2 text-[11px]">View Details</a>
+        </div>
+      </div>
+
+      <div class="shrink-0 hidden md:block">
+        <a href="/downloads" class="text-slate-300 hover:text-amber-300 text-[11px] font-semibold underline underline-offset-2">Archive & Circulars &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Main Content Area -->
   <main class="flex-grow">
-    <section class="hero-mesh relative text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <!-- Ambient Glow Orbs -->
-      <div class="absolute -top-32 -left-32 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none animate-float"></div>
-      <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl pointer-events-none animate-float" style="animation-delay: -3s;"></div>
-      <div class="absolute inset-0 hero-pattern opacity-40 pointer-events-none"></div>
 
-      <div class="max-w-5xl mx-auto text-center relative z-10">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-xs font-semibold text-emerald-300 mb-6 border border-emerald-400/30 shadow-lg shadow-emerald-950/40">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Kerala State Government Employees Resource Portal
+    <!-- Hero Section (Combining TRACES Banner + MEDISEP Live Updates + PRISM Login) -->
+    <section class="gov-hero-gradient py-8 px-4 sm:px-6 lg:px-8 border-b-4 border-amber-500 text-white">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        <!-- Left Column: Official Announcement Banner (TRACES Model) -->
+        <div class="lg:col-span-8 flex flex-col justify-between">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-950/80 rounded border border-blue-400/40 text-xs font-bold text-amber-300 mb-4 shadow-sm w-fit">
+            <span>🏛️</span>
+            <span>GOVERNMENT OF KERALA EMPLOYEE RESOURCE DIRECTORY 2026-27</span>
+          </div>
+
+          <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight mb-3 font-heading uppercase text-white drop-shadow-sm">
+            Single-Window Portal For <span class="text-amber-300">SPARK, BIMS, e-Treasury, & Education Services</span>
+          </h2>
+
+          <p class="text-sm sm:text-base text-blue-100 font-medium mb-6 leading-relaxed max-w-3xl">
+            Authorized directory and resource hub providing Kerala state government employees, DDOs, teachers, and pensioners with instant links to payroll, health insurance (MEDISEP), GPF accounts, and administrative order copies.
+          </p>
+
+          <!-- Key Features Badges (TRACES Style) -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
+            <div class="bg-blue-950/70 border border-blue-800/80 rounded p-2.5 text-center">
+              <div class="text-amber-400 text-base mb-0.5">⚡</div>
+              <div class="text-xs font-bold text-white">Direct SPARK</div>
+              <div class="text-[10px] text-blue-200">No intermediary</div>
+            </div>
+            <div class="bg-blue-950/70 border border-blue-800/80 rounded p-2.5 text-center">
+              <div class="text-emerald-400 text-base mb-0.5">🛡️</div>
+              <div class="text-xs font-bold text-white">MEDISEP II</div>
+              <div class="text-[10px] text-blue-200">Hospitals & Claims</div>
+            </div>
+            <div class="bg-blue-950/70 border border-blue-800/80 rounded p-2.5 text-center">
+              <div class="text-amber-400 text-base mb-0.5">📊</div>
+              <div class="text-xs font-bold text-white">BIMS Treasury</div>
+              <div class="text-[10px] text-blue-200">Bill Processing</div>
+            </div>
+            <div class="bg-blue-950/70 border border-blue-800/80 rounded p-2.5 text-center">
+              <div class="text-cyan-400 text-base mb-0.5">📥</div>
+              <div class="text-xs font-bold text-white">Official Forms</div>
+              <div class="text-[10px] text-blue-200">Calculators & PDFs</div>
+            </div>
+          </div>
+
+          <!-- Direct Action Buttons (TRACES Style Call-to-Action) -->
+          <div class="flex flex-wrap items-center gap-3 mb-6">
+            <a href="https://www.spark.gov.in" target="_blank" rel="noopener noreferrer" class="gov-gold-btn px-5 py-3 rounded-lg text-sm font-extrabold flex items-center gap-2">
+              <span>&gt;&gt; OPEN SPARK PORTAL</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </a>
+            <a href="https://bims.kerala.gov.in" target="_blank" rel="noopener noreferrer" class="gov-blue-btn px-5 py-3 rounded-lg text-sm font-bold flex items-center gap-2">
+              <span>BIMS e-Treasury</span>
+            </a>
+            <a href="/services" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-3 rounded-lg text-sm font-bold transition flex items-center gap-1.5">
+              <span>Browse All 33 Portals</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
+
+          <!-- Instant Portal Search Bar -->
+          <div class="bg-white p-2 rounded-xl shadow-lg flex items-center gap-2 text-slate-800">
+            <svg class="w-5 h-5 text-slate-400 ml-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <input type="text" id="hero-search-input" placeholder="Search official portals (e.g. SPARK, BIMS, GPF, MEDISEP, Sampoorna, PRISM)..." class="w-full py-1.5 px-2 text-sm font-medium focus:outline-none placeholder-slate-400">
+            <button id="hero-search-btn" class="gov-nav-bg text-white px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wide hover:opacity-95 transition shrink-0">
+              Find Portal
+            </button>
+          </div>
         </div>
-        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-5 leading-tight font-heading">
-          Employees Service, <span class="bg-gradient-to-r from-emerald-300 via-teal-200 to-emerald-100 bg-clip-text text-transparent">Kasaragod</span>
-        </h1>
-        <p class="text-lg sm:text-xl text-emerald-100/90 max-w-3xl mx-auto mb-10 font-normal leading-relaxed">
-          Your unified directory for SPARK, BIMS, e-Treasury, Tax Portals, Education Services, GPF, KITE, Downloads, and verified community guidance.
-        </p>
 
-        <!-- Quick Search Bar -->
-        <div class="max-w-2xl mx-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-2.5 flex items-center gap-2 border border-white/60 ring-4 ring-emerald-500/15 transition-all focus-within:ring-emerald-400/30">
-          <svg class="w-5 h-5 text-slate-400 ml-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          <input type="text" id="hero-search-input" placeholder="Search portals & services (e.g. SPARK, BIMS, GPF, MEDISEP, Sampoorna)..." class="w-full py-2 px-2 text-slate-800 placeholder-slate-400 focus:outline-none text-sm font-medium">
-          <button id="hero-search-btn" class="btn-gradient text-white px-6 py-2.5 rounded-xl font-semibold text-sm transition shadow-md shrink-0 flex items-center gap-1.5">
-            <span>Search</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-          </button>
+        <!-- Right Column: Dual Tabs — Live Circulars (MEDISEP Style) & Quick Login (PRISM Style) -->
+        <div class="lg:col-span-4 bg-white rounded-xl shadow-xl overflow-hidden border border-slate-200 text-slate-800">
+          <!-- Card Header Tabs -->
+          <div class="flex border-b border-slate-200 bg-slate-50 text-xs font-bold">
+            <button id="tab-btn-circulars" class="flex-1 py-3 px-3 text-center border-b-2 border-blue-900 text-blue-900 bg-white flex items-center justify-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+              <span>Live Updates & DDO Orders</span>
+            </button>
+            <button id="tab-btn-login" class="flex-1 py-3 px-3 text-center text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:bg-slate-100 flex items-center justify-center gap-1.5">
+              <span>🔐 Quick Access</span>
+            </button>
+          </div>
+
+          <!-- Tab Content 1: Live Circulars & DDO Orders (MEDISEP Model) -->
+          <div id="tab-content-circulars" class="p-4 space-y-3 max-h-[380px] overflow-y-auto">
+            <div class="p-3 rounded-lg bg-blue-50/70 border border-blue-100 text-xs">
+              <div class="flex items-center justify-between text-[11px] font-bold text-blue-900 mb-1">
+                <span class="bg-blue-200/80 px-2 py-0.5 rounded text-[10px]">22/10/2026</span>
+                <span class="text-emerald-700">SPARK Portal</span>
+              </div>
+              <p class="font-bold text-slate-900 mb-1 leading-snug">Attention DDOs: Annual Property Return (APR) Submission</p>
+              <p class="text-slate-600 text-[11px] leading-relaxed">Ensure all gazetted and non-gazetted submissions are completed before the quarterly cutoff.</p>
+              <a href="https://www.spark.gov.in" target="_blank" class="inline-block mt-1 text-[11px] font-bold text-blue-800 hover:underline">Proceed to SPARK &rarr;</a>
+            </div>
+
+            <div class="p-3 rounded-lg bg-amber-50/70 border border-amber-200/80 text-xs">
+              <div class="flex items-center justify-between text-[11px] font-bold text-amber-900 mb-1">
+                <span class="bg-amber-200 px-2 py-0.5 rounded text-[10px]">22/10/2026</span>
+                <span class="text-amber-800">MEDISEP</span>
+              </div>
+              <p class="font-bold text-slate-900 mb-1 leading-snug">MEDISEP Phase II: Hospital Network & Claims</p>
+              <p class="text-slate-600 text-[11px] leading-relaxed">Updated list of cashless empanelled private and government hospitals in Kasaragod and Mangalore.</p>
+              <a href="/downloads" class="inline-block mt-1 text-[11px] font-bold text-amber-900 hover:underline">Download Hospital Directory &rarr;</a>
+            </div>
+
+            <div class="p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs">
+              <div class="flex items-center justify-between text-[11px] font-bold text-slate-700 mb-1">
+                <span class="bg-slate-200 px-2 py-0.5 rounded text-[10px]">22/10/2026</span>
+                <span class="text-slate-600">GPF Kerala</span>
+              </div>
+              <p class="font-bold text-slate-900 mb-1 leading-snug">GPF Annual Credit Cards & Interest Calculations</p>
+              <p class="text-slate-600 text-[11px] leading-relaxed">Annual accounts statements are available for employee verification via the AG portal.</p>
+              <a href="/services" class="inline-block mt-1 text-[11px] font-bold text-slate-800 hover:underline">Open Provident Fund Links &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Tab Content 2: Quick Portal Access / Login (PRISM Model) -->
+          <div id="tab-content-login" class="hidden p-5 space-y-4">
+            <div class="text-center pb-2 border-b border-slate-100">
+              <div class="text-xs font-bold uppercase tracking-wider text-blue-900">Portal Authentication</div>
+              <p class="text-xs text-slate-500 mt-0.5">Admin & Content Management Portal</p>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Username / DDO ID</label>
+                <input type="text" placeholder="Enter username (admin)" class="w-full p-2 border border-slate-300 rounded focus:border-blue-900 focus:outline-none text-xs">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Password</label>
+                <input type="password" placeholder="••••••••••••" class="w-full p-2 border border-slate-300 rounded focus:border-blue-900 focus:outline-none text-xs">
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="bg-slate-200 px-3 py-1.5 rounded font-mono font-bold text-sm tracking-widest text-slate-800 border select-none">
+                  9 1 6 5 4
+                </div>
+                <input type="text" placeholder="Enter captcha" class="flex-1 p-2 border border-slate-300 rounded text-xs focus:outline-none">
+              </div>
+              <a href="/admin/login" class="block w-full text-center gov-gold-btn py-2.5 rounded font-extrabold text-xs tracking-wider uppercase">
+                Login to Portal
+              </a>
+              <p class="text-[11px] text-center text-slate-500">
+                Are you an employee seeking SPARK? <a href="https://www.spark.gov.in" target="_blank" class="text-blue-700 font-bold hover:underline">Click here to open SPARK direct</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-2.5 border-t border-slate-200 text-center text-xs font-bold">
+            <a href="/downloads" class="text-blue-900 hover:text-blue-700 inline-flex items-center gap-1">
+              <span>View All Circulars, Forms & Government Orders</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
         </div>
 
-        <!-- Quick Filter Tags -->
-        <div class="mt-6 flex items-center justify-center gap-2 flex-wrap text-xs text-emerald-200/90 font-medium">
-          <span class="text-emerald-300/70 font-semibold uppercase tracking-wider text-[11px]">Popular:</span>
-          <a href="/services?search=spark" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm transition border border-white/10">SPARK</a>
-          <a href="/services?search=bims" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm transition border border-white/10">BIMS</a>
-          <a href="/services?search=gpf" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm transition border border-white/10">GPF</a>
-          <a href="/services?search=medisep" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm transition border border-white/10">MEDISEP</a>
-          <a href="/services?search=sampoorna" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm transition border border-white/10">Sampoorna</a>
-          <a href="/services?search=treasury" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm transition border border-white/10">e-Treasury</a>
+      </div>
+    </section>
+
+    <!-- 6. Establishment Quick Filter Bar (SPARK Establishment Model) -->
+    <section class="bg-white border-b border-slate-300 py-3 px-4 sm:px-6 lg:px-8 shadow-xs">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="w-3 h-3 bg-amber-500 rounded-sm"></span>
+          <span class="font-extrabold uppercase tracking-wide text-slate-800">Establishment Quick Jump:</span>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 flex-grow justify-start md:justify-end">
+          <select id="jump-category-select" class="p-1.5 border border-slate-300 rounded font-medium bg-slate-50 text-slate-800 focus:outline-none">
+            <option value="">Select Service Category...</option>
+            <!-- Injected via JS -->
+          </select>
+
+          <a id="btn-quick-jump" href="/services" class="gov-blue-btn px-4 py-1.5 rounded font-bold text-xs flex items-center gap-1">
+            <span>Direct Access</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Service Categories Grid Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-slate-200 gap-4">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">Department Portals</span>
-          <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-2 font-heading">Employee Service Directory</h2>
-          <p class="text-sm text-slate-600 mt-1">Single-window access to all official Kerala state government portals.</p>
-        </div>
-        <a href="/services" class="text-sm font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5 group bg-emerald-50/60 hover:bg-emerald-50 px-4 py-2 rounded-xl transition border border-emerald-100">
-          <span>View Complete Directory</span>
-          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-        </a>
+    <!-- 7. Four-Column Structured Government Service Panels (TRACES Model) -->
+    <section class="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center mb-8">
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-900 bg-blue-100 px-3 py-1 rounded border border-blue-200">Single Window Portal</span>
+        <h3 class="text-2xl font-black text-slate-900 tracking-tight mt-2 font-heading">Government Portals & Administrative Categories</h3>
+        <p class="text-xs text-slate-600 mt-1">Structured access across Kerala State Government departments and official agencies.</p>
       </div>
 
-      <!-- Categories Container -->
-      <div id="home-categories-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        <div class="col-span-full py-12 text-center text-slate-400 text-sm animate-pulse">Loading service categories...</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Column 1: Core Services & Payroll (SPARK & BIMS) -->
+        <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+          <div class="gov-panel-header px-4 py-3 flex items-center justify-between">
+            <h4 class="font-extrabold text-sm uppercase tracking-wide">1. Core Services</h4>
+            <span class="text-amber-300 text-xs">🏛️</span>
+          </div>
+          <div class="p-3 space-y-1 divide-y divide-slate-100 flex-grow text-xs">
+            <a href="https://www.spark.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>SPARK Kerala Payroll</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="https://bims.kerala.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>BIMS (Bill Information System)</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="https://treasury.kerala.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>e-Treasury Portal</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="https://prism.kerala.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>PRISM Pensioner Info System</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="https://gains.kerala.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>GAINS Asset Management</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+          </div>
+          <div class="bg-slate-50 p-2.5 text-center border-t border-slate-100">
+            <a href="/services" class="text-blue-800 font-bold text-xs hover:underline">View All Core Services &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Column 2: Education & Schools (Sampoorna, Sametham, KITE) -->
+        <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+          <div class="gov-panel-header px-4 py-3 flex items-center justify-between">
+            <h4 class="font-extrabold text-sm uppercase tracking-wide">2. Education Portals</h4>
+            <span class="text-amber-300 text-xs">🎓</span>
+          </div>
+          <div class="p-3 space-y-1 divide-y divide-slate-100 flex-grow text-xs">
+            <a href="https://sampoorna.kite.kerala.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>Sampoorna School Portal</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="https://sametham.kite.kerala.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>Sametham Kerala School Data</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="https://kite.kerala.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>KITE IT@School Infrastructure</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="https://dhsekerala.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>Higher Secondary Portal (DHSE)</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="https://pareekshabhavan.kerala.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>Pareeksha Bhavan Examination</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+          </div>
+          <div class="bg-slate-50 p-2.5 text-center border-t border-slate-100">
+            <a href="/services" class="text-blue-800 font-bold text-xs hover:underline">View All School Portals &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Column 3: Things to Know & Compliance (TRACES / Tax / PF) -->
+        <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+          <div class="gov-panel-header px-4 py-3 flex items-center justify-between">
+            <h4 class="font-extrabold text-sm uppercase tracking-wide">3. Things to Know</h4>
+            <span class="text-amber-300 text-xs">📋</span>
+          </div>
+          <div class="p-3 space-y-1 divide-y divide-slate-100 flex-grow text-xs">
+            <a href="https://www.tdscpc.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>TRACES (TDS CPC Portal)</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="https://www.incometax.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>Income Tax e-Filing Portal</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="https://medisep.kerala.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>MEDISEP Empanelled Hospitals</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="/downloads" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>KSR Rules & Service Books</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="/downloads" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>GPF Annual Credit Statements</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+          </div>
+          <div class="bg-slate-50 p-2.5 text-center border-t border-slate-100">
+            <a href="/downloads" class="text-blue-800 font-bold text-xs hover:underline">View Circulars & Rules &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Column 4: Learn With Us & Community Blogs (TRACES Model) -->
+        <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+          <div class="gov-panel-header px-4 py-3 flex items-center justify-between">
+            <h4 class="font-extrabold text-sm uppercase tracking-wide">4. Learn with Us</h4>
+            <span class="text-amber-300 text-xs">📖</span>
+          </div>
+          <div class="p-3 space-y-1 divide-y divide-slate-100 flex-grow text-xs">
+            <a href="/blogs" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>HM Blog (Headmasters Guidance)</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="/blogs" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>Muttam Blog Educational Notes</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="/blogs" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>Maths Blog Kerala Teachers</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="/downloads" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>Salary Arrear Bill Calculators</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+            <a href="/about" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+              <span>Nodal Office FAQs & Guidance</span>
+              <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
+            </a>
+          </div>
+          <div class="bg-slate-50 p-2.5 text-center border-t border-slate-100">
+            <a href="/blogs" class="text-blue-800 font-bold text-xs hover:underline">Explore Articles & Guides &rarr;</a>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- Quick Access Highlights Section -->
-    <section class="bg-gradient-to-b from-slate-100/80 via-white to-slate-50 py-16 px-4 sm:px-6 lg:px-8 border-y border-slate-200">
+    <!-- 8. Service Categories Grid (Spreadsheet-extracted 11 Categories) -->
+    <section class="bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-200">
       <div class="max-w-7xl mx-auto">
-        <div class="text-center max-w-2xl mx-auto mb-12">
-          <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">Core Resources</span>
-          <h2 class="text-3xl font-extrabold text-slate-900 mt-2 font-heading">Everything in One Place</h2>
-          <p class="text-sm text-slate-600 mt-2">Comprehensive employee services, verified file downloads, and expert community updates.</p>
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-3 border-b border-slate-300 gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-900 bg-blue-100 px-2.5 py-0.5 rounded">All 11 Sectors</span>
+            <h3 class="text-2xl font-black text-slate-900 tracking-tight mt-1 font-heading">Complete Service Directory</h3>
+            <p class="text-xs text-slate-600">Select any department to access verified official application links.</p>
+          </div>
+          <a href="/services" class="text-xs font-extrabold text-blue-900 hover:text-blue-700 flex items-center gap-1 bg-white px-3.5 py-2 rounded border border-slate-300 shadow-2xs">
+            <span>Open Complete Directory</span>
+            <span>&rarr;</span>
+          </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Card 1: Services -->
-          <div class="card-hover-effect bg-white rounded-2xl p-7 shadow-sm border border-slate-200/80 flex flex-col justify-between relative overflow-hidden group">
-            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500"></div>
-            <div>
-              <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold mb-6 group-hover:scale-110 group-hover:bg-emerald-700 group-hover:text-white transition-all duration-300 shadow-sm border border-emerald-100">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-              </div>
-              <h3 class="text-xl font-bold text-slate-900 mb-2 font-heading group-hover:text-emerald-700 transition">Service Portals Directory</h3>
-              <p class="text-sm text-slate-600 mb-6 leading-relaxed">
-                Direct single-click access to SPARK, BIMS, Treasury, Income Tax, General Education, GPF, and KITE platforms.
-              </p>
-            </div>
-            <a href="/services" class="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-700 hover:text-emerald-800 group-hover:translate-x-1 transition-transform">
-              <span>Browse directory</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </a>
-          </div>
-
-          <!-- Card 2: Downloads -->
-          <div class="card-hover-effect bg-white rounded-2xl p-7 shadow-sm border border-slate-200/80 flex flex-col justify-between relative overflow-hidden group">
-            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
-            <div>
-              <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold mb-6 group-hover:scale-110 group-hover:bg-blue-700 group-hover:text-white transition-all duration-300 shadow-sm border border-blue-100">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-              </div>
-              <h3 class="text-xl font-bold text-slate-900 mb-2 font-heading group-hover:text-blue-700 transition">Verified Download Center</h3>
-              <p class="text-sm text-slate-600 mb-6 leading-relaxed">
-                Download official government order copies, service books formats, pension calculators, and employee circulars.
-              </p>
-            </div>
-            <a href="/downloads" class="inline-flex items-center gap-1.5 text-sm font-bold text-blue-700 hover:text-blue-800 group-hover:translate-x-1 transition-transform">
-              <span>Browse downloads</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </a>
-          </div>
-
-          <!-- Card 3: Community Blogs -->
-          <div class="card-hover-effect bg-white rounded-2xl p-7 shadow-sm border border-slate-200/80 flex flex-col justify-between relative overflow-hidden group">
-            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500"></div>
-            <div>
-              <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold mb-6 group-hover:scale-110 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300 shadow-sm border border-amber-100">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
-              </div>
-              <h3 class="text-xl font-bold text-slate-900 mb-2 font-heading group-hover:text-amber-700 transition">Community Blogs & Guides</h3>
-              <p class="text-sm text-slate-600 mb-6 leading-relaxed">
-                Stay updated with curated educational posts, income tax guides, and administrative insights from HM Blog, Muttam Blog, and Maths Blog.
-              </p>
-            </div>
-            <a href="/blogs" class="inline-flex items-center gap-1.5 text-sm font-bold text-amber-700 hover:text-amber-800 group-hover:translate-x-1 transition-transform">
-              <span>Read articles</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </a>
-          </div>
+        <!-- Dynamic Category Cards Container -->
+        <div id="home-categories-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <div class="col-span-full py-8 text-center text-slate-400 text-xs animate-pulse">Loading service categories...</div>
         </div>
       </div>
     </section>
 
-    <!-- Recent Articles Section -->
+    <!-- 9. Recent Community Articles & Circulars -->
     <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div class="flex items-center justify-between mb-8 pb-3 border-b border-slate-200">
         <div>
-          <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Recent Community Articles</h2>
-          <p class="text-sm text-slate-600 mt-1">Articles and guidance hosted on employeeserviceksd.com</p>
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded">Verified Guidance</span>
+          <h3 class="text-2xl font-black text-slate-900 tracking-tight mt-1 font-heading">Recent Community Articles</h3>
+          <p class="text-xs text-slate-600">Educational updates, salary rules, and tax filing walkthroughs.</p>
         </div>
-        <a href="/blogs" class="text-sm font-semibold text-emerald-700 hover:text-emerald-800">All Blogs &rarr;</a>
+        <a href="/blogs" class="text-xs font-bold text-blue-900 hover:text-blue-700">All Blogs & Guides &rarr;</a>
       </div>
 
       <div id="home-articles-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="col-span-full py-8 text-center text-slate-400 text-sm">Loading recent articles...</div>
+        <div class="col-span-full py-8 text-center text-slate-400 text-xs">Loading recent articles...</div>
       </div>
     </section>
+
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-400 text-sm border-t border-slate-800 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+  <!-- 10. Official Government Portal Footer (PRISM & National NIC Style) -->
+  <footer class="bg-slate-900 text-slate-300 text-xs border-t-4 border-amber-500 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-slate-800">
         <div class="md:col-span-2">
-          <div class="flex items-center gap-2 mb-3">
-            <div class="w-8 h-8 rounded bg-emerald-700 text-white flex items-center justify-center font-bold text-base">ES</div>
-            <span class="text-white font-bold text-lg tracking-tight">EMPLOYEES SERVICE, KASARAGOD</span>
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-full bg-blue-900 text-amber-400 flex items-center justify-center font-bold text-xl border border-amber-400/40">
+              🏛️
+            </div>
+            <div>
+              <div class="text-white font-extrabold text-base tracking-tight font-heading">EMPLOYEES SERVICE, KASARAGOD</div>
+              <div class="text-[11px] text-amber-400 font-medium">Independent Resource Directory for Kerala State Staff</div>
+            </div>
           </div>
-          <p class="text-slate-400 text-sm leading-relaxed max-w-md mb-4">
-            An independent resource and community information portal dedicated to employees, teachers, and staff across Kasaragod and Kerala.
+          <p class="text-slate-400 text-xs leading-relaxed max-w-lg mb-4">
+            Established to facilitate seamless administrative access to state government portals including SPARK, BIMS, e-Treasury, MEDISEP, GPF, and school management platforms for the district of Kasaragod and Kerala State.
           </p>
           <div class="text-xs text-slate-400 space-y-1">
-            <p><strong>Address:</strong> Bank Road, Near Mallikarjuna Temple, Kasaragod</p>
-            <p><strong>Email:</strong> <a href="mailto:esksd31@gmail.com" class="text-emerald-400 hover:underline">esksd31@gmail.com</a></p>
-            <p><strong>Phone:</strong> <a href="tel:9447396181" class="text-emerald-400 hover:underline">9447396181</a></p>
+            <p><strong>Nodal Office:</strong> Bank Road, Near Mallikarjuna Temple, Kasaragod, Kerala — 671121</p>
+            <p><strong>Official Email:</strong> <a href="mailto:esksd31@gmail.com" class="text-amber-400 hover:underline">esksd31@gmail.com</a></p>
+            <p><strong>Helpline Number:</strong> <a href="tel:9447396181" class="text-amber-400 hover:underline">9447396181</a> (WhatsApp available)</p>
           </div>
         </div>
 
         <div>
-          <h4 class="text-white font-semibold text-sm mb-3 uppercase tracking-wider">Quick Links</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/" class="hover:text-emerald-400 transition">Home</a></li>
-            <li><a href="/services" class="hover:text-emerald-400 transition">Service Directory</a></li>
-            <li><a href="/downloads" class="hover:text-emerald-400 transition">Download Center</a></li>
-            <li><a href="/blogs" class="hover:text-emerald-400 transition">Blogs & Web</a></li>
-            <li><a href="/about" class="hover:text-emerald-400 transition">About Us</a></li>
-            <li><a href="/contact" class="hover:text-emerald-400 transition">Contact Us</a></li>
+          <h4 class="text-white font-extrabold text-xs uppercase tracking-wider mb-3 text-amber-300">Quick Navigation</h4>
+          <ul class="space-y-1.5 text-xs text-slate-400">
+            <li><a href="/" class="hover:text-white transition">Home Portal</a></li>
+            <li><a href="/services" class="hover:text-white transition">Services Directory (33 Portals)</a></li>
+            <li><a href="/downloads" class="hover:text-white transition">Government Order Downloads</a></li>
+            <li><a href="/blogs" class="hover:text-white transition">Community Blogs (HM, Muttam, Maths)</a></li>
+            <li><a href="/about" class="hover:text-white transition">About Employees Service</a></li>
+            <li><a href="/contact" class="hover:text-white transition">Contact & Office Location</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="text-white font-semibold text-sm mb-3 uppercase tracking-wider">Portal Access</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/admin/login" class="hover:text-emerald-400 transition">Administrator Login</a></li>
-            <li><a href="/privacy-policy" class="hover:text-emerald-400 transition">Privacy Policy</a></li>
+          <h4 class="text-white font-extrabold text-xs uppercase tracking-wider mb-3 text-amber-300">Portals & Security</h4>
+          <ul class="space-y-1.5 text-xs text-slate-400">
+            <li><a href="https://www.spark.gov.in" target="_blank" class="hover:text-white transition">SPARK Official Portal &rarr;</a></li>
+            <li><a href="https://medisep.kerala.gov.in" target="_blank" class="hover:text-white transition">MEDISEP Health Insurance &rarr;</a></li>
+            <li><a href="https://bims.kerala.gov.in" target="_blank" class="hover:text-white transition">BIMS Bill System &rarr;</a></li>
+            <li><a href="/admin/login" class="text-amber-300 font-bold hover:underline">Portal Administrator Login &rarr;</a></li>
+            <li><a href="/privacy-policy" class="hover:text-white transition">Privacy Policy & Terms</a></li>
           </ul>
-          <div class="mt-6 pt-4 border-t border-slate-800 text-xs text-slate-500">
-            Helpline: 9447396181 (WhatsApp Available)
-          </div>
         </div>
       </div>
 
-      <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+      <div class="flex flex-col sm:flex-row justify-between items-center text-[11px] text-slate-500 gap-3">
         <p>&copy; 2026 Employees Service, Kasaragod. All rights reserved.</p>
-        <p>employeeserviceksd.com — Community Portal</p>
+        <p class="text-center sm:text-right">Designed according to official Kerala Government Employee Portal standards (SPARK, PRISM, MEDISEP).</p>
       </div>
     </div>
   </footer>
@@ -281,59 +585,184 @@
   <script src="/assets/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      // 1. Fetch & display Categories
+      // 1. Accessibility Font Resize Controls
+      let currentFontSize = 100;
+      const rootHtml = document.documentElement;
+      document.getElementById('btn-font-inc')?.addEventListener('click', () => {
+        if (currentFontSize < 130) {
+          currentFontSize += 10;
+          rootHtml.style.fontSize = `${currentFontSize}%`;
+        }
+      });
+      document.getElementById('btn-font-dec')?.addEventListener('click', () => {
+        if (currentFontSize > 85) {
+          currentFontSize -= 10;
+          rootHtml.style.fontSize = `${currentFontSize}%`;
+        }
+      });
+      document.getElementById('btn-font-reset')?.addEventListener('click', () => {
+        currentFontSize = 100;
+        rootHtml.style.fontSize = '100%';
+      });
+
+      // 2. Tab Switcher (Live Circulars vs Quick Login)
+      const tabBtnCirculars = document.getElementById('tab-btn-circulars');
+      const tabBtnLogin = document.getElementById('tab-btn-login');
+      const tabContentCirculars = document.getElementById('tab-content-circulars');
+      const tabContentLogin = document.getElementById('tab-content-login');
+
+      tabBtnCirculars?.addEventListener('click', () => {
+        tabBtnCirculars.classList.add('border-blue-900', 'text-blue-900', 'bg-white');
+        tabBtnCirculars.classList.remove('text-slate-500', 'border-transparent');
+        tabBtnLogin.classList.remove('border-blue-900', 'text-blue-900', 'bg-white');
+        tabBtnLogin.classList.add('text-slate-500', 'border-transparent');
+        tabContentCirculars.classList.remove('hidden');
+        tabContentLogin.classList.add('hidden');
+      });
+
+      tabBtnLogin?.addEventListener('click', () => {
+        tabBtnLogin.classList.add('border-blue-900', 'text-blue-900', 'bg-white');
+        tabBtnLogin.classList.remove('text-slate-500', 'border-transparent');
+        tabBtnCirculars.classList.remove('border-blue-900', 'text-blue-900', 'bg-white');
+        tabBtnCirculars.classList.add('text-slate-500', 'border-transparent');
+        tabContentLogin.classList.remove('hidden');
+        tabContentCirculars.classList.add('hidden');
+      });
+
+      // 3. Ticker Carousel logic
+      let announcements = [
+        { title: 'SPARK', message: 'Annual Property Return (APR) submission window is active on SPARK portal for Kerala State Employees.', link_url: 'https://www.spark.gov.in' },
+        { title: 'MEDISEP', message: 'MEDISEP Phase II: Updated empanelled hospitals list and grievance redressal helpline details for Kasaragod.', link_url: '/downloads' },
+        { title: 'GPF Kerala', message: 'GPF Annual Accounts Statements for current financial year are ready for download and verification.', link_url: '/services' }
+      ];
+      let currentTickerIdx = 0;
+      let tickerTimer = null;
+      let isTickerPaused = false;
+
+      const tickerContent = document.getElementById('ticker-content');
+      const tickerCounter = document.getElementById('ticker-counter');
+      const tickerTogglePause = document.getElementById('ticker-toggle-pause');
+
+      function renderTicker(idx) {
+        if (!tickerContent || announcements.length === 0) return;
+        const item = announcements[idx];
+        tickerContent.innerHTML = `
+          <span class="text-amber-400 font-bold">[${item.title}]:</span>
+          <span class="truncate">${item.message}</span>
+          ${item.link_url ? `<a href="${item.link_url}" ${item.link_url.startsWith('http') ? 'target="_blank"' : ''} class="underline text-amber-300 hover:text-white ml-2 text-[11px] shrink-0 font-bold">Open Portal &rarr;</a>` : ''}
+        `;
+        if (tickerCounter) tickerCounter.textContent = `${idx + 1}/${announcements.length}`;
+      }
+
+      function nextTicker() {
+        currentTickerIdx = (currentTickerIdx + 1) % announcements.length;
+        renderTicker(currentTickerIdx);
+      }
+
+      function prevTicker() {
+        currentTickerIdx = (currentTickerIdx - 1 + announcements.length) % announcements.length;
+        renderTicker(currentTickerIdx);
+      }
+
+      function startTicker() {
+        if (tickerTimer) clearInterval(tickerTimer);
+        tickerTimer = setInterval(() => {
+          if (!isTickerPaused) nextTicker();
+        }, 6000);
+      }
+
+      document.getElementById('ticker-next')?.addEventListener('click', nextTicker);
+      document.getElementById('ticker-prev')?.addEventListener('click', prevTicker);
+      tickerTogglePause?.addEventListener('click', () => {
+        isTickerPaused = !isTickerPaused;
+        tickerTogglePause.textContent = isTickerPaused ? '▶' : '❚❚';
+      });
+
+      // Fetch live announcements from DB if available
+      try {
+        const annRes = await fetch('/api/v1/announcements');
+        const annData = await annRes.json();
+        if (annData.success && annData.data && annData.data.length > 0) {
+          announcements = annData.data;
+        }
+      } catch (e) {
+        console.warn('Using default announcements');
+      }
+      renderTicker(0);
+      startTicker();
+
+      // 4. Fetch & display Categories
       try {
         const catRes = await fetch('/api/v1/services/categories');
         const catData = await catRes.json();
         const container = document.getElementById('home-categories-grid');
+        const selectBox = document.getElementById('jump-category-select');
+
         if (catData.success && catData.data.length > 0) {
-          container.innerHTML = catData.data.map(cat => `
-            <a href="/services?category=${cat.id}" class="card-hover-effect bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-900/5 text-center group flex flex-col items-center justify-between relative overflow-hidden">
-              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-100/70 text-emerald-800 flex items-center justify-center font-bold text-sm mb-3 group-hover:from-emerald-700 group-hover:to-teal-800 group-hover:text-white group-hover:scale-110 shadow-xs transition-all duration-300">
-                ${cat.name.substring(0, 2).toUpperCase()}
-              </div>
-              <span class="font-bold text-sm text-slate-900 group-hover:text-emerald-700 transition leading-tight font-heading">${cat.name}</span>
-              <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full mt-2 border border-emerald-100">${cat.links_count} portals</span>
-            </a>
-          `).join('');
-        } else {
-          container.innerHTML = '<div class="col-span-full py-4 text-center text-slate-500 text-sm">No service categories active at the moment.</div>';
+          if (container) {
+            container.innerHTML = catData.data.map(cat => `
+              <a href="/services?category=${cat.id}" class="bg-white p-3.5 rounded-lg border border-slate-200 hover:border-blue-700 hover:shadow-md text-center group flex flex-col items-center justify-between transition">
+                <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-900 flex items-center justify-center font-bold text-xs mb-2 group-hover:bg-blue-900 group-hover:text-amber-400 transition">
+                  ${cat.name.substring(0, 2).toUpperCase()}
+                </div>
+                <span class="font-extrabold text-xs text-slate-800 group-hover:text-blue-900 leading-tight">${cat.name}</span>
+                <span class="inline-flex items-center text-[10px] font-bold text-blue-900 bg-blue-50 px-2 py-0.5 rounded mt-2 border border-blue-200">${cat.links_count} Portals</span>
+              </a>
+            `).join('');
+          }
+
+          if (selectBox) {
+            catData.data.forEach(cat => {
+              const opt = document.createElement('option');
+              opt.value = cat.id;
+              opt.textContent = `${cat.name} (${cat.links_count} portals)`;
+              selectBox.appendChild(opt);
+            });
+
+            selectBox.addEventListener('change', () => {
+              const btn = document.getElementById('btn-quick-jump');
+              if (selectBox.value && btn) {
+                btn.href = `/services?category=${selectBox.value}`;
+              }
+            });
+          }
+        } else if (container) {
+          container.innerHTML = '<div class="col-span-full py-4 text-center text-slate-500 text-xs">No service categories active.</div>';
         }
       } catch (err) {
         console.error('Failed to load categories:', err);
       }
 
-      // 2. Fetch Recent Articles
+      // 5. Fetch Recent Articles
       try {
         const blogRes = await fetch('/api/v1/blogs?limit=3');
         const blogData = await blogRes.json();
         const articlesContainer = document.getElementById('home-articles-container');
         if (blogData.success && blogData.articles.length > 0) {
           articlesContainer.innerHTML = blogData.articles.map(art => `
-            <article class="card-hover-effect bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden flex flex-col justify-between hover:shadow-lg transition">
-              <div class="p-6">
-                <div class="flex items-center gap-2 mb-3">
-                  <span class="bg-emerald-50 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded-full border border-emerald-200/70">${art.category_name}</span>
-                  <span class="text-xs text-slate-300">•</span>
-                  <time class="text-xs text-slate-500 font-medium">${formatDate(art.published_at)}</time>
+            <article class="bg-white rounded-lg border border-slate-200 overflow-hidden flex flex-col justify-between hover:shadow-md hover:border-blue-900 transition">
+              <div class="p-5">
+                <div class="flex items-center gap-2 mb-2 text-xs">
+                  <span class="bg-blue-100 text-blue-900 font-bold px-2 py-0.5 rounded text-[10px]">${art.category_name}</span>
+                  <span class="text-slate-300">•</span>
+                  <time class="text-slate-500 font-medium text-[11px]">${formatDate(art.published_at)}</time>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2 leading-snug hover:text-emerald-700 transition font-heading">
+                <h4 class="text-base font-extrabold text-slate-900 mb-2 leading-snug hover:text-blue-900 transition">
                   <a href="/blogs/${art.slug}">${art.title}</a>
-                </h3>
-                <p class="text-sm text-slate-600 line-clamp-3 mb-4 leading-relaxed font-light">${art.summary || 'Click to view full guidance and notes.'}</p>
+                </h4>
+                <p class="text-xs text-slate-600 line-clamp-3 mb-3 leading-relaxed">${art.summary || 'Click to view complete employee guidance notes.'}</p>
               </div>
-              <div class="px-6 py-3.5 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 font-medium">
+              <div class="px-5 py-2.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 font-semibold">
                 <span>By ${art.author_name}</span>
-                <a href="/blogs/${art.slug}" class="font-bold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1">Read article &rarr;</a>
+                <a href="/blogs/${art.slug}" class="font-extrabold text-blue-900 hover:underline inline-flex items-center gap-1">Read article &rarr;</a>
               </div>
             </article>
           `).join('');
-        } else {
+        } else if (articlesContainer) {
           articlesContainer.innerHTML = `
-            <div class="col-span-full bg-slate-50 border border-dashed border-slate-300 rounded-xl p-8 text-center text-slate-500">
-              <svg class="w-8 h-8 text-slate-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
-              <p class="font-medium text-slate-700">No articles published yet</p>
-              <p class="text-xs text-slate-500 mt-1">Check back soon for community updates from HM Blog, Muttam Blog, and Maths Blog.</p>
+            <div class="col-span-full bg-white border border-slate-200 rounded-lg p-6 text-center text-slate-500 text-xs">
+              <p class="font-bold text-slate-700">No articles published yet</p>
+              <p class="text-slate-500 mt-1">Check back for updates from HM Blog, Muttam Blog, and Maths Blog.</p>
             </div>
           `;
         }
@@ -341,7 +770,7 @@
         console.error('Failed to load articles:', err);
       }
 
-      // Hero Search handler
+      // 6. Search Bar Event Listener
       const searchBtn = document.getElementById('hero-search-btn');
       const searchInput = document.getElementById('hero-search-input');
       const handleSearch = () => {

@@ -299,7 +299,98 @@
   padding: 0.5rem 0.75rem;
   text-align: left;
 }
-.prose-content th {
-  background-color: #f1f5f9;
-  font-weight: 600;
+/* Government Portal Styling (TRACES, PRISM, MEDISEP, SPARK models) */
+.gov-topbar {
+  background-color: #0b1f38;
+  color: #cbd5e1;
 }
+
+.gov-nav-bg {
+  background: linear-gradient(180deg, #0d3b66 0%, #0a2e52 100%);
+  border-bottom: 2px solid #f59e0b;
+}
+
+.gov-nav-item {
+  color: #f1f5f9;
+  font-weight: 600;
+  padding: 0.625rem 1rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.gov-nav-item:hover, .gov-nav-item.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.gov-hero-gradient {
+  background: linear-gradient(135deg, #092747 0%, #0c3e72 45%, #065446 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.gov-hero-card {
+  background: linear-gradient(135deg, rgba(13, 59, 102, 0.95) 0%, rgba(10, 46, 82, 0.92) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.4);
+}
+
+.gov-gold-badge {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  font-weight: 700;
+}
+
+.gov-gold-btn {
+  background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
+  color: #78350f;
+  font-weight: 800;
+  border: 1px solid #d97706;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+  transition: all 0.2s ease;
+}
+.gov-gold-btn:hover {
+  background: linear-gradient(180deg, #fcd34d 0%, #fbbf24 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+}
+
+.gov-blue-btn {
+  background: linear-gradient(180deg, #1d4ed8 0%, #1e40af 100%);
+  color: #ffffff;
+  font-weight: 700;
+  border: 1px solid #1e3a8a;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.35);
+  transition: all 0.2s ease;
+}
+.gov-blue-btn:hover {
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.gov-ticker-wrap {
+  background-color: #081d33;
+  border-bottom: 1px solid #1e3a5f;
+  color: #e2e8f0;
+}
+
+.gov-panel-header {
+  background: linear-gradient(90deg, #0d3b66 0%, #134e87 100%);
+  color: #ffffff;
+  border-bottom: 2px solid #f59e0b;
+}
+
+.gov-service-item {
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+.gov-service-item:hover {
+  background-color: #f8fafc;
+  border-left-color: #0d3b66;
+  transform: translateX(4px);
+}
+

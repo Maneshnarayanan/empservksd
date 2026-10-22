@@ -270,7 +270,44 @@ function renderAnnouncementBanner(items) {
   });
 }
 
+// Global Accessibility Font Controls (A- / A / A+)
+function initAccessibilityFontControls() {
+  let currentFontSize = 100;
+  const rootHtml = document.documentElement;
+  
+  // Restore saved preference if any
+  const saved = localStorage.getItem('esksd_font_size');
+  if (saved) {
+    currentFontSize = parseInt(saved, 10);
+    rootHtml.style.fontSize = `${currentFontSize}%`;
+  }
+
+  document.getElementById('btn-font-inc')?.addEventListener('click', () => {
+    if (currentFontSize < 130) {
+      currentFontSize += 10;
+      rootHtml.style.fontSize = `${currentFontSize}%`;
+      localStorage.setItem('esksd_font_size', currentFontSize);
+    }
+  });
+
+  document.getElementById('btn-font-dec')?.addEventListener('click', () => {
+    if (currentFontSize > 85) {
+      currentFontSize -= 10;
+      rootHtml.style.fontSize = `${currentFontSize}%`;
+      localStorage.setItem('esksd_font_size', currentFontSize);
+    }
+  });
+
+  document.getElementById('btn-font-reset')?.addEventListener('click', () => {
+    currentFontSize = 100;
+    rootHtml.style.fontSize = '100%';
+    localStorage.removeItem('esksd_font_size');
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initAnnouncementTicker();
+  initAccessibilityFontControls();
 });
+
