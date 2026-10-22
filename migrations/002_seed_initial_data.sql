@@ -8,7 +8,7 @@ INSERT INTO service_categories (name, slug, description, display_order, is_activ
 ('AGEES', 'agees', 'Accountant General Employees Electronic Services', 3, true),
 ('TREASURY', 'treasury', 'Kerala State Treasury Services and e-Treasury', 4, true),
 ('TAX', 'tax', 'Income Tax, e-Filing, TRACES, and Tax Information Network', 5, true),
-('EDUCATION', 'education', 'General Education, Pareeksha Bhavan, DGE, and Higher Secondary Services', 6, true),
+('KERALA FINANCE SERVICE', 'kerala-finance-service', 'Finance Department Government of Kerala, e-Treasury, BIMS, Budget & Accounts', 6, true),
 ('PF', 'pf', 'General Provident Fund and GAIN-PF Management', 7, true),
 ('KITE', 'kite', 'Kerala Infrastructure and Technology for Education Initiatives', 8, true),
 ('INSURANCE', 'insurance', 'State Life Insurance (SLI) and Group Insurance Scheme (GIS)', 9, true),
@@ -42,15 +42,15 @@ INSERT INTO service_links (category_id, name, destination_url, description, disp
 (5, 'BIN VIEW', NULL, 'Book Identification Number (BIN) Verification Portal', 4, true),
 (5, 'OLTAS', NULL, 'Online Tax Accounting System Challan Status Portal', 5, true),
 
--- EDUCATION
-(6, 'TRANSFER&POSTINGS', NULL, 'Department of Education Transfer and Posting Portal', 1, true),
-(6, 'PAREEKSHA BHAVAN', NULL, 'Office of the Commissioner for Government Examinations, Kerala', 2, true),
-(6, 'GEN EDUCATION', NULL, 'Department of General Education, Government of Kerala', 3, true),
-(6, 'HSS/VHSC', NULL, 'Higher Secondary & Vocational Higher Secondary Education Portal', 4, true),
-(6, 'IT SCHOOL', NULL, 'Kerala IT@School Project Portal', 5, true),
-(6, 'DGE KERALA', NULL, 'Directorate of General Education Portal', 6, true),
-(6, 'DHSE - HSE', NULL, 'Directorate of Higher Secondary Education Portal', 7, true),
-(6, 'AIDED', NULL, 'Aided Schools Management and Staff Services Portal', 8, true),
+-- KERALA FINANCE SERVICE
+(6, 'FINANCE DEPARTMENT', 'https://finance.kerala.gov.in', 'Government of Kerala Finance Department Portal, Government Orders and Rules', 1, true),
+(6, 'E-TREASURY', 'https://etreasury.kerala.gov.in', 'Kerala State e-Treasury Receipts and Payments System', 2, true),
+(6, 'BIMS BILLING', 'https://bims.kerala.gov.in', 'Bill Information and Management System for DDO Bill Submission', 3, true),
+(6, 'PRISM PENSION', 'https://prism.kerala.gov.in', 'Pensioner Information System, Finance Department', 4, true),
+(6, 'GAINS ACCOUNTS', 'https://gains.kerala.gov.in', 'Government Accounts Information System', 5, true),
+(6, 'KSFE ONLINE', 'https://ksfeonline.com', 'Kerala State Financial Enterprises Online Services', 6, true),
+(6, 'TSB ONLINE', 'https://treasury.kerala.gov.in', 'Treasury Savings Bank Electronic Accounts Portal', 7, true),
+(6, 'BUDGET PORTAL', 'https://budget.kerala.gov.in', 'Kerala State Annual Budget & Expenditure Allocation Statements', 8, true),
 
 -- PF
 (7, 'GPF', NULL, 'General Provident Fund Kerala Portal', 1, true),

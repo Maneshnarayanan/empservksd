@@ -16,7 +16,7 @@ describe('Database Connectivity and Migrations', () => {
     expect(names).toContain('AGEES');
     expect(names).toContain('TREASURY');
     expect(names).toContain('TAX');
-    expect(names).toContain('EDUCATION');
+    expect(names).toContain('KERALA FINANCE SERVICE');
     expect(names).toContain('PF');
     expect(names).toContain('KITE');
     expect(names).toContain('INSURANCE');
