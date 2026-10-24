@@ -119,49 +119,314 @@
     </div>
   </nav>
 
-  <!-- 4. Page Header Banner -->
+  <!-- 4. High-Impact Hero Banner & Search Section -->
   <main class="flex-grow">
-    <div class="gov-hero-gradient text-white py-10 px-4 sm:px-6 lg:px-8 border-b-4 border-amber-500">
+    <section class="gov-hero-gradient text-white py-12 px-4 sm:px-6 lg:px-8 border-b-4 border-amber-500 relative">
       <div class="max-w-7xl mx-auto">
-        <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-950/80 rounded border border-blue-400/40 text-xs font-bold text-amber-300 mb-3 shadow-sm">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-950/80 rounded-full border border-blue-400/40 text-xs font-bold text-amber-300 mb-4 shadow-sm">
           <span>📖</span>
-          <span>COMMUNITY ARTICLES & GUIDANCE</span>
+          <span class="uppercase tracking-wider text-[11px]">KERALA EMPLOYEE COMMUNITY DESKS & KNOWLEDGE REPOSITORY</span>
         </div>
-        <h1 class="text-2xl sm:text-4xl font-black tracking-tight mb-2 font-heading uppercase text-white">
-          Blogs & Administrative Guides
+        
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tight mb-3 font-heading uppercase text-white leading-tight">
+          Community Blogs & <span class="text-amber-300">Service Handbooks</span>
         </h1>
-        <p class="text-xs sm:text-sm text-blue-100 max-w-2xl leading-relaxed font-medium">
-          Curated educational posts, income tax guides, and administrative insights from HM Blog, Muttam Blog, Maths Blog, and Kasaragod community writers.
+        
+        <p class="text-xs sm:text-base text-blue-100 max-w-3xl leading-relaxed font-medium mb-8">
+          Authoritative walkthroughs, monthly salary bill processing manuals, KSR leave entitlement guides, and tax calculation spreadsheets curated from HM Blog, Muttam Blog, Maths Blog, Alrahman, and Renjithkumar.
         </p>
 
-        <!-- Search input -->
-        <div class="mt-6 max-w-xl bg-white p-1.5 rounded-xl shadow-lg flex items-center gap-2 text-slate-800">
-          <svg class="w-5 h-5 text-slate-400 ml-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          <input type="text" id="blog-search-input" placeholder="Search articles by title or keyword..." class="w-full py-1.5 px-2 text-sm font-medium focus:outline-none placeholder-slate-400">
+        <!-- Search Bar with Quick Action -->
+        <div class="max-w-2xl bg-white p-2 rounded-2xl shadow-2xl flex flex-col sm:flex-row items-center gap-2 text-slate-800">
+          <div class="flex items-center gap-2 w-full px-2">
+            <svg class="w-5 h-5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <input type="text" id="blog-search-input" placeholder="Search by title, rule, keyword (e.g. SPARK, MEDISEP, KSR)..." class="w-full py-2 px-1 text-sm font-medium focus:outline-none placeholder-slate-400">
+            <button id="blog-search-clear" class="hidden p-1 text-slate-400 hover:text-slate-600 rounded-full" title="Clear search">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+          </div>
+          <button id="blog-search-btn" class="w-full sm:w-auto gov-blue-btn px-6 py-2.5 rounded-xl text-xs font-extrabold whitespace-nowrap shadow-sm">
+            Search Articles
+          </button>
+        </div>
+
+        <!-- Trending Topics Filter Bar -->
+        <div class="mt-4 flex items-center gap-2 flex-wrap text-xs">
+          <span class="text-blue-200 font-bold text-[11px] uppercase tracking-wider">Quick Topics:</span>
+          <button class="topic-tag bg-blue-900/80 hover:bg-blue-800 text-blue-100 border border-blue-700/60 rounded-full px-2.5 py-0.5 text-[11px] font-semibold transition" data-query="SPARK">SPARK Pay</button>
+          <button class="topic-tag bg-blue-900/80 hover:bg-blue-800 text-blue-100 border border-blue-700/60 rounded-full px-2.5 py-0.5 text-[11px] font-semibold transition" data-query="KSR">KSR Leave</button>
+          <button class="topic-tag bg-blue-900/80 hover:bg-blue-800 text-blue-100 border border-blue-700/60 rounded-full px-2.5 py-0.5 text-[11px] font-semibold transition" data-query="MEDISEP">MEDISEP Claims</button>
+          <button class="topic-tag bg-blue-900/80 hover:bg-blue-800 text-blue-100 border border-blue-700/60 rounded-full px-2.5 py-0.5 text-[11px] font-semibold transition" data-query="Income Tax">Income Tax 2026-27</button>
+          <button class="topic-tag bg-blue-900/80 hover:bg-blue-800 text-blue-100 border border-blue-700/60 rounded-full px-2.5 py-0.5 text-[11px] font-semibold transition" data-query="Treasury">e-Treasury BiB</button>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- 5. Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <!-- Category Tabs -->
-      <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 border-b border-slate-300 scrollbar-none" id="blog-category-tabs">
-        <button class="blog-tab active bg-blue-900 text-white border border-blue-950 px-4 py-1.5 rounded text-xs font-bold whitespace-nowrap transition" data-slug="">
-          All Articles
-        </button>
+    <!-- 5. Interactive 5 Desks Showcase Header -->
+    <section class="bg-white border-b border-slate-200 py-6 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+            Official Community Desks (WEB DESIGN Reference)
+          </h2>
+          <span class="text-[11px] text-slate-400 font-medium hidden sm:inline">Click any desk below to filter guides instantly</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3" id="community-desks-grid">
+          <!-- HM BLOG -->
+          <button class="desk-card text-left p-3.5 rounded-xl border border-slate-200 hover:border-blue-700 hover:bg-blue-50/50 hover:shadow-md transition-all group" data-slug="hm-blog">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="text-lg">🏫</span>
+              <span class="font-black text-xs text-slate-900 group-hover:text-blue-900 font-heading">HM BLOG</span>
+            </div>
+            <p class="text-[11px] text-slate-500 line-clamp-2 leading-tight">School administration, staff establishment & headmaster circulars.</p>
+          </button>
+
+          <!-- MUTTAM BLOG -->
+          <button class="desk-card text-left p-3.5 rounded-xl border border-slate-200 hover:border-emerald-700 hover:bg-emerald-50/50 hover:shadow-md transition-all group" data-slug="muttam-blog">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="text-lg">📚</span>
+              <span class="font-black text-xs text-slate-900 group-hover:text-emerald-900 font-heading">MUTTAM BLOG</span>
+            </div>
+            <p class="text-[11px] text-slate-500 line-clamp-2 leading-tight">Educational resources, KSR leave entitlement & pay calculations.</p>
+          </button>
+
+          <!-- MATHS BLOG -->
+          <button class="desk-card text-left p-3.5 rounded-xl border border-slate-200 hover:border-purple-700 hover:bg-purple-50/50 hover:shadow-md transition-all group" data-slug="maths-blog">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="text-lg">📐</span>
+              <span class="font-black text-xs text-slate-900 group-hover:text-purple-900 font-heading">MATHS BLOG</span>
+            </div>
+            <p class="text-[11px] text-slate-500 line-clamp-2 leading-tight">Income tax comparison sheets, teachers forums & IT resources.</p>
+          </button>
+
+          <!-- ALRAHMAN -->
+          <button class="desk-card text-left p-3.5 rounded-xl border border-slate-200 hover:border-amber-700 hover:bg-amber-50/50 hover:shadow-md transition-all group" data-slug="alrahman">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="text-lg">⚖️</span>
+              <span class="font-black text-xs text-slate-900 group-hover:text-amber-900 font-heading">ALRAHMAN</span>
+            </div>
+            <p class="text-[11px] text-slate-500 line-clamp-2 leading-tight">Employee welfare, service regulations & MEDISEP medical claims.</p>
+          </button>
+
+          <!-- RENJITHKUMAR -->
+          <button class="desk-card text-left p-3.5 rounded-xl border border-slate-200 hover:border-indigo-700 hover:bg-indigo-50/50 hover:shadow-md transition-all group" data-slug="renjithkumar">
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="text-lg">💼</span>
+              <span class="font-black text-xs text-slate-900 group-hover:text-indigo-900 font-heading">RENJITHKUMAR</span>
+            </div>
+            <p class="text-[11px] text-slate-500 line-clamp-2 leading-tight">Treasury BiB bill procedures, government orders & finance rules.</p>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Main Content Area with Sidebar -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      
+      <!-- Category Tabs & Results Status Bar -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-3 border-b border-slate-200">
+        <!-- Horizontal Scrollable Category Pills -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none" id="blog-category-tabs">
+          <button class="blog-tab active bg-blue-900 text-white border border-blue-950 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-xs transition" data-slug="">
+            All Articles
+          </button>
+        </div>
+
+        <!-- Filter Status & Reset -->
+        <div id="filter-status-container" class="hidden text-xs text-slate-600 flex items-center gap-2 shrink-0">
+          <span id="filter-status-text" class="font-semibold"></span>
+          <button id="btn-reset-filters" class="text-blue-900 font-extrabold hover:underline text-[11px] bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+            Reset Filters ✕
+          </button>
+        </div>
       </div>
 
-      <!-- Articles Grid -->
-      <div id="blogs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="col-span-full py-12 text-center text-slate-400 text-xs animate-pulse">Loading articles...</div>
-      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left / Main Column: Spotlight + Articles Grid (8 Cols) -->
+        <div class="lg:col-span-8 flex flex-col gap-6">
 
-      <!-- Pagination -->
-      <div id="blog-pagination" class="flex justify-center items-center gap-2 mt-8"></div>
+          <!-- Spotlight / Featured Story Card (shown on page 1) -->
+          <div id="spotlight-container" class="hidden">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <!-- Section Subtitle for Regular Articles -->
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-extrabold text-slate-900 tracking-tight font-heading flex items-center gap-2" id="grid-header-title">
+              <span>Articles & Walkthroughs</span>
+              <span id="articles-count-badge" class="bg-slate-200 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full"></span>
+            </h3>
+          </div>
+
+          <!-- Articles Grid (2-column layout in main section) -->
+          <div id="blogs-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Loading Skeletons -->
+            <div class="bg-white rounded-xl border border-slate-200 p-6 animate-pulse flex flex-col justify-between h-64">
+              <div class="space-y-3">
+                <div class="h-4 bg-slate-200 rounded w-1/3"></div>
+                <div class="h-5 bg-slate-200 rounded w-5/6"></div>
+                <div class="h-3 bg-slate-100 rounded w-full"></div>
+                <div class="h-3 bg-slate-100 rounded w-4/5"></div>
+              </div>
+              <div class="h-8 bg-slate-100 rounded w-1/4"></div>
+            </div>
+            <div class="bg-white rounded-xl border border-slate-200 p-6 animate-pulse flex flex-col justify-between h-64">
+              <div class="space-y-3">
+                <div class="h-4 bg-slate-200 rounded w-1/3"></div>
+                <div class="h-5 bg-slate-200 rounded w-5/6"></div>
+                <div class="h-3 bg-slate-100 rounded w-full"></div>
+                <div class="h-3 bg-slate-100 rounded w-4/5"></div>
+              </div>
+              <div class="h-8 bg-slate-100 rounded w-1/4"></div>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div id="blogs-empty" class="hidden bg-white rounded-xl border border-slate-200 p-10 text-center">
+            <div class="w-14 h-14 rounded-full bg-blue-50 text-blue-900 flex items-center justify-center text-2xl mx-auto mb-3">
+              🔍
+            </div>
+            <h4 class="text-base font-extrabold text-slate-900 mb-1">No matching articles found</h4>
+            <p class="text-xs text-slate-500 max-w-md mx-auto mb-4">
+              We couldn't find any articles matching your search criteria. Try different keywords or browse by community category.
+            </p>
+            <button onclick="resetAllFilters()" class="gov-blue-btn px-4 py-2 rounded-lg text-xs font-bold inline-flex items-center gap-1">
+              Reset Filters & Show All
+            </button>
+          </div>
+
+          <!-- Pagination -->
+          <div id="blog-pagination" class="flex justify-center items-center gap-2 mt-4 pt-4 border-t border-slate-200"></div>
+
+        </div>
+
+        <!-- Right Column: Sidebar (4 Cols) -->
+        <div class="lg:col-span-4 flex flex-col gap-6">
+
+          <!-- Sidebar Widget 1: About the Community Blogs -->
+          <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs">
+            <div class="flex items-center gap-2 mb-3 pb-2 border-b border-slate-100">
+              <span class="text-amber-500 text-base">ℹ️</span>
+              <h3 class="font-extrabold text-xs uppercase tracking-wider text-slate-900 font-heading">
+                About Community Desks
+              </h3>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+              Kerala State government employees and teachers have maintained voluntary resource communities since 2008. These desks synthesize complex Finance Department circulars, KSR amendments, and software updates into actionable guidance.
+            </p>
+            <div class="bg-slate-50 rounded-lg p-3 border border-slate-100 text-[11px] text-slate-600 space-y-1.5 font-medium">
+              <div class="flex items-center justify-between">
+                <span>HM Blog</span>
+                <span class="font-bold text-blue-900">Schools & Establishment</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Muttam Blog</span>
+                <span class="font-bold text-emerald-800">KSR & Leave Rules</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Maths Blog</span>
+                <span class="font-bold text-purple-900">Income Tax & Spreadsheets</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Alrahman & Renjithkumar</span>
+                <span class="font-bold text-indigo-900">Service & Treasury Rules</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar Widget 2: Direct Portal Quick Jump -->
+          <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs">
+            <div class="flex items-center gap-2 mb-3 pb-2 border-b border-slate-100">
+              <span class="text-blue-900 text-base">⚡</span>
+              <h3 class="font-extrabold text-xs uppercase tracking-wider text-slate-900 font-heading">
+                Direct Portal Links
+              </h3>
+            </div>
+            <div class="space-y-1 text-xs">
+              <a href="https://www.spark.gov.in" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-2 rounded-lg hover:bg-blue-50 text-slate-800 hover:text-blue-900 font-semibold transition group">
+                <span class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                  SPARK Official Portal
+                </span>
+                <span class="text-slate-400 group-hover:text-blue-900 text-xs font-bold">&rarr;</span>
+              </a>
+              <a href="https://medisep.kerala.gov.in" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-2 rounded-lg hover:bg-emerald-50 text-slate-800 hover:text-emerald-900 font-semibold transition group">
+                <span class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                  MEDISEP Health Insurance
+                </span>
+                <span class="text-slate-400 group-hover:text-emerald-900 text-xs font-bold">&rarr;</span>
+              </a>
+              <a href="https://bims.kerala.gov.in" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-2 rounded-lg hover:bg-amber-50 text-slate-800 hover:text-amber-900 font-semibold transition group">
+                <span class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+                  BIMS Bill Information System
+                </span>
+                <span class="text-slate-400 group-hover:text-amber-900 text-xs font-bold">&rarr;</span>
+              </a>
+              <a href="https://prism.kerala.gov.in" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-2 rounded-lg hover:bg-indigo-50 text-slate-800 hover:text-indigo-900 font-semibold transition group">
+                <span class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
+                  PRISM Pensioners Portal
+                </span>
+                <span class="text-slate-400 group-hover:text-indigo-900 text-xs font-bold">&rarr;</span>
+              </a>
+              <a href="https://treasury.kerala.gov.in" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-2 rounded-lg hover:bg-teal-50 text-slate-800 hover:text-teal-900 font-semibold transition group">
+                <span class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+                  e-Treasury Portal
+                </span>
+                <span class="text-slate-400 group-hover:text-teal-900 text-xs font-bold">&rarr;</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Sidebar Widget 3: WhatsApp Support Box -->
+          <div class="bg-gradient-to-br from-emerald-800 to-teal-950 rounded-xl p-5 text-white shadow-md relative overflow-hidden">
+            <div class="absolute -right-4 -bottom-4 text-emerald-600/30 text-7xl select-none font-bold">
+              WA
+            </div>
+            <div class="relative z-10">
+              <span class="bg-emerald-400/20 text-emerald-200 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded border border-emerald-400/30 mb-2 inline-block">
+                Direct Help Desk
+              </span>
+              <h3 class="text-base font-extrabold font-heading text-white mb-1">
+                Have questions about salary bills?
+              </h3>
+              <p class="text-xs text-emerald-100 leading-relaxed mb-4">
+                Chat directly with Employees Service Kasaragod desk on WhatsApp for portal queries, circular verification, and filing guidelines.
+              </p>
+              <a href="https://wa.me/919447396181" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-emerald-50 text-emerald-950 font-black px-4 py-2.5 rounded-lg text-xs inline-flex items-center gap-2 shadow-sm transition">
+                <span>Open WhatsApp Desk</span>
+                <svg class="w-4 h-4 text-emerald-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Sidebar Widget 4: Download Circulars Callout -->
+          <div class="bg-slate-900 rounded-xl p-5 text-slate-300 border border-slate-800 shadow-xs">
+            <h3 class="font-extrabold text-xs uppercase tracking-wider text-amber-300 font-heading mb-1.5 flex items-center gap-1.5">
+              <span>📥</span>
+              <span>Downloads & Orders</span>
+            </h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-3">
+              Looking for official Government Orders (G.O.), application forms, and offline Excel salary calculators?
+            </p>
+            <a href="/downloads" class="text-amber-400 hover:text-amber-300 font-extrabold text-xs inline-flex items-center gap-1 hover:underline">
+              <span>Visit Downloads Archive</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
     </div>
   </main>
 
-  <!-- 6. Official Government Portal Footer (PRISM & National NIC Style) -->
+  <!-- 7. Official Government Portal Footer (PRISM & National NIC Style) -->
   <footer class="bg-slate-900 text-slate-300 text-xs border-t-4 border-amber-500 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-slate-800">
@@ -220,108 +485,272 @@
   <script>
     let activeCategorySlug = '';
     let currentPage = 1;
+    let currentSearchTerm = '';
+    let categoriesList = [];
+
+    const categoryStyles = {
+      'hm-blog': { bg: 'bg-blue-100 text-blue-900 border-blue-200', border: 'hover:border-blue-900', link: 'text-blue-900', badge: 'bg-blue-900 text-amber-300', icon: '🏫' },
+      'muttam-blog': { bg: 'bg-emerald-100 text-emerald-900 border-emerald-200', border: 'hover:border-emerald-700', link: 'text-emerald-900', badge: 'bg-emerald-800 text-white', icon: '📚' },
+      'maths-blog': { bg: 'bg-purple-100 text-purple-900 border-purple-200', border: 'hover:border-purple-800', link: 'text-purple-900', badge: 'bg-purple-900 text-amber-300', icon: '📐' },
+      'alrahman': { bg: 'bg-amber-100 text-amber-900 border-amber-200', border: 'hover:border-amber-700', link: 'text-amber-900', badge: 'bg-amber-800 text-white', icon: '⚖️' },
+      'renjithkumar': { bg: 'bg-indigo-100 text-indigo-900 border-indigo-200', border: 'hover:border-indigo-800', link: 'text-indigo-900', badge: 'bg-indigo-900 text-white', icon: '💼' }
+    };
+
+    function getStyleForCategory(slug) {
+      return categoryStyles[slug] || { bg: 'bg-blue-100 text-blue-900 border-blue-200', border: 'hover:border-blue-900', link: 'text-blue-900', badge: 'bg-blue-900 text-white', icon: '📄' };
+    }
 
     async function loadCategories() {
       try {
         const res = await fetch('/api/v1/blogs/categories');
         const data = await res.json();
         if (data.success) {
-          const tabsContainer = document.getElementById('blog-category-tabs');
-          const tabsHtml = data.data.map(cat => `
-            <button class="blog-tab bg-white text-slate-700 hover:bg-slate-50 border border-slate-300 px-3.5 py-1.5 rounded text-xs font-semibold whitespace-nowrap transition" data-slug="${cat.slug}">
-              ${cat.name} (${cat.articles_count})
-            </button>
-          `).join('');
-
-          tabsContainer.innerHTML = `
-            <button class="blog-tab active bg-blue-900 text-white border border-blue-950 px-3.5 py-1.5 rounded text-xs font-bold whitespace-nowrap transition" data-slug="">
-              All Articles
-            </button>
-            ${tabsHtml}
-          `;
-
-          tabsContainer.querySelectorAll('.blog-tab').forEach(btn => {
-            btn.addEventListener('click', () => {
-              tabsContainer.querySelectorAll('.blog-tab').forEach(b => {
-                b.classList.remove('bg-blue-900', 'text-white', 'border-blue-950');
-                b.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
-              });
-              btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
-              btn.classList.add('bg-blue-900', 'text-white', 'border-blue-950');
-              activeCategorySlug = btn.dataset.slug;
-              currentPage = 1;
-              fetchArticles();
-            });
-          });
+          categoriesList = data.data;
+          renderCategoryTabs();
+          highlightActiveCategory();
         }
       } catch (err) {
         console.error('Failed to load categories:', err);
       }
     }
 
+    function renderCategoryTabs() {
+      const tabsContainer = document.getElementById('blog-category-tabs');
+      if (!tabsContainer) return;
+
+      const tabsHtml = categoriesList.map(cat => `
+        <button class="blog-tab ${activeCategorySlug === cat.slug ? 'active bg-blue-900 text-white border-blue-950 shadow-xs' : 'bg-white text-slate-700 hover:bg-slate-50 border-slate-300'} border px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition flex items-center gap-1.5" data-slug="${cat.slug}">
+          <span>${getStyleForCategory(cat.slug).icon}</span>
+          <span>${cat.name}</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full ${activeCategorySlug === cat.slug ? 'bg-blue-800 text-amber-300' : 'bg-slate-100 text-slate-600'}">${cat.articles_count}</span>
+        </button>
+      `).join('');
+
+      tabsContainer.innerHTML = `
+        <button class="blog-tab ${!activeCategorySlug ? 'active bg-blue-900 text-white border-blue-950 shadow-xs' : 'bg-white text-slate-700 hover:bg-slate-50 border-slate-300'} border px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition" data-slug="">
+          All Articles
+        </button>
+        ${tabsHtml}
+      `;
+
+      tabsContainer.querySelectorAll('.blog-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          setCategoryFilter(btn.dataset.slug);
+        });
+      });
+    }
+
+    function highlightActiveCategory() {
+      document.querySelectorAll('#blog-category-tabs .blog-tab').forEach(btn => {
+        const isActive = (btn.dataset.slug === activeCategorySlug) || (!btn.dataset.slug && !activeCategorySlug);
+        if (isActive) {
+          btn.className = 'blog-tab active bg-blue-900 text-white border border-blue-950 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-xs transition flex items-center gap-1.5';
+        } else {
+          btn.className = 'blog-tab bg-white text-slate-700 hover:bg-slate-50 border border-slate-300 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition flex items-center gap-1.5';
+        }
+      });
+
+      // Also highlight desk cards in showcase
+      document.querySelectorAll('.desk-card').forEach(card => {
+        if (card.dataset.slug === activeCategorySlug) {
+          card.classList.add('ring-2', 'ring-blue-900', 'bg-blue-50/70');
+        } else {
+          card.classList.remove('ring-2', 'ring-blue-900', 'bg-blue-50/70');
+        }
+      });
+
+      updateFilterStatusBar();
+    }
+
+    function setCategoryFilter(slug) {
+      activeCategorySlug = slug || '';
+      currentPage = 1;
+      highlightActiveCategory();
+      fetchArticles();
+      updateUrlParams();
+    }
+
+    function updateFilterStatusBar() {
+      const container = document.getElementById('filter-status-container');
+      const textEl = document.getElementById('filter-status-text');
+      if (!container || !textEl) return;
+
+      const parts = [];
+      if (activeCategorySlug) {
+        const catObj = categoriesList.find(c => c.slug === activeCategorySlug);
+        parts.push(`Desk: <strong>${catObj ? catObj.name : activeCategorySlug}</strong>`);
+      }
+      if (currentSearchTerm) {
+        parts.push(`Keyword: <strong>"${escapeHtml(currentSearchTerm)}"</strong>`);
+      }
+
+      if (parts.length > 0) {
+        textEl.innerHTML = parts.join(' • ');
+        container.classList.remove('hidden');
+      } else {
+        container.classList.add('hidden');
+      }
+    }
+
+    function updateUrlParams() {
+      const params = new URLSearchParams();
+      if (activeCategorySlug) params.set('category', activeCategorySlug);
+      if (currentSearchTerm) params.set('search', currentSearchTerm);
+      if (currentPage > 1) params.set('page', currentPage);
+
+      const queryString = params.toString();
+      const newUrl = window.location.pathname + (queryString ? `?${queryString}` : '');
+      window.history.replaceState({}, '', newUrl);
+    }
+
     async function fetchArticles() {
       const grid = document.getElementById('blogs-grid');
+      const emptyEl = document.getElementById('blogs-empty');
+      const spotlightEl = document.getElementById('spotlight-container');
       const paginationEl = document.getElementById('blog-pagination');
-      const searchInput = document.getElementById('blog-search-input');
-      const searchTerm = searchInput ? searchInput.value.trim() : '';
+      const countBadge = document.getElementById('articles-count-badge');
 
       try {
-        let url = `/api/v1/blogs?page=${currentPage}&limit=9`;
+        let url = `/api/v1/blogs?page=${currentPage}&limit=8`;
         if (activeCategorySlug) url += `&category=${encodeURIComponent(activeCategorySlug)}`;
-        if (searchTerm) url += `&search=${encodeURIComponent(searchTerm)}`;
+        if (currentSearchTerm) url += `&search=${encodeURIComponent(currentSearchTerm)}`;
 
         const res = await fetch(url);
         const data = await res.json();
 
         if (data.success) {
-          if (data.articles.length === 0) {
-            grid.innerHTML = `
-              <div class="col-span-full bg-white rounded-lg border border-slate-300 p-8 text-center text-slate-500">
-                <h3 class="text-sm font-bold text-slate-800">No published articles found</h3>
-                <p class="text-xs text-slate-500 mt-1">Articles under this blog category will appear here once published by the administrator.</p>
-              </div>
-            `;
+          const articles = data.articles;
+          const { total, totalPages, page } = data.pagination;
+
+          if (countBadge) countBadge.textContent = `${total} article${total === 1 ? '' : 's'}`;
+
+          if (articles.length === 0) {
+            grid.innerHTML = '';
+            grid.classList.add('hidden');
+            spotlightEl.innerHTML = '';
+            spotlightEl.classList.add('hidden');
+            emptyEl.classList.remove('hidden');
             paginationEl.innerHTML = '';
             return;
           }
 
-          grid.innerHTML = data.articles.map(art => `
-            <article class="bg-white rounded-lg overflow-hidden border border-slate-200 hover:border-blue-900 hover:shadow-md transition flex flex-col justify-between">
+          emptyEl.classList.add('hidden');
+          grid.classList.remove('hidden');
+
+          // Spotlight Card: Show on page 1 when no search term is entered
+          let regularArticles = articles;
+          if (page === 1 && !currentSearchTerm && articles.length > 0) {
+            const spotlightArt = articles[0];
+            regularArticles = articles.slice(1);
+            const style = getStyleForCategory(spotlightArt.category_slug);
+
+            spotlightEl.classList.remove('hidden');
+            spotlightEl.innerHTML = `
+              <div class="bg-gradient-to-br from-blue-900 via-indigo-950 to-slate-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden border border-blue-800/80 group">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="bg-amber-400 text-slate-950 font-black text-[10px] uppercase px-2.5 py-0.5 rounded tracking-wider shadow-xs">
+                    ★ FEATURED SPOTLIGHT
+                  </span>
+                  <span class="bg-white/10 text-blue-200 border border-white/20 text-[10px] font-bold px-2.5 py-0.5 rounded uppercase">
+                    ${spotlightArt.category_name}
+                  </span>
+                  <span class="text-xs text-blue-200 hidden sm:inline">•</span>
+                  <span class="text-xs text-blue-200 hidden sm:inline">${formatDate(spotlightArt.published_at)}</span>
+                </div>
+                
+                <h2 class="text-xl sm:text-2xl font-black text-white group-hover:text-amber-300 transition-colors leading-tight mb-3 font-heading">
+                  <a href="/blogs/${spotlightArt.slug}">${spotlightArt.title}</a>
+                </h2>
+
+                <p class="text-xs sm:text-sm text-blue-100 line-clamp-3 leading-relaxed mb-6 max-w-2xl">
+                  ${spotlightArt.summary || 'Read complete administrative guidance notes and procedural instructions.'}
+                </p>
+
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-white/10">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs">
+                      ${(spotlightArt.author_name || 'A').charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <span class="font-bold text-xs text-white block">${spotlightArt.author_name}</span>
+                      <span class="text-[11px] text-blue-300">Desk Verified Handbook</span>
+                    </div>
+                  </div>
+                  <a href="/blogs/${spotlightArt.slug}" class="gov-gold-btn px-5 py-2.5 rounded-xl text-xs font-extrabold inline-flex items-center gap-2 self-start sm:self-auto shadow-md">
+                    <span>Read Complete Handbook</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                  </a>
+                </div>
+              </div>
+            `;
+          } else {
+            spotlightEl.innerHTML = '';
+            spotlightEl.classList.add('hidden');
+          }
+
+          // Render Grid Articles
+          grid.innerHTML = regularArticles.map(art => {
+            const style = getStyleForCategory(art.category_slug);
+            const initials = (art.author_name || 'Admin').split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+
+            return `
+            <article class="bg-white rounded-xl border border-slate-200 overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl ${style.border} transition-all duration-300 group">
               ${art.featured_image ? `
                 <div class="h-44 w-full bg-slate-100 overflow-hidden relative border-b border-slate-200">
-                  <img src="${art.featured_image}" alt="${art.title}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy">
+                  <img src="${art.featured_image}" alt="${art.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
                 </div>
               ` : ''}
-              <div class="p-5">
-                <div class="flex items-center gap-2 mb-2 text-xs">
-                  <span class="bg-blue-50 text-blue-900 border border-blue-200 text-[10px] font-bold px-2 py-0.5 rounded">${art.category_name}</span>
-                  <span class="text-slate-300">•</span>
-                  <time class="text-slate-500 font-medium text-[11px]">${formatDate(art.published_at)}</time>
+              <div class="p-6">
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="${style.bg} border text-[10px] font-extrabold px-2.5 py-0.5 rounded-md uppercase tracking-wide">
+                    ${art.category_name}
+                  </span>
+                  <span class="text-[11px] text-slate-500 font-medium">
+                    ${formatDate(art.published_at)}
+                  </span>
                 </div>
-                <h2 class="text-sm font-extrabold text-slate-900 leading-snug mb-2 font-heading hover:text-blue-900 transition">
+                <h3 class="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-blue-900 transition-colors leading-snug mb-2 font-heading">
                   <a href="/blogs/${art.slug}">${art.title}</a>
-                </h2>
-                <p class="text-xs text-slate-600 line-clamp-3 mb-3 leading-relaxed">${art.summary || 'Click below to read the full community article.'}</p>
+                </h3>
+                <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                  ${art.summary || 'Click below to read the full community article.'}
+                </p>
               </div>
-              <div class="px-5 py-2.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 font-semibold">
-                <span>By ${art.author_name}</span>
-                <a href="/blogs/${art.slug}" class="gov-blue-btn px-3 py-1 rounded text-xs font-bold inline-flex items-center gap-1 transition">
-                  <span>Read</span>
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              <div class="px-6 py-3 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-xs">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full ${style.badge} flex items-center justify-center font-bold text-[10px]">
+                    ${initials}
+                  </div>
+                  <span class="text-slate-600 font-semibold text-[11px] truncate max-w-[130px]">${art.author_name}</span>
+                </div>
+                <a href="/blogs/${art.slug}" class="${style.link} font-extrabold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                  <span>Read Guide</span>
+                  <span>&rarr;</span>
                 </a>
               </div>
             </article>
-          `).join('');
+            `;
+          }).join('');
 
-          const { totalPages, page } = data.pagination;
+          // Render Pagination
           if (totalPages > 1) {
             let pagHtml = '';
             if (page > 1) {
-              pagHtml += `<button onclick="changePage(${page - 1})" class="px-3 py-1.5 rounded border border-slate-300 text-xs font-bold hover:bg-slate-100">&larr; Previous</button>`;
+              pagHtml += `<button onclick="changePage(${page - 1})" class="px-3.5 py-1.5 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-100 text-slate-700 transition">&larr; Prev</button>`;
             }
-            pagHtml += `<span class="text-xs text-slate-600 font-semibold px-2">Page ${page} of ${totalPages}</span>`;
+            
+            for (let i = 1; i <= totalPages; i++) {
+              if (i === page) {
+                pagHtml += `<button class="w-8 h-8 rounded-lg bg-blue-900 text-white text-xs font-extrabold">${i}</button>`;
+              } else if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
+                pagHtml += `<button onclick="changePage(${i})" class="w-8 h-8 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-100 text-slate-700 transition">${i}</button>`;
+              } else if (i === page - 2 || i === page + 2) {
+                pagHtml += `<span class="px-1 text-slate-400">...</span>`;
+              }
+            }
+
             if (page < totalPages) {
-              pagHtml += `<button onclick="changePage(${page + 1})" class="px-3 py-1.5 rounded border border-slate-300 text-xs font-bold hover:bg-slate-100">Next &rarr;</button>`;
+              pagHtml += `<button onclick="changePage(${page + 1})" class="px-3.5 py-1.5 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-100 text-slate-700 transition">Next &rarr;</button>`;
             }
             paginationEl.innerHTML = pagHtml;
           } else {
@@ -336,23 +765,131 @@
     function changePage(p) {
       currentPage = p;
       fetchArticles();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 380, behavior: 'smooth' });
+      updateUrlParams();
+    }
+
+    function resetAllFilters() {
+      activeCategorySlug = '';
+      currentSearchTerm = '';
+      currentPage = 1;
+      const searchInput = document.getElementById('blog-search-input');
+      const clearBtn = document.getElementById('blog-search-clear');
+      if (searchInput) searchInput.value = '';
+      if (clearBtn) clearBtn.classList.add('hidden');
+      highlightActiveCategory();
+      fetchArticles();
+      updateUrlParams();
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. Read URL query params
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialCat = urlParams.get('category');
+      const initialSearch = urlParams.get('search');
+      const initialPage = parseInt(urlParams.get('page') || '1', 10);
+
+      if (initialCat) activeCategorySlug = initialCat;
+      if (initialSearch) currentSearchTerm = initialSearch;
+      if (initialPage > 1) currentPage = initialPage;
+
+      const searchInput = document.getElementById('blog-search-input');
+      const clearBtn = document.getElementById('blog-search-clear');
+      const searchBtn = document.getElementById('blog-search-btn');
+
+      if (searchInput && currentSearchTerm) {
+        searchInput.value = currentSearchTerm;
+        if (clearBtn) clearBtn.classList.remove('hidden');
+      }
+
       loadCategories();
       fetchArticles();
 
-      const searchInput = document.getElementById('blog-search-input');
+      // Desk Showcase Click Handlers
+      document.querySelectorAll('.desk-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const slug = card.dataset.slug;
+          if (activeCategorySlug === slug) {
+            setCategoryFilter(''); // toggle off
+          } else {
+            setCategoryFilter(slug);
+          }
+        });
+      });
+
+      // Quick Topic Tags
+      document.querySelectorAll('.topic-tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+          const query = tag.dataset.query;
+          if (searchInput) {
+            searchInput.value = query;
+            currentSearchTerm = query;
+            if (clearBtn) clearBtn.classList.remove('hidden');
+          }
+          currentPage = 1;
+          fetchArticles();
+          updateUrlParams();
+        });
+      });
+
+      // Search Inputs
       if (searchInput) {
         let debounceTimer;
         searchInput.addEventListener('input', () => {
           clearTimeout(debounceTimer);
+          const val = searchInput.value.trim();
+          if (clearBtn) {
+            if (val) clearBtn.classList.remove('hidden');
+            else clearBtn.classList.add('hidden');
+          }
           debounceTimer = setTimeout(() => {
+            currentSearchTerm = val;
             currentPage = 1;
             fetchArticles();
+            updateUrlParams();
           }, 300);
         });
+
+        searchInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            currentSearchTerm = searchInput.value.trim();
+            currentPage = 1;
+            fetchArticles();
+            updateUrlParams();
+          }
+        });
+      }
+
+      if (searchBtn) {
+        searchBtn.addEventListener('click', () => {
+          if (searchInput) {
+            currentSearchTerm = searchInput.value.trim();
+            currentPage = 1;
+            fetchArticles();
+            updateUrlParams();
+          }
+        });
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          if (searchInput) searchInput.value = '';
+          clearBtn.classList.add('hidden');
+          currentSearchTerm = '';
+          currentPage = 1;
+          fetchArticles();
+          updateUrlParams();
+        });
+      }
+
+      const resetBtn = document.getElementById('btn-reset-filters');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', resetAllFilters);
       }
     });
   </script>

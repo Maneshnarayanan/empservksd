@@ -514,18 +514,156 @@
     </section>
 
     <!-- 9. Recent Community Articles & Circulars -->
-    <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div class="flex items-center justify-between mb-8 pb-3 border-b border-slate-200">
+    <section class="py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-4 border-b border-slate-200">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded">Verified Guidance</span>
-          <h3 class="text-2xl font-black text-slate-900 tracking-tight mt-1 font-heading">Recent Community Articles</h3>
-          <p class="text-xs text-slate-600">Educational updates, salary rules, and tax filing walkthroughs.</p>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-200 rounded-full text-xs font-extrabold text-blue-900 mb-2">
+            <span>📖</span>
+            <span class="tracking-wide uppercase text-[11px]">Kerala Employee Blogs & Community Desks</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-heading">
+            Administrative Insights & Service Guidance
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
+            Curated salary bill procedures, KSR leave interpretations, MEDISEP hospital claims, and income tax updates from trusted employee desks.
+          </p>
         </div>
-        <a href="/blogs" class="text-xs font-bold text-blue-900 hover:text-blue-700">All Blogs & Guides &rarr;</a>
+        <div class="flex items-center gap-3 shrink-0">
+          <a href="/blogs" class="gov-blue-btn px-4 py-2 rounded-lg text-xs font-bold inline-flex items-center gap-1.5 shadow-sm transition">
+            <span>Explore All Blogs</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </a>
+        </div>
       </div>
 
+      <!-- Quick Category Navigation Pill Bar -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none">
+        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider shrink-0 mr-1">Popular Desks:</span>
+        <a href="/blogs?category=hm-blog" class="inline-flex items-center gap-1.5 bg-white hover:bg-blue-50 text-slate-700 hover:text-blue-900 border border-slate-300 hover:border-blue-300 px-3 py-1.5 rounded-full text-xs font-bold transition shrink-0 shadow-2xs">
+          <span>🏫</span> HM Blog
+        </a>
+        <a href="/blogs?category=muttam-blog" class="inline-flex items-center gap-1.5 bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-900 border border-slate-300 hover:border-emerald-300 px-3 py-1.5 rounded-full text-xs font-bold transition shrink-0 shadow-2xs">
+          <span>📚</span> Muttam Blog
+        </a>
+        <a href="/blogs?category=maths-blog" class="inline-flex items-center gap-1.5 bg-white hover:bg-purple-50 text-slate-700 hover:text-purple-900 border border-slate-300 hover:border-purple-300 px-3 py-1.5 rounded-full text-xs font-bold transition shrink-0 shadow-2xs">
+          <span>📐</span> Maths Blog
+        </a>
+        <a href="/blogs?category=alrahman" class="inline-flex items-center gap-1.5 bg-white hover:bg-amber-50 text-slate-700 hover:text-amber-900 border border-slate-300 hover:border-amber-300 px-3 py-1.5 rounded-full text-xs font-bold transition shrink-0 shadow-2xs">
+          <span>⚖️</span> Alrahman
+        </a>
+        <a href="/blogs?category=renjithkumar" class="inline-flex items-center gap-1.5 bg-white hover:bg-indigo-50 text-slate-700 hover:text-indigo-900 border border-slate-300 hover:border-indigo-300 px-3 py-1.5 rounded-full text-xs font-bold transition shrink-0 shadow-2xs">
+          <span>💼</span> Renjithkumar
+        </a>
+      </div>
+
+      <!-- Dynamic / Enhanced Articles Grid -->
       <div id="home-articles-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="col-span-full py-8 text-center text-slate-400 text-xs">Loading recent articles...</div>
+        <!-- Card 1 Fallback -->
+        <article class="bg-white rounded-xl border border-slate-200/90 overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl hover:border-blue-900 transition-all duration-300 group">
+          <div class="p-6">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="bg-blue-100 text-blue-900 font-extrabold px-2.5 py-0.5 rounded-md text-[11px] tracking-wide">HM BLOG</span>
+              <span class="text-xs text-slate-500 font-medium flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                5 min read
+              </span>
+            </div>
+            <h4 class="text-base font-extrabold text-slate-900 group-hover:text-blue-900 transition-colors leading-snug mb-2 font-heading">
+              <a href="/blogs/spark-salary-bill-processing-da-arrears-guide-2026">SPARK Salary Bill Processing, DA Arrears & Pay Revision Guidelines 2026</a>
+            </h4>
+            <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
+              Step-by-step procedure for drawing and disbursing officers (DDOs) to process monthly establishment bills, calculate pending dearness allowance (DA) arrears, and complete e-submission to e-Treasury.
+            </p>
+          </div>
+          <div class="px-6 py-3 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 rounded-full bg-blue-900 text-amber-300 flex items-center justify-center font-bold text-[10px]">HM</div>
+              <span class="text-slate-600 font-semibold text-[11px]">HM Blog Editorial Desk</span>
+            </div>
+            <a href="/blogs/spark-salary-bill-processing-da-arrears-guide-2026" class="text-blue-900 font-extrabold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+              Read &rarr;
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 2 Fallback -->
+        <article class="bg-white rounded-xl border border-slate-200/90 overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl hover:border-emerald-700 transition-all duration-300 group">
+          <div class="p-6">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="bg-emerald-100 text-emerald-900 font-extrabold px-2.5 py-0.5 rounded-md text-[11px] tracking-wide">MUTTAM BLOG</span>
+              <span class="text-xs text-slate-500 font-medium flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                4 min read
+              </span>
+            </div>
+            <h4 class="text-base font-extrabold text-slate-900 group-hover:text-emerald-900 transition-colors leading-snug mb-2 font-heading">
+              <a href="/blogs/ksr-leave-rules-earned-commuted-lwa-guide">Kerala Service Rules (KSR): Complete Guide to Earned Leave, Commuted Leave & LWA</a>
+            </h4>
+            <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
+              A detailed analysis of Part I Chapter IX of the Kerala Service Rules covering leave entitlement, medical certification, leave without allowances (LWA), and calculation of terminal surrender benefits.
+            </p>
+          </div>
+          <div class="px-6 py-3 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 rounded-full bg-emerald-800 text-white flex items-center justify-center font-bold text-[10px]">MB</div>
+              <span class="text-slate-600 font-semibold text-[11px]">Muttam Blog Contributor</span>
+            </div>
+            <a href="/blogs/ksr-leave-rules-earned-commuted-lwa-guide" class="text-emerald-900 font-extrabold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+              Read &rarr;
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 3 Fallback -->
+        <article class="bg-white rounded-xl border border-slate-200/90 overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl hover:border-purple-800 transition-all duration-300 group">
+          <div class="p-6">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="bg-purple-100 text-purple-900 font-extrabold px-2.5 py-0.5 rounded-md text-[11px] tracking-wide">MATHS BLOG</span>
+              <span class="text-xs text-slate-500 font-medium flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                6 min read
+              </span>
+            </div>
+            <h4 class="text-base font-extrabold text-slate-900 group-hover:text-purple-900 transition-colors leading-snug mb-2 font-heading">
+              <a href="/blogs/income-tax-fy-2026-27-teachers-staff-calculation-guide">Income Tax FY 2026-27: Old vs New Regime Comparison for Teachers & Staff</a>
+            </h4>
+            <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
+              Comprehensive comparative evaluation of tax slabs, standard deduction benefits, Section 80C exemptions, NPS contributions, and home loan interest rebates under Old vs New Tax Regimes.
+            </p>
+          </div>
+          <div class="px-6 py-3 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 rounded-full bg-purple-900 text-amber-300 flex items-center justify-center font-bold text-[10px]">MT</div>
+              <span class="text-slate-600 font-semibold text-[11px]">Maths Blog Resource Group</span>
+            </div>
+            <a href="/blogs/income-tax-fy-2026-27-teachers-staff-calculation-guide" class="text-purple-900 font-extrabold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+              Read &rarr;
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Quick Resource & WhatsApp Assistance Banner -->
+      <div class="mt-8 bg-gradient-to-r from-blue-900 via-indigo-950 to-slate-900 rounded-xl p-6 text-white flex flex-col md:flex-row items-center justify-between gap-4 shadow-md">
+        <div class="flex items-center gap-4 text-center md:text-left">
+          <div class="w-12 h-12 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-2xl shrink-0 border border-amber-400/30">
+            💬
+          </div>
+          <div>
+            <h4 class="font-extrabold text-base tracking-tight text-white font-heading">Have questions regarding SPARK, MEDISEP or KSR rules?</h4>
+            <p class="text-xs text-blue-200 mt-0.5">Connect with the Employees Service Kasaragod Help Desk on WhatsApp for fast guidance.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <a href="https://wa.me/919447396181" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-lg text-xs flex items-center gap-2 shadow-sm transition">
+            <span>WhatsApp Fast Desk</span>
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </a>
+          <a href="/blogs" class="bg-white/10 hover:bg-white/20 text-white font-bold px-3.5 py-2 rounded-lg text-xs transition border border-white/20">
+            View All Desks
+          </a>
+        </div>
       </div>
     </section>
 
@@ -743,32 +881,44 @@
         const blogData = await blogRes.json();
         const articlesContainer = document.getElementById('home-articles-container');
         if (blogData.success && blogData.articles.length > 0) {
-          articlesContainer.innerHTML = blogData.articles.map(art => `
-            <article class="bg-white rounded-lg border border-slate-200 overflow-hidden flex flex-col justify-between hover:shadow-md hover:border-blue-900 transition">
-              <div class="p-5">
-                <div class="flex items-center gap-2 mb-2 text-xs">
-                  <span class="bg-blue-100 text-blue-900 font-bold px-2 py-0.5 rounded text-[10px]">${art.category_name}</span>
-                  <span class="text-slate-300">•</span>
-                  <time class="text-slate-500 font-medium text-[11px]">${formatDate(art.published_at)}</time>
+          const categoryStyles = {
+            'hm-blog': { bg: 'bg-blue-100 text-blue-900', border: 'hover:border-blue-900', link: 'text-blue-900', badge: 'bg-blue-900 text-amber-300' },
+            'muttam-blog': { bg: 'bg-emerald-100 text-emerald-900', border: 'hover:border-emerald-700', link: 'text-emerald-900', badge: 'bg-emerald-800 text-white' },
+            'maths-blog': { bg: 'bg-purple-100 text-purple-900', border: 'hover:border-purple-800', link: 'text-purple-900', badge: 'bg-purple-900 text-amber-300' },
+            'alrahman': { bg: 'bg-amber-100 text-amber-900', border: 'hover:border-amber-700', link: 'text-amber-900', badge: 'bg-amber-800 text-white' },
+            'renjithkumar': { bg: 'bg-indigo-100 text-indigo-900', border: 'hover:border-indigo-800', link: 'text-indigo-900', badge: 'bg-indigo-900 text-white' }
+          };
+
+          articlesContainer.innerHTML = blogData.articles.map(art => {
+            const styles = categoryStyles[art.category_slug] || { bg: 'bg-blue-100 text-blue-900', border: 'hover:border-blue-900', link: 'text-blue-900', badge: 'bg-blue-900 text-white' };
+            const initials = (art.author_name || 'Admin').split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+            return `
+            <article class="bg-white rounded-xl border border-slate-200/90 overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl ${styles.border} transition-all duration-300 group">
+              <div class="p-6">
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="${styles.bg} font-extrabold px-2.5 py-0.5 rounded-md text-[11px] tracking-wide uppercase">${art.category_name}</span>
+                  <span class="text-xs text-slate-500 font-medium flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    ${formatDate(art.published_at)}
+                  </span>
                 </div>
-                <h4 class="text-base font-extrabold text-slate-900 mb-2 leading-snug hover:text-blue-900 transition">
+                <h4 class="text-base font-extrabold text-slate-900 group-hover:text-blue-900 transition-colors leading-snug mb-2 font-heading">
                   <a href="/blogs/${art.slug}">${art.title}</a>
                 </h4>
-                <p class="text-xs text-slate-600 line-clamp-3 mb-3 leading-relaxed">${art.summary || 'Click to view complete employee guidance notes.'}</p>
+                <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">${art.summary || 'Click below to read the comprehensive administrative guidance note.'}</p>
               </div>
-              <div class="px-5 py-2.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 font-semibold">
-                <span>By ${art.author_name}</span>
-                <a href="/blogs/${art.slug}" class="font-extrabold text-blue-900 hover:underline inline-flex items-center gap-1">Read article &rarr;</a>
+              <div class="px-6 py-3 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-xs">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full ${styles.badge} flex items-center justify-center font-bold text-[10px]">${initials}</div>
+                  <span class="text-slate-600 font-semibold text-[11px] truncate max-w-[140px]">${art.author_name}</span>
+                </div>
+                <a href="/blogs/${art.slug}" class="${styles.link} font-extrabold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                  Read &rarr;
+                </a>
               </div>
             </article>
-          `).join('');
-        } else if (articlesContainer) {
-          articlesContainer.innerHTML = `
-            <div class="col-span-full bg-white border border-slate-200 rounded-lg p-6 text-center text-slate-500 text-xs">
-              <p class="font-bold text-slate-700">No articles published yet</p>
-              <p class="text-slate-500 mt-1">Check back for updates from HM Blog, Muttam Blog, and Maths Blog.</p>
-            </div>
-          `;
+            `;
+          }).join('');
         }
       } catch (err) {
         console.error('Failed to load articles:', err);
