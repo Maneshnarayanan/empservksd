@@ -22,6 +22,7 @@ const adminRoutes = require('./routes/api/v1/adminRoutes');
 const pageRoutes = require('./routes/pageRoutes');
 
 const app = express();
+app.set('trust proxy', 1);
 
 // Security Headers with Helmet
 app.use(
