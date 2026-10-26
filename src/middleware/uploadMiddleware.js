@@ -53,8 +53,8 @@ function blogImageFileFilter(req, file, cb) {
   const ext = path.extname(file.originalname).toLowerCase();
   const allowedMime = ALLOWED_IMAGE_TYPES[ext];
 
-  if (!allowedMime || !file.mimetype.startsWith('image/')) {
-    return cb(new Error('Only JPEG, PNG, and WebP images are permitted for blog articles.'), false);
+  if (!allowedMime || (!file.mimetype.startsWith('image/') && file.mimetype !== 'image/svg+xml')) {
+    return cb(new Error('Only JPEG, PNG, WebP, and SVG images are permitted.'), false);
   }
 
   cb(null, true);
@@ -68,7 +68,28 @@ const uploadBlogImage = multer({
   fileFilter: blogImageFileFilter,
 });
 
+// Configure disk storage for News Posters
+const newsPosterStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const { NEWS_POSTERS_DIR } = require('../utils/storage');
+    cb(null, NEWS_POSTERS_DIR);
+  },
+  filename: (req, file, cb) => {
+    const safeName = generateSafeFilename(file.originalname);
+    cb(null, safeName);
+  },
+});
+
+const uploadNewsPoster = multer({
+  storage: newsPosterStorage,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB limit for high-res posters
+  },
+  fileFilter: blogImageFileFilter,
+});
+
 module.exports = {
   uploadDownload,
   uploadBlogImage,
+  uploadNewsPoster,
 };

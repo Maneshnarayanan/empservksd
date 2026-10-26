@@ -5,9 +5,10 @@ const crypto = require('crypto');
 const BASE_STORAGE_DIR = path.resolve(process.env.STORAGE_DIR || './storage');
 const DOWNLOADS_DIR = path.join(BASE_STORAGE_DIR, 'downloads');
 const BLOG_IMAGES_DIR = path.join(BASE_STORAGE_DIR, 'blog-images');
+const NEWS_POSTERS_DIR = path.join(BASE_STORAGE_DIR, 'news-posters');
 
 // Ensure storage subdirectories exist
-[BASE_STORAGE_DIR, DOWNLOADS_DIR, BLOG_IMAGES_DIR].forEach((dir) => {
+[BASE_STORAGE_DIR, DOWNLOADS_DIR, BLOG_IMAGES_DIR, NEWS_POSTERS_DIR].forEach((dir) => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
@@ -30,6 +31,7 @@ const ALLOWED_IMAGE_TYPES = {
   '.jpeg': 'image/jpeg',
   '.png': 'image/png',
   '.webp': 'image/webp',
+  '.svg': 'image/svg+xml',
 };
 
 function generateSafeFilename(originalName) {
@@ -39,7 +41,10 @@ function generateSafeFilename(originalName) {
 }
 
 function getSafeFilePath(type, filename) {
-  const dir = type === 'blog-image' ? BLOG_IMAGES_DIR : DOWNLOADS_DIR;
+  let dir = DOWNLOADS_DIR;
+  if (type === 'blog-image') dir = BLOG_IMAGES_DIR;
+  else if (type === 'news-poster') dir = NEWS_POSTERS_DIR;
+
   // Prevent path traversal
   const safeName = path.basename(filename);
   const fullPath = path.resolve(dir, safeName);
@@ -67,6 +72,7 @@ module.exports = {
   BASE_STORAGE_DIR,
   DOWNLOADS_DIR,
   BLOG_IMAGES_DIR,
+  NEWS_POSTERS_DIR,
   ALLOWED_DOWNLOAD_TYPES,
   ALLOWED_IMAGE_TYPES,
   generateSafeFilename,

@@ -18,9 +18,10 @@ CREATE INDEX IF NOT EXISTS idx_announcements_order ON announcements(display_orde
 
 -- Seed initial announcements
 INSERT INTO announcements (title, message, link_url, type, display_order, is_active) VALUES
-('SPARK Annual Property Return', 'Annual Property Return (APR) submission window is open on SPARK portal for Kerala State Employees.', 'https://www.spark.gov.in', 'urgent', 1, true),
-('MEDISEP Hospital Network', 'Updated empanelled hospitals list and grievance redressal helpline details for Kasaragod district.', '/downloads', 'info', 2, true),
-('General Provident Fund (GPF)', 'GPF Annual Accounts Statements for the current financial year are ready for download and verification.', '/services', 'warning', 3, true);
+('Attention DDOs: Annual Property Return (APR) Submission', 'Ensure all gazetted and non-gazetted submissions are completed before quarterly cutoff. Access direct login portal.', 'https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx', 'urgent', 1, true),
+('MEDISEP Phase II: Hospital Network & Cashless Claims', 'Updated directory of cashless empanelled private and government hospitals in Kasaragod and Mangalore regions.', '/downloads', 'info', 2, true),
+('GPF Annual Credit Cards & Interest Calculations', 'Annual accounts statements are available for employee verification via the AG portal with instant ledger reconciliation.', '/services', 'warning', 3, true),
+('Monthly Establishment Bill Processing & DSC Verification', 'All DDOs must ensure digital signature certificate (DSC) validity and timely token submission before the cutoff.', 'https://bims.kerala.gov.in', 'urgent', 4, true);
 
 -- Add announcement ticker setting
 INSERT INTO website_settings (key, value, description) VALUES

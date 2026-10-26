@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News Posters & Bulletins — Employees Service, Kasaragod</title>
+  <meta name="description" content="Official informational news posters, administrative flyers, and government bulletins for Kerala state employees and teachers in Kasaragod district.">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#f0f4f8] text-slate-800 min-h-screen flex flex-col font-sans antialiased">
+
+  <!-- 1. Accessibility & National Portal Header Strip -->
+  <div class="gov-topbar text-white text-[11px] py-1 px-4 sm:px-6 lg:px-8 flex justify-between items-center z-50">
+    <div class="flex items-center space-x-3">
+      <span class="inline-flex items-center gap-1.5 font-medium text-slate-300">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        Government of Kerala Employee Services Portal | Kasaragod District
+      </span>
+      <span class="hidden md:inline text-slate-400">|</span>
+      <span class="hidden md:inline font-bold text-amber-300">📞 Helpline: 9447396181</span>
+    </div>
+    <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-1 font-mono text-[10px] text-slate-300">
+        <button id="btn-font-dec" class="px-1.5 py-0.5 rounded hover:bg-white/10" title="Decrease font size">A-</button>
+        <button id="btn-font-reset" class="px-1.5 py-0.5 rounded hover:bg-white/10 font-bold" title="Default font size">A</button>
+        <button id="btn-font-inc" class="px-1.5 py-0.5 rounded hover:bg-white/10" title="Increase font size">A+</button>
+      </div>
+      <a href="mailto:esksd31@gmail.com" class="hover:text-amber-300 transition text-[11px] font-medium hidden sm:inline">✉️ esksd31@gmail.com</a>
+      <a href="https://wa.me/919447396181" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 transition">
+        WhatsApp Desk
+      </a>
+    </div>
+  </div>
+
+  <!-- 2. Official Portal Emblem & Title Banner -->
+  <header class="bg-white border-b border-slate-200 shadow-sm py-4 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center space-x-4 text-center md:text-left">
+        <div class="w-14 h-14 rounded-full bg-blue-900 text-amber-400 flex items-center justify-center font-bold text-2xl shadow-md border-2 border-amber-400/50 shrink-0">
+          🏛️
+        </div>
+        <div>
+          <div class="flex items-center justify-center md:justify-start gap-2">
+            <span class="text-[11px] font-extrabold uppercase tracking-widest text-blue-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">KASARAGOD DISTRICT</span>
+            <span class="text-xs text-slate-500 font-semibold">Government Employee Portal</span>
+          </div>
+          <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight font-heading uppercase mt-0.5">
+            Employees Service <span class="text-blue-900">Kasaragod</span>
+          </h1>
+          <p class="text-xs text-slate-600 font-medium">Bank Road, Near Mallikarjuna Temple, Kasaragod, Kerala — 671121</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex flex-col text-right">
+          <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Employee Help Desk</span>
+          <span class="text-sm font-black text-blue-900 font-mono">9447396181</span>
+        </div>
+        <a href="/admin/login" class="gov-gold-btn px-4 py-2 rounded-lg text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+          <span>🔒 Admin Login</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. Navigation Bar with Active "News & Posters" -->
+  <nav class="gov-nav-bg sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-12">
+        <div class="hidden md:flex items-center space-x-1 text-xs uppercase tracking-wide">
+          <a href="/" class="gov-nav-item">Home</a>
+          <a href="/services" class="gov-nav-item">Services Directory</a>
+          <a href="/downloads" class="gov-nav-item">Downloads & Orders</a>
+          <a href="/news" class="gov-nav-item active font-bold">News & Posters</a>
+          <a href="/blogs" class="gov-nav-item">Blogs & Web</a>
+          <a href="/about" class="gov-nav-item">About Us</a>
+          <a href="/contact" class="gov-nav-item">Contact</a>
+        </div>
+
+        <div class="hidden md:flex items-center gap-2">
+          <a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" rel="noopener noreferrer" class="text-amber-300 hover:text-amber-200 text-xs font-bold flex items-center gap-1 px-2.5 py-1 rounded bg-black/20 border border-amber-400/40">
+            <span>Direct SPARK &rarr;</span>
+          </a>
+        </div>
+
+        <button id="mobile-menu-btn" class="md:hidden p-1.5 rounded text-white hover:bg-white/10" aria-label="Toggle navigation">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+
+      <!-- Mobile dropdown menu -->
+      <div id="mobile-menu" class="hidden md:hidden pb-3 pt-2 border-t border-blue-900/60 space-y-1 text-sm font-semibold">
+        <a href="/" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Home</a>
+        <a href="/services" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Services Directory</a>
+        <a href="/downloads" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Downloads & Orders</a>
+        <a href="/news" class="block px-3 py-2 rounded text-white bg-blue-900/60">News & Posters</a>
+        <a href="/blogs" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Blogs & Web</a>
+        <a href="/about" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">About Us</a>
+        <a href="/contact" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Contact</a>
+        <a href="/admin/login" class="block px-3 py-2 rounded text-amber-300 hover:bg-white/10">Admin Portal</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 4. Header Banner -->
+  <main class="flex-grow">
+    <div class="gov-hero-gradient text-white py-10 px-4 sm:px-6 lg:px-8 border-b-4 border-amber-500">
+      <div class="max-w-7xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-950/80 rounded border border-blue-400/40 text-xs font-bold text-amber-300 mb-3 shadow-sm">
+          <span>📰</span>
+          <span>OFFICIAL NEWS DESK & BULLETIN ARCHIVE</span>
+        </div>
+        <h1 class="text-2xl sm:text-4xl font-black tracking-tight mb-2 font-heading uppercase text-white">
+          News Posters & Administrative Circular Bulletins
+        </h1>
+        <p class="text-xs sm:text-sm text-blue-100 max-w-2xl leading-relaxed font-medium">
+          High-resolution news posters, departmental notices, and administrative flyers issued by the nodal office for Kerala State Government staff and school establishments.
+        </p>
+
+        <!-- Search input -->
+        <div class="mt-6 max-w-xl bg-white p-1.5 rounded-xl shadow-lg flex items-center gap-2 text-slate-800">
+          <svg class="w-5 h-5 text-slate-400 ml-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <input type="text" id="news-search-input" placeholder="Search news posters & bulletins (e.g. DA Arrears, MEDISEP, APR)..." class="w-full py-1.5 px-2 text-sm font-medium focus:outline-none placeholder-slate-400">
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Featured Latest Poster Highlight -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" id="featured-poster-section">
+      <div class="flex items-center justify-between pb-3 mb-6 border-b border-slate-300">
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse"></span>
+          <h2 class="text-xs sm:text-sm font-extrabold text-blue-900 uppercase tracking-wider font-heading">
+            Latest Official News Poster
+          </h2>
+        </div>
+        <span class="text-[11px] font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-300">
+          ★ Currently Featured on Home Page
+        </span>
+      </div>
+
+      <div id="featured-poster-container" class="bg-white rounded-2xl border-2 border-amber-400 shadow-md p-6 overflow-hidden">
+        <div class="py-12 text-center text-slate-400 text-xs animate-pulse">Loading latest news poster...</div>
+      </div>
+    </div>
+
+    <!-- 6. Archive Grid of All News Posters -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
+      <div class="flex items-center justify-between pb-3 mb-6 border-b border-slate-300">
+        <div class="flex items-center gap-2">
+          <span class="text-base">🖼️</span>
+          <h2 class="text-xs sm:text-sm font-extrabold text-slate-900 uppercase tracking-wider font-heading">
+            All Uploaded News Posters & Circular Flyers
+          </h2>
+        </div>
+        <div id="news-count" class="text-xs font-bold text-blue-900">
+          Showing posters
+        </div>
+      </div>
+
+      <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="col-span-full py-12 text-center text-slate-400 text-xs animate-pulse">Loading all news bulletins...</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 7. Official Government Portal Footer -->
+  <footer class="bg-slate-900 text-slate-300 text-xs border-t-4 border-amber-500 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-slate-800">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-full bg-blue-900 text-amber-400 flex items-center justify-center font-bold text-xl border border-amber-400/40">
+              🏛️
+            </div>
+            <div>
+              <div class="text-white font-extrabold text-base tracking-tight font-heading">EMPLOYEES SERVICE, KASARAGOD</div>
+              <div class="text-[11px] text-amber-400 font-medium">Independent Resource Directory for Kerala State Staff</div>
+            </div>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed max-w-lg mb-4">
+            Established to facilitate seamless administrative access to state government portals including SPARK, BIMS, e-Treasury, MEDISEP, GPF, and school management platforms for the district of Kasaragod and Kerala State.
+          </p>
+          <div class="text-xs text-slate-400 space-y-1">
+            <p><strong>Nodal Office:</strong> Bank Road, Near Mallikarjuna Temple, Kasaragod, Kerala — 671121</p>
+            <p><strong>Official Email:</strong> <a href="mailto:esksd31@gmail.com" class="text-amber-400 hover:underline">esksd31@gmail.com</a></p>
+            <p><strong>Helpline Number:</strong> <a href="tel:9447396181" class="text-amber-400 hover:underline">9447396181</a> (WhatsApp available)</p>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white font-extrabold text-xs uppercase tracking-wider mb-3 text-amber-300">Quick Navigation</h4>
+          <ul class="space-y-1.5 text-xs text-slate-400">
+            <li><a href="/" class="hover:text-white transition">Home Portal</a></li>
+            <li><a href="/services" class="hover:text-white transition">Services Directory (33 Portals)</a></li>
+            <li><a href="/downloads" class="hover:text-white transition">Government Order Downloads</a></li>
+            <li><a href="/news" class="text-amber-300 font-bold hover:underline">News Posters & Bulletins</a></li>
+            <li><a href="/blogs" class="hover:text-white transition">Community Blogs (HM, Muttam, Maths)</a></li>
+            <li><a href="/about" class="hover:text-white transition">About Employees Service</a></li>
+            <li><a href="/contact" class="hover:text-white transition">Contact & Office Location</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-extrabold text-xs uppercase tracking-wider mb-3 text-amber-300">Portals & Security</h4>
+          <ul class="space-y-1.5 text-xs text-slate-400">
+            <li><a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" class="hover:text-white transition">SPARK Official Portal &rarr;</a></li>
+            <li><a href="https://medisep.kerala.gov.in" target="_blank" class="hover:text-white transition">MEDISEP Health Insurance &rarr;</a></li>
+            <li><a href="https://bims.kerala.gov.in" target="_blank" class="hover:text-white transition">BIMS Bill System &rarr;</a></li>
+            <li><a href="/admin/login" class="text-amber-300 font-bold hover:underline">Portal Administrator Login &rarr;</a></li>
+            <li><a href="/privacy-policy" class="hover:text-white transition">Privacy Policy & Terms</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-between items-center text-[11px] text-slate-500 gap-3">
+        <p>&copy; 2026 Employees Service, Kasaragod. All rights reserved.</p>
+        <p class="text-center sm:text-right">Designed according to official Kerala Government Employee Portal standards (SPARK, PRISM, MEDISEP).</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+  <script>
+    let allNewsList = [];
+
+    async function fetchNews() {
+      try {
+        const res = await fetch('/api/v1/news');
+        const data = await res.json();
+        if (data.success) {
+          allNewsList = data.data || [];
+          renderFeaturedPoster();
+          renderNewsGrid();
+        }
+      } catch (err) {
+        console.error('Failed to load news posters:', err);
+      }
+    }
+
+    function renderFeaturedPoster() {
+      const container = document.getElementById('featured-poster-container');
+      if (!container) return;
+
+      if (allNewsList.length === 0) {
+        container.innerHTML = '<div class="py-8 text-center text-slate-400 text-xs">No active news posters published.</div>';
+        return;
+      }
+
+      const item = allNewsList[0];
+      const pubDate = item.published_date ? new Date(item.published_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Latest Bulletin';
+
+      container.innerHTML = `
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 shadow-sm" onclick="openNewsLightboxById('${item.id}')">
+            <img src="${item.image_url}" alt="${item.title}" class="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+              <span class="bg-white/95 text-blue-900 font-extrabold px-4 py-2 rounded-xl text-xs shadow-lg flex items-center gap-1.5">
+                🔍 Click to Enlarge Full Poster
+              </span>
+            </div>
+          </div>
+          <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-red-600 text-white font-extrabold text-[10px] uppercase tracking-wider animate-pulse">
+                  <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                  LATEST BULLETIN
+                </span>
+                <span class="text-xs text-slate-500 font-bold">${pubDate}</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-black text-slate-900 leading-snug font-heading mb-3">
+                ${item.title}
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                ${item.caption || 'Official administrative circular briefing and instructions issued for Kerala State employees and school staff.'}
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-3">
+              <button onclick="openNewsLightboxById('${item.id}')" class="gov-blue-btn px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2 shadow-sm">
+                <span>View High-Res Poster</span>
+                <span>🔍</span>
+              </button>
+              <a href="${item.image_url}" download class="px-4 py-2 rounded-lg text-xs font-bold border border-slate-300 hover:bg-slate-50 text-slate-700 transition flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <span>Download Poster</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderNewsGrid() {
+      const container = document.getElementById('news-grid');
+      const countEl = document.getElementById('news-count');
+      const searchInput = document.getElementById('news-search-input');
+      const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+      const filtered = allNewsList.filter(item => {
+        return !query ||
+          item.title.toLowerCase().includes(query) ||
+          (item.caption && item.caption.toLowerCase().includes(query));
+      });
+
+      if (countEl) {
+        countEl.textContent = `Showing ${filtered.length} of ${allNewsList.length} news posters`;
+      }
+
+      if (!container) return;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full bg-white rounded-xl border border-slate-200 p-8 text-center text-slate-500 text-xs">
+            No news posters match your search.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map((item, idx) => {
+        const pubDate = item.published_date ? new Date(item.published_date).toLocaleDateString('en-GB') : '2026';
+        return `
+          <div class="bg-white rounded-xl border border-slate-200 shadow-xs hover:border-blue-900 hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col justify-between group">
+            <div class="relative cursor-pointer overflow-hidden bg-slate-100" onclick="openNewsLightboxById('${item.id}')">
+              <img src="${item.image_url}" alt="${item.title}" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300">
+              <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+                <span class="bg-white text-blue-900 font-bold px-3 py-1.5 rounded-lg text-xs shadow-md">
+                  🔍 Enlarge
+                </span>
+              </div>
+              <div class="absolute top-3 left-3">
+                <span class="bg-blue-900/90 text-amber-300 px-2.5 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider backdrop-blur-xs">
+                  ${idx === 0 ? '★ LATEST' : 'BULLETIN'}
+                </span>
+              </div>
+            </div>
+
+            <div class="p-5 flex-grow flex flex-col justify-between">
+              <div>
+                <span class="text-[11px] text-slate-400 font-bold block mb-1">Published: ${pubDate}</span>
+                <h4 class="text-sm font-black text-slate-900 leading-snug font-heading mb-2 group-hover:text-blue-900 transition-colors">
+                  ${item.title}
+                </h4>
+                <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                  ${item.caption || 'Official circular flyer issued for state employees and teachers.'}
+                </p>
+              </div>
+
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                <button onclick="openNewsLightboxById('${item.id}')" class="text-blue-900 hover:text-blue-700 font-extrabold inline-flex items-center gap-1">
+                  <span>View Poster</span>
+                  <span>&rarr;</span>
+                </button>
+                <a href="${item.image_url}" download class="text-slate-500 hover:text-slate-800 font-semibold inline-flex items-center gap-1 text-[11px]">
+                  <span>Save</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openNewsLightboxById(id) {
+      const item = allNewsList.find(n => String(n.id) === String(id));
+      if (item) {
+        openNewsLightbox(item.image_url, item.title);
+      }
+    }
+
+    function openNewsLightbox(imageUrl, title) {
+      const modal = document.getElementById('news-lightbox-modal');
+      const img = document.getElementById('lightbox-news-img');
+      const titleEl = document.getElementById('lightbox-news-title');
+      const downloadEl = document.getElementById('lightbox-news-download');
+      if (img) img.src = imageUrl;
+      if (titleEl) titleEl.textContent = title || 'Official News Poster';
+      if (downloadEl) {
+        downloadEl.href = imageUrl;
+        downloadEl.setAttribute('download', (title || 'news_poster').replace(/[^a-zA-Z0-9_-]/g, '_') + '.svg');
+      }
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeNewsLightbox() {
+      const modal = document.getElementById('news-lightbox-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+    window.closeModal = closeNewsLightbox;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchNews();
+      const searchInput = document.getElementById('news-search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', renderNewsGrid);
+      }
+
+      // Mobile Menu Toggle
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+
+      // Close modal on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeNewsLightbox();
+      });
+    });
+  </script>
+
+  <!-- High-Resolution News Poster Lightbox Modal -->
+  <div id="news-lightbox-modal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6" onclick="if(event.target.id === 'news-lightbox-modal' || event.target.id === 'modal-backdrop-area') closeNewsLightbox()">
+    
+    <!-- Floating Window Close Button (Top-Right) -->
+    <button onclick="closeNewsLightbox()" class="fixed top-4 right-4 z-50 w-11 h-11 rounded-full bg-slate-800/90 hover:bg-red-600 text-white flex items-center justify-center text-xl font-bold shadow-2xl border border-white/20 transition-all transform hover:scale-110 cursor-pointer" title="Close Lightbox (Esc)">
+      &times;
+    </button>
+
+    <!-- Dialog Card Perfectly Centered to Window -->
+    <div id="modal-backdrop-area" class="w-full h-full flex items-center justify-center pointer-events-auto" onclick="if(event.target === this) closeNewsLightbox()">
+      <div class="relative bg-slate-900 border border-slate-700/80 rounded-2xl w-fit max-w-[94vw] max-h-[92vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200" onclick="event.stopPropagation()">
+        <!-- Modal Header -->
+        <div class="px-4 sm:px-6 py-3 border-b border-slate-800 flex items-center justify-between gap-4 bg-slate-950/95 shrink-0">
+          <div class="flex items-center gap-2.5 min-w-0 pr-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 animate-pulse"></span>
+            <span id="lightbox-news-title" class="font-bold text-white text-xs sm:text-sm truncate font-heading">Official News Poster</span>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <a id="lightbox-news-download" href="#" download class="px-3.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold rounded-lg text-xs inline-flex items-center gap-1.5 shadow-sm transition">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <span>Download</span>
+            </a>
+            <button onclick="closeNewsLightbox()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-red-600 text-slate-200 hover:text-white font-bold text-xs flex items-center gap-1 border border-slate-700 hover:border-red-500 transition cursor-pointer" title="Close (Esc)">
+              <span>✕ Close</span>
+            </button>
+          </div>
+        </div>
+        <!-- Modal Image View (Centered) -->
+        <div class="p-2 sm:p-4 flex-1 overflow-auto flex items-center justify-center bg-slate-950/90 text-center">
+          <img id="lightbox-news-img" src="" alt="Full Resolution News Poster" class="max-h-[76vh] max-w-[88vw] w-auto h-auto object-contain rounded-lg shadow-2xl block mx-auto transition-transform duration-200">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

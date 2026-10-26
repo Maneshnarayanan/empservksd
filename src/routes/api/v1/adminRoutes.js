@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../../middleware/authMiddleware');
 const { csrfMiddleware } = require('../../../middleware/csrfMiddleware');
-const { uploadDownload, uploadBlogImage } = require('../../../middleware/uploadMiddleware');
+const { uploadDownload, uploadBlogImage, uploadNewsPoster } = require('../../../middleware/uploadMiddleware');
 
 const categoryController = require('../../../controllers/serviceCategoryController');
 const linkController = require('../../../controllers/serviceLinkController');
@@ -11,6 +11,7 @@ const blogCategoryController = require('../../../controllers/blogCategoryControl
 const blogArticleController = require('../../../controllers/blogArticleController');
 const settingsController = require('../../../controllers/settingsController');
 const announcementController = require('../../../controllers/announcementController');
+const newsPosterController = require('../../../controllers/newsPosterController');
 
 // All admin routes require authentication
 router.use(requireAuth);
@@ -69,5 +70,12 @@ router.post('/announcements', announcementController.createAnnouncement);
 router.put('/announcements/:id', announcementController.updateAnnouncement);
 router.delete('/announcements/:id', announcementController.deleteAnnouncement);
 router.post('/announcements/toggle-ticker', announcementController.toggleTickerStatus);
+
+// News Posters CRUD
+router.get('/news', newsPosterController.getAllNews);
+router.get('/news/:id', newsPosterController.getNewsById);
+router.post('/news', uploadNewsPoster.single('poster'), newsPosterController.createNews);
+router.put('/news/:id', uploadNewsPoster.single('poster'), newsPosterController.updateNews);
+router.delete('/news/:id', newsPosterController.deleteNews);
 
 module.exports = router;

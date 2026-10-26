@@ -91,13 +91,14 @@
           <a href="/" class="gov-nav-item">Home</a>
           <a href="/services" class="gov-nav-item">Services Directory</a>
           <a href="/downloads" class="gov-nav-item active font-bold">Downloads & Orders</a>
+          <a href="/news" class="gov-nav-item">News & Posters</a>
           <a href="/blogs" class="gov-nav-item">Blogs & Web</a>
           <a href="/about" class="gov-nav-item">About Us</a>
           <a href="/contact" class="gov-nav-item">Contact</a>
         </div>
 
         <div class="hidden md:flex items-center gap-2">
-          <a href="https://www.spark.gov.in" target="_blank" rel="noopener noreferrer" class="text-amber-300 hover:text-amber-200 text-xs font-bold flex items-center gap-1 px-2.5 py-1 rounded bg-black/20 border border-amber-400/40">
+          <a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" rel="noopener noreferrer" class="text-amber-300 hover:text-amber-200 text-xs font-bold flex items-center gap-1 px-2.5 py-1 rounded bg-black/20 border border-amber-400/40">
             <span>Direct SPARK &rarr;</span>
           </a>
         </div>
@@ -111,6 +112,7 @@
         <a href="/" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Home</a>
         <a href="/services" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Services Directory</a>
         <a href="/downloads" class="block px-3 py-2 rounded text-white bg-blue-900/60">Downloads & Orders</a>
+        <a href="/news" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">News & Posters</a>
         <a href="/blogs" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Blogs & Web</a>
         <a href="/about" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">About Us</a>
         <a href="/contact" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Contact</a>
@@ -128,26 +130,76 @@
           <span>OFFICIAL REPOSITORY & ORDER COPIES</span>
         </div>
         <h1 class="text-2xl sm:text-4xl font-black tracking-tight mb-2 font-heading uppercase text-white">
-          Verified Downloads & Government Forms
+          Verified Circulars, Government Orders & Official Forms
         </h1>
         <p class="text-xs sm:text-sm text-blue-100 max-w-2xl leading-relaxed font-medium">
-          Download government order copies, service books formats, salary arrear calculators, and administrative forms for Kerala State staff.
+          Access official administrative circulars, order copies, Kerala Service Rules (KSR) forms, salary arrear calculators, and departmental formats for Kerala State staff.
         </p>
 
         <!-- Search input -->
         <div class="mt-6 max-w-xl bg-white p-1.5 rounded-xl shadow-lg flex items-center gap-2 text-slate-800">
           <svg class="w-5 h-5 text-slate-400 ml-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          <input type="text" id="download-search-input" placeholder="Search forms, circulars, orders (e.g. Arrear Bill, KSR, MEDISEP)..." class="w-full py-1.5 px-2 text-sm font-medium focus:outline-none placeholder-slate-400">
+          <input type="text" id="download-search-input" placeholder="Search circulars, orders, forms (e.g. SPARK, DA Revision, KSR, MEDISEP)..." class="w-full py-1.5 px-2 text-sm font-medium focus:outline-none placeholder-slate-400">
         </div>
       </div>
     </div>
 
-    <!-- 5. Downloads Listing Container -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div class="flex items-center justify-between pb-3 mb-6 border-b border-slate-300">
-        <div id="downloads-count" class="text-xs font-extrabold text-blue-900 uppercase tracking-wider">
-          Available Resources
+    <!-- 5. Active Government Circulars & DDO Orders Stream -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+      <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-300">
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse"></span>
+          <h2 class="text-xs sm:text-sm font-extrabold text-blue-900 uppercase tracking-wider font-heading">
+            Active Government Circulars & DDO Orders
+          </h2>
         </div>
+        <span id="circulars-count" class="text-[11px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+          Live Administrative Feed
+        </span>
+      </div>
+
+      <div id="circulars-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="col-span-full py-6 text-center text-slate-400 text-xs animate-pulse">Loading live administrative circulars...</div>
+      </div>
+    </div>
+
+    <!-- 6. Verified Downloadable Forms, Order Copies & Calculators -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 mb-4 border-b border-slate-300 gap-3">
+        <div class="flex items-center gap-2">
+          <span class="text-base">📁</span>
+          <h2 class="text-xs sm:text-sm font-extrabold text-slate-900 uppercase tracking-wider font-heading">
+            Official Forms, Order Copies & Templates
+          </h2>
+        </div>
+        <div id="downloads-count" class="text-xs font-bold text-blue-900">
+          Showing resources
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-3 mb-5 scrollbar-thin text-xs" id="category-filter-bar">
+        <button onclick="setCategoryFilter('ALL')" class="category-pill active px-3 py-1.5 rounded-lg font-bold bg-blue-900 text-white shadow-xs transition shrink-0" data-cat="ALL">
+          All Resources
+        </button>
+        <button onclick="setCategoryFilter('Government Orders')" class="category-pill px-3 py-1.5 rounded-lg font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition shrink-0" data-cat="Government Orders">
+          Government Orders
+        </button>
+        <button onclick="setCategoryFilter('Circulars & Orders')" class="category-pill px-3 py-1.5 rounded-lg font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition shrink-0" data-cat="Circulars & Orders">
+          Circulars & Orders
+        </button>
+        <button onclick="setCategoryFilter('Official Forms')" class="category-pill px-3 py-1.5 rounded-lg font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition shrink-0" data-cat="Official Forms">
+          Official Forms
+        </button>
+        <button onclick="setCategoryFilter('MEDISEP')" class="category-pill px-3 py-1.5 rounded-lg font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition shrink-0" data-cat="MEDISEP">
+          MEDISEP
+        </button>
+        <button onclick="setCategoryFilter('GPF & Pension')" class="category-pill px-3 py-1.5 rounded-lg font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition shrink-0" data-cat="GPF & Pension">
+          GPF & Pension
+        </button>
+        <button onclick="setCategoryFilter('Calculators & Tools')" class="category-pill px-3 py-1.5 rounded-lg font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition shrink-0" data-cat="Calculators & Tools">
+          Calculators & Tools
+        </button>
       </div>
 
       <div id="downloads-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -156,7 +208,7 @@
     </div>
   </main>
 
-  <!-- 6. Official Government Portal Footer (PRISM & National NIC Style) -->
+  <!-- 7. Official Government Portal Footer (PRISM & National NIC Style) -->
   <footer class="bg-slate-900 text-slate-300 text-xs border-t-4 border-amber-500 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-slate-800">
@@ -195,7 +247,7 @@
         <div>
           <h4 class="text-white font-extrabold text-xs uppercase tracking-wider mb-3 text-amber-300">Portals & Security</h4>
           <ul class="space-y-1.5 text-xs text-slate-400">
-            <li><a href="https://www.spark.gov.in" target="_blank" class="hover:text-white transition">SPARK Official Portal &rarr;</a></li>
+            <li><a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" class="hover:text-white transition">SPARK Official Portal &rarr;</a></li>
             <li><a href="https://medisep.kerala.gov.in" target="_blank" class="hover:text-white transition">MEDISEP Health Insurance &rarr;</a></li>
             <li><a href="https://bims.kerala.gov.in" target="_blank" class="hover:text-white transition">BIMS Bill System &rarr;</a></li>
             <li><a href="/admin/login" class="text-amber-300 font-bold hover:underline">Portal Administrator Login &rarr;</a></li>
@@ -214,18 +266,103 @@
   <script src="/assets/js/main.js"></script>
   <script>
     let downloadsList = [];
+    let circularsList = [];
+    let selectedCategory = 'ALL';
 
-    async function fetchDownloads() {
+    async function fetchData() {
+      // 1. Fetch Download Resources
       try {
         const res = await fetch('/api/v1/downloads');
         const data = await res.json();
         if (data.success) {
-          downloadsList = data.data;
-          renderDownloads();
+          downloadsList = data.data || [];
         }
       } catch (err) {
         console.error('Failed to load downloads:', err);
       }
+
+      // 2. Fetch Circulars & Announcements
+      try {
+        const annRes = await fetch('/api/v1/announcements');
+        const annData = await annRes.json();
+        if (annData.success) {
+          circularsList = annData.data || [];
+        }
+      } catch (err) {
+        console.error('Failed to load circulars:', err);
+      }
+
+      renderCirculars();
+      renderDownloads();
+    }
+
+    function renderCirculars() {
+      const container = document.getElementById('circulars-grid');
+      const searchInput = document.getElementById('download-search-input');
+      const searchTerm = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+      const filtered = circularsList.filter(item => {
+        return !searchTerm ||
+          item.title.toLowerCase().includes(searchTerm) ||
+          (item.message && item.message.toLowerCase().includes(searchTerm));
+      });
+
+      if (!container) return;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full bg-white rounded-lg border border-slate-200 p-6 text-center text-slate-500 text-xs">
+            No active administrative circulars matching current filter.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const typeBadge = item.type === 'urgent'
+          ? '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-600 text-white font-extrabold text-[9px] uppercase tracking-wider"><span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>URGENT DDO</span>'
+          : '<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-blue-100 text-blue-900 border border-blue-200 font-extrabold text-[9px] uppercase tracking-wider">OFFICIAL NOTICE</span>';
+
+        const linkUrl = item.link_url || '#';
+        const isExternal = linkUrl.startsWith('http');
+        const actionLabel = linkUrl.includes('spark') ? 'Open SPARK Direct &rarr;' : (isExternal ? 'Open Portal &rarr;' : 'View Resource &rarr;');
+
+        return `
+          <div class="bg-gradient-to-br from-white to-slate-50/80 p-4 rounded-xl border border-slate-200 shadow-xs hover:shadow-md hover:border-blue-900 transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-1 mb-2">
+                ${typeBadge}
+                <span class="text-[10px] text-slate-400 font-bold">2026</span>
+              </div>
+              <h3 class="text-xs font-black text-slate-900 leading-snug mb-1.5 font-heading">
+                ${item.title}
+              </h3>
+              <p class="text-[11px] text-slate-600 line-clamp-3 leading-relaxed mb-3">
+                ${item.message}
+              </p>
+            </div>
+            ${item.link_url ? `
+              <div class="pt-2 border-t border-slate-100">
+                <a href="${item.link_url}" ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''} class="text-blue-900 hover:text-blue-700 font-black text-xs inline-flex items-center gap-1 group">
+                  <span>${actionLabel}</span>
+                </a>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setCategoryFilter(category) {
+      selectedCategory = category;
+      document.querySelectorAll('.category-pill').forEach(btn => {
+        if (btn.getAttribute('data-cat') === category) {
+          btn.className = 'category-pill active px-3 py-1.5 rounded-lg font-bold bg-blue-900 text-white shadow-xs transition shrink-0';
+        } else {
+          btn.className = 'category-pill px-3 py-1.5 rounded-lg font-bold bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition shrink-0';
+        }
+      });
+      renderDownloads();
     }
 
     function renderDownloads() {
@@ -235,48 +372,59 @@
       const countEl = document.getElementById('downloads-count');
 
       const filtered = downloadsList.filter(item => {
-        return !searchTerm ||
+        const matchesCategory = selectedCategory === 'ALL' || item.category === selectedCategory;
+        const matchesSearch = !searchTerm ||
           item.title.toLowerCase().includes(searchTerm) ||
           (item.description && item.description.toLowerCase().includes(searchTerm)) ||
           (item.category && item.category.toLowerCase().includes(searchTerm));
+        return matchesCategory && matchesSearch;
       });
 
-      countEl.textContent = `Showing ${filtered.length} of ${downloadsList.length} verified resources`;
+      if (countEl) {
+        countEl.textContent = `Showing ${filtered.length} of ${downloadsList.length} verified resources`;
+      }
+
+      if (!container) return;
 
       if (filtered.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full bg-white rounded-lg border border-slate-300 p-8 text-center text-slate-500">
-            <h3 class="text-sm font-bold text-slate-800">No resources match your search</h3>
-            <p class="text-xs text-slate-500 mt-1">Check back later or contact the nodal office for requested circulars and forms.</p>
+          <div class="col-span-full bg-white rounded-xl border border-slate-300 p-8 text-center text-slate-500">
+            <h3 class="text-sm font-bold text-slate-800">No downloadable resources match your filter</h3>
+            <p class="text-xs text-slate-500 mt-1">Try selecting "All Resources" or clearing your search term.</p>
           </div>
         `;
         return;
       }
 
       container.innerHTML = filtered.map(item => {
-        const ext = item.original_filename ? item.original_filename.split('.').pop().toUpperCase() : 'FILE';
+        const ext = item.original_filename ? item.original_filename.split('.').pop().toUpperCase() : 'PDF';
+        const isXlsx = ext === 'XLSX' || ext === 'XLS';
+        const extBadgeClass = isXlsx
+          ? 'bg-emerald-100 text-emerald-800 border-emerald-300'
+          : 'bg-rose-100 text-rose-800 border-rose-300';
+
         return `
-          <div class="bg-white rounded-lg p-4 flex flex-col justify-between border border-slate-200 hover:border-blue-900 hover:shadow-md transition">
+          <div class="bg-white rounded-xl p-4 flex flex-col justify-between border border-slate-200 hover:border-blue-900 hover:shadow-md transition">
             <div>
               <div class="flex items-start justify-between gap-2 mb-2">
-                <span class="text-[10px] font-mono font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-300">
+                <span class="text-[10px] font-mono font-black ${extBadgeClass} px-2 py-0.5 rounded border">
                   ${ext}
                 </span>
                 <span class="text-[10px] font-bold bg-blue-50 text-blue-900 px-2 py-0.5 rounded border border-blue-200">
                   ${item.category || 'General'}
                 </span>
               </div>
-              <h3 class="font-extrabold text-slate-900 text-xs leading-snug mb-2 font-heading">${item.title}</h3>
-              <p class="text-xs text-slate-600 line-clamp-2 mb-3 leading-relaxed">${item.description || 'Downloadable resource file.'}</p>
+              <h3 class="font-black text-slate-900 text-xs leading-snug mb-2 font-heading">${item.title}</h3>
+              <p class="text-xs text-slate-600 line-clamp-3 mb-3 leading-relaxed">${item.description || 'Downloadable official resource file.'}</p>
             </div>
 
             <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
               <div class="flex items-center gap-2 text-[10px] font-semibold text-slate-500">
                 <span>${formatBytes(item.file_size)}</span>
                 <span>•</span>
-                <span>${item.download_count} downloads</span>
+                <span>${item.download_count || 0} downloads</span>
               </div>
-              <a href="/api/v1/downloads/${item.id}/file" class="gov-blue-btn px-3 py-1.5 rounded text-xs font-bold flex items-center gap-1">
+              <a href="/api/v1/downloads/${item.id}/file" class="gov-blue-btn px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs hover:shadow-sm">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                 <span>Download</span>
               </a>
@@ -287,10 +435,13 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      fetchDownloads();
+      fetchData();
       const searchInput = document.getElementById('download-search-input');
       if (searchInput) {
-        searchInput.addEventListener('input', renderDownloads);
+        searchInput.addEventListener('input', () => {
+          renderCirculars();
+          renderDownloads();
+        });
       }
     });
   </script>

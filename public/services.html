@@ -16,7 +16,7 @@
       <div class="flex items-center gap-3 flex-wrap justify-center md:justify-start">
         <span class="inline-flex items-center gap-1.5 text-slate-300 font-medium">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Government of Kerala Employee Services Portal | Kasaragod District
+          Government of Kerala Employees Services Portal | Kasaragod District
         </span>
         <span class="hidden md:inline text-slate-500">•</span>
         <span class="text-amber-300 font-semibold flex items-center gap-1">
@@ -91,13 +91,14 @@
           <a href="/" class="gov-nav-item">Home</a>
           <a href="/services" class="gov-nav-item active font-bold">Services Directory</a>
           <a href="/downloads" class="gov-nav-item">Downloads & Orders</a>
+          <a href="/news" class="gov-nav-item">News & Posters</a>
           <a href="/blogs" class="gov-nav-item">Blogs & Web</a>
           <a href="/about" class="gov-nav-item">About Us</a>
           <a href="/contact" class="gov-nav-item">Contact</a>
         </div>
 
         <div class="hidden md:flex items-center gap-2">
-          <a href="https://www.spark.gov.in" target="_blank" rel="noopener noreferrer" class="text-amber-300 hover:text-amber-200 text-xs font-bold flex items-center gap-1 px-2.5 py-1 rounded bg-black/20 border border-amber-400/40">
+          <a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" rel="noopener noreferrer" class="text-amber-300 hover:text-amber-200 text-xs font-bold flex items-center gap-1 px-2.5 py-1 rounded bg-black/20 border border-amber-400/40">
             <span>Direct SPARK &rarr;</span>
           </a>
         </div>
@@ -111,6 +112,7 @@
         <a href="/" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Home</a>
         <a href="/services" class="block px-3 py-2 rounded text-white bg-blue-900/60">Services Directory</a>
         <a href="/downloads" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Downloads & Orders</a>
+        <a href="/news" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">News & Posters</a>
         <a href="/blogs" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Blogs & Web</a>
         <a href="/about" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">About Us</a>
         <a href="/contact" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Contact</a>
@@ -144,13 +146,24 @@
 
     <!-- 5. Main Content Container -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <!-- Category Filter Pills -->
-      <div class="mb-8">
-        <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="category-pills">
-          <button class="category-pill active bg-blue-900 text-white border border-blue-950 px-4 py-1.5 rounded text-xs font-bold whitespace-nowrap transition" data-category="">
+      <!-- Category Filter Pills with Scroll Controls -->
+      <div class="mb-8 relative">
+        <!-- Scroll Left Button -->
+        <button id="pills-scroll-left" class="hidden sm:flex absolute -left-3.5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white shadow-md border border-slate-300 text-slate-700 hover:text-blue-900 hover:bg-slate-50 items-center justify-center transition-all duration-200 cursor-pointer" aria-label="Scroll categories left">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+
+        <!-- Scrollable Pills Container -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-3 pt-1 px-1 scroll-smooth select-none cursor-grab active:cursor-grabbing border-b border-slate-200/80" id="category-pills" style="scrollbar-width: thin; scrollbar-color: #cbd5e1 #f8fafc;">
+          <button class="category-pill active bg-blue-900 text-white border border-blue-950 px-4 py-1.5 rounded text-xs font-bold whitespace-nowrap transition shadow-2xs shrink-0" data-category="">
             All Portals
           </button>
         </div>
+
+        <!-- Scroll Right Button -->
+        <button id="pills-scroll-right" class="hidden sm:flex absolute -right-3.5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white shadow-md border border-slate-300 text-slate-700 hover:text-blue-900 hover:bg-slate-50 items-center justify-center transition-all duration-200 cursor-pointer" aria-label="Scroll categories right">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </button>
       </div>
 
       <!-- Services Grid -->
@@ -199,7 +212,7 @@
         <div>
           <h4 class="text-white font-extrabold text-xs uppercase tracking-wider mb-3 text-amber-300">Portals & Security</h4>
           <ul class="space-y-1.5 text-xs text-slate-400">
-            <li><a href="https://www.spark.gov.in" target="_blank" class="hover:text-white transition">SPARK Official Portal &rarr;</a></li>
+            <li><a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" class="hover:text-white transition">SPARK Official Portal &rarr;</a></li>
             <li><a href="https://medisep.kerala.gov.in" target="_blank" class="hover:text-white transition">MEDISEP Health Insurance &rarr;</a></li>
             <li><a href="https://bims.kerala.gov.in" target="_blank" class="hover:text-white transition">BIMS Bill System &rarr;</a></li>
             <li><a href="/admin/login" class="text-amber-300 font-bold hover:underline">Portal Administrator Login &rarr;</a></li>
@@ -243,11 +256,14 @@
           activeCategoryId = catParam;
           document.querySelectorAll('.category-pill').forEach(btn => {
             if (btn.dataset.category === catParam) {
-              btn.classList.add('bg-blue-900', 'text-white');
-              btn.classList.remove('bg-white', 'text-slate-700');
+              btn.classList.add('bg-blue-900', 'text-white', 'border-blue-950');
+              btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+              setTimeout(() => {
+                btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+              }, 120);
             } else {
-              btn.classList.remove('bg-blue-900', 'text-white');
-              btn.classList.add('bg-white', 'text-slate-700');
+              btn.classList.remove('bg-blue-900', 'text-white', 'border-blue-950');
+              btn.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
             }
           });
         }
@@ -263,16 +279,91 @@
       }
     }
 
+    let updatePillScrollButtons = () => {};
+
+    function setupCategoryScroll() {
+      const container = document.getElementById('category-pills');
+      const btnLeft = document.getElementById('pills-scroll-left');
+      const btnRight = document.getElementById('pills-scroll-right');
+
+      if (!container) return;
+
+      updatePillScrollButtons = function() {
+        if (!btnLeft || !btnRight) return;
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        if (maxScroll <= 8) {
+          btnLeft.style.display = 'none';
+          btnRight.style.display = 'none';
+          return;
+        }
+        btnLeft.style.display = 'flex';
+        btnRight.style.display = 'flex';
+        btnLeft.style.opacity = container.scrollLeft <= 8 ? '0.3' : '1';
+        btnLeft.style.pointerEvents = container.scrollLeft <= 8 ? 'none' : 'auto';
+        btnRight.style.opacity = container.scrollLeft >= maxScroll - 8 ? '0.3' : '1';
+        btnRight.style.pointerEvents = container.scrollLeft >= maxScroll - 8 ? 'none' : 'auto';
+      };
+
+      if (btnLeft) {
+        btnLeft.addEventListener('click', () => {
+          container.scrollBy({ left: -260, behavior: 'smooth' });
+          setTimeout(updatePillScrollButtons, 300);
+        });
+      }
+
+      if (btnRight) {
+        btnRight.addEventListener('click', () => {
+          container.scrollBy({ left: 260, behavior: 'smooth' });
+          setTimeout(updatePillScrollButtons, 300);
+        });
+      }
+
+      // Mouse wheel horizontal scroll conversion
+      container.addEventListener('wheel', (e) => {
+        if (e.deltaY !== 0) {
+          e.preventDefault();
+          container.scrollLeft += e.deltaY;
+          updatePillScrollButtons();
+        }
+      }, { passive: false });
+
+      // Click & drag to scroll
+      let isDown = false;
+      let startX, scrollLeftPos;
+
+      container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - container.offsetLeft;
+        scrollLeftPos = container.scrollLeft;
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDown = false;
+      });
+
+      container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        container.scrollLeft = scrollLeftPos - walk;
+        updatePillScrollButtons();
+      });
+
+      container.addEventListener('scroll', updatePillScrollButtons, { passive: true });
+      window.addEventListener('resize', updatePillScrollButtons, { passive: true });
+      setTimeout(updatePillScrollButtons, 200);
+    }
+
     function renderCategoryPills() {
       const pillsContainer = document.getElementById('category-pills');
       const pillsHtml = allCategories.map(cat => `
-        <button class="category-pill bg-white text-slate-700 hover:bg-slate-50 border border-slate-300 px-3.5 py-1.5 rounded text-xs font-semibold whitespace-nowrap transition" data-category="${cat.id}">
+        <button class="category-pill bg-white text-slate-700 hover:bg-slate-50 border border-slate-300 px-3.5 py-1.5 rounded text-xs font-semibold whitespace-nowrap transition shrink-0" data-category="${cat.id}">
           ${cat.name} (${cat.links_count})
         </button>
       `).join('');
 
       pillsContainer.innerHTML = `
-        <button class="category-pill active bg-blue-900 text-white border border-blue-950 px-3.5 py-1.5 rounded text-xs font-bold whitespace-nowrap transition" data-category="">
+        <button class="category-pill active bg-blue-900 text-white border border-blue-950 px-3.5 py-1.5 rounded text-xs font-bold whitespace-nowrap transition shadow-2xs shrink-0" data-category="">
           All Portals (${allLinks.length})
         </button>
         ${pillsHtml}
@@ -287,9 +378,16 @@
           btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
           btn.classList.add('bg-blue-900', 'text-white', 'border-blue-950');
           activeCategoryId = btn.dataset.category;
+          btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
           renderServices();
         });
       });
+
+      setTimeout(() => {
+        if (typeof updatePillScrollButtons === 'function') {
+          updatePillScrollButtons();
+        }
+      }, 100);
     }
 
     function renderServices() {
@@ -373,6 +471,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      setupCategoryScroll();
       loadData();
       const searchInput = document.getElementById('service-search-input');
       if (searchInput) {

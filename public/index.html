@@ -16,7 +16,7 @@
       <div class="flex items-center gap-3 flex-wrap justify-center md:justify-start">
         <span class="inline-flex items-center gap-1.5 text-slate-300 font-medium">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Government of Kerala Employee Services Portal | Kasaragod District
+          Government of Kerala Employees Services Portal | Kasaragod District
         </span>
         <span class="hidden md:inline text-slate-500">•</span>
         <span class="text-amber-300 font-semibold flex items-center gap-1">
@@ -60,7 +60,7 @@
             <span class="text-[11px] font-semibold text-slate-500">Government Employee Portal</span>
           </div>
           <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-tight mt-0.5 font-heading">
-            EMPLOYEES SERVICE <span class="text-blue-900">KASARAGOD</span>
+            EMPLOYEES SERVICES <span class="text-blue-900">KASARAGOD</span>
           </h1>
           <p class="text-xs text-slate-600 font-medium">Bank Road, Near Mallikarjuna Temple, Kasaragod, Kerala — 671121</p>
         </div>
@@ -98,6 +98,7 @@
           </a>
           <a href="/services" class="gov-nav-item">Services Directory</a>
           <a href="/downloads" class="gov-nav-item">Downloads & Orders</a>
+          <a href="/news" class="gov-nav-item">News & Posters</a>
           <a href="/blogs" class="gov-nav-item">Blogs & Web</a>
           <a href="/about" class="gov-nav-item">About Us</a>
           <a href="/contact" class="gov-nav-item">Contact</a>
@@ -121,6 +122,7 @@
         <a href="/" class="block px-3 py-2 rounded text-white bg-blue-900/60">Home</a>
         <a href="/services" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Services Directory</a>
         <a href="/downloads" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Downloads & Orders</a>
+        <a href="/news" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">News & Posters</a>
         <a href="/blogs" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Blogs & Web</a>
         <a href="/about" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">About Us</a>
         <a href="/contact" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Contact</a>
@@ -209,16 +211,16 @@
 
           <!-- Direct Action Buttons (TRACES Style Call-to-Action) -->
           <div class="flex flex-wrap items-center gap-3 mb-6">
-            <a href="https://www.spark.gov.in" target="_blank" rel="noopener noreferrer" class="gov-gold-btn px-5 py-3 rounded-lg text-sm font-extrabold flex items-center gap-2">
+            <a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" rel="noopener noreferrer" class="gov-gold-btn px-5 py-3 rounded-lg text-sm font-extrabold flex items-center gap-2">
               <span>&gt;&gt; OPEN SPARK PORTAL</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
             </a>
             <a href="https://bims.kerala.gov.in" target="_blank" rel="noopener noreferrer" class="gov-blue-btn px-5 py-3 rounded-lg text-sm font-bold flex items-center gap-2">
               <span>BIMS e-Treasury</span>
             </a>
-            <a href="/services" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-3 rounded-lg text-sm font-bold transition flex items-center gap-1.5">
+            <a href="/services" class="gov-gold-btn px-5 py-3 rounded-lg text-sm font-extrabold flex items-center gap-2">
               <span>Browse All 33 Portals</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
             </a>
           </div>
 
@@ -233,48 +235,50 @@
         </div>
 
         <!-- Right Column: Dual Tabs — Live Circulars (MEDISEP Style) & Quick Login (PRISM Style) -->
-        <div class="lg:col-span-4 bg-white rounded-xl shadow-xl overflow-hidden border border-slate-200 text-slate-800">
+        <div class="lg:col-span-4 bg-white rounded-xl shadow-xl overflow-hidden border border-slate-200 text-slate-800 flex flex-col">
           <!-- Card Header Tabs -->
-          <div class="flex border-b border-slate-200 bg-slate-50 text-xs font-bold">
-            <button id="tab-btn-circulars" class="flex-1 py-3 px-3 text-center border-b-2 border-blue-900 text-blue-900 bg-white flex items-center justify-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
-              <span>Live Updates & DDO Orders</span>
-            </button>
-            <button id="tab-btn-login" class="flex-1 py-3 px-3 text-center text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:bg-slate-100 flex items-center justify-center gap-1.5">
-              <span>🔐 Quick Access</span>
-            </button>
+          <div class="flex border-b border-slate-200 bg-slate-50 text-xs font-bold items-center justify-between">
+            <div class="flex flex-1">
+              <button id="tab-btn-circulars" class="flex-1 py-3 px-3 text-center border-b-2 border-blue-900 text-blue-900 bg-white flex items-center justify-center gap-2">
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
+                </span>
+                <span class="font-extrabold uppercase tracking-wide text-[11px]">Live Updates & DDO Orders</span>
+              </button>
+              <button id="tab-btn-login" class="flex-1 py-3 px-3 text-center text-slate-500 hover:text-slate-800 border-b-2 border-transparent hover:bg-slate-100 flex items-center justify-center gap-1.5 transition">
+                <span>🔐 Quick Access</span>
+              </button>
+            </div>
           </div>
 
-          <!-- Tab Content 1: Live Circulars & DDO Orders (MEDISEP Model) -->
-          <div id="tab-content-circulars" class="p-4 space-y-3 max-h-[380px] overflow-y-auto">
-            <div class="p-3 rounded-lg bg-blue-50/70 border border-blue-100 text-xs">
-              <div class="flex items-center justify-between text-[11px] font-bold text-blue-900 mb-1">
-                <span class="bg-blue-200/80 px-2 py-0.5 rounded text-[10px]">22/10/2026</span>
-                <span class="text-emerald-700">SPARK Portal</span>
+          <!-- Tab Content 1: Live Circulars & DDO Orders with Dynamic Animated Feed -->
+          <div id="tab-content-circulars" class="p-4 flex-grow flex flex-col justify-between">
+            <!-- Animated Status & Live Controls Bar -->
+            <div class="flex items-center justify-between text-[11px] font-bold text-slate-500 mb-2 pb-2 border-b border-slate-100">
+              <div class="flex items-center gap-1.5">
+                <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-slate-700 uppercase tracking-wider text-[10px] font-black" id="live-feed-status">Real-Time DDO Stream</span>
               </div>
-              <p class="font-bold text-slate-900 mb-1 leading-snug">Attention DDOs: Annual Property Return (APR) Submission</p>
-              <p class="text-slate-600 text-[11px] leading-relaxed">Ensure all gazetted and non-gazetted submissions are completed before the quarterly cutoff.</p>
-              <a href="https://www.spark.gov.in" target="_blank" class="inline-block mt-1 text-[11px] font-bold text-blue-800 hover:underline">Proceed to SPARK &rarr;</a>
+              <div class="flex items-center gap-1.5">
+                <button id="live-feed-prev" class="w-5 h-5 rounded hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-extrabold transition cursor-pointer" title="Previous Notice">&larr;</button>
+                <span id="live-feed-counter" class="text-[10px] font-mono text-blue-900 bg-blue-50 px-1.5 py-0.2 rounded font-extrabold border border-blue-200">1/4</span>
+                <button id="live-feed-next" class="w-5 h-5 rounded hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-extrabold transition cursor-pointer" title="Next Notice">&rarr;</button>
+              </div>
             </div>
 
-            <div class="p-3 rounded-lg bg-amber-50/70 border border-amber-200/80 text-xs">
-              <div class="flex items-center justify-between text-[11px] font-bold text-amber-900 mb-1">
-                <span class="bg-amber-200 px-2 py-0.5 rounded text-[10px]">22/10/2026</span>
-                <span class="text-amber-800">MEDISEP</span>
-              </div>
-              <p class="font-bold text-slate-900 mb-1 leading-snug">MEDISEP Phase II: Hospital Network & Claims</p>
-              <p class="text-slate-600 text-[11px] leading-relaxed">Updated list of cashless empanelled private and government hospitals in Kasaragod and Mangalore.</p>
-              <a href="/downloads" class="inline-block mt-1 text-[11px] font-bold text-amber-900 hover:underline">Download Hospital Directory &rarr;</a>
+            <!-- Dynamic Animated Feed Items -->
+            <div id="live-feed-container" class="space-y-2.5 relative overflow-hidden min-h-[250px]">
+              <div class="p-3 rounded-lg bg-blue-50/70 border border-blue-100 text-xs animate-pulse">Loading verified orders...</div>
             </div>
 
-            <div class="p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs">
-              <div class="flex items-center justify-between text-[11px] font-bold text-slate-700 mb-1">
-                <span class="bg-slate-200 px-2 py-0.5 rounded text-[10px]">22/10/2026</span>
-                <span class="text-slate-600">GPF Kerala</span>
-              </div>
-              <p class="font-bold text-slate-900 mb-1 leading-snug">GPF Annual Credit Cards & Interest Calculations</p>
-              <p class="text-slate-600 text-[11px] leading-relaxed">Annual accounts statements are available for employee verification via the AG portal.</p>
-              <a href="/services" class="inline-block mt-1 text-[11px] font-bold text-slate-800 hover:underline">Open Provident Fund Links &rarr;</a>
+            <div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
+              <span class="text-slate-400 text-[10px] flex items-center gap-1">
+                <span class="text-amber-500">⚡</span> Auto-cycled live feed
+              </span>
+              <a href="/downloads" class="text-blue-900 hover:text-blue-700 font-extrabold text-[11px] inline-flex items-center gap-0.5">
+                <span>View All Orders &rarr;</span>
+              </a>
             </div>
           </div>
 
@@ -304,7 +308,7 @@
                 Login to Portal
               </a>
               <p class="text-[11px] text-center text-slate-500">
-                Are you an employee seeking SPARK? <a href="https://www.spark.gov.in" target="_blank" class="text-blue-700 font-bold hover:underline">Click here to open SPARK direct</a>
+                Are you an employee seeking SPARK? <a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" class="text-blue-700 font-bold hover:underline">Click here to open SPARK direct</a>
               </p>
             </div>
           </div>
@@ -342,6 +346,124 @@
       </div>
     </section>
 
+    <!-- 6b. Official News Poster & Circular Bulletin Desk -->
+    <section class="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-slate-200">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 pb-4 border-b border-slate-200 gap-4">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-rose-100 text-rose-800 border border-rose-200 mb-2">
+            <span class="w-2 h-2 rounded-full bg-rose-600 animate-pulse"></span>
+            Official Bulletin & News Desk
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-heading">
+            Latest Official News Poster & Circular Notice
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">
+            Departmental announcements, orders, and service notifications released for Kasaragod employees.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="/news" class="gov-blue-btn px-4 py-2 rounded-lg font-bold text-xs inline-flex items-center gap-2 shadow-xs hover:shadow transition">
+            <span>View All News Posters</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Latest Poster Showcase Card -->
+      <div id="home-news-container" class="bg-gradient-to-br from-slate-950 via-[#0a1e38] to-[#061527] rounded-3xl p-6 sm:p-10 text-white shadow-2xl border-2 border-amber-400/30 relative overflow-hidden">
+        <!-- Background animated atmospheric glows -->
+        <div class="absolute -left-20 top-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow"></div>
+        <div class="absolute -right-20 -top-20 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none animate-float"></div>
+        <div class="absolute left-1/3 -bottom-20 w-80 h-80 bg-rose-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+          <!-- Poster Preview Left (Illuminated & Animated Standout) -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-full max-w-sm poster-float">
+              <!-- Floating Priority Badge on top of poster frame -->
+             
+              <!-- Animated Gradient Border Frame -->
+              <div class="p-[3px] rounded-2xl bg-gradient-to-tr from-amber-400 via-rose-500 to-blue-500 poster-glow-frame transition-all duration-500 hover:scale-[1.02]">
+                <div class="relative group cursor-pointer bg-slate-950 p-2.5 rounded-[13px] border border-slate-700/80 shadow-2xl overflow-hidden" onclick="openHomePosterLightbox()">
+                  <!-- Image Container with Light Sweep Animation -->
+                  <div class="relative overflow-hidden rounded-lg aspect-[3/4] bg-slate-950 flex items-center justify-center poster-light-sweep">
+                    <img id="home-poster-img" src="/storage/news-posters/news_poster_da_arrears_2026.svg" alt="Latest News Poster" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" />
+                    
+                    <!-- Corner Ribbon Stamp -->
+                    <div class="absolute top-2.5 right-2.5 bg-black/75 backdrop-blur-md border border-amber-400/60 text-amber-300 font-black text-[9px] uppercase px-2 py-0.5 rounded shadow-md tracking-wider flex items-center gap-1">
+                      <span>OFFICIAL</span>
+                      <span>🏛️</span>
+                    </div>
+
+                    <!-- Interactive Hover Zoom Overlay -->
+                    <div class="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-2.5 text-white backdrop-blur-xs">
+                      <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-blue-600 to-amber-500 p-0.5 shadow-2xl transform group-hover:scale-110 transition-transform">
+                        <div class="w-full h-full rounded-full bg-slate-950 flex items-center justify-center">
+                          <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path></svg>
+                        </div>
+                      </div>
+                      <span class="text-xs font-black tracking-wide text-amber-300 uppercase bg-black/60 px-3 py-1 rounded-full border border-amber-400/40">
+                        Click for Full Resolution
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Bottom Card Meta Strip -->
+                  <div class="mt-2.5 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 px-1">
+                    
+                    <span id="home-poster-date-badge" class="font-mono text-slate-300 text-[10.5px]">Oct 26, 2026</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Poster Meta & Action Right Column -->
+          <div class="lg:col-span-7 flex flex-col justify-center">
+            <div class="flex flex-wrap items-center gap-2 mb-3">
+              <span id="home-poster-badge" class="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-black px-3 py-1 rounded-md text-[11px] uppercase tracking-wider shadow-md">
+                Official Gazette Notice
+              </span>
+              <span id="home-poster-category" class="bg-blue-900/90 text-blue-200 border border-blue-600/60 font-bold px-2.5 py-1 rounded-md text-[11px] uppercase tracking-wide">
+                Order & Circular
+              </span>
+              <span class="text-xs text-slate-300 flex items-center gap-1.5 font-mono bg-black/30 px-2.5 py-1 rounded-md border border-slate-700/60">
+                <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <span id="home-poster-published-at">Published: Today</span>
+              </span>
+            </div>
+
+            <h4 id="home-poster-title" class="text-2xl sm:text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-amber-200 tracking-tight leading-snug font-heading mb-4">
+              DA Arrears 2026 & Pay Revision Orders Released for State Employees
+            </h4>
+
+            <p id="home-poster-caption" class="text-sm sm:text-base text-slate-300 leading-relaxed mb-5 font-normal">
+              Official circular on DA installment clearance and disbursement schedule for district offices and educational institutions across Kasaragod.
+            </p>
+
+          
+
+            <!-- Action buttons -->
+            <div class="flex flex-wrap items-center gap-3 pt-3 border-t border-slate-700/60">
+              <button onclick="openHomePosterLightbox()" class="gov-gold-btn px-6 py-3 rounded-xl font-black text-xs sm:text-sm inline-flex items-center gap-2.5 shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+                <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path></svg>
+                <span>View Full Resolution Poster</span>
+                <span class="text-slate-900 font-bold">&rarr;</span>
+              </button>
+              <a id="home-poster-download-btn" href="/storage/news-posters/news_poster_da_arrears_2026.svg" download class="bg-slate-800/90 hover:bg-slate-700 text-white font-bold px-4 py-3 rounded-xl text-xs inline-flex items-center gap-2 border border-slate-600 transition shadow-md">
+                <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <span>Download Poster</span>
+              </a>
+              <a href="/news" class="text-blue-300 hover:text-white font-bold text-xs inline-flex items-center gap-1.5 sm:ml-auto py-2 group">
+                <span>Browse All News Archive</span>
+                <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 7. Four-Column Structured Government Service Panels (TRACES Model) -->
     <section class="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div class="text-center mb-8">
@@ -359,7 +481,7 @@
             <span class="text-amber-300 text-xs">🏛️</span>
           </div>
           <div class="p-3 space-y-1 divide-y divide-slate-100 flex-grow text-xs">
-            <a href="https://www.spark.gov.in" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
+            <a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" class="gov-service-item block p-2 rounded text-slate-800 font-semibold flex items-center justify-between">
               <span>SPARK Kerala Payroll</span>
               <span class="text-blue-700 text-[11px] font-bold">&rarr;</span>
             </a>
@@ -708,7 +830,7 @@
         <div>
           <h4 class="text-white font-extrabold text-xs uppercase tracking-wider mb-3 text-amber-300">Portals & Security</h4>
           <ul class="space-y-1.5 text-xs text-slate-400">
-            <li><a href="https://www.spark.gov.in" target="_blank" class="hover:text-white transition">SPARK Official Portal &rarr;</a></li>
+            <li><a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" class="hover:text-white transition">SPARK Official Portal &rarr;</a></li>
             <li><a href="https://medisep.kerala.gov.in" target="_blank" class="hover:text-white transition">MEDISEP Health Insurance &rarr;</a></li>
             <li><a href="https://bims.kerala.gov.in" target="_blank" class="hover:text-white transition">BIMS Bill System &rarr;</a></li>
             <li><a href="/admin/login" class="text-amber-300 font-bold hover:underline">Portal Administrator Login &rarr;</a></li>
@@ -773,7 +895,7 @@
 
       // 3. Ticker Carousel logic
       let announcements = [
-        { title: 'SPARK', message: 'Annual Property Return (APR) submission window is active on SPARK portal for Kerala State Employees.', link_url: 'https://www.spark.gov.in' },
+        { title: 'SPARK', message: 'Annual Property Return (APR) submission window is active on SPARK portal for Kerala State Employees.', link_url: 'https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx' },
         { title: 'MEDISEP', message: 'MEDISEP Phase II: Updated empanelled hospitals list and grievance redressal helpline details for Kasaragod.', link_url: '/downloads' },
         { title: 'GPF Kerala', message: 'GPF Annual Accounts Statements for current financial year are ready for download and verification.', link_url: '/services' }
       ];
@@ -820,15 +942,245 @@
         tickerTogglePause.textContent = isTickerPaused ? '▶' : '❚❚';
       });
 
-      // Fetch live announcements from DB if available
+      // 3b. Attractive Animated Live Updates & DDO Orders Stream
+      function mapAnnouncementToOrder(ann) {
+        let badge = 'Official Notice';
+        let tagClass = 'bg-blue-100 text-blue-900 border-blue-200';
+        let urgentPill = (ann.type || 'URGENT').toUpperCase();
+        let actionText = 'Open Link &rarr;';
+        const link = ann.link_url || '/downloads';
+        const isExternal = link.startsWith('http');
+
+        const titleLower = (ann.title || '').toLowerCase();
+        if (titleLower.includes('spark')) {
+          badge = 'SPARK Direct';
+          tagClass = 'bg-amber-100 text-amber-900 border-amber-300';
+          urgentPill = 'URGENT DDO';
+          actionText = 'Proceed to SPARK Direct &rarr;';
+        } else if (titleLower.includes('medisep')) {
+          badge = 'MEDISEP II';
+          tagClass = 'bg-emerald-100 text-emerald-900 border-emerald-300';
+          urgentPill = 'NEW ORDER';
+          actionText = 'Download Hospital Directory &rarr;';
+        } else if (titleLower.includes('gpf')) {
+          badge = 'GPF Kerala';
+          tagClass = 'bg-blue-100 text-blue-900 border-blue-300';
+          urgentPill = 'CIRCULAR';
+          actionText = 'Access GPF Portal &rarr;';
+        } else if (titleLower.includes('bims') || titleLower.includes('dsc') || titleLower.includes('treasury')) {
+          badge = 'BIMS Treasury';
+          tagClass = 'bg-indigo-100 text-indigo-900 border-indigo-300';
+          urgentPill = 'DDO ADVISORY';
+          actionText = 'Open BIMS Processing &rarr;';
+        } else {
+          actionText = isExternal ? 'Open Portal &rarr;' : 'View Resource &rarr;';
+        }
+
+        return {
+          date: ann.created_at ? new Date(ann.created_at).toLocaleDateString('en-GB') : '26/10/2026',
+          badge,
+          tagClass,
+          urgentPill,
+          title: ann.title,
+          desc: ann.message,
+          actionText,
+          actionUrl: link,
+          isExternal
+        };
+      }
+
+      let liveOrders = [
+        {
+          date: '26/10/2026',
+          badge: 'SPARK Direct',
+          tagClass: 'bg-amber-100 text-amber-900 border-amber-300',
+          urgentPill: 'URGENT DDO',
+          title: 'Attention DDOs: Annual Property Return (APR) Submission',
+          desc: 'Ensure all gazetted and non-gazetted submissions are completed before quarterly cutoff. Access direct login portal.',
+          actionText: 'Proceed to SPARK Direct &rarr;',
+          actionUrl: 'https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx',
+          isExternal: true
+        },
+        {
+          date: '25/10/2026',
+          badge: 'MEDISEP II',
+          tagClass: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+          urgentPill: 'NEW ORDER',
+          title: 'MEDISEP Phase II: Hospital Network & Cashless Claims',
+          desc: 'Updated directory of cashless empanelled private and government hospitals in Kasaragod and Mangalore regions.',
+          actionText: 'Download Hospital Directory &rarr;',
+          actionUrl: '/downloads',
+          isExternal: false
+        },
+        {
+          date: '24/10/2026',
+          badge: 'GPF Kerala',
+          tagClass: 'bg-blue-100 text-blue-900 border-blue-300',
+          urgentPill: 'CIRCULAR',
+          title: 'GPF Annual Credit Cards & Interest Calculations',
+          desc: 'Annual accounts statements are available for employee verification via the AG portal with instant ledger reconciliation.',
+          actionText: 'Access GPF Portal &rarr;',
+          actionUrl: '/services',
+          isExternal: false
+        },
+        {
+          date: '22/10/2026',
+          badge: 'BIMS Treasury',
+          tagClass: 'bg-indigo-100 text-indigo-900 border-indigo-300',
+          urgentPill: 'DDO ADVISORY',
+          title: 'Monthly Establishment Bill Processing & DSC Verification',
+          desc: 'All DDOs must ensure digital signature certificate (DSC) validity and timely token submission before the cutoff.',
+          actionText: 'Open BIMS Processing &rarr;',
+          actionUrl: 'https://bims.kerala.gov.in',
+          isExternal: true
+        }
+      ];
+
+      let currentLiveIdx = 0;
+      let liveFeedTimer = null;
+      let isLiveFeedPaused = false;
+      const liveFeedContainer = document.getElementById('live-feed-container');
+      const liveFeedCounter = document.getElementById('live-feed-counter');
+      const liveFeedStatus = document.getElementById('live-feed-status');
+      const liveFeedPrev = document.getElementById('live-feed-prev');
+      const liveFeedNext = document.getElementById('live-feed-next');
+
+      function renderLiveFeed(highlightIdx) {
+        if (!liveFeedContainer || liveOrders.length === 0) return;
+        const total = liveOrders.length;
+        const safeIdx = highlightIdx % total;
+        if (liveFeedCounter) {
+          liveFeedCounter.textContent = `${safeIdx + 1}/${total}`;
+        }
+
+        // Render 3 visible cards starting with active highlight
+        const activeItem = liveOrders[safeIdx];
+        const nextItem1 = liveOrders[(safeIdx + 1) % total];
+        const nextItem2 = liveOrders[(safeIdx + 2) % total];
+
+        liveFeedContainer.innerHTML = `
+          <!-- Active Highlight Card with Glowing Gradient Border & Dynamic Pill -->
+          <div class="relative p-3.5 rounded-xl bg-gradient-to-r from-amber-50/90 via-blue-50/70 to-white border-2 border-amber-400 shadow-md transition-all duration-500 transform hover:scale-[1.01]">
+            <div class="flex items-center justify-between gap-1 mb-1.5">
+              <div class="flex items-center gap-1.5">
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-600 text-white font-extrabold text-[9px] uppercase tracking-wider animate-pulse">
+                  <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                  ${activeItem.urgentPill}
+                </span>
+                <span class="text-[10px] text-slate-500 font-bold">${activeItem.date}</span>
+              </div>
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded border ${activeItem.tagClass}">
+                ${activeItem.badge}
+              </span>
+            </div>
+            <h5 class="text-xs font-black text-slate-900 leading-snug mb-1 hover:text-blue-900 transition font-heading">
+              <a href="${activeItem.actionUrl}" ${activeItem.isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}>${activeItem.title}</a>
+            </h5>
+            <p class="text-[11px] text-slate-600 line-clamp-2 leading-tight mb-2">
+              ${activeItem.desc}
+            </p>
+            <div class="flex items-center justify-between pt-1 border-t border-amber-200/60">
+              <a href="${activeItem.actionUrl}" ${activeItem.isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''} class="text-blue-900 hover:text-blue-700 font-black text-[11px] inline-flex items-center gap-1 group">
+                <span>${activeItem.actionText}</span>
+              </a>
+              <span class="text-[9px] text-amber-700 font-bold bg-amber-100 px-1.5 py-0.5 rounded border border-amber-200">
+                ACTIVE
+              </span>
+            </div>
+          </div>
+
+          <!-- Secondary Order Item 1 -->
+          ${nextItem1 ? `
+          <div class="p-2.5 rounded-lg bg-white/95 border border-slate-200 shadow-xs hover:border-blue-400 hover:bg-blue-50/40 transition-all duration-300">
+            <div class="flex items-center justify-between text-[10px] mb-1">
+              <span class="text-slate-400 font-semibold">${nextItem1.date}</span>
+              <span class="font-bold text-[9px] px-1.5 py-0.2 rounded border ${nextItem1.tagClass}">${nextItem1.badge}</span>
+            </div>
+            <h6 class="text-[11px] font-bold text-slate-800 line-clamp-1 leading-tight hover:text-blue-900">
+              <a href="${nextItem1.actionUrl}" ${nextItem1.isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}>${nextItem1.title}</a>
+            </h6>
+          </div>
+          ` : ''}
+
+          <!-- Secondary Order Item 2 -->
+          ${nextItem2 && nextItem2 !== nextItem1 ? `
+          <div class="p-2.5 rounded-lg bg-white/95 border border-slate-200 shadow-xs hover:border-blue-400 hover:bg-blue-50/40 transition-all duration-300">
+            <div class="flex items-center justify-between text-[10px] mb-1">
+              <span class="text-slate-400 font-semibold">${nextItem2.date}</span>
+              <span class="font-bold text-[9px] px-1.5 py-0.2 rounded border ${nextItem2.tagClass}">${nextItem2.badge}</span>
+            </div>
+            <h6 class="text-[11px] font-bold text-slate-800 line-clamp-1 leading-tight hover:text-blue-900">
+              <a href="${nextItem2.actionUrl}" ${nextItem2.isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}>${nextItem2.title}</a>
+            </h6>
+          </div>
+          ` : ''}
+        `;
+      }
+
+      function nextLiveFeed() {
+        if (liveOrders.length === 0) return;
+        currentLiveIdx = (currentLiveIdx + 1) % liveOrders.length;
+        renderLiveFeed(currentLiveIdx);
+      }
+
+      function prevLiveFeed() {
+        if (liveOrders.length === 0) return;
+        currentLiveIdx = (currentLiveIdx - 1 + liveOrders.length) % liveOrders.length;
+        renderLiveFeed(currentLiveIdx);
+      }
+
+      function startLiveFeedTimer() {
+        if (liveFeedTimer) clearInterval(liveFeedTimer);
+        liveFeedTimer = setInterval(() => {
+          if (!isLiveFeedPaused) {
+            nextLiveFeed();
+          }
+        }, 4000);
+      }
+
+      liveFeedNext?.addEventListener('click', () => {
+        nextLiveFeed();
+        startLiveFeedTimer();
+      });
+
+      liveFeedPrev?.addEventListener('click', () => {
+        prevLiveFeed();
+        startLiveFeedTimer();
+      });
+
+      liveFeedContainer?.addEventListener('mouseenter', () => {
+        isLiveFeedPaused = true;
+        if (liveFeedStatus) {
+          liveFeedStatus.textContent = 'Paused (Inspecting)';
+          liveFeedStatus.classList.add('text-amber-600');
+        }
+      });
+
+      liveFeedContainer?.addEventListener('mouseleave', () => {
+        isLiveFeedPaused = false;
+        if (liveFeedStatus) {
+          liveFeedStatus.textContent = 'Real-Time DDO Stream';
+          liveFeedStatus.classList.remove('text-amber-600');
+        }
+      });
+
+      renderLiveFeed(0);
+      startLiveFeedTimer();
+
+      // Fetch live announcements from DB as authoritative source
       try {
         const annRes = await fetch('/api/v1/announcements');
         const annData = await annRes.json();
         if (annData.success && annData.data && annData.data.length > 0) {
           announcements = annData.data;
+          // Map DB announcements directly to live orders so admin changes reflect immediately!
+          liveOrders = annData.data.map(mapAnnouncementToOrder);
+          currentLiveIdx = 0;
+          renderLiveFeed(0);
+          renderTicker(0);
         }
       } catch (e) {
-        console.warn('Using default announcements');
+        console.warn('Using default announcements:', e);
       }
       renderTicker(0);
       startTicker();
@@ -939,7 +1291,121 @@
           if (e.key === 'Enter') handleSearch();
         });
       }
+
+      // 7. Load Latest News Poster for Official Bulletin Desk
+      let currentPosterData = null;
+
+      window.openHomePosterLightbox = function() {
+        if (!currentPosterData) return;
+        const modal = document.getElementById('home-poster-modal');
+        const modalImg = document.getElementById('home-modal-img');
+        const modalTitle = document.getElementById('home-modal-title');
+        const modalDownload = document.getElementById('home-modal-download');
+
+        modalImg.src = currentPosterData.image_url;
+        modalTitle.textContent = currentPosterData.title || 'Official News Poster';
+        modalDownload.href = currentPosterData.image_url;
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      };
+
+      window.closeHomePosterLightbox = function() {
+        const modal = document.getElementById('home-poster-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      };
+      window.closeModal = window.closeHomePosterLightbox;
+
+      // Close modal on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeHomePosterLightbox();
+      });
+
+      try {
+        const newsRes = await fetch('/api/v1/news/latest');
+        const newsResult = await newsRes.json();
+        let poster = null;
+
+        if (newsResult.success && newsResult.data) {
+          poster = newsResult.data;
+        } else {
+          // Fallback to first item from all news
+          const allRes = await fetch('/api/v1/news');
+          const allResult = await allRes.json();
+          if (allResult.success && allResult.data && allResult.data.length > 0) {
+            poster = allResult.data[0];
+          }
+        }
+
+        if (poster) {
+          currentPosterData = poster;
+          const posterImg = document.getElementById('home-poster-img');
+          const posterTitle = document.getElementById('home-poster-title');
+          const posterCaption = document.getElementById('home-poster-caption');
+          const posterDateBadge = document.getElementById('home-poster-date-badge');
+          const posterPublishedAt = document.getElementById('home-poster-published-at');
+          const posterBadge = document.getElementById('home-poster-badge');
+          const posterCategory = document.getElementById('home-poster-category');
+          const downloadBtn = document.getElementById('home-poster-download-btn');
+
+          if (posterImg) {
+            posterImg.src = poster.image_url;
+            posterImg.alt = poster.title;
+          }
+          if (posterTitle) posterTitle.textContent = poster.title;
+          if (posterCaption) posterCaption.textContent = poster.caption || 'Official bulletin issued by Employees Service Kasaragod.';
+          if (posterCategory) posterCategory.textContent = poster.category || 'Order & Circular';
+          if (posterBadge) posterBadge.textContent = poster.badge_text || 'Official Notice';
+
+          const formattedDate = formatDate(poster.published_at);
+          if (posterDateBadge) posterDateBadge.textContent = formattedDate;
+          if (posterPublishedAt) posterPublishedAt.textContent = `Published: ${formattedDate}`;
+          if (downloadBtn) {
+            downloadBtn.href = poster.image_url;
+            downloadBtn.setAttribute('download', poster.title.replace(/[^a-zA-Z0-9_-]/g, '_') + '.svg');
+          }
+        }
+      } catch (err) {
+        console.warn('Could not load latest news poster:', err);
+      }
     });
   </script>
+
+  <!-- Lightbox Modal for Homepage News Poster -->
+  <div id="home-poster-modal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6" onclick="if(event.target.id === 'home-poster-modal' || event.target.id === 'home-modal-backdrop-area') closeHomePosterLightbox()">
+    
+    <!-- Floating Window Close Button (Top-Right) -->
+    <button onclick="closeHomePosterLightbox()" class="fixed top-4 right-4 z-50 w-11 h-11 rounded-full bg-slate-800/90 hover:bg-red-600 text-white flex items-center justify-center text-xl font-bold shadow-2xl border border-white/20 transition-all transform hover:scale-110 cursor-pointer" title="Close Lightbox (Esc)">
+      &times;
+    </button>
+
+    <!-- Dialog Card Centered to Window -->
+    <div id="home-modal-backdrop-area" class="w-full h-full flex items-center justify-center pointer-events-auto" onclick="if(event.target === this) closeHomePosterLightbox()">
+      <div class="relative bg-slate-900 border border-slate-700/80 rounded-2xl w-fit max-w-[94vw] max-h-[92vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200" onclick="event.stopPropagation()">
+        <!-- Modal Header -->
+        <div class="px-4 sm:px-6 py-3 border-b border-slate-800 flex items-center justify-between gap-4 bg-slate-950/95 shrink-0">
+          <div class="flex items-center gap-2.5 min-w-0 pr-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 animate-pulse"></span>
+            <span id="home-modal-title" class="font-bold text-white text-xs sm:text-sm truncate font-heading">Official News Poster</span>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <a id="home-modal-download" href="#" download class="px-3.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold rounded-lg text-xs inline-flex items-center gap-1.5 shadow-sm transition">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <span>Download</span>
+            </a>
+            <button onclick="closeHomePosterLightbox()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-red-600 text-slate-200 hover:text-white font-bold text-xs flex items-center gap-1 border border-slate-700 hover:border-red-500 transition cursor-pointer" title="Close (Esc)">
+              <span>✕ Close</span>
+            </button>
+          </div>
+        </div>
+        <!-- Modal Image View (Centered) -->
+        <div class="p-2 sm:p-4 flex-1 overflow-auto flex items-center justify-center bg-slate-950/90 text-center">
+          <img id="home-modal-img" src="" alt="High Resolution Poster" class="max-h-[76vh] max-w-[88vw] w-auto h-auto object-contain rounded-lg shadow-2xl block mx-auto transition-transform duration-200" />
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
