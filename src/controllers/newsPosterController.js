@@ -67,7 +67,7 @@ async function getNewsById(req, res, next) {
 
 async function createNews(req, res, next) {
   try {
-    const { title, caption, display_order, is_active, published_date } = req.body;
+    const { title, caption, description, display_order, is_active, published_date } = req.body;
 
     if (!title || !title.trim()) {
       if (req.file) deleteStoredFile('news-poster', req.file.filename);
@@ -81,6 +81,7 @@ async function createNews(req, res, next) {
     const created = await newsRepo.create({
       title: title.trim(),
       caption: caption ? caption.trim() : null,
+      description: description ? description.trim() : null,
       image_filename: req.file.filename,
       original_filename: req.file.originalname,
       display_order: parseInt(display_order || 0, 10),
@@ -111,7 +112,7 @@ async function updateNews(req, res, next) {
       return res.status(404).json({ success: false, message: 'News poster not found.' });
     }
 
-    const { title, caption, display_order, is_active, published_date } = req.body;
+    const { title, caption, description, display_order, is_active, published_date } = req.body;
 
     let image_filename = existing.image_filename;
     let original_filename = existing.original_filename;
@@ -126,6 +127,7 @@ async function updateNews(req, res, next) {
     const updated = await newsRepo.update(id, {
       title: title !== undefined ? title.trim() : existing.title,
       caption: caption !== undefined ? (caption ? caption.trim() : null) : existing.caption,
+      description: description !== undefined ? (description ? description.trim() : null) : existing.description,
       image_filename,
       original_filename,
       display_order: display_order !== undefined ? parseInt(display_order, 10) : existing.display_order,

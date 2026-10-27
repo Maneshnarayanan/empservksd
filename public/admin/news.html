@@ -204,8 +204,13 @@
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Caption / Summary Details</label>
-          <textarea id="item-caption" rows="3" placeholder="Brief explanation or guidance notes regarding this news poster..." class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none"></textarea>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Caption / Headline Tagline</label>
+          <textarea id="item-caption" rows="2" placeholder="Short tagline or key highlight..." class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">News Explanation / Full Paragraph</label>
+          <textarea id="item-description" rows="4" placeholder="Detailed explanation, order references, beneficiary rules, and employee guidelines..." class="w-full text-xs border border-slate-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-emerald-500 focus:outline-none"></textarea>
         </div>
 
         <div class="flex justify-end gap-3 pt-3 border-t border-slate-100">
@@ -292,7 +297,8 @@
             ${idx === 0 && item.is_active ? '<span class="inline-block mt-1 px-2 py-0.2 rounded-full text-[9px] font-black bg-amber-100 text-amber-800 border border-amber-300">★ FEATURED ON HOME</span>' : ''}
           </td>
           <td class="px-6 py-3.5 text-slate-600 max-w-sm">
-            <p class="line-clamp-2 leading-relaxed">${item.caption || '<span class="italic text-slate-400">No caption provided.</span>'}</p>
+            <p class="font-semibold text-slate-800 text-xs mb-1 line-clamp-1">${item.caption || '<span class="italic text-slate-400">No caption</span>'}</p>
+            <p class="text-[11px] text-slate-500 line-clamp-2 leading-relaxed">${item.description || '<span class="italic text-slate-400">No explanation paragraph.</span>'}</p>
           </td>
           <td class="px-6 py-3.5 font-mono text-slate-500">${item.display_order}</td>
           <td class="px-6 py-3.5 whitespace-nowrap">
@@ -325,6 +331,7 @@
       document.getElementById('item-order').value = '0';
       document.getElementById('item-status').value = 'true';
       document.getElementById('item-caption').value = '';
+      document.getElementById('item-description').value = '';
       document.getElementById('item-file').value = '';
       document.getElementById('item-file').required = true;
       document.getElementById('file-required-label').textContent = '*';
@@ -343,6 +350,7 @@
       document.getElementById('item-order').value = item.display_order || 0;
       document.getElementById('item-status').value = item.is_active ? 'true' : 'false';
       document.getElementById('item-caption').value = item.caption || '';
+      document.getElementById('item-description').value = item.description || '';
       document.getElementById('item-file').value = '';
       document.getElementById('item-file').required = false;
       document.getElementById('file-required-label').textContent = '(Optional, leave empty to keep current)';
@@ -380,6 +388,7 @@
       formData.append('display_order', document.getElementById('item-order').value);
       formData.append('is_active', document.getElementById('item-status').value);
       formData.append('caption', document.getElementById('item-caption').value.trim());
+      formData.append('description', document.getElementById('item-description').value.trim());
 
       const fileInput = document.getElementById('item-file');
       if (fileInput.files.length > 0) {

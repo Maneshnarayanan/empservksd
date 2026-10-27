@@ -450,23 +450,36 @@
               DA Arrears 2026 & Pay Revision Orders Released for State Employees
             </h4>
 
-            <p id="home-poster-caption" class="text-xs sm:text-base text-slate-300 leading-relaxed mb-4 sm:mb-5 font-normal">
+            <p id="home-poster-caption" class="text-xs sm:text-base text-amber-200/90 leading-relaxed font-semibold mb-3">
               Official circular on DA installment clearance and disbursement schedule for district offices and educational institutions across Kasaragod.
             </p>
 
+            <!-- News Explanation Paragraph Section -->
+            <div id="home-poster-desc-box" class="p-3.5 sm:p-4 rounded-xl bg-slate-900/90 border border-slate-700/80 mb-4 sm:mb-5 shadow-inner">
+              <div class="flex items-center gap-2 mb-2 text-amber-400 font-extrabold text-[11px] sm:text-xs uppercase tracking-wider">
+                <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>News Explanation & Guidelines</span>
+              </div>
+              <p id="home-poster-description" class="text-xs sm:text-sm text-slate-200 leading-relaxed font-normal whitespace-pre-line"></p>
+            </div>
+
             <!-- Action buttons -->
-            <div class="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 pt-3 border-t border-slate-700/60">
-              <button onclick="openHomePosterLightbox()" class="gov-gold-btn w-full sm:w-auto justify-center px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl font-black text-xs sm:text-sm inline-flex items-center gap-2.5 shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
+            <div class="flex flex-col sm:flex-row sm:items-center flex-wrap gap-2.5 sm:gap-3 pt-3 border-t border-slate-700/60">
+              <button onclick="openHomePosterLightbox()" class="gov-gold-btn w-full sm:w-auto justify-center px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl font-black text-xs sm:text-sm inline-flex items-center gap-2 shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer">
                 <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path></svg>
-                <span>View Full Resolution Poster</span>
+                <span>View High-Res Poster</span>
                 <span class="text-slate-900 font-bold">&rarr;</span>
               </button>
-              <a id="home-poster-download-btn" href="/storage/news-posters/news_poster_da_arrears_2026.svg" download class="bg-slate-800/90 hover:bg-slate-700 text-white font-bold w-full sm:w-auto justify-center px-4 py-2.5 sm:py-3 rounded-xl text-xs inline-flex items-center gap-2 border border-slate-600 transition shadow-md">
+              <button id="home-poster-share-btn" onclick="sharePosterWhatsApp(currentPosterData)" class="bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold w-full sm:w-auto justify-center px-4 py-2.5 sm:py-3 rounded-xl text-xs inline-flex items-center gap-2 transition shadow-lg hover:scale-105 duration-300 cursor-pointer">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                <span>Share WhatsApp</span>
+              </button>
+              <a id="home-poster-download-btn" href="/storage/news-posters/news_poster_da_arrears_2026.svg" download class="bg-slate-800/90 hover:bg-slate-700 text-white font-bold w-full sm:w-auto justify-center px-3.5 py-2.5 sm:py-3 rounded-xl text-xs inline-flex items-center gap-2 border border-slate-600 transition shadow-md">
                 <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                <span>Download Poster</span>
+                <span>Download</span>
               </a>
               <a href="/news" class="text-blue-300 hover:text-white font-bold text-xs inline-flex items-center justify-center sm:justify-start gap-1.5 sm:ml-auto py-2 group">
-                <span>Browse All News Archive</span>
+                <span>Browse All News</span>
                 <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
               </a>
             </div>
@@ -1306,16 +1319,35 @@
       // 7. Load Latest News Poster for Official Bulletin Desk
       let currentPosterData = null;
 
+      window.sharePosterWhatsApp = function(poster) {
+        const item = poster || currentPosterData;
+        if (!item) return;
+        const pageUrl = window.location.origin + '/news';
+        const title = item.title || 'Official News Poster';
+        const caption = item.caption ? `*Highlight:* ${item.caption}\n\n` : '';
+        const descSnippet = item.description 
+          ? (item.description.length > 250 ? item.description.substring(0, 250) + '...' : item.description)
+          : '';
+        const descText = descSnippet ? `*Summary:*\n${descSnippet}\n\n` : '';
+        const message = `📢 *Employees Service, Kasaragod — Official Bulletin*\n\n📌 *${title}*\n\n${caption}${descText}🌐 View high-resolution poster & full circular details:\n${pageUrl}`;
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+      };
+
       window.openHomePosterLightbox = function() {
         if (!currentPosterData) return;
         const modal = document.getElementById('home-poster-modal');
         const modalImg = document.getElementById('home-modal-img');
         const modalTitle = document.getElementById('home-modal-title');
         const modalDownload = document.getElementById('home-modal-download');
+        const modalDesc = document.getElementById('home-modal-description');
 
         modalImg.src = currentPosterData.image_url;
         modalTitle.textContent = currentPosterData.title || 'Official News Poster';
         modalDownload.href = currentPosterData.image_url;
+        if (modalDesc) {
+          modalDesc.textContent = currentPosterData.description || currentPosterData.caption || 'Official circular guidance issued for employees and teachers in Kasaragod district.';
+        }
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
       };
@@ -1355,6 +1387,7 @@
           const posterImg = document.getElementById('home-poster-img');
           const posterTitle = document.getElementById('home-poster-title');
           const posterCaption = document.getElementById('home-poster-caption');
+          const posterDesc = document.getElementById('home-poster-description');
           const posterDateBadge = document.getElementById('home-poster-date-badge');
           const posterPublishedAt = document.getElementById('home-poster-published-at');
           const posterBadge = document.getElementById('home-poster-badge');
@@ -1367,6 +1400,9 @@
           }
           if (posterTitle) posterTitle.textContent = poster.title;
           if (posterCaption) posterCaption.textContent = poster.caption || 'Official bulletin issued by Employees Service Kasaragod.';
+          if (posterDesc) {
+            posterDesc.textContent = poster.description || 'Comprehensive government guidelines, order numbers, and procedural directives regarding this notification have been dispatched to drawing & disbursing officers and head of institutions.';
+          }
           if (posterCategory) posterCategory.textContent = poster.category || 'Order & Circular';
           if (posterBadge) posterBadge.textContent = poster.badge_text || 'Official Notice';
 
@@ -1396,12 +1432,16 @@
     <div id="home-modal-backdrop-area" class="w-full h-full flex items-center justify-center pointer-events-auto" onclick="if(event.target === this) closeHomePosterLightbox()">
       <div class="relative bg-slate-900 border border-slate-700/80 rounded-2xl w-fit max-w-[94vw] max-h-[92vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200" onclick="event.stopPropagation()">
         <!-- Modal Header -->
-        <div class="px-4 sm:px-6 py-3 border-b border-slate-800 flex items-center justify-between gap-4 bg-slate-950/95 shrink-0">
+        <div class="px-4 sm:px-6 py-3 border-b border-slate-800 flex items-center justify-between gap-3 bg-slate-950/95 shrink-0 flex-wrap">
           <div class="flex items-center gap-2.5 min-w-0 pr-2">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 animate-pulse"></span>
-            <span id="home-modal-title" class="font-bold text-white text-xs sm:text-sm truncate font-heading">Official News Poster</span>
+            <span id="home-modal-title" class="font-bold text-white text-xs sm:text-sm truncate font-heading max-w-xs sm:max-w-md">Official News Poster</span>
           </div>
           <div class="flex items-center gap-2 shrink-0">
+            <button onclick="sharePosterWhatsApp(currentPosterData)" class="px-3 py-1.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold rounded-lg text-xs inline-flex items-center gap-1.5 shadow-sm transition cursor-pointer">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              <span>WhatsApp</span>
+            </button>
             <a id="home-modal-download" href="#" download class="px-3.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold rounded-lg text-xs inline-flex items-center gap-1.5 shadow-sm transition">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
               <span>Download</span>
@@ -1413,7 +1453,15 @@
         </div>
         <!-- Modal Image View (Centered) -->
         <div class="p-2 sm:p-4 flex-1 overflow-auto flex items-center justify-center bg-slate-950/90 text-center">
-          <img id="home-modal-img" src="" alt="High Resolution Poster" class="max-h-[76vh] max-w-[88vw] w-auto h-auto object-contain rounded-lg shadow-2xl block mx-auto transition-transform duration-200" />
+          <img id="home-modal-img" src="" alt="High Resolution Poster" class="max-h-[64vh] sm:max-h-[70vh] max-w-[88vw] w-auto h-auto object-contain rounded-lg shadow-2xl block mx-auto transition-transform duration-200" />
+        </div>
+        <!-- Modal Footer Explanation Strip -->
+        <div id="home-modal-desc-box" class="px-4 sm:px-6 py-2.5 sm:py-3 bg-slate-950/95 border-t border-slate-800 text-slate-200 text-xs sm:text-sm max-w-4xl max-h-32 overflow-y-auto shrink-0 leading-relaxed">
+          <div class="flex items-center gap-1.5 font-bold text-amber-400 text-xs uppercase tracking-wide mb-1">
+            <span>📋</span>
+            <span>Explanation & Circular Guidance:</span>
+          </div>
+          <p id="home-modal-description" class="whitespace-pre-line text-slate-300 text-xs sm:text-xs leading-relaxed"></p>
         </div>
       </div>
     </div>

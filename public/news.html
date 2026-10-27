@@ -9,6 +9,44 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    .news-featured-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+      width: 100%;
+    }
+    @media (min-width: 1024px) {
+      .news-featured-grid {
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      }
+    }
+    .news-featured-img-col {
+      width: 100%;
+      min-width: 0;
+    }
+    .news-featured-content-col {
+      width: 100%;
+      min-width: 0;
+    }
+    .news-archive-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      width: 100%;
+    }
+    @media (min-width: 640px) {
+      .news-archive-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (min-width: 1024px) {
+      .news-archive-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+  </style>
 </head>
 <body class="bg-[#f0f4f8] text-slate-800 min-h-screen flex flex-col font-sans antialiased">
 
@@ -183,7 +221,7 @@
         </div>
       </div>
 
-      <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div id="news-grid" class="news-archive-grid">
         <div class="col-span-full py-12 text-center text-slate-400 text-xs animate-pulse">Loading all news bulletins...</div>
       </div>
     </div>
@@ -276,39 +314,62 @@
       const pubDate = item.published_date ? new Date(item.published_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Latest Bulletin';
 
       container.innerHTML = `
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div class="lg:col-span-7 relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 shadow-sm" onclick="openNewsLightboxById('${item.id}')">
-            <img src="${item.image_url}" alt="${item.title}" class="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-300">
-            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-              <span class="bg-white/95 text-blue-900 font-extrabold px-4 py-2 rounded-xl text-xs shadow-lg flex items-center gap-1.5">
-                🔍 Click to Enlarge Full Poster
-              </span>
+        <div class="news-featured-grid">
+          <div class="news-featured-img-col">
+            <div class="relative group cursor-pointer overflow-hidden rounded-2xl border-2 border-slate-200 hover:border-blue-900 shadow-md bg-slate-950 flex items-center justify-center p-2.5 transition-all duration-300" onclick="openNewsLightboxById('${item.id}')">
+              <div class="relative w-full aspect-[4/3] bg-slate-900 rounded-xl overflow-hidden flex items-center justify-center">
+                <img src="${item.image_url}" alt="${item.title}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                  <span class="bg-white/95 text-blue-900 font-extrabold px-4 py-2 rounded-xl text-xs shadow-lg flex items-center gap-1.5">
+                    🔍 Click to Enlarge Full Poster
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
+          <div class="news-featured-content-col flex flex-col justify-between space-y-4">
             <div>
-              <div class="flex items-center gap-2 mb-2">
+              <div class="flex items-center gap-2 mb-2 flex-wrap">
                 <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-red-600 text-white font-extrabold text-[10px] uppercase tracking-wider animate-pulse">
                   <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
                   LATEST BULLETIN
                 </span>
                 <span class="text-xs text-slate-500 font-bold">${pubDate}</span>
               </div>
-              <h3 class="text-lg sm:text-xl font-black text-slate-900 leading-snug font-heading mb-3">
+              <h3 class="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 leading-snug font-heading mb-2">
                 ${item.title}
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                ${item.caption || 'Official administrative circular briefing and instructions issued for Kerala State employees and school staff.'}
-              </p>
+              ${item.caption ? `
+                <p class="text-xs sm:text-sm font-semibold text-blue-900 leading-relaxed mb-3">
+                  ${item.caption}
+                </p>
+              ` : ''}
+
+              <!-- News Explanation Paragraph Section -->
+              <div class="p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 shadow-inner">
+                <div class="flex items-center gap-1.5 text-blue-900 font-extrabold text-xs uppercase tracking-wider mb-1.5">
+                  <svg class="w-4 h-4 text-blue-800 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <span>News Explanation & Guidelines</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal whitespace-pre-line">
+                  ${item.description || item.caption || 'Comprehensive government directives and guidelines have been issued to state offices and schools across the district.'}
+                </p>
+              </div>
             </div>
-            <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-3">
-              <button onclick="openNewsLightboxById('${item.id}')" class="gov-blue-btn px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2 shadow-sm">
+
+            <!-- Action Buttons -->
+            <div class="pt-4 border-t border-slate-200 flex flex-wrap items-center gap-2.5 sm:gap-3">
+              <button onclick="openNewsLightboxById('${item.id}')" class="gov-blue-btn px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm cursor-pointer hover:scale-105 transition">
                 <span>View High-Res Poster</span>
                 <span>🔍</span>
               </button>
-              <a href="${item.image_url}" download class="px-4 py-2 rounded-lg text-xs font-bold border border-slate-300 hover:bg-slate-50 text-slate-700 transition flex items-center gap-1.5">
+              <button onclick="sharePosterWhatsAppById('${item.id}')" class="bg-[#25D366] hover:bg-[#20ba59] text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm transition hover:scale-105 cursor-pointer">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                <span>Share WhatsApp</span>
+              </button>
+              <a href="${item.image_url}" download class="px-4 py-2.5 rounded-xl text-xs font-bold border border-slate-300 hover:bg-slate-50 text-slate-700 transition flex items-center gap-1.5 shadow-xs">
                 <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                <span>Download Poster</span>
+                <span>Download</span>
               </a>
             </div>
           </div>
@@ -325,7 +386,8 @@
       const filtered = allNewsList.filter(item => {
         return !query ||
           item.title.toLowerCase().includes(query) ||
-          (item.caption && item.caption.toLowerCase().includes(query));
+          (item.caption && item.caption.toLowerCase().includes(query)) ||
+          (item.description && item.description.toLowerCase().includes(query));
       });
 
       if (countEl) {
@@ -347,8 +409,8 @@
         const pubDate = item.published_date ? new Date(item.published_date).toLocaleDateString('en-GB') : '2026';
         return `
           <div class="bg-white rounded-xl border border-slate-200 shadow-xs hover:border-blue-900 hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col justify-between group">
-            <div class="relative cursor-pointer overflow-hidden bg-slate-100" onclick="openNewsLightboxById('${item.id}')">
-              <img src="${item.image_url}" alt="${item.title}" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300">
+            <div class="relative cursor-pointer overflow-hidden bg-slate-950 aspect-[4/3] flex items-center justify-center p-2 rounded-t-xl" onclick="openNewsLightboxById('${item.id}')">
+              <img src="${item.image_url}" alt="${item.title}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300">
               <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
                 <span class="bg-white text-blue-900 font-bold px-3 py-1.5 rounded-lg text-xs shadow-md">
                   🔍 Enlarge
@@ -361,26 +423,44 @@
               </div>
             </div>
 
-            <div class="p-5 flex-grow flex flex-col justify-between">
+            <div class="p-4 sm:p-5 flex-grow flex flex-col justify-between space-y-3">
               <div>
                 <span class="text-[11px] text-slate-400 font-bold block mb-1">Published: ${pubDate}</span>
-                <h4 class="text-sm font-black text-slate-900 leading-snug font-heading mb-2 group-hover:text-blue-900 transition-colors">
+                <h4 class="text-sm font-black text-slate-900 leading-snug font-heading mb-1.5 group-hover:text-blue-900 transition-colors">
                   ${item.title}
                 </h4>
-                <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
-                  ${item.caption || 'Official circular flyer issued for state employees and teachers.'}
-                </p>
+                ${item.caption ? `
+                  <p class="text-xs text-blue-950 font-medium line-clamp-1 mb-2">
+                    ${item.caption}
+                  </p>
+                ` : ''}
+
+                <!-- News Explanation Paragraph Section -->
+                <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-600">
+                  <span class="font-extrabold text-blue-900 block text-[10.5px] uppercase tracking-wide mb-0.5">
+                    Explanation & Details:
+                  </span>
+                  <p class="text-[11.5px] text-slate-600 line-clamp-2 leading-relaxed">
+                    ${item.description || item.caption || 'Official circular guidance issued for employees.'}
+                  </p>
+                </div>
               </div>
 
-              <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                <button onclick="openNewsLightboxById('${item.id}')" class="text-blue-900 hover:text-blue-700 font-extrabold inline-flex items-center gap-1">
+              <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2 text-xs">
+                <button onclick="openNewsLightboxById('${item.id}')" class="text-blue-900 hover:text-blue-700 font-extrabold inline-flex items-center gap-1 cursor-pointer">
                   <span>View Poster</span>
                   <span>&rarr;</span>
                 </button>
-                <a href="${item.image_url}" download class="text-slate-500 hover:text-slate-800 font-semibold inline-flex items-center gap-1 text-[11px]">
-                  <span>Save</span>
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                </a>
+                <div class="flex items-center gap-2">
+                  <button onclick="sharePosterWhatsAppById('${item.id}')" class="inline-flex items-center gap-1 text-[11px] font-bold text-[#1eb354] hover:text-[#169443] bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded transition cursor-pointer" title="Share on WhatsApp">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    <span>WhatsApp</span>
+                  </button>
+                  <a href="${item.image_url}" download class="text-slate-500 hover:text-slate-800 font-semibold inline-flex items-center gap-1 text-[11px] p-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    <span>Save</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -388,23 +468,46 @@
       }).join('');
     }
 
+    let currentLightboxPoster = null;
+
+    window.sharePosterWhatsAppById = function(id) {
+      const item = allNewsList.find(n => String(n.id) === String(id));
+      if (!item) return;
+      const pageUrl = window.location.origin + '/news';
+      const title = item.title || 'Official News Poster';
+      const caption = item.caption ? `*Highlight:* ${item.caption}\n\n` : '';
+      const descSnippet = item.description 
+        ? (item.description.length > 250 ? item.description.substring(0, 250) + '...' : item.description)
+        : '';
+      const descText = descSnippet ? `*Summary:*\n${descSnippet}\n\n` : '';
+      const message = `📢 *Employees Service, Kasaragod — Official Bulletin*\n\n📌 *${title}*\n\n${caption}${descText}🌐 View high-resolution poster & full circular details:\n${pageUrl}`;
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    };
+
     function openNewsLightboxById(id) {
       const item = allNewsList.find(n => String(n.id) === String(id));
       if (item) {
-        openNewsLightbox(item.image_url, item.title);
+        currentLightboxPoster = item;
+        openNewsLightbox(item);
       }
     }
 
-    function openNewsLightbox(imageUrl, title) {
+    function openNewsLightbox(item) {
       const modal = document.getElementById('news-lightbox-modal');
       const img = document.getElementById('lightbox-news-img');
       const titleEl = document.getElementById('lightbox-news-title');
       const downloadEl = document.getElementById('lightbox-news-download');
-      if (img) img.src = imageUrl;
-      if (titleEl) titleEl.textContent = title || 'Official News Poster';
+      const descEl = document.getElementById('lightbox-news-description');
+
+      if (img) img.src = item.image_url;
+      if (titleEl) titleEl.textContent = item.title || 'Official News Poster';
       if (downloadEl) {
-        downloadEl.href = imageUrl;
-        downloadEl.setAttribute('download', (title || 'news_poster').replace(/[^a-zA-Z0-9_-]/g, '_') + '.svg');
+        downloadEl.href = item.image_url;
+        downloadEl.setAttribute('download', (item.title || 'news_poster').replace(/[^a-zA-Z0-9_-]/g, '_') + '.svg');
+      }
+      if (descEl) {
+        descEl.textContent = item.description || item.caption || 'Official circular issued for employees and teachers in Kasaragod district.';
       }
       if (modal) {
         modal.classList.remove('hidden');
@@ -456,12 +559,16 @@
     <div id="modal-backdrop-area" class="w-full h-full flex items-center justify-center pointer-events-auto" onclick="if(event.target === this) closeNewsLightbox()">
       <div class="relative bg-slate-900 border border-slate-700/80 rounded-2xl w-fit max-w-[94vw] max-h-[92vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200" onclick="event.stopPropagation()">
         <!-- Modal Header -->
-        <div class="px-4 sm:px-6 py-3 border-b border-slate-800 flex items-center justify-between gap-4 bg-slate-950/95 shrink-0">
+        <div class="px-4 sm:px-6 py-3 border-b border-slate-800 flex items-center justify-between gap-3 bg-slate-950/95 shrink-0 flex-wrap">
           <div class="flex items-center gap-2.5 min-w-0 pr-2">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 animate-pulse"></span>
-            <span id="lightbox-news-title" class="font-bold text-white text-xs sm:text-sm truncate font-heading">Official News Poster</span>
+            <span id="lightbox-news-title" class="font-bold text-white text-xs sm:text-sm truncate font-heading max-w-xs sm:max-w-md">Official News Poster</span>
           </div>
           <div class="flex items-center gap-2 shrink-0">
+            <button onclick="if(currentLightboxPoster) sharePosterWhatsAppById(currentLightboxPoster.id)" class="px-3 py-1.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold rounded-lg text-xs inline-flex items-center gap-1.5 shadow-sm transition cursor-pointer">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              <span>WhatsApp</span>
+            </button>
             <a id="lightbox-news-download" href="#" download class="px-3.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold rounded-lg text-xs inline-flex items-center gap-1.5 shadow-sm transition">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
               <span>Download</span>
@@ -473,7 +580,15 @@
         </div>
         <!-- Modal Image View (Centered) -->
         <div class="p-2 sm:p-4 flex-1 overflow-auto flex items-center justify-center bg-slate-950/90 text-center">
-          <img id="lightbox-news-img" src="" alt="Full Resolution News Poster" class="max-h-[76vh] max-w-[88vw] w-auto h-auto object-contain rounded-lg shadow-2xl block mx-auto transition-transform duration-200">
+          <img id="lightbox-news-img" src="" alt="Full Resolution News Poster" class="max-h-[64vh] sm:max-h-[70vh] max-w-[88vw] w-auto h-auto object-contain rounded-lg shadow-2xl block mx-auto transition-transform duration-200">
+        </div>
+        <!-- Modal Footer Explanation Strip -->
+        <div id="lightbox-news-desc-box" class="px-4 sm:px-6 py-2.5 sm:py-3 bg-slate-950/95 border-t border-slate-800 text-slate-200 text-xs sm:text-sm max-w-4xl max-h-32 overflow-y-auto shrink-0 leading-relaxed">
+          <div class="flex items-center gap-1.5 font-bold text-amber-400 text-xs uppercase tracking-wide mb-1">
+            <span>📋</span>
+            <span>Explanation & Circular Guidance:</span>
+          </div>
+          <p id="lightbox-news-description" class="whitespace-pre-line text-slate-300 text-xs sm:text-xs leading-relaxed"></p>
         </div>
       </div>
     </div>
