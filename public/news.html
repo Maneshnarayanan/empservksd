@@ -13,49 +13,53 @@
 <body class="bg-[#f0f4f8] text-slate-800 min-h-screen flex flex-col font-sans antialiased">
 
   <!-- 1. Accessibility & National Portal Header Strip -->
-  <div class="gov-topbar text-white text-[11px] py-1 px-4 sm:px-6 lg:px-8 flex justify-between items-center z-50">
-    <div class="flex items-center space-x-3">
-      <span class="inline-flex items-center gap-1.5 font-medium text-slate-300">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-        Government of Kerala Employee Services Portal | Kasaragod District
-      </span>
-      <span class="hidden md:inline text-slate-400">|</span>
-      <span class="hidden md:inline font-bold text-amber-300">📞 Helpline: 9447396181</span>
-    </div>
-    <div class="flex items-center space-x-4">
-      <div class="flex items-center space-x-1 font-mono text-[10px] text-slate-300">
-        <button id="btn-font-dec" class="px-1.5 py-0.5 rounded hover:bg-white/10" title="Decrease font size">A-</button>
-        <button id="btn-font-reset" class="px-1.5 py-0.5 rounded hover:bg-white/10 font-bold" title="Default font size">A</button>
-        <button id="btn-font-inc" class="px-1.5 py-0.5 rounded hover:bg-white/10" title="Increase font size">A+</button>
+  <div class="gov-topbar text-white text-[11px] py-1.5 px-4 sm:px-6 lg:px-8 border-b border-slate-700/60 z-50">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-center sm:justify-start text-center sm:text-left">
+        <span class="inline-flex items-center gap-1.5 font-medium text-slate-300">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          Government of Kerala Employees Services | Kasaragod
+        </span>
+        <span class="hidden md:inline text-slate-400">•</span>
+        <a href="tel:9447396181" class="font-bold text-amber-300 hover:underline">📞 Helpline: 9447396181</a>
       </div>
-      <a href="mailto:esksd31@gmail.com" class="hover:text-amber-300 transition text-[11px] font-medium hidden sm:inline">✉️ esksd31@gmail.com</a>
-      <a href="https://wa.me/919447396181" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 transition">
-        WhatsApp Desk
-      </a>
+      <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
+        <div class="flex items-center gap-1 bg-slate-800/80 rounded px-1.5 py-0.5 border border-slate-700 text-[10px] font-bold">
+          <button id="btn-font-dec" class="px-1 text-slate-400 hover:text-white" title="Decrease font size">A-</button>
+          <button id="btn-font-reset" class="px-1 text-amber-400 hover:text-white" title="Default font size">A</button>
+          <button id="btn-font-inc" class="px-1 text-slate-400 hover:text-white" title="Increase font size">A+</button>
+        </div>
+        <a href="mailto:esksd31@gmail.com" class="text-slate-300 hover:text-white hidden sm:flex items-center gap-1 text-[11px]">
+          ✉️ esksd31@gmail.com
+        </a>
+        <a href="https://wa.me/919447396181" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2 py-0.5 rounded text-[10px] flex items-center gap-1 transition shadow-xs">
+          WhatsApp Desk
+        </a>
+      </div>
     </div>
   </div>
 
   <!-- 2. Official Portal Emblem & Title Banner -->
-  <header class="bg-white border-b border-slate-200 shadow-sm py-4 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-      <div class="flex items-center space-x-4 text-center md:text-left">
-        <div class="w-14 h-14 rounded-full bg-blue-900 text-amber-400 flex items-center justify-center font-bold text-2xl shadow-md border-2 border-amber-400/50 shrink-0">
+  <header class="bg-white border-b border-slate-200 shadow-sm py-3 sm:py-4 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+      <div class="flex items-center gap-3 sm:gap-4 text-center sm:text-left">
+        <a href="/" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-blue-900 text-amber-400 flex items-center justify-center font-bold text-xl sm:text-2xl shadow-md border-2 border-amber-400/50 shrink-0">
           🏛️
-        </div>
+        </a>
         <div>
-          <div class="flex items-center justify-center md:justify-start gap-2">
-            <span class="text-[11px] font-extrabold uppercase tracking-widest text-blue-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">KASARAGOD DISTRICT</span>
-            <span class="text-xs text-slate-500 font-semibold">Government Employee Portal</span>
+          <div class="flex items-center justify-center sm:justify-start gap-2">
+            <span class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-blue-900 bg-blue-50 px-1.5 sm:px-2 py-0.5 rounded border border-blue-200">KASARAGOD DISTRICT</span>
+            <span class="text-[10px] sm:text-xs text-slate-500 font-semibold">Government Employee Portal</span>
           </div>
-          <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight font-heading uppercase mt-0.5">
+          <a href="/" class="block text-lg sm:text-2xl font-black text-slate-900 tracking-tight font-heading uppercase mt-0.5">
             Employees Service <span class="text-blue-900">Kasaragod</span>
-          </h1>
-          <p class="text-xs text-slate-600 font-medium">Bank Road, Near Mallikarjuna Temple, Kasaragod, Kerala — 671121</p>
+          </a>
+          <p class="text-[11px] sm:text-xs text-slate-600 font-medium">Bank Road, Near Mallikarjuna Temple, Kasaragod, Kerala — 671121</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-3">
-        <div class="hidden sm:flex flex-col text-right">
+      <div class="hidden sm:flex items-center gap-3">
+        <div class="hidden lg:flex flex-col text-right">
           <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Employee Help Desk</span>
           <span class="text-sm font-black text-blue-900 font-mono">9447396181</span>
         </div>
@@ -82,13 +86,22 @@
 
         <div class="hidden md:flex items-center gap-2">
           <a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" rel="noopener noreferrer" class="text-amber-300 hover:text-amber-200 text-xs font-bold flex items-center gap-1 px-2.5 py-1 rounded bg-black/20 border border-amber-400/40">
-            <span>Direct SPARK &rarr;</span>
+            <span>SPARK Login &rarr;</span>
           </a>
         </div>
 
-        <button id="mobile-menu-btn" class="md:hidden p-1.5 rounded text-white hover:bg-white/10" aria-label="Toggle navigation">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-        </button>
+        <!-- Mobile Header Bar: Menu Button + SPARK Direct Action -->
+        <div class="flex md:hidden items-center justify-between w-full">
+          <button id="mobile-menu-btn" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-white hover:bg-white/10 border border-white/20 active:bg-white/20 transition shadow-xs" aria-label="Toggle navigation">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            <span class="text-xs font-bold uppercase tracking-wider">Menu</span>
+          </button>
+          
+          <a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-amber-300 hover:text-amber-200 text-xs font-bold px-3 py-1.5 rounded-lg bg-black/30 border border-amber-400/40 shadow-xs active:bg-black/50 transition">
+            <span>SPARK Login</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          </a>
+        </div>
       </div>
 
       <!-- Mobile dropdown menu -->
@@ -100,7 +113,16 @@
         <a href="/blogs" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Blogs & Web</a>
         <a href="/about" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">About Us</a>
         <a href="/contact" class="block px-3 py-2 rounded text-blue-100 hover:bg-white/10">Contact</a>
-        <a href="/admin/login" class="block px-3 py-2 rounded text-amber-300 hover:bg-white/10">Admin Portal</a>
+        <div class="pt-2 mt-2 border-t border-blue-800/60 flex flex-col gap-1.5 px-1">
+          <a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-3 py-2 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs shadow-xs">
+            <span>⚡ SPARK Direct Portal</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="/admin/login" class="flex items-center justify-between px-3 py-2 rounded-lg bg-slate-800 text-amber-300 font-bold text-xs border border-amber-400/30">
+            <span>🔐 Admin Login</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
       </div>
     </div>
   </nav>

@@ -6,6 +6,15 @@ if (!fs.existsSync(postersDir)) {
   fs.mkdirSync(postersDir, { recursive: true });
 }
 
+function escapeXml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 function makePosterSvg(theme) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
   <defs>
@@ -47,19 +56,19 @@ function makePosterSvg(theme) {
 
   <!-- Release Tag on Right -->
   <rect x="960" y="70" width="180" height="40" rx="20" fill="${theme.accentBadgeBg}" />
-  <text x="1050" y="96" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="900" letter-spacing="1.5" text-anchor="middle" fill="${theme.accentBadgeText}">${theme.badge}</text>
+  <text x="1050" y="96" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="900" letter-spacing="1.5" text-anchor="middle" fill="${theme.accentBadgeText}">${escapeXml(theme.badge)}</text>
 
   <!-- Main Body Content -->
   <!-- Category Pill -->
   <rect x="70" y="220" width="${theme.categoryWidth}" height="32" rx="16" fill="${theme.catBg}" stroke="${theme.catBorder}" stroke-width="1.5" />
-  <text x="${70 + theme.categoryWidth/2}" y="242" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="${theme.catText}">${theme.category}</text>
+  <text x="${70 + theme.categoryWidth/2}" y="242" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="${theme.catText}">${escapeXml(theme.category)}</text>
 
   <!-- Published Date -->
-  <text x="1120" y="242" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" text-anchor="end" fill="#64748B">📅 ${theme.date}</text>
+  <text x="1120" y="242" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" text-anchor="end" fill="#64748B">📅 ${escapeXml(theme.date)}</text>
 
   <!-- Main Headline Title -->
-  <text x="70" y="295" font-family="'Segoe UI', Roboto, sans-serif" font-size="30" font-weight="900" fill="#0F172A">${theme.titleLine1}</text>
-  <text x="70" y="340" font-family="'Segoe UI', Roboto, sans-serif" font-size="30" font-weight="900" fill="${theme.primaryDark}">${theme.titleLine2}</text>
+  <text x="70" y="295" font-family="'Segoe UI', Roboto, sans-serif" font-size="30" font-weight="900" fill="#0F172A">${escapeXml(theme.titleLine1)}</text>
+  <text x="70" y="340" font-family="'Segoe UI', Roboto, sans-serif" font-size="30" font-weight="900" fill="${theme.primaryDark}">${escapeXml(theme.titleLine2)}</text>
 
   <!-- Divider -->
   <line x1="70" y1="375" x2="1130" y2="375" stroke="#E2E8F0" stroke-width="2" />
@@ -69,28 +78,28 @@ function makePosterSvg(theme) {
   <rect x="70" y="405" width="330" height="210" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
   <rect x="90" y="425" width="38" height="38" rx="8" fill="${theme.card1Bg}" />
   <text x="109" y="450" font-family="'Segoe UI', Roboto, sans-serif" font-size="20" text-anchor="middle" fill="${theme.primaryDark}">📌</text>
-  <text x="140" y="450" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" fill="#0F172A">${theme.card1Title}</text>
-  <text x="90" y="495" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${theme.card1Text1}</text>
-  <text x="90" y="525" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${theme.card1Text2}</text>
-  <text x="90" y="555" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${theme.card1Text3}</text>
+  <text x="140" y="450" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" fill="#0F172A">${escapeXml(theme.card1Title)}</text>
+  <text x="90" y="495" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${escapeXml(theme.card1Text1)}</text>
+  <text x="90" y="525" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${escapeXml(theme.card1Text2)}</text>
+  <text x="90" y="555" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${escapeXml(theme.card1Text3)}</text>
 
   <!-- Card 2 -->
   <rect x="435" y="405" width="330" height="210" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
   <rect x="455" y="425" width="38" height="38" rx="8" fill="${theme.card2Bg}" />
   <text x="474" y="450" font-family="'Segoe UI', Roboto, sans-serif" font-size="20" text-anchor="middle" fill="${theme.primaryDark}">⚙️</text>
-  <text x="505" y="450" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" fill="#0F172A">${theme.card2Title}</text>
-  <text x="455" y="495" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${theme.card2Text1}</text>
-  <text x="455" y="525" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${theme.card2Text2}</text>
-  <text x="455" y="555" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${theme.card2Text3}</text>
+  <text x="505" y="450" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" fill="#0F172A">${escapeXml(theme.card2Title)}</text>
+  <text x="455" y="495" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${escapeXml(theme.card2Text1)}</text>
+  <text x="455" y="525" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${escapeXml(theme.card2Text2)}</text>
+  <text x="455" y="555" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${escapeXml(theme.card2Text3)}</text>
 
   <!-- Card 3 -->
   <rect x="800" y="405" width="330" height="210" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
   <rect x="820" y="425" width="38" height="38" rx="8" fill="${theme.card3Bg}" />
   <text x="839" y="450" font-family="'Segoe UI', Roboto, sans-serif" font-size="20" text-anchor="middle" fill="${theme.primaryDark}">📞</text>
-  <text x="870" y="450" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" fill="#0F172A">${theme.card3Title}</text>
-  <text x="820" y="495" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${theme.card3Text1}</text>
-  <text x="820" y="525" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${theme.card3Text2}</text>
-  <text x="820" y="555" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${theme.card3Text3}</text>
+  <text x="870" y="450" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" fill="#0F172A">${escapeXml(theme.card3Title)}</text>
+  <text x="820" y="495" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${escapeXml(theme.card3Text1)}</text>
+  <text x="820" y="525" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${escapeXml(theme.card3Text2)}</text>
+  <text x="820" y="555" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#475569">${escapeXml(theme.card3Text3)}</text>
 
   <!-- Official Footer Band -->
   <rect x="24" y="650" width="1152" height="126" rx="0" fill="#0F172A" />
