@@ -50,8 +50,8 @@ function makePosterSvg(theme) {
   <text x="100" y="112" font-family="'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="900" text-anchor="middle" fill="${theme.primaryDark}">🏛️</text>
 
   <!-- Header text -->
-  <text x="170" y="80" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" letter-spacing="3" fill="#FDE68A">GOVERNMENT OF KERALA — EMPLOYEES SERVICE RESOURCE HUB</text>
-  <text x="170" y="115" font-family="'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="900" fill="#FFFFFF">EMPLOYEES SERVICE, KASARAGOD</text>
+  <text x="170" y="80" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" letter-spacing="3" fill="#FDE68A">GOVERNMENT OF KERALA — EMPLOYEES SERVICES RESOURCE HUB</text>
+  <text x="170" y="115" font-family="'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="900" fill="#FFFFFF">EMPLOYEES SERVICES, KASARAGOD</text>
   <text x="170" y="142" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#E2E8F0">Special Administrative News Bulletin &amp; Circular Poster</text>
 
   <!-- Release Tag on Right -->
@@ -105,7 +105,7 @@ function makePosterSvg(theme) {
   <rect x="24" y="650" width="1152" height="126" rx="0" fill="#0F172A" />
   <rect x="24" y="650" width="1152" height="4" fill="url(#goldGrad-${theme.id})" />
   
-  <text x="70" y="695" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#FBBF24">EMPLOYEES SERVICE KASARAGOD — RESOURCE DIRECTORY</text>
+  <text x="70" y="695" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#FBBF24">EMPLOYEES SERVICES KASARAGOD — RESOURCE DIRECTORY</text>
   <text x="70" y="725" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500" fill="#94A3B8">Nodal Office: Bank Road, Near Mallikarjuna Temple, Kasaragod — 671121 | Email: esksd31@gmail.com</text>
   <text x="70" y="750" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500" fill="#94A3B8">Helpline Number: 9447396181 (WhatsApp Desk) | Portal: https://employeeserviceksd.gov.in</text>
 

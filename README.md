@@ -1,6 +1,6 @@
-# employeeserviceksd.com — Employee Services & Community Blog Portal
+# employeeserviceksd.com — Employees Services & Community Blog Portal
 
-Production-ready web application for **Employees Service, Kasaragod**, built to provide Kerala state government employees with a unified, lightweight, secure, and accessible directory of government portals, downloadable administrative resources, and community blog articles.
+Production-ready web application for **Employees Services, Kasaragod**, built to provide Kerala state government employees with a unified, lightweight, secure, and accessible directory of government portals, downloadable administrative resources, and community blog articles.
 
 ---
 
@@ -232,11 +232,11 @@ Section 6 requires:
 
 ### Public Pages
 - `/` — Homepage with hero banner, service shortcuts, downloads CTA, and community blog highlights.
-- `/services` — Complete employee service directory with live search and category filtering.
+- `/services` — Complete Employees Services directory with live search and category filtering.
 - `/downloads` — Downloadable administrative orders, circulars, and forms.
 - `/blogs` — Internal community blog articles with keyword search, category filter, and pagination.
 - `/blogs/:slug` — Full article view with author, publication date, and formatted content.
-- `/about` — About Employees Service, Kasaragod.
+- `/about` — About Employees Services, Kasaragod.
 - `/contact` — Office address, email link, telephone link, and WhatsApp helpline.
 - `/privacy-policy` — Data protection and privacy policy.
 
@@ -381,4 +381,4 @@ Add to crontab (`crontab -e`):
 ---
 
 ## 10. License & Copyright
-Developed for **Employees Service, Kasaragod**. All rights reserved.
+Developed for **Employees Services, Kasaragod**. All rights reserved.

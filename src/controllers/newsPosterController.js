@@ -15,6 +15,19 @@ async function getPublicNews(req, res, next) {
   }
 }
 
+async function getHomeNews(req, res, next) {
+  try {
+    const posters = await newsRepo.getHomePosters({ limit: 3 });
+    const formatted = posters.map(p => ({
+      ...p,
+      image_url: `/storage/news-posters/${p.image_filename}`,
+    }));
+    return res.json({ success: true, data: formatted });
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function getLatestNews(req, res, next) {
   try {
     const latest = await newsRepo.getLatest();
@@ -67,7 +80,7 @@ async function getNewsById(req, res, next) {
 
 async function createNews(req, res, next) {
   try {
-    const { title, caption, description, display_order, is_active, published_date } = req.body;
+    const { title, caption, description, display_order, is_active, is_home_published, published_date } = req.body;
 
     if (!title || !title.trim()) {
       if (req.file) deleteStoredFile('news-poster', req.file.filename);
@@ -78,14 +91,28 @@ async function createNews(req, res, next) {
       return res.status(400).json({ success: false, message: 'News poster image file is required.' });
     }
 
+    const isHome = is_home_published !== undefined ? String(is_home_published) === 'true' : false;
+
+    if (isHome) {
+      const homeCount = await newsRepo.countHomePublished();
+      if (homeCount >= 3) {
+        if (req.file) deleteStoredFile('news-poster', req.file.filename);
+        return res.status(400).json({
+          success: false,
+          message: 'Maximum 3 news posters can be published on the Home Page at a time. Please uncheck another poster first.',
+        });
+      }
+    }
+
     const created = await newsRepo.create({
       title: title.trim(),
       caption: caption ? caption.trim() : null,
       description: description ? description.trim() : null,
       image_filename: req.file.filename,
       original_filename: req.file.originalname,
-      display_order: parseInt(display_order || 0, 10),
+      display_order: isHome ? parseInt(display_order || 1, 10) : 0,
       is_active: is_active !== undefined ? String(is_active) === 'true' : true,
+      is_home_published: isHome,
       published_date: published_date || null,
     });
 
@@ -112,7 +139,20 @@ async function updateNews(req, res, next) {
       return res.status(404).json({ success: false, message: 'News poster not found.' });
     }
 
-    const { title, caption, description, display_order, is_active, published_date } = req.body;
+    const { title, caption, description, display_order, is_active, is_home_published, published_date } = req.body;
+
+    const willBeHome = is_home_published !== undefined ? String(is_home_published) === 'true' : existing.is_home_published;
+
+    if (willBeHome && !existing.is_home_published) {
+      const homeCount = await newsRepo.countHomePublished(id);
+      if (homeCount >= 3) {
+        if (req.file) deleteStoredFile('news-poster', req.file.filename);
+        return res.status(400).json({
+          success: false,
+          message: 'Maximum 3 news posters can be published on the Home Page at a time. Please uncheck another poster first.',
+        });
+      }
+    }
 
     let image_filename = existing.image_filename;
     let original_filename = existing.original_filename;
@@ -120,7 +160,6 @@ async function updateNews(req, res, next) {
     if (req.file) {
       image_filename = req.file.filename;
       original_filename = req.file.originalname;
-      // Delete old file
       deleteStoredFile('news-poster', existing.image_filename);
     }
 
@@ -130,8 +169,9 @@ async function updateNews(req, res, next) {
       description: description !== undefined ? (description ? description.trim() : null) : existing.description,
       image_filename,
       original_filename,
-      display_order: display_order !== undefined ? parseInt(display_order, 10) : existing.display_order,
+      display_order: willBeHome ? (display_order !== undefined ? parseInt(display_order, 10) : existing.display_order || 1) : 0,
       is_active: is_active !== undefined ? String(is_active) === 'true' : existing.is_active,
+      is_home_published: willBeHome,
       published_date: published_date || existing.published_date,
     });
 
@@ -171,6 +211,7 @@ async function deleteNews(req, res, next) {
 
 module.exports = {
   getPublicNews,
+  getHomeNews,
   getLatestNews,
   getAllNews,
   getNewsById,

@@ -83,8 +83,8 @@ The following contact details from `WEB DESIGN.xlsx` were verified and seeded in
 
 | Key | Seeded Value | Presentation on Site |
 |-----|--------------|----------------------|
-| Organization Name | `EMPLOYEES SERVICE, KASARAGOD` | Header logo text, footer, page titles |
-| Tagline | `Employee Services & Community Resource Portal for Kerala State Employees` | Hero banner and meta description |
+| Organization Name | `EMPLOYEES SERVICES, KASARAGOD` | Header logo text, footer, page titles |
+| Tagline | `Employees Services & Community Resource Portal for Kerala State Employees` | Hero banner and meta description |
 | Address | `BANK ROAD, NEAR MALLIKARJUNA TEMPLE, KASARGOD` | Contact page, footer |
 | Email | `esksd31@gmail.com` | Clickable `mailto:` link in header, contact page, and footer |
 | Telephone | `9447396181` | Clickable `tel:+919447396181` link |

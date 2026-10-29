@@ -20,10 +20,9 @@ CREATE INDEX IF NOT EXISTS idx_news_posters_order ON news_posters(display_order 
 
 -- Seed initial official news posters
 INSERT INTO news_posters (
-    id, title, caption, image_filename, original_filename, display_order, is_active, published_date
+    title, caption, image_filename, original_filename, display_order, is_active, published_date
 ) VALUES
 (
-    1,
     'Dearness Allowance (DA) Rate Hike & Arrears Settlement Schedule Announced for Kerala Staff',
     'Official circular briefing on the sanctioned DA hike, establishment bill processing on SPARK/BIMS, and special helpdesk guidance for Kasaragod district employees and school teachers.',
     'news_poster_da_arrears_2026.svg',
@@ -33,7 +32,6 @@ INSERT INTO news_posters (
     '2026-10-26'
 ),
 (
-    2,
     'MEDISEP Phase II Empanelled Hospital Network & Cashless Claim Pre-Authorization Guidelines',
     'Comprehensive update on cashless claims across 18 empanelled hospitals in Kasaragod & Mangalore with QR Medi-Card issuance guidelines.',
     'news_poster_medisep_camp_2026.svg',
@@ -43,7 +41,6 @@ INSERT INTO news_posters (
     '2026-10-25'
 ),
 (
-    3,
     'Annual Property Return (APR) 2026 Submission: Mandatory Electronic Filing on SPARK Portal',
     'Strict compliance advisory for Drawing and Disbursing Officers (DDOs) and establishment staff to submit and countersign APR declarations on SPARK.',
     'news_poster_spark_apr_2026.svg',
@@ -51,12 +48,5 @@ INSERT INTO news_posters (
     3,
     true,
     '2026-10-24'
-)
-ON CONFLICT (id) DO UPDATE SET
-    title = EXCLUDED.title,
-    caption = EXCLUDED.caption,
-    image_filename = EXCLUDED.image_filename,
-    original_filename = EXCLUDED.original_filename,
-    display_order = EXCLUDED.display_order,
-    is_active = EXCLUDED.is_active,
-    published_date = EXCLUDED.published_date;
+);
+

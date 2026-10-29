@@ -259,7 +259,7 @@
             <li><a href="/downloads" class="hover:text-white transition">Government Order Downloads</a></li>
             <li><a href="/news" class="text-amber-300 font-bold hover:underline">News Posters & Bulletins</a></li>
             <li><a href="/blogs" class="hover:text-white transition">Community Blogs (HM, Muttam, Maths)</a></li>
-            <li><a href="/about" class="hover:text-white transition">About Employees Service</a></li>
+            <li><a href="/about" class="hover:text-white transition">About Employees Services</a></li>
             <li><a href="/contact" class="hover:text-white transition">Contact & Office Location</a></li>
           </ul>
         </div>
@@ -470,17 +470,43 @@
 
     let currentLightboxPoster = null;
 
-    window.sharePosterWhatsAppById = function(id) {
+    window.sharePosterWhatsAppById = async function(id) {
       const item = allNewsList.find(n => String(n.id) === String(id));
       if (!item) return;
       const pageUrl = window.location.origin + '/news';
+      const imgUrl = item.image_url ? (item.image_url.startsWith('http') ? item.image_url : window.location.origin + item.image_url) : '';
       const title = item.title || 'Official News Poster';
       const caption = item.caption ? `*Highlight:* ${item.caption}\n\n` : '';
       const descSnippet = item.description 
         ? (item.description.length > 250 ? item.description.substring(0, 250) + '...' : item.description)
         : '';
       const descText = descSnippet ? `*Summary:*\n${descSnippet}\n\n` : '';
-      const message = `📢 *Employees Service, Kasaragod — Official Bulletin*\n\n📌 *${title}*\n\n${caption}${descText}🌐 View high-resolution poster & full circular details:\n${pageUrl}`;
+      const message = `📢 *Employees Services, Kasaragod — Official Bulletin*\n\n📌 *${title}*\n\n${caption}${descText}🖼️ *View Full Poster Image:*\n${imgUrl}\n\n🌐 *Official News & Circular Portal:*\n${pageUrl}`;
+
+      // 1. Try Native Web Share API (Mobile / Smartphones) to send the ACTUAL image file directly to WhatsApp
+      if (navigator.share && navigator.canShare && item.image_url) {
+        try {
+          const response = await fetch(item.image_url);
+          const blob = await response.blob();
+          const ext = blob.type === 'image/svg+xml' ? '.svg' : (blob.type === 'image/jpeg' ? '.jpg' : '.png');
+          const safeName = (item.title || 'news_poster').replace(/[^a-zA-Z0-9_-]/g, '_') + ext;
+          const file = new File([blob], safeName, { type: blob.type || 'image/png' });
+
+          if (navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              files: [file],
+              title: `Employees Services - ${title}`,
+              text: message,
+            });
+            return;
+          }
+        } catch (shareErr) {
+          if (shareErr.name === 'AbortError') return; // User closed share sheet
+          console.warn('Native file share failed, falling back to WhatsApp link:', shareErr);
+        }
+      }
+
+      // 2. Fallback: Open WhatsApp with message text and direct image link for rich media preview
       const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank');
     };

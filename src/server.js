@@ -27,7 +27,7 @@ async function startServer() {
     const app = require('./app');
 
     server = app.listen(PORT, () => {
-      logger.info(`Employees Service Kasaragod portal running at http://localhost:${PORT}`);
+      logger.info(`Employees Services Kasaragod portal running at http://localhost:${PORT}`);
       logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
     });
   } catch (err) {

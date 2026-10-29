@@ -41,7 +41,7 @@ describe('Database Connectivity and Migrations', () => {
     const map = {};
     res.rows.forEach(r => map[r.key] = r.value);
 
-    expect(map.site_title).toBe('EMPLOYEES SERVICE, KASARAGOD');
+    expect(map.site_title).toBe('EMPLOYEES SERVICES, KASARAGOD');
     expect(map.site_address).toBe('BANK ROAD, NEAR MALLIKARJUNA TEMPLE, KASARGOD');
     expect(map.contact_email).toBe('esksd31@gmail.com');
     expect(map.contact_mobile).toBe('9447396181');

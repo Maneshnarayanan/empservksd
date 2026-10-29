@@ -11,8 +11,8 @@ async function getPublicSettings(req, res, next) {
     return res.json({
       success: true,
       data: {
-        site_title: map.site_title || 'EMPLOYEES SERVICE, KASARAGOD',
-        site_tagline: map.site_tagline || 'Employee Services & Community Resource Portal',
+        site_title: map.site_title || 'EMPLOYEES SERVICES, KASARAGOD',
+        site_tagline: map.site_tagline || 'Employees Services & Community Resource Portal',
         site_address: map.site_address || 'BANK ROAD, NEAR MALLIKARJUNA TEMPLE, KASARGOD',
         contact_email: map.contact_email || 'esksd31@gmail.com',
         contact_mobile: map.contact_mobile || '9447396181',

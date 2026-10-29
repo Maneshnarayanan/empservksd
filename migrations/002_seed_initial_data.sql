@@ -84,8 +84,8 @@ INSERT INTO blog_categories (name, slug, description, display_order) VALUES
 
 -- 4. Insert Website Settings verified from WEB DESIGN.xlsx
 INSERT INTO website_settings (key, value, description) VALUES
-('site_title', 'EMPLOYEES SERVICE, KASARAGOD', 'Organization and website display name'),
-('site_tagline', 'Employee Services & Community Resource Portal for Kerala State Employees', 'Portal subtitle and tagline'),
+('site_title', 'EMPLOYEES SERVICES, KASARAGOD', 'Organization and website display name'),
+('site_tagline', 'Employees Services & Community Resource Portal for Kerala State Employees', 'Portal subtitle and tagline'),
 ('site_address', 'BANK ROAD, NEAR MALLIKARJUNA TEMPLE, KASARGOD', 'Physical office address'),
 ('contact_email', 'esksd31@gmail.com', 'Primary contact email address'),
 ('contact_mobile', '9447396181', 'Primary phone contact number'),

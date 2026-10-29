@@ -204,7 +204,7 @@
             <li><a href="/services" class="hover:text-white transition">Services Directory (33 Portals)</a></li>
             <li><a href="/downloads" class="hover:text-white transition">Government Order Downloads</a></li>
             <li><a href="/blogs" class="hover:text-white transition">Community Blogs (HM, Muttam, Maths)</a></li>
-            <li><a href="/about" class="hover:text-white transition">About Employees Service</a></li>
+            <li><a href="/about" class="hover:text-white transition">About Employees Services</a></li>
             <li><a href="/contact" class="hover:text-white transition">Contact & Office Location</a></li>
           </ul>
         </div>
@@ -259,13 +259,13 @@
 
         const art = data.data;
 
-        document.title = `${art.title} — Employees Service, Kasaragod`;
+        document.title = `${art.title} — Employees Services, Kasaragod`;
         const metaDesc = document.getElementById('meta-desc');
         if (metaDesc && art.summary) metaDesc.setAttribute('content', art.summary);
         document.getElementById('breadcrumb-category').textContent = art.category_name;
 
         const shareUrl = encodeURIComponent(window.location.href);
-        const shareText = encodeURIComponent(`${art.title} - Official Kerala Employee Guidance via Employees Service Kasaragod`);
+        const shareText = encodeURIComponent(`${art.title} - Official Kerala Employee Guidance via Employees Services Kasaragod`);
 
         wrapper.innerHTML = `
           <article class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-10 shadow-sm">
@@ -305,7 +305,7 @@
                   </div>
                   <div>
                     <span class="font-extrabold text-slate-900 text-xs sm:text-sm block">${art.author_name}</span>
-                    <span class="text-slate-500 text-[11px]">Employees Service Kasaragod Verified Desk</span>
+                    <span class="text-slate-500 text-[11px]">Employees Services Kasaragod Verified Desk</span>
                   </div>
                 </div>
 
@@ -330,7 +330,7 @@
             <div class="mt-10 bg-blue-50 border border-blue-200 rounded-xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
                 <h4 class="font-extrabold text-blue-950 text-xs uppercase tracking-wide">Have questions about this article or rule?</h4>
-                <p class="text-xs text-blue-800 mt-0.5">Contact the Employees Service Help Desk via WhatsApp for rapid clarification.</p>
+                <p class="text-xs text-blue-800 mt-0.5">Contact the Employees Services Help Desk via WhatsApp for rapid clarification.</p>
               </div>
               <a href="https://wa.me/919447396181" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-lg text-xs shrink-0 shadow-xs transition">
                 WhatsApp 9447396181
@@ -341,7 +341,7 @@
               <a href="/blogs" class="text-blue-900 hover:underline font-bold flex items-center gap-1">
                 &larr; Back to all community articles
               </a>
-              <span class="text-slate-400 font-medium">Employees Service, Kasaragod</span>
+              <span class="text-slate-400 font-medium">Employees Services, Kasaragod</span>
             </footer>
           </article>
         `;
