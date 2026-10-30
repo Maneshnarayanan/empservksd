@@ -440,9 +440,13 @@
             <span id="home-poster-counter-badge" class="bg-amber-400 text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-full shadow-xs">
               1 of 3
             </span>
+            <span id="home-slideshow-indicator" class="text-[10px] text-amber-200/90 font-mono flex items-center gap-1.5 bg-slate-900/90 px-2 py-0.5 rounded-md border border-slate-700/70" title="Auto-slideshow active (pauses on mouse hover)">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Auto Slideshow</span>
+            </span>
           </div>
 
-          <!-- Poster Selector Tabs & Prev/Next Arrows -->
+          <!-- Poster Selector Tabs & Prev/Play/Next Controls -->
           <div class="flex items-center gap-2">
             <div id="home-poster-pills" class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-700/80">
               <!-- Dynamically populated buttons -->
@@ -451,10 +455,18 @@
               <button onclick="prevHomePoster()" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white flex items-center justify-center text-xs transition cursor-pointer" title="Previous Poster">
                 &larr;
               </button>
+              <button id="home-slideshow-toggle-btn" onclick="toggleHomeSlideshow()" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white flex items-center justify-center text-xs transition cursor-pointer" title="Pause / Resume Slideshow">
+                ⏸
+              </button>
               <button onclick="nextHomePoster()" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white flex items-center justify-center text-xs transition cursor-pointer" title="Next Poster">
                 &rarr;
               </button>
             </div>
+          </div>
+
+          <!-- Slim Progress Line across the switcher -->
+          <div class="w-full bg-slate-850/80 h-1 rounded-full overflow-hidden mt-1 bg-slate-800">
+            <div id="home-slideshow-progress" class="bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 h-full rounded-full transition-all duration-500" style="width: 33.33%;"></div>
           </div>
         </div>
 
@@ -467,7 +479,7 @@
                 <div class="relative group cursor-pointer bg-slate-950 p-2 sm:p-2.5 rounded-[13px] border border-slate-700/80 shadow-2xl overflow-hidden" onclick="openHomePosterLightbox()">
                   <!-- Image Container with Light Sweep Animation -->
                   <div class="relative overflow-hidden rounded-lg aspect-[3/4] bg-slate-950 flex items-center justify-center poster-light-sweep">
-                    <img id="home-poster-img" src="/storage/news-posters/news_poster_da_arrears_2026.svg" alt="Latest News Poster" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" />
+                    <img id="home-poster-img" src="/storage/news-posters/news_poster_da_arrears_2026.svg" alt="Latest News Poster" class="w-full h-full object-contain group-hover:scale-105 transition-all duration-500 ease-in-out" />
                     
                     <!-- Corner Ribbon Stamp -->
                     <div class="absolute top-2.5 right-2.5 bg-black/75 backdrop-blur-md border border-amber-400/60 text-amber-300 font-black text-[9px] uppercase px-2 py-0.5 rounded shadow-md tracking-wider flex items-center gap-1">
@@ -1454,6 +1466,9 @@
 
       window.openHomePosterLightbox = function() {
         if (!window.currentPosterData) return;
+        if (typeof window.stopHomeSlideshow === 'function') {
+          window.stopHomeSlideshow();
+        }
         const modal = document.getElementById('home-poster-modal');
         const modalImg = document.getElementById('home-modal-img');
         const modalTitle = document.getElementById('home-modal-title');
@@ -1476,6 +1491,9 @@
           modal.classList.add('hidden');
           document.body.style.overflow = '';
         }
+        if (!window.isSlideshowPaused && window.homePosters && window.homePosters.length > 1) {
+          window.startHomeSlideshow();
+        }
       };
       window.closeModal = window.closeHomePosterLightbox;
 
@@ -1484,11 +1502,68 @@
         if (e.key === 'Escape') closeHomePosterLightbox();
       });
 
-      // State for Home Page Showcase Posters (Max 3)
+      // State for Home Page Showcase Posters & Auto Slideshow (Max 3)
       window.homePosters = [];
       window.activeHomePosterIdx = 0;
+      window.homeSlideshowTimer = null;
+      window.isSlideshowPaused = false;
+      const SLIDESHOW_INTERVAL_MS = 6000; // 6 seconds per poster slide
 
-      window.renderHomePoster = function(index) {
+      window.startHomeSlideshow = function() {
+        if (!window.homePosters || window.homePosters.length <= 1) return;
+        window.stopHomeSlideshow();
+        if (window.isSlideshowPaused) return;
+
+        window.homeSlideshowTimer = setInterval(() => {
+          if (!window.isSlideshowPaused && window.homePosters.length > 1) {
+            const nextIdx = (window.activeHomePosterIdx + 1) % window.homePosters.length;
+            window.renderHomePoster(nextIdx, false); // false = auto triggered
+          }
+        }, SLIDESHOW_INTERVAL_MS);
+        updateSlideshowUI();
+      };
+
+      window.stopHomeSlideshow = function() {
+        if (window.homeSlideshowTimer) {
+          clearInterval(window.homeSlideshowTimer);
+          window.homeSlideshowTimer = null;
+        }
+      };
+
+      window.restartHomeSlideshow = function() {
+        window.stopHomeSlideshow();
+        if (!window.isSlideshowPaused && window.homePosters.length > 1) {
+          window.startHomeSlideshow();
+        }
+      };
+
+      window.toggleHomeSlideshow = function() {
+        window.isSlideshowPaused = !window.isSlideshowPaused;
+        if (window.isSlideshowPaused) {
+          window.stopHomeSlideshow();
+        } else {
+          window.startHomeSlideshow();
+        }
+        updateSlideshowUI();
+      };
+
+      function updateSlideshowUI() {
+        const toggleBtn = document.getElementById('home-slideshow-toggle-btn');
+        const indicator = document.getElementById('home-slideshow-indicator');
+        if (toggleBtn) {
+          toggleBtn.innerHTML = window.isSlideshowPaused ? '▶' : '⏸';
+          toggleBtn.title = window.isSlideshowPaused ? 'Resume Auto Slideshow' : 'Pause Auto Slideshow';
+        }
+        if (indicator) {
+          if (window.isSlideshowPaused) {
+            indicator.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span><span>Paused</span>';
+          } else {
+            indicator.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span><span>Auto Slideshow</span>';
+          }
+        }
+      }
+
+      window.renderHomePoster = function(index, isUserAction = true) {
         if (!window.homePosters || !window.homePosters[index]) return;
         window.activeHomePosterIdx = index;
         const poster = window.homePosters[index];
@@ -1504,6 +1579,7 @@
         const posterCategory = document.getElementById('home-poster-category');
         const downloadBtn = document.getElementById('home-poster-download-btn');
         const counterBadge = document.getElementById('home-poster-counter-badge');
+        const progressBar = document.getElementById('home-slideshow-progress');
 
         const heroPosterTitle = document.getElementById('hero-poster-title');
         const pointerTitle = document.getElementById('poster-pointing-title');
@@ -1511,8 +1587,12 @@
         const toastPosterDesc = document.getElementById('toast-poster-desc');
 
         if (posterImg) {
-          posterImg.src = poster.image_url;
-          posterImg.alt = poster.title;
+          posterImg.classList.add('opacity-40');
+          setTimeout(() => {
+            posterImg.src = poster.image_url;
+            posterImg.alt = poster.title;
+            posterImg.classList.remove('opacity-40');
+          }, 150);
         }
         if (posterTitle) posterTitle.textContent = poster.title;
         if (heroPosterTitle) heroPosterTitle.textContent = poster.title;
@@ -1537,6 +1617,10 @@
         if (counterBadge) {
           counterBadge.textContent = `${index + 1} of ${window.homePosters.length}`;
         }
+        if (progressBar && window.homePosters.length > 0) {
+          const progressPct = ((index + 1) / window.homePosters.length) * 100;
+          progressBar.style.width = `${progressPct}%`;
+        }
 
         // Update pills active styling
         window.homePosters.forEach((_, i) => {
@@ -1549,25 +1633,49 @@
             }
           }
         });
+
+        // Reset auto slideshow timer on manual user interaction
+        if (isUserAction && !window.isSlideshowPaused && window.homePosters.length > 1) {
+          window.restartHomeSlideshow();
+        }
       };
 
       window.prevHomePoster = function() {
         if (window.homePosters.length > 1) {
           const newIdx = (window.activeHomePosterIdx - 1 + window.homePosters.length) % window.homePosters.length;
-          window.renderHomePoster(newIdx);
+          window.renderHomePoster(newIdx, true);
         }
       };
 
       window.nextHomePoster = function() {
         if (window.homePosters.length > 1) {
           const newIdx = (window.activeHomePosterIdx + 1) % window.homePosters.length;
-          window.renderHomePoster(newIdx);
+          window.renderHomePoster(newIdx, true);
         }
       };
 
       window.setActiveHomePoster = function(idx) {
-        window.renderHomePoster(idx);
+        window.renderHomePoster(idx, true);
       };
+
+      // Pause slideshow on mouse hover over poster card container so visitors can read without rush
+      const homeNewsContainer = document.getElementById('home-news-container');
+      if (homeNewsContainer) {
+        homeNewsContainer.addEventListener('mouseenter', () => {
+          if (!window.isSlideshowPaused && window.homePosters && window.homePosters.length > 1) {
+            window.stopHomeSlideshow();
+            const indicator = document.getElementById('home-slideshow-indicator');
+            if (indicator) {
+              indicator.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span><span>Hover Paused</span>';
+            }
+          }
+        });
+        homeNewsContainer.addEventListener('mouseleave', () => {
+          if (!window.isSlideshowPaused && window.homePosters && window.homePosters.length > 1) {
+            window.startHomeSlideshow();
+          }
+        });
+      }
 
       try {
         const newsRes = await fetch('/api/v1/news/home');
@@ -1594,11 +1702,13 @@
                 </button>
               `).join('');
             }
+            window.startHomeSlideshow();
           } else {
             if (switcherBar) switcherBar.classList.add('hidden');
+            window.stopHomeSlideshow();
           }
 
-          window.renderHomePoster(0);
+          window.renderHomePoster(0, false);
         }
       } catch (err) {
         console.warn('Could not load home news posters:', err);
