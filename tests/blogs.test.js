@@ -89,4 +89,17 @@ describe('Blog Management & Publishing Workflow', () => {
     expect(singleRes.body.success).toBe(true);
     expect(singleRes.body.data.title).toBe('Draft Rule Update 2026');
   });
+
+  it('should support pagination on public blog articles with page, limit and hasMore metadata', async () => {
+    const res = await request(app).get('/api/v1/blogs?page=1&limit=2');
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(Array.isArray(res.body.articles)).toBe(true);
+    expect(res.body.articles.length).toBeLessThanOrEqual(2);
+    expect(res.body.pagination).toBeDefined();
+    expect(res.body.pagination.page).toBe(1);
+    expect(res.body.pagination.limit).toBe(2);
+    expect(res.body.pagination.total).toBeGreaterThanOrEqual(1);
+    expect(typeof res.body.pagination.hasMore).toBe('boolean');
+  });
 });

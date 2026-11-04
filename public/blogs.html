@@ -317,8 +317,23 @@
             </button>
           </div>
 
-          <!-- Pagination -->
-          <div id="blog-pagination" class="flex justify-center items-center gap-2 mt-4 pt-4 border-t border-slate-200"></div>
+          <!-- Load More Container -->
+          <div id="blog-load-more-container" class="mt-8 text-center hidden">
+            <button id="blog-load-more-btn" onclick="loadMoreArticles()" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-extrabold text-xs sm:text-sm bg-white hover:bg-blue-50 text-blue-900 border-2 border-blue-900/30 hover:border-blue-900 shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer">
+              <span id="blog-load-more-text">View More Guides &amp; Articles</span>
+              <svg id="blog-load-more-icon" class="w-4 h-4 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+              <span id="blog-load-more-spinner" class="hidden w-4 h-4 border-2 border-blue-900 border-t-transparent rounded-full animate-spin"></span>
+            </button>
+            <p id="blog-load-more-summary" class="text-xs text-slate-500 font-medium mt-2"></p>
+          </div>
+
+          <!-- All Loaded Indicator -->
+          <div id="blog-all-loaded-indicator" class="mt-8 text-center text-xs font-semibold text-slate-500 hidden">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-200/80 text-slate-700 rounded-full border border-slate-300">
+              <span class="text-emerald-700 font-bold">✓</span>
+              <span id="blog-all-loaded-text">All guides and articles loaded</span>
+            </span>
+          </div>
 
         </div>
 
@@ -503,10 +518,16 @@
 
   <script src="/assets/js/main.js"></script>
   <script>
+    const PAGE_SIZE = 6;
+    let allArticlesList = [];
+    let spotlightArticle = null;
     let activeCategorySlug = '';
     let currentPage = 1;
     let currentSearchTerm = '';
     let categoriesList = [];
+    let totalArticles = 0;
+    let hasMoreArticles = false;
+    let isLoadingMore = false;
 
     const categoryStyles = {
       'hm-blog': { bg: 'bg-blue-100 text-blue-900 border-blue-200', border: 'hover:border-blue-900', link: 'text-blue-900', badge: 'bg-blue-900 text-amber-300', icon: '🏫' },
@@ -586,7 +607,7 @@
       activeCategorySlug = slug || '';
       currentPage = 1;
       highlightActiveCategory();
-      fetchArticles();
+      fetchArticles(1, false);
       updateUrlParams();
     }
 
@@ -623,170 +644,240 @@
       window.history.replaceState({}, '', newUrl);
     }
 
-    async function fetchArticles() {
+    function renderSpotlight(spotlightArt) {
+      const spotlightEl = document.getElementById('spotlight-container');
+      if (!spotlightEl) return;
+
+      if (!spotlightArt) {
+        spotlightEl.innerHTML = '';
+        spotlightEl.classList.add('hidden');
+        return;
+      }
+
+      spotlightEl.classList.remove('hidden');
+      spotlightEl.innerHTML = `
+        <div class="bg-gradient-to-br from-blue-900 via-indigo-950 to-slate-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden border border-blue-800/80 group">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-amber-400 text-slate-950 font-black text-[10px] uppercase px-2.5 py-0.5 rounded tracking-wider shadow-xs">
+              ★ FEATURED SPOTLIGHT
+            </span>
+            <span class="bg-white/10 text-blue-200 border border-white/20 text-[10px] font-bold px-2.5 py-0.5 rounded uppercase">
+              ${escapeHtml(spotlightArt.category_name)}
+            </span>
+            <span class="text-xs text-blue-200 hidden sm:inline">•</span>
+            <span class="text-xs text-blue-200 hidden sm:inline">${formatDate(spotlightArt.published_at)}</span>
+          </div>
+          
+          <h2 class="text-xl sm:text-2xl font-black text-white group-hover:text-amber-300 transition-colors leading-tight mb-3 font-heading">
+            <a href="/blogs/${spotlightArt.slug}">${escapeHtml(spotlightArt.title)}</a>
+          </h2>
+
+          <p class="text-xs sm:text-sm text-blue-100 line-clamp-3 leading-relaxed mb-6 max-w-2xl">
+            ${escapeHtml(spotlightArt.summary || 'Read complete administrative guidance notes and procedural instructions.')}
+          </p>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-white/10">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs">
+                ${(spotlightArt.author_name || 'A').charAt(0).toUpperCase()}
+              </div>
+              <div>
+                <span class="font-bold text-xs text-white block">${escapeHtml(spotlightArt.author_name)}</span>
+                <span class="text-[11px] text-blue-300">Desk Verified Handbook</span>
+              </div>
+            </div>
+            <a href="/blogs/${spotlightArt.slug}" class="gov-gold-btn px-5 py-2.5 rounded-xl text-xs font-extrabold inline-flex items-center gap-2 self-start sm:self-auto shadow-md">
+              <span>Read Complete Handbook</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderArticleCard(art) {
+      const style = getStyleForCategory(art.category_slug);
+      const initials = (art.author_name || 'Admin').split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+
+      return `
+      <article class="bg-white rounded-xl border border-slate-200 overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl ${style.border} transition-all duration-300 group">
+        ${art.featured_image ? `
+          <div class="h-44 w-full bg-slate-100 overflow-hidden relative border-b border-slate-200">
+            <img src="${art.featured_image}" alt="${escapeHtml(art.title)}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
+          </div>
+        ` : ''}
+        <div class="p-6">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="${style.bg} border text-[10px] font-extrabold px-2.5 py-0.5 rounded-md uppercase tracking-wide">
+              ${escapeHtml(art.category_name)}
+            </span>
+            <span class="text-[11px] text-slate-500 font-medium">
+              ${formatDate(art.published_at)}
+            </span>
+          </div>
+          <h3 class="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-blue-900 transition-colors leading-snug mb-2 font-heading">
+            <a href="/blogs/${art.slug}">${escapeHtml(art.title)}</a>
+          </h3>
+          <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
+            ${escapeHtml(art.summary || 'Click below to read the full community article.')}
+          </p>
+        </div>
+        <div class="px-6 py-3 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded-full ${style.badge} flex items-center justify-center font-bold text-[10px]">
+              ${initials}
+            </div>
+            <span class="text-slate-600 font-semibold text-[11px] truncate max-w-[130px]">${escapeHtml(art.author_name)}</span>
+          </div>
+          <a href="/blogs/${art.slug}" class="${style.link} font-extrabold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+            <span>Read Guide</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </article>
+      `;
+    }
+
+    async function fetchArticles(page = 1, append = false) {
       const grid = document.getElementById('blogs-grid');
       const emptyEl = document.getElementById('blogs-empty');
-      const spotlightEl = document.getElementById('spotlight-container');
-      const paginationEl = document.getElementById('blog-pagination');
       const countBadge = document.getElementById('articles-count-badge');
+      const loadMoreContainer = document.getElementById('blog-load-more-container');
+      const allLoadedIndicator = document.getElementById('blog-all-loaded-indicator');
+
+      if (!append && grid) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center text-slate-400 text-xs animate-pulse">
+            <svg class="w-6 h-6 mx-auto mb-2 text-blue-900 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+            Loading community articles &amp; guides...
+          </div>
+        `;
+      }
 
       try {
-        let url = `/api/v1/blogs?page=${currentPage}&limit=8`;
-        if (activeCategorySlug) url += `&category=${encodeURIComponent(activeCategorySlug)}`;
-        if (currentSearchTerm) url += `&search=${encodeURIComponent(currentSearchTerm)}`;
+        const params = new URLSearchParams({
+          page: page,
+          limit: PAGE_SIZE,
+        });
+        if (activeCategorySlug) params.set('category', activeCategorySlug);
+        if (currentSearchTerm) params.set('search', currentSearchTerm);
 
-        const res = await fetch(url);
+        const res = await fetch(`/api/v1/blogs?${params.toString()}`);
         const data = await res.json();
 
         if (data.success) {
-          const articles = data.articles;
-          const { total, totalPages, page } = data.pagination;
+          const articles = data.articles || [];
+          totalArticles = data.pagination ? data.pagination.total : articles.length;
+          currentPage = page;
+          hasMoreArticles = data.pagination ? data.pagination.hasMore : false;
 
-          if (countBadge) countBadge.textContent = `${total} article${total === 1 ? '' : 's'}`;
+          if (countBadge) {
+            countBadge.textContent = `${totalArticles} article${totalArticles === 1 ? '' : 's'}`;
+          }
 
-          if (articles.length === 0) {
+          if (totalArticles === 0) {
             grid.innerHTML = '';
             grid.classList.add('hidden');
-            spotlightEl.innerHTML = '';
-            spotlightEl.classList.add('hidden');
+            renderSpotlight(null);
             emptyEl.classList.remove('hidden');
-            paginationEl.innerHTML = '';
+            if (loadMoreContainer) loadMoreContainer.classList.add('hidden');
+            if (allLoadedIndicator) allLoadedIndicator.classList.add('hidden');
             return;
           }
 
           emptyEl.classList.add('hidden');
           grid.classList.remove('hidden');
 
-          // Spotlight Card: Show on page 1 when no search term is entered
-          let regularArticles = articles;
-          if (page === 1 && !currentSearchTerm && articles.length > 0) {
-            const spotlightArt = articles[0];
-            regularArticles = articles.slice(1);
-            const style = getStyleForCategory(spotlightArt.category_slug);
-
-            spotlightEl.classList.remove('hidden');
-            spotlightEl.innerHTML = `
-              <div class="bg-gradient-to-br from-blue-900 via-indigo-950 to-slate-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden border border-blue-800/80 group">
-                <div class="flex items-center gap-2 mb-3">
-                  <span class="bg-amber-400 text-slate-950 font-black text-[10px] uppercase px-2.5 py-0.5 rounded tracking-wider shadow-xs">
-                    ★ FEATURED SPOTLIGHT
-                  </span>
-                  <span class="bg-white/10 text-blue-200 border border-white/20 text-[10px] font-bold px-2.5 py-0.5 rounded uppercase">
-                    ${spotlightArt.category_name}
-                  </span>
-                  <span class="text-xs text-blue-200 hidden sm:inline">•</span>
-                  <span class="text-xs text-blue-200 hidden sm:inline">${formatDate(spotlightArt.published_at)}</span>
-                </div>
-                
-                <h2 class="text-xl sm:text-2xl font-black text-white group-hover:text-amber-300 transition-colors leading-tight mb-3 font-heading">
-                  <a href="/blogs/${spotlightArt.slug}">${spotlightArt.title}</a>
-                </h2>
-
-                <p class="text-xs sm:text-sm text-blue-100 line-clamp-3 leading-relaxed mb-6 max-w-2xl">
-                  ${spotlightArt.summary || 'Read complete administrative guidance notes and procedural instructions.'}
-                </p>
-
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-white/10">
-                  <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs">
-                      ${(spotlightArt.author_name || 'A').charAt(0).toUpperCase()}
-                    </div>
-                    <div>
-                      <span class="font-bold text-xs text-white block">${spotlightArt.author_name}</span>
-                      <span class="text-[11px] text-blue-300">Desk Verified Handbook</span>
-                    </div>
-                  </div>
-                  <a href="/blogs/${spotlightArt.slug}" class="gov-gold-btn px-5 py-2.5 rounded-xl text-xs font-extrabold inline-flex items-center gap-2 self-start sm:self-auto shadow-md">
-                    <span>Read Complete Handbook</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                  </a>
-                </div>
-              </div>
-            `;
+          if (!append) {
+            let regularArticles = articles;
+            if (page === 1 && !currentSearchTerm && articles.length > 0) {
+              spotlightArticle = articles[0];
+              renderSpotlight(spotlightArticle);
+              regularArticles = articles.slice(1);
+            } else {
+              spotlightArticle = null;
+              renderSpotlight(null);
+            }
+            allArticlesList = regularArticles;
+            grid.innerHTML = allArticlesList.map(renderArticleCard).join('');
           } else {
-            spotlightEl.innerHTML = '';
-            spotlightEl.classList.add('hidden');
+            allArticlesList = allArticlesList.concat(articles);
+            const fragment = articles.map(renderArticleCard).join('');
+            grid.insertAdjacentHTML('beforeend', fragment);
           }
 
-          // Render Grid Articles
-          grid.innerHTML = regularArticles.map(art => {
-            const style = getStyleForCategory(art.category_slug);
-            const initials = (art.author_name || 'Admin').split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
-
-            return `
-            <article class="bg-white rounded-xl border border-slate-200 overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl ${style.border} transition-all duration-300 group">
-              ${art.featured_image ? `
-                <div class="h-44 w-full bg-slate-100 overflow-hidden relative border-b border-slate-200">
-                  <img src="${art.featured_image}" alt="${art.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
-                </div>
-              ` : ''}
-              <div class="p-6">
-                <div class="flex items-center justify-between gap-2 mb-3">
-                  <span class="${style.bg} border text-[10px] font-extrabold px-2.5 py-0.5 rounded-md uppercase tracking-wide">
-                    ${art.category_name}
-                  </span>
-                  <span class="text-[11px] text-slate-500 font-medium">
-                    ${formatDate(art.published_at)}
-                  </span>
-                </div>
-                <h3 class="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-blue-900 transition-colors leading-snug mb-2 font-heading">
-                  <a href="/blogs/${art.slug}">${art.title}</a>
-                </h3>
-                <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
-                  ${art.summary || 'Click below to read the full community article.'}
-                </p>
-              </div>
-              <div class="px-6 py-3 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-xs">
-                <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded-full ${style.badge} flex items-center justify-center font-bold text-[10px]">
-                    ${initials}
-                  </div>
-                  <span class="text-slate-600 font-semibold text-[11px] truncate max-w-[130px]">${art.author_name}</span>
-                </div>
-                <a href="/blogs/${art.slug}" class="${style.link} font-extrabold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                  <span>Read Guide</span>
-                  <span>&rarr;</span>
-                </a>
-              </div>
-            </article>
-            `;
-          }).join('');
-
-          // Render Pagination
-          if (totalPages > 1) {
-            let pagHtml = '';
-            if (page > 1) {
-              pagHtml += `<button onclick="changePage(${page - 1})" class="px-3.5 py-1.5 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-100 text-slate-700 transition">&larr; Prev</button>`;
-            }
-            
-            for (let i = 1; i <= totalPages; i++) {
-              if (i === page) {
-                pagHtml += `<button class="w-8 h-8 rounded-lg bg-blue-900 text-white text-xs font-extrabold">${i}</button>`;
-              } else if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
-                pagHtml += `<button onclick="changePage(${i})" class="w-8 h-8 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-100 text-slate-700 transition">${i}</button>`;
-              } else if (i === page - 2 || i === page + 2) {
-                pagHtml += `<span class="px-1 text-slate-400">...</span>`;
-              }
-            }
-
-            if (page < totalPages) {
-              pagHtml += `<button onclick="changePage(${page + 1})" class="px-3.5 py-1.5 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-100 text-slate-700 transition">Next &rarr;</button>`;
-            }
-            paginationEl.innerHTML = pagHtml;
-          } else {
-            paginationEl.innerHTML = '';
-          }
+          updateBlogLoadMoreUI();
         }
       } catch (err) {
         console.error('Failed to fetch articles:', err);
+        if (grid && !append) {
+          grid.innerHTML = `
+            <div class="col-span-full bg-white rounded-xl border border-rose-200 p-8 text-center text-rose-700">
+              <h3 class="text-sm font-bold">Failed to load articles</h3>
+              <p class="text-xs text-slate-500 mt-1">Please check your network connection or try refreshing.</p>
+              <button onclick="fetchArticles(1, false)" class="mt-3 px-4 py-1.5 bg-blue-900 text-white rounded-lg text-xs font-bold hover:bg-blue-800 transition cursor-pointer">Try Again</button>
+            </div>
+          `;
+        }
       }
     }
 
-    function changePage(p) {
-      currentPage = p;
-      fetchArticles();
-      window.scrollTo({ top: 380, behavior: 'smooth' });
-      updateUrlParams();
+    async function loadMoreArticles() {
+      if (isLoadingMore || !hasMoreArticles) return;
+      isLoadingMore = true;
+
+      const loadMoreBtn = document.getElementById('blog-load-more-btn');
+      const loadMoreText = document.getElementById('blog-load-more-text');
+      const loadMoreIcon = document.getElementById('blog-load-more-icon');
+      const loadMoreSpinner = document.getElementById('blog-load-more-spinner');
+
+      if (loadMoreBtn) loadMoreBtn.disabled = true;
+      if (loadMoreText) loadMoreText.textContent = 'Loading more guides & articles...';
+      if (loadMoreIcon) loadMoreIcon.classList.add('hidden');
+      if (loadMoreSpinner) loadMoreSpinner.classList.remove('hidden');
+
+      try {
+        await fetchArticles(currentPage + 1, true);
+      } finally {
+        isLoadingMore = false;
+        if (loadMoreBtn) loadMoreBtn.disabled = false;
+        if (loadMoreIcon) loadMoreIcon.classList.remove('hidden');
+        if (loadMoreSpinner) loadMoreSpinner.classList.add('hidden');
+      }
+    }
+
+    function updateBlogLoadMoreUI() {
+      const container = document.getElementById('blog-load-more-container');
+      const summary = document.getElementById('blog-load-more-summary');
+      const allLoaded = document.getElementById('blog-all-loaded-indicator');
+      const allLoadedText = document.getElementById('blog-all-loaded-text');
+      const loadMoreText = document.getElementById('blog-load-more-text');
+
+      if (!container || !allLoaded) return;
+
+      const loadedCount = (spotlightArticle ? 1 : 0) + allArticlesList.length;
+      const remaining = Math.max(0, totalArticles - loadedCount);
+
+      if (hasMoreArticles && remaining > 0) {
+        container.classList.remove('hidden');
+        allLoaded.classList.add('hidden');
+        if (loadMoreText) {
+          loadMoreText.textContent = `View More Guides & Articles (${remaining} more)`;
+        }
+        if (summary) {
+          summary.textContent = `Showing ${loadedCount} of ${totalArticles} articles (${remaining} remaining)`;
+        }
+      } else {
+        container.classList.add('hidden');
+        if (totalArticles > 0) {
+          allLoaded.classList.remove('hidden');
+          if (allLoadedText) {
+            allLoadedText.textContent = `All ${totalArticles} guides and articles loaded`;
+          }
+        } else {
+          allLoaded.classList.add('hidden');
+        }
+      }
     }
 
     function resetAllFilters() {

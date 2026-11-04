@@ -69,6 +69,7 @@ async function findAll({
       limit: safeLimit,
       total,
       totalPages: Math.ceil(total / safeLimit) || 1,
+      hasMore: parseInt(page, 10) * safeLimit < total,
     },
   };
 }

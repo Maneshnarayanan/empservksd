@@ -1,33 +1,58 @@
 const db = require('../config/database');
 
-async function findAll({ onlyActive = false, category = null, search = null } = {}) {
-  let query = `
-    SELECT id, title, description, category, filename, original_filename,
-           mime_type, file_size, download_count, is_active, created_at, updated_at
-    FROM download_resources
-    WHERE 1=1
-  `;
+async function findAll({ onlyActive = false, category = null, search = null, page = null, limit = null } = {}) {
+  let baseWhere = ' WHERE 1=1';
   const params = [];
 
   if (onlyActive) {
     params.push(true);
-    query += ` AND is_active = $${params.length}`;
+    baseWhere += ` AND is_active = $${params.length}`;
   }
 
-  if (category) {
+  if (category && category !== 'ALL') {
     params.push(category.trim());
-    query += ` AND category = $${params.length}`;
+    baseWhere += ` AND category = $${params.length}`;
   }
 
-  if (search) {
+  if (search && search.trim()) {
     params.push(`%${search.trim().toLowerCase()}%`);
-    query += ` AND (LOWER(title) LIKE $${params.length} OR LOWER(description) LIKE $${params.length})`;
+    baseWhere += ` AND (LOWER(title) LIKE $${params.length} OR LOWER(description) LIKE $${params.length})`;
   }
 
-  query += ' ORDER BY created_at DESC;';
+  // Count total matching items
+  const countQuery = `SELECT COUNT(*)::int as total FROM download_resources ${baseWhere};`;
+  const countRes = await db.query(countQuery, params);
+  const total = countRes.rows[0]?.total || 0;
 
-  const res = await db.query(query, params);
-  return res.rows;
+  let query = `
+    SELECT id, title, description, category, filename, original_filename,
+           mime_type, file_size, download_count, is_active, created_at, updated_at
+    FROM download_resources
+    ${baseWhere}
+    ORDER BY created_at DESC
+  `;
+
+  const queryParams = [...params];
+  const parsedLimit = limit ? parseInt(limit, 10) : null;
+  const parsedPage = page ? Math.max(1, parseInt(page, 10)) : 1;
+
+  if (parsedLimit && parsedLimit > 0) {
+    queryParams.push(parsedLimit);
+    query += ` LIMIT $${queryParams.length}`;
+    const offset = Math.max(0, (parsedPage - 1) * parsedLimit);
+    queryParams.push(offset);
+    query += ` OFFSET $${queryParams.length}`;
+  }
+
+  query += ';';
+
+  const res = await db.query(query, queryParams);
+  return {
+    rows: res.rows,
+    total,
+    page: parsedPage,
+    limit: parsedLimit,
+  };
 }
 
 async function findById(id) {

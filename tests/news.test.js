@@ -100,4 +100,17 @@ describe('News Posters API & Home Showcase Workflow', () => {
     const homeRes = await request(app).get('/api/v1/news/home');
     expect(homeRes.body.data.length).toBe(2);
   });
+
+  it('should support pagination on public news posters with page and limit', async () => {
+    const res = await request(app).get('/api/v1/news?page=1&limit=2');
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(Array.isArray(res.body.data)).toBe(true);
+    expect(res.body.data.length).toBeLessThanOrEqual(2);
+    expect(res.body.pagination).toBeDefined();
+    expect(res.body.pagination.page).toBe(1);
+    expect(res.body.pagination.limit).toBe(2);
+    expect(res.body.pagination.total).toBeGreaterThanOrEqual(2);
+    expect(typeof res.body.pagination.hasMore).toBe('boolean');
+  });
 });

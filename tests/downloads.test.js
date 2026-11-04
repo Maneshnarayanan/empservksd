@@ -60,6 +60,18 @@ describe('Downloads Management & Secure File Delivery', () => {
     expect(res.body.data.some(d => d.id === createdDownloadId)).toBe(true);
   });
 
+  it('should support pagination with page, limit and pagination metadata', async () => {
+    const res = await request(app).get('/api/v1/downloads?page=1&limit=2');
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(Array.isArray(res.body.data)).toBe(true);
+    expect(res.body.data.length).toBeLessThanOrEqual(2);
+    expect(res.body.pagination).toBeDefined();
+    expect(res.body.pagination.page).toBe(1);
+    expect(res.body.pagination.limit).toBe(2);
+    expect(res.body.pagination.total).toBeGreaterThanOrEqual(1);
+  });
+
   it('should stream file through controlled download route and increment count', async () => {
     const res = await request(app).get(`/api/v1/downloads/${createdDownloadId}/file`);
     expect(res.status).toBe(200);

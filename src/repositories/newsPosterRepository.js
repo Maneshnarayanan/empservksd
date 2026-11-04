@@ -1,28 +1,53 @@
 const db = require('../config/database');
 
-async function findAll({ onlyActive = false, search = null } = {}) {
-  let query = `
-    SELECT id, title, caption, description, image_filename, original_filename, display_order, is_active, is_home_published, published_date, created_at, updated_at
-    FROM news_posters
-    WHERE 1=1
-  `;
+async function findAll({ onlyActive = false, search = null, page = null, limit = null } = {}) {
+  let baseWhere = ' WHERE 1=1';
   const params = [];
 
   if (onlyActive) {
     params.push(true);
-    query += ` AND is_active = $${params.length}`;
+    baseWhere += ` AND is_active = $${params.length}`;
   }
 
-  if (search) {
+  if (search && search.trim()) {
     params.push(`%${search.trim().toLowerCase()}%`);
-    query += ` AND (LOWER(title) LIKE $${params.length} OR LOWER(COALESCE(caption, '')) LIKE $${params.length} OR LOWER(COALESCE(description, '')) LIKE $${params.length})`;
+    baseWhere += ` AND (LOWER(title) LIKE $${params.length} OR LOWER(COALESCE(caption, '')) LIKE $${params.length} OR LOWER(COALESCE(description, '')) LIKE $${params.length})`;
   }
+
+  // Count total matching items
+  const countQuery = `SELECT COUNT(*)::int as total FROM news_posters ${baseWhere};`;
+  const countRes = await db.query(countQuery, params);
+  const total = countRes.rows[0]?.total || 0;
 
   // Ordered purely by published date descending, then created_at descending
-  query += ' ORDER BY published_date DESC, created_at DESC;';
+  let query = `
+    SELECT id, title, caption, description, image_filename, original_filename, display_order, is_active, is_home_published, published_date, created_at, updated_at
+    FROM news_posters
+    ${baseWhere}
+    ORDER BY published_date DESC, created_at DESC
+  `;
 
-  const res = await db.query(query, params);
-  return res.rows;
+  const queryParams = [...params];
+  const parsedLimit = limit ? parseInt(limit, 10) : null;
+  const parsedPage = page ? Math.max(1, parseInt(page, 10)) : 1;
+
+  if (parsedLimit && parsedLimit > 0) {
+    queryParams.push(parsedLimit);
+    query += ` LIMIT $${queryParams.length}`;
+    const offset = Math.max(0, (parsedPage - 1) * parsedLimit);
+    queryParams.push(offset);
+    query += ` OFFSET $${queryParams.length}`;
+  }
+
+  query += ';';
+
+  const res = await db.query(query, queryParams);
+  return {
+    rows: res.rows,
+    total,
+    page: parsedPage,
+    limit: parsedLimit,
+  };
 }
 
 async function getHomePosters({ limit = 3 } = {}) {

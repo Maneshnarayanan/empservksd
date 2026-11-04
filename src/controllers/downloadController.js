@@ -6,13 +6,32 @@ const { getSafeFilePath, deleteStoredFile } = require('../utils/storage');
 
 async function getPublicDownloads(req, res, next) {
   try {
-    const { category, search } = req.query;
-    const downloads = await downloadRepo.findAll({
+    const { category, search, page, limit } = req.query;
+    const result = await downloadRepo.findAll({
       onlyActive: true,
       category,
       search,
+      page,
+      limit,
     });
-    return res.json({ success: true, data: downloads });
+
+    const total = result.total;
+    const parsedLimit = result.limit;
+    const parsedPage = result.page;
+    const totalPages = parsedLimit ? Math.ceil(total / parsedLimit) : 1;
+    const hasMore = parsedLimit ? (parsedPage * parsedLimit < total) : false;
+
+    return res.json({
+      success: true,
+      data: result.rows,
+      pagination: {
+        total,
+        page: parsedPage,
+        limit: parsedLimit || total,
+        totalPages,
+        hasMore,
+      },
+    });
   } catch (err) {
     next(err);
   }
@@ -20,13 +39,32 @@ async function getPublicDownloads(req, res, next) {
 
 async function getAllDownloads(req, res, next) {
   try {
-    const { category, search } = req.query;
-    const downloads = await downloadRepo.findAll({
+    const { category, search, page, limit } = req.query;
+    const result = await downloadRepo.findAll({
       onlyActive: false,
       category,
       search,
+      page,
+      limit,
     });
-    return res.json({ success: true, data: downloads });
+
+    const total = result.total;
+    const parsedLimit = result.limit;
+    const parsedPage = result.page;
+    const totalPages = parsedLimit ? Math.ceil(total / parsedLimit) : 1;
+    const hasMore = parsedLimit ? (parsedPage * parsedLimit < total) : false;
+
+    return res.json({
+      success: true,
+      data: result.rows,
+      pagination: {
+        total,
+        page: parsedPage,
+        limit: parsedLimit || total,
+        totalPages,
+        hasMore,
+      },
+    });
   } catch (err) {
     next(err);
   }

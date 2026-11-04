@@ -3,13 +3,30 @@ const { deleteStoredFile } = require('../utils/storage');
 
 async function getPublicNews(req, res, next) {
   try {
-    const { search } = req.query;
-    const posters = await newsRepo.findAll({ onlyActive: true, search });
-    const formatted = posters.map(p => ({
+    const { search, page, limit } = req.query;
+    const result = await newsRepo.findAll({ onlyActive: true, search, page, limit });
+    const formatted = result.rows.map(p => ({
       ...p,
       image_url: `/storage/news-posters/${p.image_filename}`,
     }));
-    return res.json({ success: true, data: formatted });
+
+    const total = result.total;
+    const parsedLimit = result.limit;
+    const parsedPage = result.page;
+    const totalPages = parsedLimit ? Math.ceil(total / parsedLimit) : 1;
+    const hasMore = parsedLimit ? (parsedPage * parsedLimit < total) : false;
+
+    return res.json({
+      success: true,
+      data: formatted,
+      pagination: {
+        total,
+        page: parsedPage,
+        limit: parsedLimit || total,
+        totalPages,
+        hasMore,
+      },
+    });
   } catch (err) {
     next(err);
   }
@@ -48,13 +65,30 @@ async function getLatestNews(req, res, next) {
 
 async function getAllNews(req, res, next) {
   try {
-    const { search } = req.query;
-    const posters = await newsRepo.findAll({ onlyActive: false, search });
-    const formatted = posters.map(p => ({
+    const { search, page, limit } = req.query;
+    const result = await newsRepo.findAll({ onlyActive: false, search, page, limit });
+    const formatted = result.rows.map(p => ({
       ...p,
       image_url: `/storage/news-posters/${p.image_filename}`,
     }));
-    return res.json({ success: true, data: formatted });
+
+    const total = result.total;
+    const parsedLimit = result.limit;
+    const parsedPage = result.page;
+    const totalPages = parsedLimit ? Math.ceil(total / parsedLimit) : 1;
+    const hasMore = parsedLimit ? (parsedPage * parsedLimit < total) : false;
+
+    return res.json({
+      success: true,
+      data: formatted,
+      pagination: {
+        total,
+        page: parsedPage,
+        limit: parsedLimit || total,
+        totalPages,
+        hasMore,
+      },
+    });
   } catch (err) {
     next(err);
   }
