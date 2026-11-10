@@ -1,19 +1,20 @@
 const express = require('express');
 const path = require('path');
 const router = express.Router();
+const { renderPage } = require('../utils/layout');
 
 const PUBLIC_DIR = path.join(__dirname, '../../public');
 
-// Public Pages
-router.get('/', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'index.html')));
-router.get('/services', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'services.html')));
-router.get('/downloads', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'downloads.html')));
-router.get('/news', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'news.html')));
-router.get('/blogs', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'blogs.html')));
-router.get('/blogs/:slug', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'blog-detail.html')));
-router.get('/about', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'about.html')));
-router.get('/contact', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'contact.html')));
-router.get('/privacy-policy', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'privacy-policy.html')));
+// Public Pages with centralized Shared Layout
+router.get('/', (req, res) => res.send(renderPage('index.html', 'home')));
+router.get('/services', (req, res) => res.send(renderPage('services.html', 'services')));
+router.get('/downloads', (req, res) => res.send(renderPage('downloads.html', 'downloads')));
+router.get('/news', (req, res) => res.send(renderPage('news.html', 'news')));
+router.get('/blogs', (req, res) => res.send(renderPage('blogs.html', 'blogs')));
+router.get('/blogs/:slug', (req, res) => res.send(renderPage('blog-detail.html', 'blogs')));
+router.get('/about', (req, res) => res.send(renderPage('about.html', 'about')));
+router.get('/contact', (req, res) => res.send(renderPage('contact.html', 'contact')));
+router.get('/privacy-policy', (req, res) => res.send(renderPage('privacy-policy.html', '')));
 
 // Admin Pages
 router.get('/admin', (req, res) => res.redirect('/admin/dashboard'));
