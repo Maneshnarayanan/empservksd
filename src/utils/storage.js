@@ -6,9 +6,10 @@ const BASE_STORAGE_DIR = path.resolve(process.env.STORAGE_DIR || './storage');
 const DOWNLOADS_DIR = path.join(BASE_STORAGE_DIR, 'downloads');
 const BLOG_IMAGES_DIR = path.join(BASE_STORAGE_DIR, 'blog-images');
 const NEWS_POSTERS_DIR = path.join(BASE_STORAGE_DIR, 'news-posters');
+const SLIDERS_DIR = path.join(BASE_STORAGE_DIR, 'sliders');
 
 // Ensure storage subdirectories exist
-[BASE_STORAGE_DIR, DOWNLOADS_DIR, BLOG_IMAGES_DIR, NEWS_POSTERS_DIR].forEach((dir) => {
+[BASE_STORAGE_DIR, DOWNLOADS_DIR, BLOG_IMAGES_DIR, NEWS_POSTERS_DIR, SLIDERS_DIR].forEach((dir) => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
@@ -44,6 +45,7 @@ function getSafeFilePath(type, filename) {
   let dir = DOWNLOADS_DIR;
   if (type === 'blog-image') dir = BLOG_IMAGES_DIR;
   else if (type === 'news-poster') dir = NEWS_POSTERS_DIR;
+  else if (type === 'slider') dir = SLIDERS_DIR;
 
   // Prevent path traversal
   const safeName = path.basename(filename);
@@ -73,6 +75,7 @@ module.exports = {
   DOWNLOADS_DIR,
   BLOG_IMAGES_DIR,
   NEWS_POSTERS_DIR,
+  SLIDERS_DIR,
   ALLOWED_DOWNLOAD_TYPES,
   ALLOWED_IMAGE_TYPES,
   generateSafeFilename,

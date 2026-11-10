@@ -19,6 +19,7 @@ const blogRoutes = require('./routes/api/v1/blogRoutes');
 const settingsRoutes = require('./routes/api/v1/settingsRoutes');
 const announcementRoutes = require('./routes/api/v1/announcementRoutes');
 const newsRoutes = require('./routes/api/v1/newsRoutes');
+const sliderRoutes = require('./routes/api/v1/sliderRoutes');
 const adminRoutes = require('./routes/api/v1/adminRoutes');
 const pageRoutes = require('./routes/pageRoutes');
 
@@ -99,6 +100,7 @@ app.use('/assets', express.static(path.join(__dirname, '../public/assets')));
 // Publicly serve only safe blog images and news posters (controlled downloads go through /api/v1/downloads/:id/file)
 app.use('/storage/blog-images', express.static(path.join(__dirname, '../storage/blog-images')));
 app.use('/storage/news-posters', express.static(path.join(__dirname, '../storage/news-posters')));
+app.use('/storage/sliders', express.static(path.join(__dirname, '../storage/sliders')));
 
 // CSRF Token Provider Endpoint
 app.get('/api/v1/csrf-token', (req, res) => {
@@ -114,6 +116,7 @@ app.use('/api/v1/blogs', blogRoutes);
 app.use('/api/v1/settings', settingsRoutes);
 app.use('/api/v1/announcements', announcementRoutes);
 app.use('/api/v1/news', newsRoutes);
+app.use('/api/v1/sliders', sliderRoutes);
 app.use('/api/v1/admin', adminRoutes);
 
 // Frontend Page Routes

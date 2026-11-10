@@ -47,6 +47,50 @@
   <!-- 5. Main Content Area -->
   <main class="flex-grow">
 
+    <!-- 5.0 Primary Spotlight Slider (keralaservice.org Model) -->
+    <section id="home-slider-section" class="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-3 sm:py-5 px-4 sm:px-6 lg:px-8 border-b-2 border-slate-800">
+      <div class="max-w-7xl mx-auto">
+        <!-- Main Carousel Container -->
+        <div id="home-carousel-container" class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900 w-full h-[340px] sm:h-[420px] md:h-[460px]" style="min-height: 340px;">
+          
+          <!-- Slides Wrapper -->
+          <div id="home-slides-wrapper" class="relative w-full h-full">
+            <div class="absolute inset-0 flex items-center justify-center text-slate-400 text-sm">
+              <span class="animate-pulse">Loading Spotlight Updates...</span>
+            </div>
+          </div>
+
+          <!-- Slider Previous / Next Arrows -->
+          <button id="slider-prev-btn" class="absolute left-2.5 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-950/80 hover:bg-amber-400 hover:text-slate-950 text-white flex items-center justify-center border border-white/20 shadow-xl backdrop-blur-md transition-all transform hover:scale-110 active:scale-95 cursor-pointer" aria-label="Previous Slide">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+          </button>
+          <button id="slider-next-btn" class="absolute right-2.5 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-950/80 hover:bg-amber-400 hover:text-slate-950 text-white flex items-center justify-center border border-white/20 shadow-xl backdrop-blur-md transition-all transform hover:scale-110 active:scale-95 cursor-pointer" aria-label="Next Slide">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+          </button>
+
+          <!-- Bottom Control Bar (Indicator Dots, Counter & Pause) -->
+          <div class="absolute bottom-3 sm:bottom-4 left-0 right-0 z-20 flex items-center justify-between px-4 sm:px-8 pointer-events-none">
+            <!-- Counter & Auto-play indicator -->
+            <div class="flex items-center gap-2 pointer-events-auto bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10 text-[11px] font-mono text-slate-300 shadow-md">
+              <span id="slider-counter" class="font-bold text-amber-300">1 / 3</span>
+              <button id="slider-pause-btn" class="hover:text-amber-300 transition text-[10px]" title="Pause or Resume Slideshow">⏸</button>
+            </div>
+
+            <!-- Dots / Bullets -->
+            <div id="slider-dots" class="flex items-center gap-1.5 sm:gap-2 pointer-events-auto bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 shadow-md">
+              <!-- Rendered dynamically -->
+            </div>
+
+            <!-- Quick Link / Tag -->
+            <div class="hidden sm:flex items-center gap-1 pointer-events-auto text-[11px] text-slate-300 bg-slate-950/85 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10 shadow-md">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Live Updates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Hero Section (Combining TRACES Banner + MEDISEP Live Updates + PRISM Login) -->
     <section class="gov-hero-gradient py-8 px-4 sm:px-6 lg:px-8 border-b-4 border-amber-500 text-white">
       <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -755,6 +799,231 @@
   <!-- SHARED_FOOTER -->
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
+      // ---------------------------------------------------------
+      // 0. Primary Spotlight Slider Carousel (keralaservice.org style)
+      // ---------------------------------------------------------
+      let homeSliders = [];
+      let currentSlideIdx = 0;
+      let slideTimer = null;
+      let isSliderPaused = false;
+
+      async function initHomeSlider() {
+        const wrapper = document.getElementById('home-slides-wrapper');
+        const dotsContainer = document.getElementById('slider-dots');
+        const counter = document.getElementById('slider-counter');
+        const prevBtn = document.getElementById('slider-prev-btn');
+        const nextBtn = document.getElementById('slider-next-btn');
+        const pauseBtn = document.getElementById('slider-pause-btn');
+        const container = document.getElementById('home-carousel-container');
+
+        if (!wrapper) return;
+
+        try {
+          const res = await fetch('/api/v1/sliders');
+          const json = await res.json();
+          if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+            homeSliders = json.data;
+          }
+        } catch (err) {
+          console.warn('Could not fetch home sliders:', err);
+        }
+
+        // Fallback default slides if none in database
+        if (homeSliders.length === 0) {
+          homeSliders = [
+            {
+              id: 1,
+              title: 'Dearness Allowance (DA) & Pay Revision Calculators 2026',
+              description: 'Official government orders on DA installment clearance, fixation calculators, and ready-to-use Excel utilities for Kerala staff.',
+              image_url: '/storage/sliders/slider_pay_revision_da_2026.svg',
+              link_url: '/downloads',
+              button_text: 'Download Orders & Calculators',
+              target_blank: false
+            },
+            {
+              id: 2,
+              title: 'MEDISEP Phase II Empanelled Hospitals & Cashless Claim Guide',
+              description: 'Direct access to list of authorized private & government medical centres, digital Medi-Card download procedure, and grievance desk.',
+              image_url: '/storage/sliders/slider_medisep_insurance_2026.svg',
+              link_url: '/services',
+              button_text: 'Explore Healthcare Directory',
+              target_blank: false
+            },
+            {
+              id: 3,
+              title: 'Government Orders, Circulars & Rule Amendments Gazette',
+              description: 'Latest departmental notifications, Kerala Service Rules (KSR) updates, and high-resolution official bulletins for district establishments.',
+              image_url: '/storage/sliders/slider_psc_service_orders_2026.svg',
+              link_url: '/news',
+              button_text: 'Read News & Circulars',
+              target_blank: false
+            }
+          ];
+        }
+
+        renderSlides();
+        renderDots();
+        showSlide(0);
+        startSlideTimer();
+
+        prevBtn?.addEventListener('click', () => {
+          prevSlide();
+          resetSlideTimer();
+        });
+
+        nextBtn?.addEventListener('click', () => {
+          nextSlide();
+          resetSlideTimer();
+        });
+
+        pauseBtn?.addEventListener('click', () => {
+          isSliderPaused = !isSliderPaused;
+          pauseBtn.textContent = isSliderPaused ? '▶' : '⏸';
+          if (isSliderPaused) {
+            clearInterval(slideTimer);
+          } else {
+            startSlideTimer();
+          }
+        });
+
+        container?.addEventListener('mouseenter', () => {
+          if (!isSliderPaused) clearInterval(slideTimer);
+        });
+
+        container?.addEventListener('mouseleave', () => {
+          if (!isSliderPaused) startSlideTimer();
+        });
+
+        // Touch swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        container?.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        container?.addEventListener('touchend', (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          if (touchStartX - touchEndX > 45) {
+            nextSlide();
+            resetSlideTimer();
+          } else if (touchEndX - touchStartX > 45) {
+            prevSlide();
+            resetSlideTimer();
+          }
+        }, { passive: true });
+      }
+
+      function renderSlides() {
+        const wrapper = document.getElementById('home-slides-wrapper');
+        if (!wrapper) return;
+
+        wrapper.innerHTML = homeSliders.map((item, idx) => `
+          <div id="home-slide-${idx}" class="home-slide-item absolute inset-0 transition-all duration-700 ease-in-out ${idx === 0 ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-[1.01] pointer-events-none'}">
+            <!-- Slide Background Banner -->
+            <img src="${item.image_url}" alt="${item.title ? item.title.replace(/"/g, '&quot;') : 'Banner'}" class="w-full h-full object-cover select-none">
+            
+            <!-- Modern Gradient Contrast Backdrop -->
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent sm:bg-gradient-to-r sm:from-slate-950/95 sm:via-slate-950/75 sm:to-transparent/30"></div>
+            
+            <!-- Slide Text Overlay -->
+            <div class="absolute inset-0 flex flex-col justify-end sm:justify-center p-5 sm:p-10 md:p-14 max-w-3xl z-10 pointer-events-auto">
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 font-extrabold text-[10px] sm:text-xs uppercase tracking-wider mb-2 sm:mb-3 w-fit shadow-xs">
+                <span>★ SPOTLIGHT</span>
+                <span class="text-white/60">•</span>
+                <span>${item.button_text || 'Official Notice'}</span>
+              </div>
+
+              <h3 class="text-lg sm:text-2xl md:text-3xl font-black text-white tracking-tight leading-snug font-heading drop-shadow-md">
+                ${item.title || ''}
+              </h3>
+
+              ${item.description ? `
+                <p class="text-xs sm:text-sm text-slate-200 font-medium mt-1.5 sm:mt-2.5 line-clamp-2 sm:line-clamp-3 leading-relaxed drop-shadow-sm max-w-xl">
+                  ${item.description}
+                </p>
+              ` : ''}
+
+              <div class="mt-3 sm:mt-5 flex items-center gap-3">
+                <a href="${item.link_url || '#'}" ${item.target_blank ? 'target="_blank" rel="noopener noreferrer"' : ''} class="gov-gold-btn px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold inline-flex items-center gap-2 shadow-xl hover:shadow-amber-500/30 transform hover:-translate-y-0.5 transition-all">
+                  <span>${item.button_text || 'View Details'}</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function renderDots() {
+        const dotsContainer = document.getElementById('slider-dots');
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = homeSliders.map((_, idx) => `
+          <button type="button" onclick="window.goToSlide(${idx})" id="slider-dot-${idx}" class="h-2.5 rounded-full transition-all duration-300 ${idx === 0 ? 'bg-amber-400 w-6' : 'bg-white/40 hover:bg-white/70 w-2.5'}" aria-label="Go to slide ${idx + 1}"></button>
+        `).join('');
+      }
+
+      function showSlide(idx) {
+        if (!homeSliders.length) return;
+        currentSlideIdx = (idx + homeSliders.length) % homeSliders.length;
+
+        homeSliders.forEach((_, i) => {
+          const slide = document.getElementById(`home-slide-${i}`);
+          const dot = document.getElementById(`slider-dot-${i}`);
+
+          if (slide) {
+            if (i === currentSlideIdx) {
+              slide.classList.remove('opacity-0', 'z-0', 'pointer-events-none', 'scale-[1.01]');
+              slide.classList.add('opacity-100', 'z-10', 'scale-100');
+            } else {
+              slide.classList.add('opacity-0', 'z-0', 'pointer-events-none', 'scale-[1.01]');
+              slide.classList.remove('opacity-100', 'z-10', 'scale-100');
+            }
+          }
+
+          if (dot) {
+            if (i === currentSlideIdx) {
+              dot.classList.add('bg-amber-400', 'w-6');
+              dot.classList.remove('bg-white/40', 'w-2.5');
+            } else {
+              dot.classList.remove('bg-amber-400', 'w-6');
+              dot.classList.add('bg-white/40', 'w-2.5');
+            }
+          }
+        });
+
+        const counter = document.getElementById('slider-counter');
+        if (counter) {
+          counter.textContent = `${currentSlideIdx + 1} / ${homeSliders.length}`;
+        }
+      }
+
+      function nextSlide() {
+        showSlide(currentSlideIdx + 1);
+      }
+
+      function prevSlide() {
+        showSlide(currentSlideIdx - 1);
+      }
+
+      window.goToSlide = function(idx) {
+        showSlide(idx);
+        resetSlideTimer();
+      };
+
+      function startSlideTimer() {
+        clearInterval(slideTimer);
+        slideTimer = setInterval(() => {
+          if (!isSliderPaused) nextSlide();
+        }, 5000);
+      }
+
+      function resetSlideTimer() {
+        if (!isSliderPaused) {
+          startSlideTimer();
+        }
+      }
+
+      await initHomeSlider();
+
       // 1. Accessibility Font Resize Controls
       let currentFontSize = 100;
       const rootHtml = document.documentElement;

@@ -88,8 +88,29 @@ const uploadNewsPoster = multer({
   fileFilter: blogImageFileFilter,
 });
 
+// Configure disk storage for Home Sliders
+const sliderStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const { SLIDERS_DIR } = require('../utils/storage');
+    cb(null, SLIDERS_DIR);
+  },
+  filename: (req, file, cb) => {
+    const safeName = generateSafeFilename(file.originalname);
+    cb(null, safeName);
+  },
+});
+
+const uploadSlider = multer({
+  storage: sliderStorage,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB limit
+  },
+  fileFilter: blogImageFileFilter,
+});
+
 module.exports = {
   uploadDownload,
   uploadBlogImage,
   uploadNewsPoster,
+  uploadSlider,
 };

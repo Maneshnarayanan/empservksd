@@ -5,6 +5,14 @@ const { renderPage } = require('../utils/layout');
 
 const PUBLIC_DIR = path.join(__dirname, '../../public');
 
+// Disable HTML caching on public page routes so changes reflect instantly in browsers
+router.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  next();
+});
+
 // Public Pages with centralized Shared Layout
 router.get('/', (req, res) => res.send(renderPage('index.html', 'home')));
 router.get('/services', (req, res) => res.send(renderPage('services.html', 'services')));
@@ -24,6 +32,7 @@ router.get('/admin/services', (req, res) => res.sendFile(path.join(PUBLIC_DIR, '
 router.get('/admin/service-categories', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/service-categories.html')));
 router.get('/admin/downloads', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/downloads.html')));
 router.get('/admin/news', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/news.html')));
+router.get('/admin/sliders', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/sliders.html')));
 router.get('/admin/blogs', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/blogs.html')));
 router.get('/admin/blog-categories', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/blog-categories.html')));
 router.get('/admin/announcements', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/announcements.html')));

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../../middleware/authMiddleware');
 const { csrfMiddleware } = require('../../../middleware/csrfMiddleware');
-const { uploadDownload, uploadBlogImage, uploadNewsPoster } = require('../../../middleware/uploadMiddleware');
+const { uploadDownload, uploadBlogImage, uploadNewsPoster, uploadSlider } = require('../../../middleware/uploadMiddleware');
 
 const categoryController = require('../../../controllers/serviceCategoryController');
 const linkController = require('../../../controllers/serviceLinkController');
@@ -12,6 +12,7 @@ const blogArticleController = require('../../../controllers/blogArticleControlle
 const settingsController = require('../../../controllers/settingsController');
 const announcementController = require('../../../controllers/announcementController');
 const newsPosterController = require('../../../controllers/newsPosterController');
+const sliderController = require('../../../controllers/sliderController');
 
 // All admin routes require authentication
 router.use(requireAuth);
@@ -77,5 +78,12 @@ router.get('/news/:id', newsPosterController.getNewsById);
 router.post('/news', uploadNewsPoster.single('poster'), newsPosterController.createNews);
 router.put('/news/:id', uploadNewsPoster.single('poster'), newsPosterController.updateNews);
 router.delete('/news/:id', newsPosterController.deleteNews);
+
+// Home Sliders CRUD
+router.get('/sliders', sliderController.getAllSliders);
+router.get('/sliders/:id', sliderController.getSliderById);
+router.post('/sliders', uploadSlider.single('image'), sliderController.createSlider);
+router.put('/sliders/:id', uploadSlider.single('image'), sliderController.updateSlider);
+router.delete('/sliders/:id', sliderController.deleteSlider);
 
 module.exports = router;
