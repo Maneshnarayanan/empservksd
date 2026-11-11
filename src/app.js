@@ -20,6 +20,7 @@ const settingsRoutes = require('./routes/api/v1/settingsRoutes');
 const announcementRoutes = require('./routes/api/v1/announcementRoutes');
 const newsRoutes = require('./routes/api/v1/newsRoutes');
 const sliderRoutes = require('./routes/api/v1/sliderRoutes');
+const quickLinkRoutes = require('./routes/api/v1/quickLinkRoutes');
 const adminRoutes = require('./routes/api/v1/adminRoutes');
 const pageRoutes = require('./routes/pageRoutes');
 
@@ -117,6 +118,7 @@ app.use('/api/v1/settings', settingsRoutes);
 app.use('/api/v1/announcements', announcementRoutes);
 app.use('/api/v1/news', newsRoutes);
 app.use('/api/v1/sliders', sliderRoutes);
+app.use('/api/v1/quick-links', quickLinkRoutes);
 app.use('/api/v1/admin', adminRoutes);
 
 // Frontend Page Routes

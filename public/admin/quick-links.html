@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Popular Quick Links — Admin Portal</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body class="bg-slate-100 text-slate-800 flex h-screen overflow-hidden">
+
+  <!-- Sidebar -->
+  <aside class="w-64 admin-sidebar text-slate-300 flex flex-col justify-between shrink-0 shadow-2xl">
+    <div>
+      <div class="h-16 flex items-center gap-3 px-6 border-b border-white/10 bg-black/20">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 text-white flex items-center justify-center font-extrabold text-base shadow-lg shadow-emerald-950/60 ring-2 ring-emerald-500/20">ES</div>
+        <div>
+          <span class="block text-sm font-bold text-white tracking-tight font-heading">Admin Portal</span>
+          <span class="block text-[11px] text-emerald-400 font-medium">ESKSD Control</span>
+        </div>
+      </div>
+
+      <nav class="p-4 space-y-1.5 text-sm font-medium">
+        <a href="/admin/dashboard" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+          Dashboard
+        </a>
+        <a href="/admin/sliders" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path></svg>
+          Home Slider
+        </a>
+        <a href="/admin/quick-links" class="admin-nav-link active">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+          Quick Links
+        </a>
+        <a href="/admin/services" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          Service Portals
+        </a>
+        <a href="/admin/service-categories" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          Categories
+        </a>
+        <a href="/admin/downloads" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          Downloads
+        </a>
+        <a href="/admin/news" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          News Posters
+        </a>
+        <a href="/admin/blogs" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+          Blog Articles
+        </a>
+        <a href="/admin/blog-categories" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+          Blog Categories
+        </a>
+        <a href="/admin/announcements" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+          Announcements &amp; Ticker
+        </a>
+        <a href="/admin/settings" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          Settings
+        </a>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-white/10 bg-black/20">
+      <div class="flex items-center justify-between mb-3 px-1">
+        <div class="text-xs">
+          <span class="block text-white font-semibold admin-username-display font-heading">Administrator</span>
+          <span class="text-emerald-400/80 text-[11px] font-medium">Super Admin</span>
+        </div>
+        <button id="admin-logout-btn" class="p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-white/10 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+        </button>
+      </div>
+      <a href="/" target="_blank" class="block w-full text-center text-xs font-semibold py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 transition border border-white/10">
+        View Live Website &rarr;
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content View -->
+  <main class="flex-grow flex flex-col overflow-y-auto">
+    <header class="h-16 glass-header border-b border-slate-200/80 px-8 flex items-center justify-between shrink-0 sticky top-0 z-20">
+      <div>
+        <h1 class="text-lg font-bold text-slate-900 font-heading">Popular Articles &amp; Quick Links</h1>
+        <p class="text-xs text-slate-500">Manage the trending employee links and guideline shortcuts shown in the 1/4 sidebar</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="/" target="_blank" class="px-3.5 py-2 rounded-xl text-xs font-semibold border border-slate-200 bg-white/80 hover:bg-white text-slate-700 flex items-center gap-1.5 shadow-sm transition">
+          <span>Preview on Homepage &rarr;</span>
+        </a>
+        <button onclick="openCreateModal()" class="btn-gradient text-white px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          Add Quick Link
+        </button>
+      </div>
+    </header>
+
+    <div class="p-8 max-w-7xl w-full mx-auto space-y-6">
+
+      <!-- Summary Stats -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div class="stat-card-gradient p-5 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100/70 border border-emerald-200 flex items-center justify-center text-emerald-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+          </div>
+          <div>
+            <span class="block text-2xl font-bold text-slate-900 font-heading" id="stat-total">0</span>
+            <span class="text-xs text-slate-500 font-medium">Total Quick Links</span>
+          </div>
+        </div>
+
+        <div class="stat-card-gradient p-5 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-blue-100/70 border border-blue-200 flex items-center justify-center text-blue-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <div>
+            <span class="block text-2xl font-bold text-slate-900 font-heading" id="stat-active">0</span>
+            <span class="text-xs text-slate-500 font-medium">Active on Sidebar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Links Table Card -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+        <div class="p-4 border-b border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="relative w-full sm:w-72">
+            <input type="text" id="filter-search" oninput="filterQuickLinks()" placeholder="Filter quick links by title or URL..." class="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-emerald-500 bg-slate-50">
+            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <span class="text-xs text-slate-500" id="quick-links-count-label">Loading links...</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50/80 border-b border-slate-200/80 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                <th class="py-3 px-6">Order</th>
+                <th class="py-3 px-6">Link Title</th>
+                <th class="py-3 px-6">Target Destination</th>
+                <th class="py-3 px-6">Badge / Tag</th>
+                <th class="py-3 px-6">Status</th>
+                <th class="py-3 px-6 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="quick-links-table-body" class="divide-y divide-slate-100 text-xs">
+              <tr>
+                <td colspan="6" class="py-8 text-center text-slate-400">Loading quick links...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modal: Create / Edit Quick Link -->
+  <div id="quick-link-modal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-200 transform transition-all">
+      <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/60">
+        <div>
+          <h3 id="modal-title" class="font-bold text-slate-900 text-base font-heading">Add Quick Link</h3>
+          <p class="text-xs text-slate-500 mt-0.5">Customize link title, destination URL, and optional highlight badge</p>
+        </div>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 transition p-1 rounded-lg hover:bg-slate-100 cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <form id="quick-link-form" onsubmit="handleSaveQuickLink(event)" class="p-6 space-y-4 text-xs">
+        <input type="hidden" id="link-id" value="">
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Link Title <span class="text-rose-500">*</span></label>
+          <input type="text" id="link-title" required placeholder="e.g. DA Chart & Pay Fixation 2026" class="w-full p-2.5 border border-slate-300 rounded-xl focus:border-emerald-500 focus:outline-none text-xs">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Destination URL <span class="text-rose-500">*</span></label>
+          <input type="text" id="link-url" required placeholder="e.g. /downloads, /services, or https://..." class="w-full p-2.5 border border-slate-300 rounded-xl focus:border-emerald-500 focus:outline-none text-xs font-mono">
+          <div class="flex flex-wrap items-center gap-1.5 mt-2">
+            <span class="text-[11px] text-slate-500 font-semibold mr-1">Quick Presets:</span>
+            <button type="button" onclick="setPresetUrl('/downloads')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 border border-slate-200 text-[10px] font-mono cursor-pointer transition">/downloads</button>
+            <button type="button" onclick="setPresetUrl('/services')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 border border-slate-200 text-[10px] font-mono cursor-pointer transition">/services</button>
+            <button type="button" onclick="setPresetUrl('/news')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 border border-slate-200 text-[10px] font-mono cursor-pointer transition">/news</button>
+            <button type="button" onclick="setPresetUrl('/blogs')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 border border-slate-200 text-[10px] font-mono cursor-pointer transition">/blogs</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Optional Badge / Tag</label>
+            <input type="text" id="link-badge" placeholder="e.g. HOT, NEW, 2026" class="w-full p-2.5 border border-slate-300 rounded-xl focus:border-emerald-500 focus:outline-none text-xs uppercase">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Display Order</label>
+            <input type="number" id="link-order" value="1" min="0" max="999" class="w-full p-2.5 border border-slate-300 rounded-xl focus:border-emerald-500 focus:outline-none text-xs font-mono">
+          </div>
+        </div>
+
+        <div class="pt-2 flex flex-col gap-2">
+          <label class="flex items-center gap-2 cursor-pointer select-none">
+            <input type="checkbox" id="link-target-blank" class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500">
+            <span class="text-xs text-slate-700 font-medium">Open in new browser tab (<code class="font-mono text-[10px]">target="_blank"</code>)</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer select-none">
+            <input type="checkbox" id="link-is-active" checked class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500">
+            <span class="text-xs text-slate-700 font-medium">Visible on Homepage 1/4 Sidebar (Active)</span>
+          </label>
+        </div>
+
+        <div class="p-4 bg-slate-50 -mx-6 -mb-6 mt-6 border-t border-slate-100 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-200 text-xs font-semibold transition cursor-pointer">Cancel</button>
+          <button type="submit" id="save-btn" class="btn-gradient text-white px-5 py-2 rounded-xl text-xs font-semibold shadow-sm flex items-center gap-2 cursor-pointer">
+            <span id="save-btn-text">Save Quick Link</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let allQuickLinks = [];
+    let csrfToken = '';
+
+    async function fetchCsrfToken() {
+      try {
+        const res = await fetch('/api/v1/csrf-token');
+        const json = await res.json();
+        if (json.success) csrfToken = json.csrfToken;
+      } catch (err) {
+        console.error('Failed to get CSRF token', err);
+      }
+    }
+
+    async function loadQuickLinks() {
+      try {
+        const res = await fetch('/api/v1/admin/quick-links');
+        if (res.status === 401) {
+          window.location.href = '/admin/login';
+          return;
+        }
+        const json = await res.json();
+        if (json.success && Array.isArray(json.data)) {
+          allQuickLinks = json.data;
+          renderTable(allQuickLinks);
+          updateStats(allQuickLinks);
+        }
+      } catch (err) {
+        console.error('Failed to load quick links', err);
+      }
+    }
+
+    function updateStats(items) {
+      document.getElementById('stat-total').textContent = items.length;
+      document.getElementById('stat-active').textContent = items.filter(i => i.is_active).length;
+      document.getElementById('quick-links-count-label').textContent = `Showing ${items.length} link${items.length === 1 ? '' : 's'}`;
+    }
+
+    function renderTable(items) {
+      const tbody = document.getElementById('quick-links-table-body');
+      if (!tbody) return;
+
+      if (items.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="py-8 text-center text-slate-400">No quick links configured yet. Click "Add Quick Link" to create one.</td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = items.map(item => `
+        <tr class="hover:bg-slate-50/70 transition-colors">
+          <td class="py-3 px-6 font-mono font-bold text-slate-600">${item.display_order}</td>
+          <td class="py-3 px-6 font-bold text-slate-900">${escapeHtml(item.title)}</td>
+          <td class="py-3 px-6">
+            <a href="${item.url}" target="_blank" class="text-blue-700 hover:underline font-mono text-[11px] flex items-center gap-1">
+              <span>${escapeHtml(item.url)}</span>
+              ${item.target_blank ? '<span class="text-[9px] bg-slate-100 text-slate-600 px-1 rounded border">new tab</span>' : ''}
+            </a>
+          </td>
+          <td class="py-3 px-6">
+            ${item.badge_text ? `
+              <span class="bg-amber-100 text-amber-800 font-extrabold text-[9px] uppercase px-2 py-0.5 rounded border border-amber-200">
+                ${escapeHtml(item.badge_text)}
+              </span>
+            ` : '<span class="text-slate-400">—</span>'}
+          </td>
+          <td class="py-3 px-6">
+            <button onclick="toggleActive(${item.id}, ${!item.is_active})" class="cursor-pointer inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold ${item.is_active ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-500 border border-slate-200'}">
+              <span class="w-1.5 h-1.5 rounded-full ${item.is_active ? 'bg-emerald-500' : 'bg-slate-400'}"></span>
+              <span>${item.is_active ? 'Active' : 'Inactive'}</span>
+            </button>
+          </td>
+          <td class="py-3 px-6 text-right">
+            <div class="flex items-center justify-end gap-2">
+              <button onclick="openEditModal(${item.id})" class="p-1.5 rounded-lg text-slate-500 hover:text-blue-700 hover:bg-blue-50 transition cursor-pointer" title="Edit Link">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+              </button>
+              <button onclick="deleteQuickLink(${item.id})" class="p-1.5 rounded-lg text-slate-500 hover:text-rose-700 hover:bg-rose-50 transition cursor-pointer" title="Delete Link">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterQuickLinks() {
+      const q = (document.getElementById('filter-search').value || '').toLowerCase().trim();
+      if (!q) {
+        renderTable(allQuickLinks);
+        return;
+      }
+      const filtered = allQuickLinks.filter(i => 
+        (i.title && i.title.toLowerCase().includes(q)) ||
+        (i.url && i.url.toLowerCase().includes(q)) ||
+        (i.badge_text && i.badge_text.toLowerCase().includes(q))
+      );
+      renderTable(filtered);
+    }
+
+    function openCreateModal() {
+      document.getElementById('modal-title').textContent = 'Add Quick Link';
+      document.getElementById('link-id').value = '';
+      document.getElementById('link-title').value = '';
+      document.getElementById('link-url').value = '';
+      document.getElementById('link-badge').value = '';
+      document.getElementById('link-order').value = allQuickLinks.length + 1;
+      document.getElementById('link-target-blank').checked = false;
+      document.getElementById('link-is-active').checked = true;
+      document.getElementById('save-btn-text').textContent = 'Create Quick Link';
+      document.getElementById('quick-link-modal').classList.remove('hidden');
+    }
+
+    function openEditModal(id) {
+      const item = allQuickLinks.find(i => i.id === id);
+      if (!item) return;
+
+      document.getElementById('modal-title').textContent = 'Edit Quick Link';
+      document.getElementById('link-id').value = item.id;
+      document.getElementById('link-title').value = item.title;
+      document.getElementById('link-url').value = item.url;
+      document.getElementById('link-badge').value = item.badge_text || '';
+      document.getElementById('link-order').value = item.display_order;
+      document.getElementById('link-target-blank').checked = Boolean(item.target_blank);
+      document.getElementById('link-is-active').checked = Boolean(item.is_active);
+      document.getElementById('save-btn-text').textContent = 'Update Quick Link';
+      document.getElementById('quick-link-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('quick-link-modal').classList.add('hidden');
+    }
+
+    function setPresetUrl(url) {
+      document.getElementById('link-url').value = url;
+    }
+
+    async function handleSaveQuickLink(e) {
+      e.preventDefault();
+      const id = document.getElementById('link-id').value;
+      const title = document.getElementById('link-title').value.trim();
+      const url = document.getElementById('link-url').value.trim();
+      const badge_text = document.getElementById('link-badge').value.trim();
+      const display_order = parseInt(document.getElementById('link-order').value, 10) || 0;
+      const target_blank = document.getElementById('link-target-blank').checked;
+      const is_active = document.getElementById('link-is-active').checked;
+
+      const payload = { title, url, badge_text, display_order, target_blank, is_active };
+      const method = id ? 'PUT' : 'POST';
+      const endpoint = id ? `/api/v1/admin/quick-links/${id}` : '/api/v1/admin/quick-links';
+
+      const saveBtn = document.getElementById('save-btn');
+      saveBtn.disabled = true;
+
+      try {
+        const res = await fetch(endpoint, {
+          method,
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const json = await res.json();
+        if (json.success) {
+          closeModal();
+          await loadQuickLinks();
+        } else {
+          alert(json.message || 'Error saving quick link.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Network or server error.');
+      } finally {
+        saveBtn.disabled = false;
+      }
+    }
+
+    async function toggleActive(id, newStatus) {
+      try {
+        const res = await fetch(`/api/v1/admin/quick-links/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken,
+          },
+          body: JSON.stringify({ is_active: newStatus }),
+        });
+        const json = await res.json();
+        if (json.success) {
+          await loadQuickLinks();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function deleteQuickLink(id) {
+      if (!confirm('Are you sure you want to delete this quick link?')) return;
+
+      try {
+        const res = await fetch(`/api/v1/admin/quick-links/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'X-CSRF-Token': csrfToken,
+          },
+        });
+        const json = await res.json();
+        if (json.success) {
+          await loadQuickLinks();
+        } else {
+          alert(json.message || 'Failed to delete quick link.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Network or server error.');
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await fetchCsrfToken();
+      await loadQuickLinks();
+
+      document.getElementById('admin-logout-btn')?.addEventListener('click', async () => {
+        try {
+          await fetch('/api/v1/admin/auth/logout', { method: 'POST', headers: { 'X-CSRF-Token': csrfToken } });
+        } finally {
+          window.location.href = '/admin/login';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

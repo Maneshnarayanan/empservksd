@@ -33,6 +33,7 @@ router.get('/admin/service-categories', (req, res) => res.sendFile(path.join(PUB
 router.get('/admin/downloads', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/downloads.html')));
 router.get('/admin/news', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/news.html')));
 router.get('/admin/sliders', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/sliders.html')));
+router.get('/admin/quick-links', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/quick-links.html')));
 router.get('/admin/blogs', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/blogs.html')));
 router.get('/admin/blog-categories', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/blog-categories.html')));
 router.get('/admin/announcements', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/announcements.html')));

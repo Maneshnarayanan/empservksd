@@ -13,6 +13,7 @@ const settingsController = require('../../../controllers/settingsController');
 const announcementController = require('../../../controllers/announcementController');
 const newsPosterController = require('../../../controllers/newsPosterController');
 const sliderController = require('../../../controllers/sliderController');
+const quickLinkController = require('../../../controllers/quickLinkController');
 
 // All admin routes require authentication
 router.use(requireAuth);
@@ -85,5 +86,12 @@ router.get('/sliders/:id', sliderController.getSliderById);
 router.post('/sliders', uploadSlider.single('image'), sliderController.createSlider);
 router.put('/sliders/:id', uploadSlider.single('image'), sliderController.updateSlider);
 router.delete('/sliders/:id', sliderController.deleteSlider);
+
+// Quick Links (Popular Articles / Trending Guidelines) CRUD
+router.get('/quick-links', quickLinkController.getAllQuickLinks);
+router.get('/quick-links/:id', quickLinkController.getQuickLinkById);
+router.post('/quick-links', quickLinkController.createQuickLink);
+router.put('/quick-links/:id', quickLinkController.updateQuickLink);
+router.delete('/quick-links/:id', quickLinkController.deleteQuickLink);
 
 module.exports = router;
