@@ -53,9 +53,14 @@
         <!-- Main Carousel Container -->
         <div id="home-carousel-container" class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900 w-full h-[340px] sm:h-[420px] md:h-[460px]" style="min-height: 340px;">
           
-          <!-- Slides Wrapper -->
-          <div id="home-slides-wrapper" class="relative w-full h-full">
-            <div class="absolute inset-0 flex items-center justify-center text-slate-400 text-sm">
+          <!-- Animated Top Progress Bar -->
+          <div class="absolute top-0 left-0 right-0 z-30 h-1 bg-slate-950/70 overflow-hidden pointer-events-none">
+            <div id="slider-progress-bar" class="slider-progress-bar"></div>
+          </div>
+
+          <!-- Slides Track (Smooth hardware-accelerated horizontal slide) -->
+          <div id="home-slides-track" class="slider-track">
+            <div class="w-full h-full flex items-center justify-center text-slate-400 text-sm">
               <span class="animate-pulse">Loading Spotlight Updates...</span>
             </div>
           </div>
@@ -805,10 +810,12 @@
       let homeSliders = [];
       let currentSlideIdx = 0;
       let slideTimer = null;
+      let progressTimer = null;
       let isSliderPaused = false;
+      const SLIDE_INTERVAL_MS = 4000; // Snappy 4.0s transition
 
       async function initHomeSlider() {
-        const wrapper = document.getElementById('home-slides-wrapper');
+        const track = document.getElementById('home-slides-track');
         const dotsContainer = document.getElementById('slider-dots');
         const counter = document.getElementById('slider-counter');
         const prevBtn = document.getElementById('slider-prev-btn');
@@ -816,7 +823,7 @@
         const pauseBtn = document.getElementById('slider-pause-btn');
         const container = document.getElementById('home-carousel-container');
 
-        if (!wrapper) return;
+        if (!track) return;
 
         try {
           const res = await fetch('/api/v1/sliders');
@@ -881,17 +888,23 @@
           pauseBtn.textContent = isSliderPaused ? '▶' : '⏸';
           if (isSliderPaused) {
             clearInterval(slideTimer);
+            stopProgressBar();
           } else {
             startSlideTimer();
           }
         });
 
         container?.addEventListener('mouseenter', () => {
-          if (!isSliderPaused) clearInterval(slideTimer);
+          if (!isSliderPaused) {
+            clearInterval(slideTimer);
+            pauseProgressBar();
+          }
         });
 
         container?.addEventListener('mouseleave', () => {
-          if (!isSliderPaused) startSlideTimer();
+          if (!isSliderPaused) {
+            startSlideTimer();
+          }
         });
 
         // Touch swipe support for mobile
@@ -913,40 +926,47 @@
       }
 
       function renderSlides() {
-        const wrapper = document.getElementById('home-slides-wrapper');
-        if (!wrapper) return;
+        const track = document.getElementById('home-slides-track');
+        if (!track) return;
 
-        wrapper.innerHTML = homeSliders.map((item, idx) => `
-          <div id="home-slide-${idx}" class="home-slide-item absolute inset-0 transition-all duration-700 ease-in-out ${idx === 0 ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-[1.01] pointer-events-none'}">
-            <!-- Slide Background Banner -->
-            <img src="${item.image_url}" alt="${item.title ? item.title.replace(/"/g, '&quot;') : 'Banner'}" class="w-full h-full object-cover select-none">
+        track.innerHTML = homeSliders.map((item, idx) => `
+          <div id="home-slide-${idx}" class="slider-slide ${idx === 0 ? 'is-active' : ''}">
+            <!-- 1. Full Image Banner (Clickable, clearly visible) -->
+            <a href="${item.link_url || '#'}" ${item.target_blank ? 'target="_blank" rel="noopener noreferrer"' : ''} class="block w-full h-full cursor-pointer relative" title="${item.title ? item.title.replace(/"/g, '&quot;') : 'View details'}">
+              <img src="${item.image_url}" alt="${item.title ? item.title.replace(/"/g, '&quot;') : 'Banner'}" class="slider-bg-img select-none">
+            </a>
             
-            <!-- Modern Gradient Contrast Backdrop -->
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent sm:bg-gradient-to-r sm:from-slate-950/95 sm:via-slate-950/75 sm:to-transparent/30"></div>
-            
-            <!-- Slide Text Overlay -->
-            <div class="absolute inset-0 flex flex-col justify-end sm:justify-center p-5 sm:p-10 md:p-14 max-w-3xl z-10 pointer-events-auto">
-              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 font-extrabold text-[10px] sm:text-xs uppercase tracking-wider mb-2 sm:mb-3 w-fit shadow-xs">
-                <span>★ SPOTLIGHT</span>
-                <span class="text-white/60">•</span>
-                <span>${item.button_text || 'Official Notice'}</span>
-              </div>
+            <!-- 2. Subtle Bottom Shadow: Keeps upper 75% of image completely clear -->
+            <div class="absolute inset-x-0 bottom-0 h-40 sm:h-36 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent pointer-events-none z-10"></div>
 
-              <h3 class="text-lg sm:text-2xl md:text-3xl font-black text-white tracking-tight leading-snug font-heading drop-shadow-md">
-                ${item.title || ''}
-              </h3>
+            <!-- 3. Bottom Docked Information & Action Strip -->
+            <div class="absolute bottom-11 sm:bottom-12 inset-x-0 z-20 px-4 sm:px-8 pointer-events-none">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 max-w-7xl mx-auto">
+                <!-- Title & Description Left -->
+                <div class="slide-title-area min-w-0 flex-1 pointer-events-auto">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-black text-[9px] sm:text-[10px] uppercase tracking-wider shadow-xs">
+                      ★ SPOTLIGHT
+                    </span>
+                    <span class="text-[11px] font-mono text-amber-300 font-bold hidden sm:inline">${item.button_text || 'Official Notice'}</span>
+                  </div>
+                  <a href="${item.link_url || '#'}" ${item.target_blank ? 'target="_blank" rel="noopener noreferrer"' : ''} class="block text-base sm:text-xl md:text-2xl font-black text-white hover:text-amber-300 transition-colors tracking-tight leading-tight truncate drop-shadow-md font-heading">
+                    ${item.title || ''}
+                  </a>
+                  ${item.description ? `
+                    <p class="text-xs sm:text-sm text-slate-200 font-medium line-clamp-1 mt-0.5 drop-shadow max-w-3xl hidden sm:block">
+                      ${item.description}
+                    </p>
+                  ` : ''}
+                </div>
 
-              ${item.description ? `
-                <p class="text-xs sm:text-sm text-slate-200 font-medium mt-1.5 sm:mt-2.5 line-clamp-2 sm:line-clamp-3 leading-relaxed drop-shadow-sm max-w-xl">
-                  ${item.description}
-                </p>
-              ` : ''}
-
-              <div class="mt-3 sm:mt-5 flex items-center gap-3">
-                <a href="${item.link_url || '#'}" ${item.target_blank ? 'target="_blank" rel="noopener noreferrer"' : ''} class="gov-gold-btn px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold inline-flex items-center gap-2 shadow-xl hover:shadow-amber-500/30 transform hover:-translate-y-0.5 transition-all">
-                  <span>${item.button_text || 'View Details'}</span>
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </a>
+                <!-- Action Button Right -->
+                <div class="slide-action-area flex items-center gap-2 shrink-0 pointer-events-auto">
+                  <a href="${item.link_url || '#'}" ${item.target_blank ? 'target="_blank" rel="noopener noreferrer"' : ''} class="gov-gold-btn px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold inline-flex items-center gap-2 shadow-xl hover:shadow-amber-500/40 transform hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer">
+                    <span>${item.button_text || 'View Details'}</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -957,7 +977,7 @@
         const dotsContainer = document.getElementById('slider-dots');
         if (!dotsContainer) return;
         dotsContainer.innerHTML = homeSliders.map((_, idx) => `
-          <button type="button" onclick="window.goToSlide(${idx})" id="slider-dot-${idx}" class="h-2.5 rounded-full transition-all duration-300 ${idx === 0 ? 'bg-amber-400 w-6' : 'bg-white/40 hover:bg-white/70 w-2.5'}" aria-label="Go to slide ${idx + 1}"></button>
+          <button type="button" onclick="window.goToSlide(${idx})" id="slider-dot-${idx}" class="h-2 rounded-full transition-all duration-300 ${idx === 0 ? 'bg-amber-400 w-7 shadow-md shadow-amber-400/50 cursor-pointer' : 'bg-white/40 hover:bg-white/70 w-2.5 cursor-pointer'}" aria-label="Go to slide ${idx + 1}"></button>
         `).join('');
       }
 
@@ -965,27 +985,28 @@
         if (!homeSliders.length) return;
         currentSlideIdx = (idx + homeSliders.length) % homeSliders.length;
 
+        const track = document.getElementById('home-slides-track');
+        if (track) {
+          track.style.transform = `translateX(-${currentSlideIdx * 100}%)`;
+        }
+
         homeSliders.forEach((_, i) => {
           const slide = document.getElementById(`home-slide-${i}`);
           const dot = document.getElementById(`slider-dot-${i}`);
 
           if (slide) {
             if (i === currentSlideIdx) {
-              slide.classList.remove('opacity-0', 'z-0', 'pointer-events-none', 'scale-[1.01]');
-              slide.classList.add('opacity-100', 'z-10', 'scale-100');
+              slide.classList.add('is-active');
             } else {
-              slide.classList.add('opacity-0', 'z-0', 'pointer-events-none', 'scale-[1.01]');
-              slide.classList.remove('opacity-100', 'z-10', 'scale-100');
+              slide.classList.remove('is-active');
             }
           }
 
           if (dot) {
             if (i === currentSlideIdx) {
-              dot.classList.add('bg-amber-400', 'w-6');
-              dot.classList.remove('bg-white/40', 'w-2.5');
+              dot.className = 'h-2 rounded-full transition-all duration-300 bg-amber-400 w-7 shadow-md shadow-amber-400/50 cursor-pointer';
             } else {
-              dot.classList.remove('bg-amber-400', 'w-6');
-              dot.classList.add('bg-white/40', 'w-2.5');
+              dot.className = 'h-2 rounded-full transition-all duration-300 bg-white/40 hover:bg-white/70 w-2.5 cursor-pointer';
             }
           }
         });
@@ -994,6 +1015,8 @@
         if (counter) {
           counter.textContent = `${currentSlideIdx + 1} / ${homeSliders.length}`;
         }
+
+        restartProgressBar();
       }
 
       function nextSlide() {
@@ -1009,11 +1032,45 @@
         resetSlideTimer();
       };
 
+      let progressStartTime = 0;
+      function restartProgressBar() {
+        const progressBar = document.getElementById('slider-progress-bar');
+        if (!progressBar) return;
+        if (progressTimer) clearInterval(progressTimer);
+
+        if (isSliderPaused) {
+          progressBar.style.width = '0%';
+          return;
+        }
+
+        progressBar.style.width = '0%';
+        progressStartTime = Date.now();
+        progressTimer = setInterval(() => {
+          const elapsed = Date.now() - progressStartTime;
+          const pct = Math.min(100, (elapsed / SLIDE_INTERVAL_MS) * 100);
+          progressBar.style.width = `${pct}%`;
+          if (elapsed >= SLIDE_INTERVAL_MS) {
+            clearInterval(progressTimer);
+          }
+        }, 40);
+      }
+
+      function stopProgressBar() {
+        if (progressTimer) clearInterval(progressTimer);
+        const progressBar = document.getElementById('slider-progress-bar');
+        if (progressBar) progressBar.style.width = '0%';
+      }
+
+      function pauseProgressBar() {
+        if (progressTimer) clearInterval(progressTimer);
+      }
+
       function startSlideTimer() {
         clearInterval(slideTimer);
+        restartProgressBar();
         slideTimer = setInterval(() => {
           if (!isSliderPaused) nextSlide();
-        }, 5000);
+        }, SLIDE_INTERVAL_MS);
       }
 
       function resetSlideTimer() {

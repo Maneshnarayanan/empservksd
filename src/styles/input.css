@@ -156,6 +156,70 @@
   pointer-events: none;
 }
 
+/* ============================================================
+   Primary Spotlight Slider (Snappy Horizontal Sliding + Ken Burns)
+   ============================================================ */
+.slider-track {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.slider-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 5.5s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.slider-slide.is-active .slider-bg-img {
+  transform: scale(1.08);
+}
+
+.slider-slide .slide-title-area {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 350ms ease, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slider-slide.is-active .slide-title-area {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 150ms;
+}
+
+.slider-slide .slide-action-area {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 350ms ease, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slider-slide.is-active .slide-action-area {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 220ms;
+}
+
+.slider-progress-bar {
+  height: 3px;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24, #10b981);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.7);
+  width: 0%;
+  transition: width 100ms linear;
+}
+
 /* Glassmorphism & Modern Accents */
 .glass-header {
   background: rgba(255, 255, 255, 0.90);
