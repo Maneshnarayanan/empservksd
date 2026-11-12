@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../../middleware/authMiddleware');
 const { csrfMiddleware } = require('../../../middleware/csrfMiddleware');
-const { uploadDownload, uploadBlogImage, uploadNewsPoster, uploadSlider } = require('../../../middleware/uploadMiddleware');
+const { uploadDownload, uploadBlogImage, uploadNewsPoster, uploadSlider, uploadPageImage, uploadPageAttachment } = require('../../../middleware/uploadMiddleware');
 
 const categoryController = require('../../../controllers/serviceCategoryController');
 const linkController = require('../../../controllers/serviceLinkController');
@@ -14,6 +14,7 @@ const announcementController = require('../../../controllers/announcementControl
 const newsPosterController = require('../../../controllers/newsPosterController');
 const sliderController = require('../../../controllers/sliderController');
 const quickLinkController = require('../../../controllers/quickLinkController');
+const customPageController = require('../../../controllers/customPageController');
 
 // All admin routes require authentication
 router.use(requireAuth);
@@ -93,5 +94,15 @@ router.get('/quick-links/:id', quickLinkController.getQuickLinkById);
 router.post('/quick-links', quickLinkController.createQuickLink);
 router.put('/quick-links/:id', quickLinkController.updateQuickLink);
 router.delete('/quick-links/:id', quickLinkController.deleteQuickLink);
+
+// Dynamic Pages & Page Builder CRUD
+router.get('/pages', customPageController.getAllPages);
+router.get('/pages/:id', customPageController.getPageById);
+router.post('/pages', customPageController.createPage);
+router.post('/pages/preview', customPageController.previewBlocks);
+router.post('/pages/upload-image', uploadPageImage.single('image'), customPageController.uploadPageAsset);
+router.post('/pages/upload-attachment', uploadPageAttachment.single('file'), customPageController.uploadPageAsset);
+router.put('/pages/:id', customPageController.updatePage);
+router.delete('/pages/:id', customPageController.deletePage);
 
 module.exports = router;

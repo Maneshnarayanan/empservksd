@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Page Builder — Admin Portal</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body class="bg-slate-100 text-slate-800 flex h-screen overflow-hidden">
+
+  <!-- Sidebar -->
+  <aside class="w-64 admin-sidebar text-slate-300 flex flex-col justify-between shrink-0 shadow-2xl">
+    <div class="overflow-y-auto">
+      <div class="h-16 flex items-center gap-3 px-6 border-b border-white/10 bg-black/20">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 text-white flex items-center justify-center font-extrabold text-base shadow-lg shadow-emerald-950/60 ring-2 ring-emerald-500/20">ES</div>
+        <div>
+          <span class="block text-sm font-bold text-white tracking-tight font-heading">Admin Portal</span>
+          <span class="block text-[11px] text-emerald-400 font-medium">ESKSD Control</span>
+        </div>
+      </div>
+
+      <nav class="p-4 space-y-1.5 text-sm font-medium">
+        <a href="/admin/dashboard" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+          Dashboard
+        </a>
+        <a href="/admin/pages" class="admin-nav-link active">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+          Page Builder
+        </a>
+        <a href="/admin/sliders" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path></svg>
+          Home Slider
+        </a>
+        <a href="/admin/quick-links" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+          Quick Links
+        </a>
+        <a href="/admin/services" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          Service Portals
+        </a>
+        <a href="/admin/service-categories" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          Categories
+        </a>
+        <a href="/admin/downloads" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          Downloads
+        </a>
+        <a href="/admin/news" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          News Posters
+        </a>
+        <a href="/admin/blogs" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+          Blog Articles
+        </a>
+        <a href="/admin/blog-categories" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+          Blog Categories
+        </a>
+        <a href="/admin/announcements" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+          Announcements &amp; Ticker
+        </a>
+        <a href="/admin/settings" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          Settings
+        </a>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-white/10 bg-black/20 shrink-0">
+      <div class="flex items-center justify-between mb-3 px-1">
+        <div class="text-xs">
+          <span class="block text-white font-semibold admin-username-display font-heading">Administrator</span>
+          <span class="text-emerald-400/80 text-[11px] font-medium">Super Admin</span>
+        </div>
+        <button id="admin-logout-btn" class="p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-white/10 transition" title="Logout">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+        </button>
+      </div>
+      <a href="/" target="_blank" class="block w-full text-center text-xs font-semibold py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 transition border border-white/10">
+        View Live Website &rarr;
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex flex-col overflow-y-auto">
+    <header class="h-16 glass-header border-b border-slate-200/80 px-6 sm:px-8 flex items-center justify-between shrink-0 sticky top-0 z-30">
+      <div>
+        <h1 class="text-lg font-bold text-slate-900 font-heading flex items-center gap-2">
+          <span>Dynamic Page Builder</span>
+          <span id="builder-mode-badge" class="hidden text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">Editing Mode</span>
+        </h1>
+        <p class="text-xs text-slate-500">Build custom pages with reusable blocks inheriting your fixed header, navigation &amp; footer</p>
+      </div>
+
+      <!-- List Mode Actions -->
+      <div id="list-header-actions" class="flex items-center gap-2.5">
+        <button onclick="openNewPage()" class="btn-gradient text-white px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 shadow-sm cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          Create New Page
+        </button>
+      </div>
+
+      <!-- Builder Mode Actions -->
+      <div id="builder-header-actions" class="hidden items-center gap-2.5">
+        <button onclick="exitBuilder()" class="px-3.5 py-2 rounded-xl text-xs font-semibold border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 cursor-pointer">
+          &larr; All Pages
+        </button>
+        <button onclick="togglePreviewMode()" id="toggle-preview-btn" class="px-3.5 py-2 rounded-xl text-xs font-semibold border border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-900 flex items-center gap-1.5 cursor-pointer">
+          <span>👁️ Live Preview</span>
+        </button>
+        <button onclick="savePage()" id="save-page-btn" class="btn-gradient text-white px-5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer">
+          <span>💾 Save Page</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============================================================
+         VIEW 1: PAGES LIST TABLE
+         ============================================================ -->
+    <div id="pages-list-view" class="p-6 sm:p-8 space-y-6 max-w-7xl mx-auto w-full">
+      <!-- Stats & Info Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+          <div>
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Custom Pages</p>
+            <p id="stat-total" class="text-2xl font-extrabold text-slate-900 mt-1 font-heading">0</p>
+          </div>
+          <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-xl">📄</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+          <div>
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Published Live</p>
+            <p id="stat-published" class="text-2xl font-extrabold text-emerald-700 mt-1 font-heading">0</p>
+          </div>
+          <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl">🌐</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+          <div>
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">In Top Nav Bar</p>
+            <p id="stat-nav" class="text-2xl font-extrabold text-amber-600 mt-1 font-heading">0</p>
+          </div>
+          <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">🧭</div>
+        </div>
+      </div>
+
+      <!-- Quick Starter Templates -->
+      <div class="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-2xl p-5 text-white shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span class="text-[10px] font-black uppercase tracking-widest text-amber-400">Starter Templates</span>
+          <h3 class="text-sm sm:text-base font-bold font-heading">Need to publish a new employee guide, rate chart, or notice page fast?</h3>
+          <p class="text-xs text-slate-300 mt-0.5">Every dynamic page automatically inherits your portal Header, Nav Bar, Ticker &amp; Footer.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 shrink-0">
+          <button onclick="openTemplate('guide')" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold transition cursor-pointer">
+            📘 Rate Chart / Guide
+          </button>
+          <button onclick="openTemplate('faq')" class="px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-extrabold transition cursor-pointer">
+            ❓ Circular &amp; FAQ
+          </button>
+        </div>
+      </div>
+
+      <!-- Search + Table -->
+      <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+        <div class="p-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50/50">
+          <div class="relative w-full sm:w-80">
+            <input type="text" id="search-pages-input" oninput="filterPages()" placeholder="Search pages by title or URL slug..." class="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-blue-500">
+            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <p class="text-[11px] text-slate-500">URL format: <code class="font-mono bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">/p/&lt;slug&gt;</code></p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-[11px] uppercase tracking-wider text-slate-500 font-bold">
+                <th class="px-5 py-3.5">Page Title &amp; Route</th>
+                <th class="px-4 py-3.5">Layout</th>
+                <th class="px-4 py-3.5 text-center">Blocks</th>
+                <th class="px-4 py-3.5 text-center">Top Nav</th>
+                <th class="px-4 py-3.5 text-center">Status</th>
+                <th class="px-5 py-3.5 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="pages-table-body" class="divide-y divide-slate-100 text-sm">
+              <tr>
+                <td colspan="6" class="px-6 py-10 text-center text-slate-400 text-xs">Loading dynamic pages...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         VIEW 2: VISUAL PAGE BUILDER WORKSPACE
+         ============================================================ -->
+    <div id="page-builder-view" class="hidden p-6 sm:p-8 max-w-7xl mx-auto w-full space-y-6">
+      <!-- Page Properties Card -->
+      <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+          <h2 class="text-sm font-extrabold uppercase tracking-wider text-slate-800 font-heading flex items-center gap-2">
+            <span>⚙️</span>
+            <span>Page Settings &amp; URL Configuration</span>
+          </h2>
+          <span id="builder-live-url-pill" class="text-xs font-mono bg-blue-50 text-blue-900 px-3 py-1 rounded-full border border-blue-200 font-semibold">/p/new-page</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="lg:col-span-2">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Page Title <span class="text-rose-500">*</span></label>
+            <input type="text" id="pb-title" oninput="handleTitleInput()" placeholder="e.g. Kerala Pay Revision & DA Arrears 2026" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-blue-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">URL Slug <span class="text-rose-500">*</span></label>
+            <div class="flex items-center border border-slate-200 rounded-xl overflow-hidden bg-slate-50 focus-within:border-blue-500 focus-within:bg-white">
+              <span class="px-2.5 text-xs font-mono text-slate-500 border-r border-slate-200 bg-slate-100 py-2">/p/</span>
+              <input type="text" id="pb-slug" oninput="handleSlugManualInput()" placeholder="da-arrears-2026" class="w-full px-2.5 py-2 text-xs font-mono focus:outline-none bg-transparent">
+            </div>
+          </div>
+
+          <div class="lg:col-span-2">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Subtitle / Summary</label>
+            <input type="text" id="pb-subtitle" placeholder="Short description shown under the page title or in search previews" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-blue-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Page Layout Template</label>
+            <select id="pb-layout" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 focus:outline-none focus:border-blue-500 bg-white">
+              <option value="standard">📄 Standard Document (Centered)</option>
+              <option value="wide">🖥️ Wide Portal View (Full Container)</option>
+              <option value="sidebar">📰 3:1 Layout (With Popular Links &amp; Downloads Sidebar)</option>
+            </select>
+          </div>
+
+          <div class="md:col-span-2 lg:col-span-3 flex flex-wrap items-center gap-6 pt-2">
+            <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700">
+              <input type="checkbox" id="pb-published" checked class="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+              <span>Publish Page Live</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700">
+              <input type="checkbox" id="pb-show-in-nav" class="rounded border-slate-300 text-blue-600 focus:ring-blue-500 w-4 h-4">
+              <span>Add Link to Main Navigation Bar</span>
+            </label>
+            <div class="flex items-center gap-2">
+              <label class="text-xs font-semibold text-slate-600">Nav Order:</label>
+              <input type="number" id="pb-nav-order" value="0" min="0" class="w-16 px-2.5 py-1 rounded-lg border border-slate-200 text-xs text-center">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Editor vs Preview Area -->
+      <div id="pb-editor-container" class="space-y-5">
+        <!-- Block Palette Toolbar -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-4">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-slate-700 font-heading">+ Add Content Block to Page</span>
+            <span class="text-[11px] text-slate-500">Click any block to append it below</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-2">
+            <button type="button" onclick="addBlock('hero')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
+              <span class="text-lg mb-1 group-hover:scale-110 transition-transform">🎯</span>
+              <span class="text-[11px] font-bold text-slate-700">Hero Banner</span>
+            </button>
+            <button type="button" onclick="addBlock('richtext')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
+              <span class="text-lg mb-1 group-hover:scale-110 transition-transform">📝</span>
+              <span class="text-[11px] font-bold text-slate-700">Rich Text</span>
+            </button>
+            <button type="button" onclick="addBlock('alert')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
+              <span class="text-lg mb-1 group-hover:scale-110 transition-transform">⚠️</span>
+              <span class="text-[11px] font-bold text-slate-700">Notice Box</span>
+            </button>
+            <button type="button" onclick="addBlock('cards')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
+              <span class="text-lg mb-1 group-hover:scale-110 transition-transform">🗂️</span>
+              <span class="text-[11px] font-bold text-slate-700">Cards Grid</span>
+            </button>
+            <button type="button" onclick="addBlock('table')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
+              <span class="text-lg mb-1 group-hover:scale-110 transition-transform">📊</span>
+              <span class="text-[11px] font-bold text-slate-700">Data Table</span>
+            </button>
+            <button type="button" onclick="addBlock('download_cta')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
+              <span class="text-lg mb-1 group-hover:scale-110 transition-transform">📥</span>
+              <span class="text-[11px] font-bold text-slate-700">Download CTA</span>
+            </button>
+            <button type="button" onclick="addBlock('image')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
+              <span class="text-lg mb-1 group-hover:scale-110 transition-transform">🖼️</span>
+              <span class="text-[11px] font-bold text-slate-700">Image</span>
+            </button>
+            <button type="button" onclick="addBlock('faq')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
+              <span class="text-lg mb-1 group-hover:scale-110 transition-transform">❓</span>
+              <span class="text-[11px] font-bold text-slate-700">FAQ List</span>
+            </button>
+            <button type="button" onclick="addBlock('divider')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
+              <span class="text-lg mb-1 group-hover:scale-110 transition-transform">➖</span>
+              <span class="text-[11px] font-bold text-slate-700">Divider</span>
+            </button>
+            <button type="button" onclick="addBlock('html')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
+              <span class="text-lg mb-1 group-hover:scale-110 transition-transform">🧩</span>
+              <span class="text-[11px] font-bold text-slate-700">Custom HTML</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Active Blocks Stack -->
+        <div id="blocks-canvas" class="space-y-4">
+          <!-- Rendered dynamically by JS -->
+        </div>
+      </div>
+
+      <!-- Live Preview Panel -->
+      <div id="pb-preview-container" class="hidden bg-slate-100 rounded-2xl border-2 border-blue-300 p-6 shadow-inner">
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-300">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-xs font-extrabold uppercase tracking-wider text-slate-700">Live Page Preview (Rendered With Portal Theme)</span>
+          </div>
+          <button onclick="togglePreviewMode()" class="text-xs font-bold text-blue-900 hover:underline cursor-pointer">
+            &larr; Back to Block Editor
+          </button>
+        </div>
+        <div id="pb-preview-output" class="max-w-5xl mx-auto">
+          <!-- Populated by /api/v1/admin/pages/preview -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let allPages = [];
+    let csrfToken = '';
+    let editingPageId = null;
+    let slugManuallyEdited = false;
+    let builderBlocks = [];
+    let isPreviewActive = false;
+
+    const BLOCK_META = {
+      hero: { label: 'Hero Banner', icon: '🎯', color: 'border-l-blue-600' },
+      richtext: { label: 'Rich Text Section', icon: '📝', color: 'border-l-emerald-600' },
+      alert: { label: 'Notice / Alert Box', icon: '⚠️', color: 'border-l-amber-500' },
+      cards: { label: 'Feature Cards Grid', icon: '🗂️', color: 'border-l-indigo-600' },
+      table: { label: 'Data Table / Chart', icon: '📊', color: 'border-l-cyan-600' },
+      download_cta: { label: 'Download CTA Strip', icon: '📥', color: 'border-l-sky-600' },
+      image: { label: 'Image / Graphic', icon: '🖼️', color: 'border-l-teal-600' },
+      faq: { label: 'FAQ Accordion', icon: '❓', color: 'border-l-purple-600' },
+      divider: { label: 'Section Divider', icon: '➖', color: 'border-l-slate-400' },
+      html: { label: 'Custom HTML Block', icon: '🧩', color: 'border-l-rose-500' },
+    };
+
+    async function ensureAuthAndCsrf() {
+      const meRes = await fetch('/api/v1/admin/auth/me');
+      if (!meRes.ok) {
+        window.location.href = '/admin/login';
+        return false;
+      }
+      const meJson = await meRes.json();
+      if (meJson.admin) {
+        document.querySelectorAll('.admin-username-display').forEach(el => {
+          el.textContent = meJson.admin.fullName || meJson.admin.username;
+        });
+      }
+
+      const csrfRes = await fetch('/api/v1/csrf-token');
+      const csrfJson = await csrfRes.json();
+      csrfToken = csrfJson.csrfToken || '';
+      return true;
+    }
+
+    async function loadPages() {
+      try {
+        const res = await fetch('/api/v1/admin/pages');
+        if (res.status === 401) {
+          window.location.href = '/admin/login';
+          return;
+        }
+        const json = await res.json();
+        allPages = json.data || [];
+        updateStats();
+        renderPagesTable(allPages);
+      } catch (err) {
+        console.error('Failed to load pages:', err);
+      }
+    }
+
+    function updateStats() {
+      document.getElementById('stat-total').textContent = allPages.length;
+      document.getElementById('stat-published').textContent = allPages.filter(p => p.is_published).length;
+      document.getElementById('stat-nav').textContent = allPages.filter(p => p.show_in_nav && p.is_published).length;
+    }
+
+    function filterPages() {
+      const q = (document.getElementById('search-pages-input').value || '').trim().toLowerCase();
+      if (!q) {
+        renderPagesTable(allPages);
+        return;
+      }
+      const filtered = allPages.filter(p =>
+        p.title.toLowerCase().includes(q) ||
+        p.slug.toLowerCase().includes(q) ||
+        (p.subtitle && p.subtitle.toLowerCase().includes(q))
+      );
+      renderPagesTable(filtered);
+    }
+
+    function renderPagesTable(items) {
+      const tbody = document.getElementById('pages-table-body');
+      if (!items.length) {
+        tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-10 text-center text-slate-400 text-xs">No dynamic pages found. Click "+ Create New Page" to build one!</td></tr>`;
+        return;
+      }
+
+      const layoutLabels = {
+        standard: 'Standard',
+        wide: 'Wide Grid',
+        sidebar: '3:1 Sidebar',
+      };
+
+      tbody.innerHTML = items.map(page => `
+        <tr class="hover:bg-slate-50/70 transition">
+          <td class="px-5 py-3.5">
+            <div class="font-bold text-slate-900">${escapeHtml(page.title)}</div>
+            <div class="flex items-center gap-2 mt-0.5">
+              <a href="/p/${encodeURIComponent(page.slug)}" target="_blank" class="text-xs font-mono text-blue-700 hover:underline">/p/${escapeHtml(page.slug)}</a>
+              <button onclick="copyPageUrl('${escapeHtml(page.slug)}')" class="text-[10px] px-1.5 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded cursor-pointer" title="Copy URL">Copy URL</button>
+            </div>
+          </td>
+          <td class="px-4 py-3.5 text-xs font-semibold text-slate-600">
+            <span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200">${layoutLabels[page.layout_mode] || 'Standard'}</span>
+          </td>
+          <td class="px-4 py-3.5 text-center font-mono text-xs font-bold text-slate-700">
+            ${Array.isArray(page.blocks) ? page.blocks.length : 0}
+          </td>
+          <td class="px-4 py-3.5 text-center">
+            ${page.show_in_nav
+              ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800">In Navbar</span>'
+              : '<span class="text-[11px] text-slate-400">—</span>'}
+          </td>
+          <td class="px-4 py-3.5 text-center">
+            <button onclick="togglePublish(${page.id}, ${!page.is_published})" class="px-2.5 py-1 rounded-full text-[10px] font-bold cursor-pointer ${page.is_published ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-amber-100 text-amber-800 hover:bg-amber-200'}">
+              ${page.is_published ? 'Published' : 'Draft'}
+            </button>
+          </td>
+          <td class="px-5 py-3.5 text-right whitespace-nowrap">
+            <div class="flex items-center justify-end gap-2">
+              <a href="/p/${encodeURIComponent(page.slug)}" target="_blank" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">View</a>
+              <button onclick="editPage(${page.id})" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-50 text-blue-700 hover:bg-blue-100 transition cursor-pointer">Edit Blocks</button>
+              <button onclick="deletePage(${page.id})" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-rose-50 text-rose-700 hover:bg-rose-100 transition cursor-pointer">Delete</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function copyPageUrl(slug) {
+      const url = `/p/${encodeURIComponent(slug)}`;
+      const displayUrl = `/p/${slug}`;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => alert(`Copied URL: ${url}\n(Readable: ${displayUrl})\nYou can paste this in Quick Links or Home Slider!`));
+      } else {
+        prompt('Copy page URL:', url);
+      }
+    }
+
+    function slugifyText(text) {
+      return String(text || '')
+        .normalize('NFC')
+        .toLowerCase()
+        .trim()
+        .replace(/[^\p{L}\p{M}\p{N}_-]+/gu, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    function handleTitleInput() {
+      if (!editingPageId && !slugManuallyEdited) {
+        const title = document.getElementById('pb-title').value;
+        const slug = slugifyText(title);
+        document.getElementById('pb-slug').value = slug;
+        updateLiveUrlPill();
+      }
+    }
+
+    function handleSlugManualInput() {
+      slugManuallyEdited = true;
+      updateLiveUrlPill();
+    }
+
+    function updateLiveUrlPill() {
+      const slug = slugifyText(document.getElementById('pb-slug').value) || 'new-page';
+      document.getElementById('builder-live-url-pill').textContent = `/p/${slug}`;
+    }
+
+    function enterBuilder() {
+      document.getElementById('pages-list-view').classList.add('hidden');
+      document.getElementById('page-builder-view').classList.remove('hidden');
+      document.getElementById('list-header-actions').classList.add('hidden');
+      document.getElementById('builder-header-actions').classList.remove('hidden');
+      document.getElementById('builder-header-actions').classList.add('flex');
+      document.getElementById('builder-mode-badge').classList.remove('hidden');
+      isPreviewActive = false;
+      document.getElementById('pb-editor-container').classList.remove('hidden');
+      document.getElementById('pb-preview-container').classList.add('hidden');
+      document.getElementById('toggle-preview-btn').innerHTML = '<span>👁️ Live Preview</span>';
+    }
+
+    function exitBuilder() {
+      document.getElementById('page-builder-view').classList.add('hidden');
+      document.getElementById('pages-list-view').classList.remove('hidden');
+      document.getElementById('builder-header-actions').classList.add('hidden');
+      document.getElementById('builder-header-actions').classList.remove('flex');
+      document.getElementById('list-header-actions').classList.remove('hidden');
+      document.getElementById('builder-mode-badge').classList.add('hidden');
+    }
+
+    function openNewPage() {
+      editingPageId = null;
+      slugManuallyEdited = false;
+      document.getElementById('pb-title').value = '';
+      document.getElementById('pb-slug').value = '';
+      document.getElementById('pb-subtitle').value = '';
+      document.getElementById('pb-layout').value = 'standard';
+      document.getElementById('pb-published').checked = true;
+      document.getElementById('pb-show-in-nav').checked = false;
+      document.getElementById('pb-nav-order').value = 0;
+      builderBlocks = [
+        {
+          type: 'hero',
+          badge: 'OFFICIAL GUIDE',
+          title: 'Page Headline Here',
+          subtitle: 'Add a concise description for employees and visitors.',
+          buttonText: 'View Downloads',
+          buttonUrl: '/downloads',
+          theme: 'blue'
+        }
+      ];
+      updateLiveUrlPill();
+      renderBlocksCanvas();
+      enterBuilder();
+    }
+
+    function openTemplate(templateName) {
+      editingPageId = null;
+      slugManuallyEdited = false;
+      if (templateName === 'guide') {
+        document.getElementById('pb-title').value = 'Employee Pay & Allowance Chart 2026';
+        document.getElementById('pb-slug').value = 'pay-allowance-chart-2026';
+        document.getElementById('pb-subtitle').value = 'Updated rates, official circulars, and calculation matrix.';
+        document.getElementById('pb-layout').value = 'sidebar';
+        builderBlocks = [
+          {
+            type: 'hero',
+            badge: 'FINANCE ORDER UPDATE',
+            title: 'Pay & Allowance Rate Chart 2026',
+            subtitle: 'Complete reference chart for DDOs, teachers, and state government staff.',
+            buttonText: 'Download Order PDF',
+            buttonUrl: '/downloads',
+            theme: 'blue'
+          },
+          {
+            type: 'alert',
+            variant: 'info',
+            title: 'Effective Date Notice',
+            message: 'Verify treasury bill codes in SPARK before processing monthly claims.'
+          },
+          {
+            type: 'table',
+            heading: 'Applicable Rate Schedule',
+            headers: ['Category', 'Existing Rate', 'Revised Rate', 'Remarks'],
+            rows: [
+              ['Category A', '35%', '37%', 'Applicable w.e.f 01/01/2026'],
+              ['Category B', 'Rs. 750', 'Rs. 850', 'Daily Wage Revision']
+            ]
+          }
+        ];
+      } else {
+        document.getElementById('pb-title').value = 'Guidelines & Frequently Asked Questions';
+        document.getElementById('pb-slug').value = 'guidelines-faq';
+        document.getElementById('pb-subtitle').value = 'Step-by-step instructions and answers to common departmental queries.';
+        document.getElementById('pb-layout').value = 'standard';
+        builderBlocks = [
+          {
+            type: 'hero',
+            badge: 'HELP DESK GUIDE',
+            title: 'Employee Circular & FAQ Guide',
+            subtitle: 'Clear explanations and statutory application links.',
+            buttonText: 'Open Services',
+            buttonUrl: '/services',
+            theme: 'emerald'
+          },
+          {
+            type: 'faq',
+            heading: 'Common Questions',
+            items: [
+              { question: 'How do I submit this application?', answer: 'Download the prescribed form from Downloads & Orders and submit via your DDO.' },
+              { question: 'Where can I check application status?', answer: 'Log into the official portal linked under Services Directory.' }
+            ]
+          },
+          {
+            type: 'download_cta',
+            title: 'Download Related Application Forms',
+            description: 'PDF & Excel utilities verified by Employees Services Kasaragod.',
+            buttonText: 'Go to Downloads',
+            buttonUrl: '/downloads',
+            newTab: false
+          }
+        ];
+      }
+      document.getElementById('pb-published').checked = true;
+      document.getElementById('pb-show-in-nav').checked = false;
+      document.getElementById('pb-nav-order').value = 0;
+      updateLiveUrlPill();
+      renderBlocksCanvas();
+      enterBuilder();
+    }
+
+    async function editPage(id) {
+      try {
+        const res = await fetch(`/api/v1/admin/pages/${id}`);
+        const json = await res.json();
+        if (!json.success || !json.data) {
+          alert('Could not load page details.');
+          return;
+        }
+        const p = json.data;
+        editingPageId = p.id;
+        slugManuallyEdited = true;
+        document.getElementById('pb-title').value = p.title || '';
+        document.getElementById('pb-slug').value = p.slug || '';
+        document.getElementById('pb-subtitle').value = p.subtitle || '';
+        document.getElementById('pb-layout').value = p.layout_mode || 'standard';
+        document.getElementById('pb-published').checked = Boolean(p.is_published);
+        document.getElementById('pb-show-in-nav').checked = Boolean(p.show_in_nav);
+        document.getElementById('pb-nav-order').value = p.nav_order || 0;
+        builderBlocks = Array.isArray(p.blocks) ? JSON.parse(JSON.stringify(p.blocks)) : [];
+        updateLiveUrlPill();
+        renderBlocksCanvas();
+        enterBuilder();
+      } catch (err) {
+        console.error(err);
+        alert('Error loading page.');
+      }
+    }
+
+    function addBlock(type) {
+      const defaults = {
+        hero: { type: 'hero', badge: 'SECTION TAG', title: 'Banner Title', subtitle: 'Banner subtitle text', buttonText: 'Learn More', buttonUrl: '/downloads', theme: 'blue' },
+        richtext: { type: 'richtext', heading: 'Section Heading', body: '<p>Enter formatted details here. You can include bold text, links, and bullet points.</p>' },
+        alert: { type: 'alert', variant: 'info', title: 'Important Notice', message: 'Enter alert or circular reminder details here.' },
+        cards: {
+          type: 'cards',
+          heading: 'Key Resources & Links',
+          columns: 3,
+          items: [
+            { icon: '📄', title: 'Resource One', description: 'Short summary', linkText: 'Open', linkUrl: '/downloads' },
+            { icon: '🏛️', title: 'Resource Two', description: 'Short summary', linkText: 'Open', linkUrl: '/services' }
+          ]
+        },
+        table: {
+          type: 'table',
+          heading: 'Data / Rate Chart',
+          headers: ['Column 1', 'Column 2', 'Column 3'],
+          rows: [
+            ['Row 1 A', 'Row 1 B', 'Row 1 C'],
+            ['Row 2 A', 'Row 2 B', 'Row 2 C']
+          ]
+        },
+        download_cta: { type: 'download_cta', title: 'Download Official Order / Form', description: 'Verified circular PDF ready for download.', buttonText: 'Download PDF', buttonUrl: '/downloads', newTab: false },
+        image: { type: 'image', src: '', alt: '', caption: '', align: 'center', maxWidth: 'lg' },
+        faq: {
+          type: 'faq',
+          heading: 'Frequently Asked Questions',
+          items: [{ question: 'Sample Question?', answer: 'Detailed helpful answer here.' }]
+        },
+        divider: { type: 'divider' },
+        html: { type: 'html', code: '<div class="p-4 bg-white rounded-xl border border-slate-200">\n  <p>Custom HTML block</p>\n</div>' }
+      };
+
+      builderBlocks.push(defaults[type] || { type: 'richtext', heading: '', body: '' });
+      renderBlocksCanvas();
+      // Scroll smoothly to newly added block
+      setTimeout(() => {
+        const canvas = document.getElementById('blocks-canvas');
+        if (canvas.lastElementChild) {
+          canvas.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 60);
+    }
+
+    function moveBlock(idx, dir) {
+      const target = idx + dir;
+      if (target < 0 || target >= builderBlocks.length) return;
+      const temp = builderBlocks[idx];
+      builderBlocks[idx] = builderBlocks[target];
+      builderBlocks[target] = temp;
+      renderBlocksCanvas();
+    }
+
+    function duplicateBlock(idx) {
+      const copy = JSON.parse(JSON.stringify(builderBlocks[idx]));
+      builderBlocks.splice(idx + 1, 0, copy);
+      renderBlocksCanvas();
+    }
+
+    function removeBlock(idx) {
+      builderBlocks.splice(idx, 1);
+      renderBlocksCanvas();
+    }
+
+    function updateBlockField(idx, field, val) {
+      if (!builderBlocks[idx]) return;
+      builderBlocks[idx][field] = val;
+    }
+
+    // Nested helpers for Cards / Table / FAQ
+    function addCardItem(blockIdx) {
+      builderBlocks[blockIdx].items.push({ icon: '📄', title: 'New Card', description: 'Description', linkText: 'View', linkUrl: '/downloads' });
+      renderBlocksCanvas();
+    }
+    function removeCardItem(blockIdx, cardIdx) {
+      builderBlocks[blockIdx].items.splice(cardIdx, 1);
+      renderBlocksCanvas();
+    }
+    function updateCardField(blockIdx, cardIdx, field, val) {
+      builderBlocks[blockIdx].items[cardIdx][field] = val;
+    }
+
+    function addFaqItem(blockIdx) {
+      builderBlocks[blockIdx].items.push({ question: 'New Question?', answer: 'Answer here.' });
+      renderBlocksCanvas();
+    }
+    function removeFaqItem(blockIdx, faqIdx) {
+      builderBlocks[blockIdx].items.splice(faqIdx, 1);
+      renderBlocksCanvas();
+    }
+    function updateFaqField(blockIdx, faqIdx, field, val) {
+      builderBlocks[blockIdx].items[faqIdx][field] = val;
+    }
+
+    function addTableColumn(blockIdx) {
+      const b = builderBlocks[blockIdx];
+      b.headers.push(`Col ${b.headers.length + 1}`);
+      b.rows.forEach(r => r.push(''));
+      renderBlocksCanvas();
+    }
+    function removeTableColumn(blockIdx, colIdx) {
+      const b = builderBlocks[blockIdx];
+      if (b.headers.length <= 1) return;
+      b.headers.splice(colIdx, 1);
+      b.rows.forEach(r => r.splice(colIdx, 1));
+      renderBlocksCanvas();
+    }
+    function addTableRow(blockIdx) {
+      const b = builderBlocks[blockIdx];
+      b.rows.push(new Array(b.headers.length).fill(''));
+      renderBlocksCanvas();
+    }
+    function removeTableRow(blockIdx, rowIdx) {
+      builderBlocks[blockIdx].rows.splice(rowIdx, 1);
+      renderBlocksCanvas();
+    }
+
+    function wrapRichTextSelection(blockIdx, tag) {
+      const textarea = document.getElementById(`richtext-body-${blockIdx}`);
+      if (!textarea) return;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const selected = textarea.value.substring(start, end) || 'Text';
+      let insertion = `<${tag}>${selected}</${tag}>`;
+      if (tag === 'a') {
+        const href = prompt('Enter URL (e.g. /downloads or https://...):', '/downloads');
+        if (!href) return;
+        insertion = `<a href="${href}">${selected}</a>`;
+      } else if (tag === 'ul') {
+        insertion = `\n<ul>\n  <li>${selected}</li>\n  <li>Item 2</li>\n</ul>`;
+      } else if (tag === 'p') {
+        insertion = `\n<p>${selected}</p>`;
+      }
+      textarea.value = textarea.value.substring(0, start) + insertion + textarea.value.substring(end);
+      builderBlocks[blockIdx].body = textarea.value;
+    }
+
+    function renderBlockBodyEditor(b, idx) {
+      switch (b.type) {
+        case 'hero':
+          return `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Badge Tag</label>
+                <input type="text" value="${escapeHtml(b.badge || '')}" oninput="updateBlockField(${idx}, 'badge', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Banner Color Theme</label>
+                <select onchange="updateBlockField(${idx}, 'theme', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white">
+                  <option value="blue" ${b.theme === 'blue' ? 'selected' : ''}>Royal Blue (Official)</option>
+                  <option value="emerald" ${b.theme === 'emerald' ? 'selected' : ''}>Emerald Green</option>
+                  <option value="amber" ${b.theme === 'amber' ? 'selected' : ''}>Amber Gold</option>
+                  <option value="slate" ${b.theme === 'slate' ? 'selected' : ''}>Dark Slate</option>
+                </select>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Hero Headline</label>
+                <input type="text" value="${escapeHtml(b.title || '')}" oninput="updateBlockField(${idx}, 'title', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-sm font-semibold">
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Subtitle / Description</label>
+                <textarea rows="2" oninput="updateBlockField(${idx}, 'subtitle', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs">${escapeHtml(b.subtitle || '')}</textarea>
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">CTA Button Text (optional)</label>
+                <input type="text" value="${escapeHtml(b.buttonText || '')}" oninput="updateBlockField(${idx}, 'buttonText', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">CTA Button URL</label>
+                <input type="text" value="${escapeHtml(b.buttonUrl || '')}" oninput="updateBlockField(${idx}, 'buttonUrl', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-mono">
+              </div>
+            </div>
+          `;
+
+        case 'richtext':
+          return `
+            <div class="space-y-2.5">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Section Heading (optional)</label>
+                <input type="text" value="${escapeHtml(b.heading || '')}" oninput="updateBlockField(${idx}, 'heading', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold">
+              </div>
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <label class="text-[11px] font-bold text-slate-600">Article / Body Content (HTML supported)</label>
+                  <div class="flex items-center gap-1">
+                    <button type="button" onclick="wrapRichTextSelection(${idx}, 'strong')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-[11px] font-bold cursor-pointer">B</button>
+                    <button type="button" onclick="wrapRichTextSelection(${idx}, 'em')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-[11px] italic cursor-pointer">I</button>
+                    <button type="button" onclick="wrapRichTextSelection(${idx}, 'p')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-[11px] cursor-pointer">Paragraph</button>
+                    <button type="button" onclick="wrapRichTextSelection(${idx}, 'ul')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-[11px] cursor-pointer">• List</button>
+                    <button type="button" onclick="wrapRichTextSelection(${idx}, 'a')" class="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-[11px] text-blue-700 font-semibold cursor-pointer">Link</button>
+                  </div>
+                </div>
+                <textarea id="richtext-body-${idx}" rows="5" oninput="updateBlockField(${idx}, 'body', this.value)" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-mono">${escapeHtml(b.body || '')}</textarea>
+              </div>
+            </div>
+          `;
+
+        case 'alert':
+          return `
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Alert Style</label>
+                <select onchange="updateBlockField(${idx}, 'variant', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white">
+                  <option value="info" ${b.variant === 'info' ? 'selected' : ''}>ℹ️ Info (Blue)</option>
+                  <option value="warning" ${b.variant === 'warning' ? 'selected' : ''}>⚠️ Important (Amber)</option>
+                  <option value="urgent" ${b.variant === 'urgent' ? 'selected' : ''}>🚨 Urgent (Red)</option>
+                  <option value="success" ${b.variant === 'success' ? 'selected' : ''}>✅ Verified (Green)</option>
+                </select>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Notice Title</label>
+                <input type="text" value="${escapeHtml(b.title || '')}" oninput="updateBlockField(${idx}, 'title', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold">
+              </div>
+              <div class="sm:col-span-3">
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Notice Message</label>
+                <textarea rows="2" oninput="updateBlockField(${idx}, 'message', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs">${escapeHtml(b.message || '')}</textarea>
+              </div>
+            </div>
+          `;
+
+        case 'cards':
+          return `
+            <div class="space-y-3">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="sm:col-span-2">
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">Grid Section Heading</label>
+                  <input type="text" value="${escapeHtml(b.heading || '')}" oninput="updateBlockField(${idx}, 'heading', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">Columns</label>
+                  <select onchange="updateBlockField(${idx}, 'columns', parseInt(this.value, 10))" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white">
+                    <option value="2" ${Number(b.columns) === 2 ? 'selected' : ''}>2 Columns</option>
+                    <option value="3" ${Number(b.columns) !== 2 ? 'selected' : ''}>3 Columns</option>
+                  </select>
+                </div>
+              </div>
+              <div class="space-y-2">
+                ${(b.items || []).map((c, cIdx) => `
+                  <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 grid grid-cols-1 sm:grid-cols-12 gap-2 items-center">
+                    <input type="text" value="${escapeHtml(c.icon || '')}" oninput="updateCardField(${idx}, ${cIdx}, 'icon', this.value)" placeholder="Icon" class="sm:col-span-1 px-2 py-1 rounded border border-slate-200 text-center text-sm bg-white">
+                    <input type="text" value="${escapeHtml(c.title || '')}" oninput="updateCardField(${idx}, ${cIdx}, 'title', this.value)" placeholder="Card Title" class="sm:col-span-3 px-2.5 py-1 rounded border border-slate-200 text-xs font-semibold bg-white">
+                    <input type="text" value="${escapeHtml(c.description || '')}" oninput="updateCardField(${idx}, ${cIdx}, 'description', this.value)" placeholder="Short description" class="sm:col-span-4 px-2.5 py-1 rounded border border-slate-200 text-xs bg-white">
+                    <input type="text" value="${escapeHtml(c.linkUrl || '')}" oninput="updateCardField(${idx}, ${cIdx}, 'linkUrl', this.value)" placeholder="URL (/downloads)" class="sm:col-span-3 px-2.5 py-1 rounded border border-slate-200 text-xs font-mono bg-white">
+                    <button type="button" onclick="removeCardItem(${idx}, ${cIdx})" class="sm:col-span-1 text-rose-600 hover:bg-rose-50 py-1 rounded text-xs font-bold cursor-pointer">✕</button>
+                  </div>
+                `).join('')}
+                <button type="button" onclick="addCardItem(${idx})" class="px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-800 text-xs font-bold cursor-pointer">+ Add Card Item</button>
+              </div>
+            </div>
+          `;
+
+        case 'table':
+          return `
+            <div class="space-y-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <input type="text" value="${escapeHtml(b.heading || '')}" oninput="updateBlockField(${idx}, 'heading', this.value)" placeholder="Table Title / Heading" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold w-full sm:w-72">
+                <div class="flex gap-2">
+                  <button type="button" onclick="addTableColumn(${idx})" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold cursor-pointer">+ Column</button>
+                  <button type="button" onclick="addTableRow(${idx})" class="px-2.5 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-800 text-[11px] font-bold cursor-pointer">+ Row</button>
+                </div>
+              </div>
+              <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                <table class="w-full text-xs">
+                  <thead class="bg-slate-100">
+                    <tr>
+                      ${(b.headers || []).map((h, hIdx) => `
+                        <th class="p-1.5 border-r border-slate-200">
+                          <div class="flex items-center gap-1">
+                            <input type="text" value="${escapeHtml(h)}" oninput="builderBlocks[${idx}].headers[${hIdx}] = this.value" class="w-full px-2 py-1 rounded border border-slate-200 bg-white font-bold text-[11px]">
+                            <button type="button" onclick="removeTableColumn(${idx}, ${hIdx})" class="text-rose-500 text-[10px] px-1 cursor-pointer" title="Remove column">✕</button>
+                          </div>
+                        </th>
+                      `).join('')}
+                      <th class="w-10"></th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200">
+                    ${(b.rows || []).map((row, rIdx) => `
+                      <tr>
+                        ${row.map((cell, cIdx) => `
+                          <td class="p-1.5 border-r border-slate-200">
+                            <input type="text" value="${escapeHtml(cell)}" oninput="builderBlocks[${idx}].rows[${rIdx}][${cIdx}] = this.value" class="w-full px-2 py-1 rounded border border-slate-100 focus:border-blue-400 text-xs">
+                          </td>
+                        `).join('')}
+                        <td class="p-1.5 text-center">
+                          <button type="button" onclick="removeTableRow(${idx}, ${rIdx})" class="text-rose-600 hover:bg-rose-50 px-1.5 py-0.5 rounded text-xs font-bold cursor-pointer">✕</button>
+                        </td>
+                      </tr>
+                    `).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+
+        case 'download_cta':
+          return `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">CTA Title</label>
+                <input type="text" value="${escapeHtml(b.title || '')}" oninput="updateBlockField(${idx}, 'title', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Description</label>
+                <input type="text" value="${escapeHtml(b.description || '')}" oninput="updateBlockField(${idx}, 'description', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Button Label</label>
+                <input type="text" value="${escapeHtml(b.buttonText || '')}" oninput="updateBlockField(${idx}, 'buttonText', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">Target URL or Uploaded Attachment</label>
+                <div class="flex items-center gap-2">
+                  <input type="text" value="${escapeHtml(b.buttonUrl || '')}" oninput="updateBlockField(${idx}, 'buttonUrl', this.value)" class="flex-1 min-w-0 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-mono">
+                  <label class="px-3 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 text-xs font-bold cursor-pointer shrink-0">
+                    📎 Upload File
+                    <input type="file" accept=".pdf,.docx,.xlsx,.zip,.jpg,.jpeg,.png,.txt" class="hidden" onchange="uploadBlockAsset(${idx}, 'attachment', this)">
+                  </label>
+                </div>
+              </div>
+            </div>
+          `;
+
+        case 'image':
+          return `
+            <div class="space-y-3">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="sm:col-span-2">
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">Image URL or Upload Image</label>
+                  <div class="flex items-center gap-2">
+                    <input type="text" value="${escapeHtml(b.src || '')}" placeholder="https://... or /storage/page-assets/..." oninput="updateBlockField(${idx}, 'src', this.value)" class="flex-1 min-w-0 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-mono">
+                    <label class="px-3 py-1.5 rounded-lg bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 text-xs font-bold cursor-pointer shrink-0">
+                      🖼️ Upload Image
+                      <input type="file" accept="image/*" class="hidden" onchange="uploadBlockAsset(${idx}, 'image', this)">
+                    </label>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">Alt Text (Accessibility)</label>
+                  <input type="text" value="${escapeHtml(b.alt || '')}" placeholder="Describe the image" oninput="updateBlockField(${idx}, 'alt', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">Caption (Optional)</label>
+                  <input type="text" value="${escapeHtml(b.caption || '')}" placeholder="Caption below image" oninput="updateBlockField(${idx}, 'caption', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">Alignment</label>
+                  <select onchange="updateBlockField(${idx}, 'align', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
+                    <option value="center" ${(!b.align || b.align === 'center') ? 'selected' : ''}>Center</option>
+                    <option value="left" ${b.align === 'left' ? 'selected' : ''}>Left</option>
+                    <option value="right" ${b.align === 'right' ? 'selected' : ''}>Right</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">Width Size</label>
+                  <select onchange="updateBlockField(${idx}, 'maxWidth', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
+                    <option value="sm" ${b.maxWidth === 'sm' ? 'selected' : ''}>Small (max-w-md)</option>
+                    <option value="md" ${b.maxWidth === 'md' ? 'selected' : ''}>Medium (max-w-2xl)</option>
+                    <option value="lg" ${(!b.maxWidth || b.maxWidth === 'lg') ? 'selected' : ''}>Large (max-w-4xl)</option>
+                    <option value="full" ${b.maxWidth === 'full' ? 'selected' : ''}>Full Width</option>
+                  </select>
+                </div>
+              </div>
+              ${b.src ? `
+                <div class="p-2 bg-slate-50 rounded-xl border border-slate-200 flex items-center gap-3">
+                  <img src="${escapeHtml(b.src)}" alt="Preview" class="h-16 w-24 object-cover rounded-lg border border-slate-200 bg-white">
+                  <span class="text-[11px] text-slate-500 font-mono truncate flex-1">${escapeHtml(b.src)}</span>
+                </div>
+              ` : ''}
+            </div>
+          `;
+
+        case 'faq':
+          return `
+            <div class="space-y-3">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 mb-1">FAQ Section Heading</label>
+                <input type="text" value="${escapeHtml(b.heading || '')}" oninput="updateBlockField(${idx}, 'heading', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold">
+              </div>
+              <div class="space-y-2">
+                ${(b.items || []).map((f, fIdx) => `
+                  <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs font-extrabold text-blue-900">Q:</span>
+                      <input type="text" value="${escapeHtml(f.question || '')}" oninput="updateFaqField(${idx}, ${fIdx}, 'question', this.value)" class="flex-1 px-2.5 py-1 rounded border border-slate-200 text-xs font-semibold bg-white">
+                      <button type="button" onclick="removeFaqItem(${idx}, ${fIdx})" class="text-rose-600 hover:bg-rose-50 px-2 py-1 rounded text-xs font-bold cursor-pointer">✕</button>
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <span class="text-xs font-extrabold text-emerald-700 mt-1">A:</span>
+                      <textarea rows="2" oninput="updateFaqField(${idx}, ${fIdx}, 'answer', this.value)" class="flex-1 px-2.5 py-1 rounded border border-slate-200 text-xs bg-white">${escapeHtml(f.answer || '')}</textarea>
+                    </div>
+                  </div>
+                `).join('')}
+                <button type="button" onclick="addFaqItem(${idx})" class="px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-800 text-xs font-bold cursor-pointer">+ Add Question &amp; Answer</button>
+              </div>
+            </div>
+          `;
+
+        case 'divider':
+          return `<div class="py-2 flex items-center gap-3 text-xs text-slate-400"><hr class="flex-1 border-slate-300"><span>Horizontal Divider Line</span><hr class="flex-1 border-slate-300"></div>`;
+
+        case 'html':
+          return `
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-1">Custom HTML (Tailwind classes allowed; scripts stripped automatically for safety)</label>
+              <textarea rows="5" oninput="updateBlockField(${idx}, 'code', this.value)" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-mono bg-slate-950 text-emerald-300">${escapeHtml(b.code || '')}</textarea>
+            </div>
+          `;
+
+        default:
+          return '';
+      }
+    }
+
+    function renderBlocksCanvas() {
+      const canvas = document.getElementById('blocks-canvas');
+      if (!builderBlocks.length) {
+        canvas.innerHTML = `
+          <div class="bg-white rounded-2xl border-2 border-dashed border-slate-300 p-10 text-center">
+            <p class="text-sm font-bold text-slate-600">Your page canvas is currently empty</p>
+            <p class="text-xs text-slate-400 mt-1">Click any block type from the palette above (Hero Banner, Rich Text, Data Table, etc.) to start building!</p>
+          </div>
+        `;
+        return;
+      }
+
+      canvas.innerHTML = builderBlocks.map((b, idx) => {
+        const meta = BLOCK_META[b.type] || { label: b.type, icon: '📦', color: 'border-l-slate-500' };
+        return `
+          <div class="bg-white rounded-2xl border border-slate-200 border-l-4 ${meta.color} shadow-xs overflow-hidden">
+            <div class="bg-slate-50/90 px-4 py-2.5 border-b border-slate-200/80 flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-base">${meta.icon}</span>
+                <span class="text-xs font-extrabold uppercase tracking-wider text-slate-700 font-heading">${meta.label}</span>
+                <span class="text-[10px] font-mono text-slate-400">#${idx + 1}</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <button type="button" onclick="moveBlock(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} class="px-2 py-1 rounded bg-white border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-100 disabled:opacity-40 cursor-pointer" title="Move Up">&uarr;</button>
+                <button type="button" onclick="moveBlock(${idx}, 1)" ${idx === builderBlocks.length - 1 ? 'disabled' : ''} class="px-2 py-1 rounded bg-white border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-100 disabled:opacity-40 cursor-pointer" title="Move Down">&darr;</button>
+                <button type="button" onclick="duplicateBlock(${idx})" class="px-2 py-1 rounded bg-white border border-slate-200 text-xs font-semibold text-blue-700 hover:bg-blue-50 cursor-pointer" title="Duplicate">Copy</button>
+                <button type="button" onclick="removeBlock(${idx})" class="px-2 py-1 rounded bg-white border border-rose-200 text-xs font-bold text-rose-600 hover:bg-rose-50 cursor-pointer" title="Remove Block">✕</button>
+              </div>
+            </div>
+            <div class="p-4">
+              ${renderBlockBodyEditor(b, idx)}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function togglePreviewMode() {
+      isPreviewActive = !isPreviewActive;
+      const editorEl = document.getElementById('pb-editor-container');
+      const previewEl = document.getElementById('pb-preview-container');
+      const btn = document.getElementById('toggle-preview-btn');
+
+      if (!isPreviewActive) {
+        previewEl.classList.add('hidden');
+        editorEl.classList.remove('hidden');
+        btn.innerHTML = '<span>👁️ Live Preview</span>';
+        return;
+      }
+
+      editorEl.classList.add('hidden');
+      previewEl.classList.remove('hidden');
+      btn.innerHTML = '<span>✏️ Back to Editor</span>';
+
+      const output = document.getElementById('pb-preview-output');
+      output.innerHTML = '<div class="py-12 text-center text-slate-500 text-xs">Rendering preview...</div>';
+
+      try {
+        const res = await fetch('/api/v1/admin/pages/preview', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken,
+          },
+          body: JSON.stringify({ blocks: builderBlocks }),
+        });
+        const json = await res.json();
+        const title = document.getElementById('pb-title').value.trim();
+        const subtitle = document.getElementById('pb-subtitle').value.trim();
+        const hasHeroFirst = builderBlocks.length > 0 && builderBlocks[0].type === 'hero';
+        const headerHtml = !hasHeroFirst && title ? `
+          <header class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs mb-6">
+            <h1 class="text-2xl sm:text-3xl font-black text-slate-900 font-heading tracking-tight">${escapeHtml(title)}</h1>
+            ${subtitle ? `<p class="text-sm text-slate-600 mt-2">${escapeHtml(subtitle)}</p>` : ''}
+          </header>
+        ` : '';
+        output.innerHTML = headerHtml + (json.html || '<div class="bg-white rounded-xl p-8 text-center text-slate-400">No blocks added yet.</div>');
+      } catch (err) {
+        output.innerHTML = '<div class="text-rose-600 text-xs">Failed to render preview.</div>';
+      }
+    }
+
+    async function savePage() {
+      const title = document.getElementById('pb-title').value.trim();
+      const slug = document.getElementById('pb-slug').value.trim();
+      if (!title) {
+        alert('Page Title is required.');
+        return;
+      }
+
+      const payload = {
+        title,
+        slug,
+        subtitle: document.getElementById('pb-subtitle').value.trim(),
+        meta_description: document.getElementById('pb-subtitle').value.trim(),
+        layout_mode: document.getElementById('pb-layout').value,
+        is_published: document.getElementById('pb-published').checked,
+        show_in_nav: document.getElementById('pb-show-in-nav').checked,
+        nav_order: parseInt(document.getElementById('pb-nav-order').value, 10) || 0,
+        blocks: builderBlocks,
+      };
+
+      const btn = document.getElementById('save-page-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<span>Saving...</span>';
+
+      try {
+        const endpoint = editingPageId ? `/api/v1/admin/pages/${editingPageId}` : '/api/v1/admin/pages';
+        const method = editingPageId ? 'PUT' : 'POST';
+
+        const res = await fetch(endpoint, {
+          method,
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken,
+          },
+          body: JSON.stringify(payload),
+        });
+        const json = await res.json();
+        if (res.ok && json.success) {
+          await loadPages();
+          exitBuilder();
+        } else {
+          alert(json.message || 'Could not save dynamic page.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Network error while saving.');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span>💾 Save Page</span>';
+      }
+    }
+
+    async function togglePublish(id, newState) {
+      try {
+        const res = await fetch(`/api/v1/admin/pages/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken,
+          },
+          body: JSON.stringify({ is_published: newState }),
+        });
+        const json = await res.json();
+        if (json.success) {
+          await loadPages();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function deletePage(id) {
+      if (!confirm('Are you sure you want to delete this dynamic page?')) return;
+      try {
+        const res = await fetch(`/api/v1/admin/pages/${id}`, {
+          method: 'DELETE',
+          headers: { 'X-CSRF-Token': csrfToken },
+        });
+        const json = await res.json();
+        if (json.success) {
+          await loadPages();
+        } else {
+          alert(json.message || 'Failed to delete page.');
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function uploadBlockAsset(idx, kind, inputEl) {
+      const file = inputEl.files && inputEl.files[0];
+      if (!file) return;
+
+      const isImage = kind === 'image';
+      const endpoint = isImage ? '/api/v1/admin/pages/upload-image' : '/api/v1/admin/pages/upload-attachment';
+      const fieldName = isImage ? 'image' : 'file';
+
+      const formData = new FormData();
+      formData.append(fieldName, file);
+
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'X-CSRF-Token': csrfToken },
+          body: formData,
+        });
+        const json = await res.json();
+        if (!res.ok || !json.success) {
+          alert(json.message || 'Upload failed.');
+          return;
+        }
+        if (isImage) {
+          builderBlocks[idx].src = json.url;
+          if (!builderBlocks[idx].alt) {
+            builderBlocks[idx].alt = (json.original_name || file.name).replace(/\.[^/.]+$/, '');
+          }
+        } else {
+          builderBlocks[idx].buttonUrl = json.url;
+        }
+        renderBlocksCanvas();
+      } catch (err) {
+        console.error(err);
+        alert('Error uploading file. Please try again.');
+      } finally {
+        inputEl.value = '';
+      }
+    }
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const ok = await ensureAuthAndCsrf();
+      if (!ok) return;
+      await loadPages();
+
+      document.getElementById('admin-logout-btn')?.addEventListener('click', async () => {
+        try {
+          await fetch('/api/v1/admin/auth/logout', { method: 'POST', headers: { 'X-CSRF-Token': csrfToken } });
+        } finally {
+          window.location.href = '/admin/login';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

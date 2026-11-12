@@ -99,38 +99,23 @@
             </div>
           </div>
 
-          <!-- 2. Featured Departmental Bulletin & Order Card (keralaservice.org Model in screenshot) -->
-          <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
-            <div class="bg-gradient-to-r from-emerald-100/90 via-slate-100 to-amber-100/70 px-4 py-2.5 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+          <!-- 2. Latest Dynamic Service Pages & Guides (Compact Summary Cards) -->
+          <section aria-labelledby="latest-pages-heading" class="space-y-3">
+            <div class="flex items-center justify-between px-1">
               <div class="flex items-center gap-2">
-                <span id="featured-order-tag" class="bg-emerald-700 text-white font-extrabold text-[9px] uppercase px-2 py-0.5 rounded shadow-xs tracking-wider">
-                  OFFICIAL GAZETTE ORDER
-                </span>
-                <h4 id="featured-order-title" class="font-black text-xs sm:text-sm text-slate-900 font-heading">
-                  Dearness Allowance Enhanced 2% w.e.f 01/01/2026 - Order dated 17/10/2026
-                </h4>
+                <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                <h3 id="latest-pages-heading" class="font-heading font-black text-xs sm:text-sm uppercase tracking-wider text-slate-800">
+                  Latest Employee Service Pages &amp; Guides
+                </h3>
               </div>
-              <span id="featured-order-ref" class="text-[11px] font-mono text-slate-600 font-semibold hidden md:inline">GO(P) No.108/2026/FIN</span>
+              <span class="text-[11px] font-semibold text-slate-500">Updated Guides</span>
             </div>
-            <div class="p-4 text-xs sm:text-sm text-slate-700 leading-relaxed space-y-2.5">
-              <p id="featured-order-desc">
-                Vide GO(P) No.108/2026/FIN Dated 17/10/2026, sanctioned 2% of Dearness Allowance due on 01/01/2026 to Kerala Government Employees and Teachers along with the salary of October 2026. The DA enhanced from the existing 35% to 37%. Also enhanced dearness relief to Pensioners along with the pension of November 2026. A separate order will be issued regarding the DA arrears from 01/01/2026 to 30/09/2026.
-              </p>
-              <div class="pt-2.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
-                <div class="flex items-center gap-1.5 text-xs min-w-0 flex-1">
-                  <span class="text-slate-900 font-bold shrink-0">Related Download:</span>
-                  <a id="featured-order-related-link" href="/downloads" target="_blank" rel="noopener noreferrer" class="text-blue-900 hover:text-blue-700 underline font-extrabold flex items-center gap-1 truncate">
-                    <span class="related-link-title truncate">Dearness Allowance 2% w.e.f 01/01/2026 - Order dated 17/10/2026</span>
-                    <span class="bg-red-600 text-white font-black text-[9px] uppercase px-1.5 py-0.2 rounded animate-pulse shrink-0">HOT</span>
-                  </a>
-                </div>
-                <a id="featured-order-btn" href="/downloads" target="_blank" rel="noopener noreferrer" class="gov-blue-btn px-4 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5 shadow-xs shrink-0">
-                  <span>Download Order PDF</span>
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                </a>
+            <div id="home-latest-pages" class="space-y-3">
+              <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 text-xs text-slate-500">
+                Loading latest service pages...
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- 3. Authorized Resource Directory Hub (TRACES / PRISM Launcher Card) -->
           <div class="gov-hero-gradient rounded-2xl p-5 sm:p-6 text-white shadow-xl border-2 border-blue-900/40">
@@ -226,7 +211,28 @@
             </form>
           </div>
 
-          <!-- 2. Popular Article Card (keralaservice.org Model in screenshot) -->
+          <!-- 2. Important Notices & Real-time DDO Stream Card -->
+          <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-3.5 py-2 border-b border-slate-200 flex items-center justify-between">
+              <h4 class="font-extrabold text-xs uppercase tracking-wide text-slate-900 font-heading flex items-center gap-1.5">
+                <span class="inline-block w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
+                <span id="live-feed-status">Important Notices</span>
+              </h4>
+              <div class="flex items-center gap-1">
+                <button id="live-feed-prev" class="w-5 h-5 rounded hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold cursor-pointer" title="Previous Notice">&larr;</button>
+                <span id="live-feed-counter" class="text-[9px] font-mono text-blue-900 bg-blue-50 px-1 rounded font-bold border border-blue-200">1/4</span>
+                <button id="live-feed-next" class="w-5 h-5 rounded hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold cursor-pointer" title="Next Notice">&rarr;</button>
+              </div>
+            </div>
+            <div id="live-feed-container" class="p-3 space-y-2 text-xs min-h-[160px]">
+              <div class="p-2.5 rounded-lg bg-blue-50/70 border border-blue-100 text-xs animate-pulse">Loading verified notices...</div>
+            </div>
+            <div class="bg-slate-50 px-3 py-1.5 border-t border-slate-100 text-center">
+              <a href="/downloads" class="text-[11px] font-bold text-blue-900 hover:underline">View All Notices &amp; Circulars &rarr;</a>
+            </div>
+          </div>
+
+          <!-- 3. Popular Article Card (keralaservice.org Model in screenshot) -->
           <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
             <div class="bg-slate-50 px-3.5 py-2 border-b border-slate-200 flex items-center justify-between">
               <h4 class="font-extrabold text-xs uppercase tracking-wide text-slate-900 font-heading flex items-center gap-1.5">
@@ -274,7 +280,7 @@
             </div>
           </div>
 
-          <!-- 3. Latest Download Card (keralaservice.org Model in screenshot) -->
+          <!-- 4. Latest Download Card (keralaservice.org Model in screenshot) -->
           <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
             <div class="bg-slate-50 px-3.5 py-2 border-b border-slate-200 flex items-center justify-between">
               <h4 class="font-extrabold text-xs uppercase tracking-wide text-slate-900 font-heading flex items-center gap-1.5">
@@ -324,27 +330,6 @@
                   <span class="text-emerald-700 font-medium">Finance Dept</span>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <!-- 4. Important Notices & Real-time DDO Stream Card -->
-          <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
-            <div class="bg-slate-50 px-3.5 py-2 border-b border-slate-200 flex items-center justify-between">
-              <h4 class="font-extrabold text-xs uppercase tracking-wide text-slate-900 font-heading flex items-center gap-1.5">
-                <span class="inline-block w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
-                <span id="live-feed-status">Important Notices</span>
-              </h4>
-              <div class="flex items-center gap-1">
-                <button id="live-feed-prev" class="w-5 h-5 rounded hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold cursor-pointer" title="Previous Notice">&larr;</button>
-                <span id="live-feed-counter" class="text-[9px] font-mono text-blue-900 bg-blue-50 px-1 rounded font-bold border border-blue-200">1/4</span>
-                <button id="live-feed-next" class="w-5 h-5 rounded hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold cursor-pointer" title="Next Notice">&rarr;</button>
-              </div>
-            </div>
-            <div id="live-feed-container" class="p-3 space-y-2 text-xs min-h-[160px]">
-              <div class="p-2.5 rounded-lg bg-blue-50/70 border border-blue-100 text-xs animate-pulse">Loading verified notices...</div>
-            </div>
-            <div class="bg-slate-50 px-3 py-1.5 border-t border-slate-100 text-center">
-              <a href="/downloads" class="text-[11px] font-bold text-blue-900 hover:underline">View All Notices &amp; Circulars &rarr;</a>
             </div>
           </div>
 
@@ -1267,62 +1252,82 @@
 
       await initLatestDownloads();
 
-      // 0.3 Featured Departmental Bulletin & Order Card (Dynamic from /api/v1/downloads)
-      async function initFeaturedOrder() {
-        const titleEl = document.getElementById('featured-order-title');
-        const descEl = document.getElementById('featured-order-desc');
-        const relatedLinkEl = document.getElementById('featured-order-related-link');
-        const btnEl = document.getElementById('featured-order-btn');
-        const tagEl = document.getElementById('featured-order-tag');
-        const refEl = document.getElementById('featured-order-ref');
+      // 0.3 Latest Dynamic Service Pages (3-5 compact summary cards from /api/v1/pages)
+      async function initLatestPages() {
+        const container = document.getElementById('home-latest-pages');
+        if (!container) return;
 
-        if (!titleEl) return;
+        const escapeSafe = (str) => {
+          if (!str) return '';
+          return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+        };
 
         try {
-          const res = await fetch('/api/v1/downloads?limit=6');
+          const res = await fetch('/api/v1/pages');
           const data = await res.json();
-          if (data && data.success && Array.isArray(data.data) && data.data.length > 0) {
-            // Find the newest Government Order, or default to the most recent download
-            const item = data.data.find(d => d.category && d.category.toLowerCase().includes('order')) || data.data[0];
-            if (!item) return;
-
-            // Extract official order reference code if present in title (e.g. GO(P) No. 42/2026/Fin)
-            let orderRef = '';
-            const match = item.title.match(/(GO\([A-Z]+\)\s*No\.?[^\s—–-]+(?:\/[A-Z0-9]+)*)/i);
-            if (match) {
-              orderRef = match[1];
-            } else if (item.original_filename) {
-              orderRef = item.original_filename.replace(/\.[^/.]+$/, '').replace(/_/g, ' ');
-            }
-
-            if (tagEl) tagEl.textContent = (item.category || 'OFFICIAL GAZETTE ORDER').toUpperCase();
-            if (refEl) {
-              if (orderRef) {
-                refEl.textContent = orderRef;
-                refEl.classList.remove('hidden');
-              } else {
-                refEl.classList.add('hidden');
-              }
-            }
-            if (titleEl) titleEl.textContent = item.title;
-            if (descEl) descEl.textContent = item.description || 'Official government order copy issued for state employees, teachers, and DDO establishments.';
-
-            const fileUrl = `/api/v1/downloads/${item.id}/file`;
-            if (relatedLinkEl) {
-              relatedLinkEl.href = fileUrl;
-              const linkSpan = relatedLinkEl.querySelector('.related-link-title');
-              if (linkSpan) linkSpan.textContent = item.title;
-            }
-            if (btnEl) {
-              btnEl.href = fileUrl;
-            }
+          if (!data || !data.success || !Array.isArray(data.data) || data.data.length === 0) {
+            container.innerHTML = `
+              <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 text-xs text-slate-500">
+                No published service pages available yet.
+              </div>
+            `;
+            return;
           }
+
+          const latestPages = [...data.data]
+            .sort((a, b) => {
+              const timeDiff = new Date(b.updated_at || 0).getTime() - new Date(a.updated_at || 0).getTime();
+              return timeDiff !== 0 ? timeDiff : (b.id || 0) - (a.id || 0);
+            })
+            .slice(0, 4);
+
+          container.innerHTML = latestPages.map((page) => {
+            const pageUrl = `/p/${encodeURIComponent(page.slug)}`;
+            const safeTitle = escapeSafe(page.title || 'Service Page');
+            const safeSubtitle = escapeSafe(
+              page.subtitle || 'Detailed Kerala government employee service guide, rules, and reference information.'
+            );
+            const isMalayalam = /[\u0D00-\u0D7F]/.test(page.title || '');
+            const badgeText = isMalayalam ? 'മലയാളം' : 'SERVICE GUIDE';
+            const badgeClass = isMalayalam ? 'bg-emerald-700' : 'bg-blue-900';
+            const updatedDate = page.updated_at
+              ? new Date(page.updated_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
+              : '';
+
+            return `
+              <article class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden hover:border-blue-300 transition-colors">
+                <div class="bg-gradient-to-r from-emerald-100/80 via-slate-100 to-amber-100/60 px-4 py-2.5 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                  <div class="flex items-center gap-2 min-w-0">
+                    <span class="${badgeClass} text-white font-extrabold text-[9px] uppercase px-2 py-0.5 rounded shadow-xs tracking-wider shrink-0">
+                      ${badgeText}
+                    </span>
+                    <h4 class="font-black text-xs sm:text-sm text-slate-900 font-heading truncate">
+                      <a href="${pageUrl}" class="hover:text-blue-800 transition-colors">${safeTitle}</a>
+                    </h4>
+                  </div>
+                  ${updatedDate ? `<span class="text-[11px] font-mono text-slate-600 font-semibold shrink-0">${escapeSafe(updatedDate)}</span>` : ''}
+                </div>
+                <div class="p-4 text-xs sm:text-sm text-slate-700 leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <p class="line-clamp-2 min-w-0 flex-1">${safeSubtitle}</p>
+                  <a href="${pageUrl}" class="gov-blue-btn px-4 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5 shadow-xs shrink-0 self-start sm:self-center">
+                    <span>View Guide</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                  </a>
+                </div>
+              </article>
+            `;
+          }).join('');
         } catch (err) {
-          console.warn('Could not load dynamic featured order, keeping fallback:', err);
+          console.warn('Could not load latest dynamic pages:', err);
         }
       }
 
-      await initFeaturedOrder();
+      await initLatestPages();
 
       // 1. Accessibility Font Resize Controls
       let currentFontSize = 100;

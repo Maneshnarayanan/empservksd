@@ -108,9 +108,39 @@ const uploadSlider = multer({
   fileFilter: blogImageFileFilter,
 });
 
+// Configure disk storage for Dynamic Page Assets (Images & File Attachments)
+const pageAssetStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const { PAGE_ASSETS_DIR } = require('../utils/storage');
+    cb(null, PAGE_ASSETS_DIR);
+  },
+  filename: (req, file, cb) => {
+    const safeName = generateSafeFilename(file.originalname);
+    cb(null, safeName);
+  },
+});
+
+const uploadPageImage = multer({
+  storage: pageAssetStorage,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB limit
+  },
+  fileFilter: blogImageFileFilter,
+});
+
+const uploadPageAttachment = multer({
+  storage: pageAssetStorage,
+  limits: {
+    fileSize: parseInt(process.env.MAX_UPLOAD_SIZE_BYTES || '15728640', 10), // 15MB
+  },
+  fileFilter: downloadFileFilter,
+});
+
 module.exports = {
   uploadDownload,
   uploadBlogImage,
   uploadNewsPoster,
   uploadSlider,
+  uploadPageImage,
+  uploadPageAttachment,
 };

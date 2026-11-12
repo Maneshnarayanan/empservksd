@@ -305,9 +305,55 @@ function initAccessibilityFontControls() {
   });
 }
 
+// Dynamically append custom pages marked with show_in_nav to fixed desktop & mobile navigation
+async function initDynamicNavPages() {
+  if (window.location.pathname.startsWith('/admin')) return;
+  const desktopNav = document.getElementById('desktop-nav-links');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (!desktopNav && !mobileMenu) return;
+
+  try {
+    const res = await fetch('/api/v1/pages/nav');
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data.success || !Array.isArray(data.data) || data.data.length === 0) return;
+
+    const currentPath = decodeURIComponent(window.location.pathname).normalize('NFC');
+    data.data.forEach(page => {
+      const targetHref = `/p/${encodeURIComponent(page.slug)}`;
+      const decodedHref = `/p/${page.slug}`.normalize('NFC');
+      const isAct = currentPath === decodedHref || currentPath === `/${page.slug}`.normalize('NFC');
+
+      if (desktopNav) {
+        const link = document.createElement('a');
+        link.href = targetHref;
+        link.className = `gov-nav-item ${isAct ? 'active font-bold' : ''}`;
+        link.textContent = page.title;
+        desktopNav.appendChild(link);
+      }
+
+      if (mobileMenu) {
+        const divider = mobileMenu.querySelector('.border-t');
+        const link = document.createElement('a');
+        link.href = targetHref;
+        link.className = `block px-3 py-2 rounded ${isAct ? 'text-white bg-blue-900/60 font-bold' : 'text-blue-100 hover:bg-white/10'}`;
+        link.textContent = page.title;
+        if (divider) {
+          mobileMenu.insertBefore(link, divider);
+        } else {
+          mobileMenu.appendChild(link);
+        }
+      }
+    });
+  } catch (err) {
+    console.warn('Could not load dynamic nav pages:', err);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initAnnouncementTicker();
   initAccessibilityFontControls();
+  initDynamicNavPages();
 });
 
