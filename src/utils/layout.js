@@ -4,7 +4,7 @@ const path = require('path');
 const PARTIALS_DIR = path.join(__dirname, '../views/partials');
 const PUBLIC_DIR = path.join(__dirname, '../../public');
 
-const NAV_KEYS = ['home', 'services', 'downloads', 'news', 'blogs', 'about', 'contact'];
+const NAV_KEYS = ['home', 'services', 'downloads', 'news', 'blogs', 'jobs', 'about', 'contact'];
 
 /**
  * Returns compiled header HTML with the given navigation tab marked active.

@@ -97,7 +97,9 @@ function renderSingleBlock(block) {
     }
 
     case 'richtext': {
-      const cleanBody = sanitizePageHtml(block.body || '');
+      const rawBody = String(block.body || '')
+        .replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-900 underline font-semibold">$1</a>');
+      const cleanBody = sanitizePageHtml(rawBody);
       return `
         <section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs mb-6">
           ${block.heading ? `<h3 class="text-lg sm:text-xl font-extrabold text-slate-900 font-heading mb-4 pb-2.5 border-b border-slate-100">${escapeHtml(block.heading)}</h3>` : ''}
@@ -254,6 +256,11 @@ function renderSingleBlock(block) {
       if (!src || src === '#') return '';
       const alt = escapeHtml(block.alt || 'Page image');
       const caption = escapeHtml(block.caption || '');
+      const linkUrl = safeUrl(block.linkUrl || block.url || '');
+      const hasLink = linkUrl && linkUrl !== '#';
+      const isExternal = block.targetBlank !== false && (block.targetBlank || /^https?:\/\//i.test(block.linkUrl || block.url || ''));
+      const targetAttr = isExternal ? 'target="_blank" rel="noopener noreferrer"' : '';
+
       const widthMap = {
         sm: 'max-w-md',
         md: 'max-w-2xl',
@@ -269,11 +276,104 @@ function renderSingleBlock(block) {
       const widthClass = widthMap[block.maxWidth] || widthMap.lg;
       const alignClass = alignMap[block.align] || alignMap.center;
 
+      const imgTag = `<img src="${src}" alt="${alt}" loading="lazy" class="w-full h-auto object-contain max-h-[640px] bg-slate-50 ${hasLink ? 'group-hover:scale-[1.01] transition-transform duration-200' : ''}">`;
+      const imgContent = hasLink
+        ? `<a href="${linkUrl}" ${targetAttr} class="block group overflow-hidden">${imgTag}</a>`
+        : imgTag;
+
       return `
         <figure class="mb-6 ${widthClass} ${alignClass} bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-          <img src="${src}" alt="${alt}" loading="lazy" class="w-full h-auto object-contain max-h-[640px] bg-slate-50">
+          ${imgContent}
           ${caption ? `<figcaption class="px-4 py-2.5 text-xs text-slate-600 bg-slate-50/80 border-t border-slate-100 text-center font-medium">${caption}</figcaption>` : ''}
         </figure>
+      `;
+    }
+
+    case 'links': {
+      const heading = escapeHtml(block.heading || '');
+      const description = escapeHtml(block.description || '');
+      const layout = block.layout || 'buttons'; // 'buttons' | 'grid' | 'list'
+      const items = Array.isArray(block.items) ? block.items : [];
+      if (!items.length) return '';
+
+      const renderedItems = items.map(item => {
+        const title = escapeHtml(item.title || item.label || 'Link');
+        const url = safeUrl(item.url || item.linkUrl || '#');
+        const note = escapeHtml(item.description || item.note || '');
+        const badge = escapeHtml(item.badge || '');
+        const isExternal = item.targetBlank !== false && (item.targetBlank || /^https?:\/\//i.test(item.url || ''));
+        const targetAttr = isExternal ? 'target="_blank" rel="noopener noreferrer"' : '';
+        const variant = item.variant || 'primary';
+
+        if (layout === 'buttons') {
+          const btnThemes = {
+            primary: 'gov-blue-btn text-white',
+            emerald: 'bg-emerald-700 hover:bg-emerald-800 text-white shadow-xs',
+            amber: 'bg-amber-500 hover:bg-amber-600 text-slate-950 font-black shadow-xs',
+            outline: 'bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 shadow-xs hover:border-blue-500',
+            dark: 'bg-slate-900 hover:bg-slate-800 text-white shadow-xs',
+          };
+          const btnClass = btnThemes[variant] || btnThemes.primary;
+          return `
+            <a href="${url}" ${targetAttr} class="${btnClass} px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-2 transition group shrink-0">
+              <span>${title}</span>
+              ${badge ? `<span class="bg-white/20 text-[10px] uppercase px-1.5 py-0.5 rounded font-extrabold tracking-wider">${badge}</span>` : ''}
+              <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          `;
+        }
+
+        if (layout === 'grid') {
+          return `
+            <a href="${url}" ${targetAttr} class="bg-white rounded-xl p-4 border border-slate-200 hover:border-blue-400 hover:shadow-md transition flex flex-col justify-between group">
+              <div>
+                <div class="flex items-start justify-between gap-2 mb-1.5">
+                  <h4 class="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-blue-900 transition-colors">${title}</h4>
+                  ${badge ? `<span class="bg-blue-100 text-blue-800 text-[10px] font-black uppercase px-2 py-0.5 rounded shrink-0">${badge}</span>` : ''}
+                </div>
+                ${note ? `<p class="text-xs text-slate-600 line-clamp-2">${note}</p>` : ''}
+              </div>
+              <div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-blue-900 group-hover:text-blue-700">
+                <span class="truncate font-mono text-[10px] text-slate-400">${item.url ? escapeHtml(item.url) : 'Open Link'}</span>
+                <span class="flex items-center gap-1 shrink-0 group-hover:translate-x-0.5 transition-transform">Visit &rarr;</span>
+              </div>
+            </a>
+          `;
+        }
+
+        // Default 'list' layout
+        return `
+          <a href="${url}" ${targetAttr} class="block px-4 py-3 bg-white hover:bg-blue-50/70 border border-slate-200 rounded-xl transition flex items-center justify-between gap-3 group">
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-blue-900 transition-colors">${title}</span>
+                ${badge ? `<span class="bg-blue-100 text-blue-800 text-[10px] font-black uppercase px-1.5 py-0.2 rounded">${badge}</span>` : ''}
+              </div>
+              ${note ? `<p class="text-xs text-slate-500 mt-0.5 truncate">${note}</p>` : ''}
+            </div>
+            <div class="flex items-center gap-1 text-xs font-bold text-blue-900 shrink-0">
+              <span class="hidden sm:inline">Open</span>
+              <span class="text-slate-400 group-hover:text-blue-900 group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+            </div>
+          </a>
+        `;
+      }).join('\n');
+
+      let containerHtml = '';
+      if (layout === 'buttons') {
+        containerHtml = `<div class="flex flex-wrap items-center gap-2.5 sm:gap-3">${renderedItems}</div>`;
+      } else if (layout === 'grid') {
+        containerHtml = `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">${renderedItems}</div>`;
+      } else {
+        containerHtml = `<div class="space-y-2">${renderedItems}</div>`;
+      }
+
+      return `
+        <section class="mb-6 bg-slate-50/70 p-4 sm:p-5 rounded-2xl border border-slate-200/80">
+          ${heading ? `<h3 class="font-heading font-black text-sm sm:text-base text-slate-900 mb-1 flex items-center gap-1.5"><span class="text-blue-700">🔗</span> ${heading}</h3>` : ''}
+          ${description ? `<p class="text-xs text-slate-600 mb-3.5 leading-relaxed">${description}</p>` : ''}
+          ${containerHtml}
+        </section>
       `;
     }
 

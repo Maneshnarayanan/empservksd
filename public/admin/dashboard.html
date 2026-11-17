@@ -28,6 +28,10 @@
           <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
           Page Builder
         </a>
+        <a href="/admin/jobs" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          Job Vacancies
+        </a>
         <a href="/admin/sliders" class="admin-nav-link">
           <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path></svg>
           Home Slider
@@ -106,53 +110,94 @@
 
     <!-- Metrics Cards Grid -->
     <div class="p-8 max-w-7xl w-full mx-auto space-y-8">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Metric 1 -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Metric 1: Service Categories -->
         <div class="stat-card-gradient p-6">
           <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Service Categories</span>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Service Categories &amp; Links</span>
             <div class="w-9 h-9 rounded-xl bg-emerald-100/70 text-emerald-700 flex items-center justify-center font-bold ring-1 ring-emerald-200">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
             </div>
           </div>
           <div class="text-3xl font-extrabold text-slate-900 font-heading" id="stat-categories">—</div>
-          <p class="text-xs text-slate-500 mt-1.5">SPARK, BIMS, Treasury, Tax, etc.</p>
+          <p class="text-xs text-slate-500 mt-1.5"><span id="stat-links">—</span> portal links (<span id="stat-unconfigured" class="text-amber-600 font-medium">—</span>)</p>
         </div>
 
-        <!-- Metric 2 -->
+        <!-- Metric 2: Dynamic Custom Pages -->
         <div class="stat-card-gradient p-6">
           <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Service Portals</span>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Dynamic Pages &amp; Views</span>
             <div class="w-9 h-9 rounded-xl bg-blue-100/70 text-blue-700 flex items-center justify-center font-bold ring-1 ring-blue-200">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
             </div>
           </div>
-          <div class="text-3xl font-extrabold text-slate-900 font-heading" id="stat-links">—</div>
-          <p class="text-xs text-amber-600 mt-1.5 font-medium" id="stat-unconfigured">—</p>
+          <div class="text-3xl font-extrabold text-slate-900 font-heading" id="stat-pages">—</div>
+          <p class="text-xs text-slate-500 mt-1.5"><span id="stat-page-breakdown" class="text-emerald-700 font-semibold">— published</span> • <span id="stat-page-views" class="font-bold text-blue-900">👁️ — views</span></p>
         </div>
 
-        <!-- Metric 3 -->
+        <!-- Metric 3: Blog Articles -->
         <div class="stat-card-gradient p-6">
           <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Download Resources</span>
-            <div class="w-9 h-9 rounded-xl bg-purple-100/70 text-purple-700 flex items-center justify-center font-bold ring-1 ring-purple-200">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-            </div>
-          </div>
-          <div class="text-3xl font-extrabold text-slate-900 font-heading" id="stat-downloads">—</div>
-          <p class="text-xs text-slate-500 mt-1.5" id="stat-active-downloads">— active files</p>
-        </div>
-
-        <!-- Metric 4 -->
-        <div class="stat-card-gradient p-6">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Blog Articles</span>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Blog Articles &amp; Views</span>
             <div class="w-9 h-9 rounded-xl bg-amber-100/70 text-amber-700 flex items-center justify-center font-bold ring-1 ring-amber-200">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
             </div>
           </div>
           <div class="text-3xl font-extrabold text-slate-900 font-heading" id="stat-blogs">—</div>
-          <p class="text-xs text-slate-500 mt-1.5" id="stat-blog-breakdown">— published, — drafts</p>
+          <p class="text-xs text-slate-500 mt-1.5"><span id="stat-blog-breakdown">— published</span> • <span id="stat-blog-views" class="font-bold text-amber-800">👁️ — views</span></p>
+        </div>
+
+        <!-- Metric 4: News Posters -->
+        <div class="stat-card-gradient p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">News Posters &amp; Views</span>
+            <div class="w-9 h-9 rounded-xl bg-purple-100/70 text-purple-700 flex items-center justify-center font-bold ring-1 ring-purple-200">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            </div>
+          </div>
+          <div class="text-3xl font-extrabold text-slate-900 font-heading" id="stat-posters">—</div>
+          <p class="text-xs text-slate-500 mt-1.5"><span id="stat-poster-breakdown" class="text-emerald-700 font-semibold">— active</span> • <span id="stat-poster-views" class="font-bold text-purple-900">👁️ — views</span></p>
+        </div>
+
+        <!-- Metric 5: Download Resources -->
+        <div class="stat-card-gradient p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Downloads &amp; Files</span>
+            <div class="w-9 h-9 rounded-xl bg-sky-100/70 text-sky-700 flex items-center justify-center font-bold ring-1 ring-sky-200">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            </div>
+          </div>
+          <div class="text-3xl font-extrabold text-slate-900 font-heading" id="stat-downloads">—</div>
+          <p class="text-xs text-slate-500 mt-1.5"><span id="stat-active-downloads">— active files</span> • <span id="stat-total-downloads" class="font-bold text-sky-900">📥 — downloads</span></p>
+        </div>
+
+        <!-- Metric 6: Job Vacancies -->
+        <div class="stat-card-gradient p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Job Vacancies &amp; Views</span>
+            <div class="w-9 h-9 rounded-xl bg-emerald-100/70 text-emerald-700 flex items-center justify-center font-bold ring-1 ring-emerald-200">
+              💼
+            </div>
+          </div>
+          <div class="text-3xl font-extrabold text-slate-900 font-heading" id="stat-jobs">—</div>
+          <p class="text-xs text-slate-500 mt-1.5"><span id="stat-job-breakdown" class="text-emerald-700 font-semibold">— active</span> • <span id="stat-job-views" class="font-bold text-emerald-900">👁️ — views</span></p>
+        </div>
+
+        <!-- Metric 6: Portal Status & Quick Link -->
+        <div class="stat-card-gradient p-6 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">System Status</span>
+            <div class="w-9 h-9 rounded-xl bg-teal-100/70 text-teal-700 flex items-center justify-center font-bold ring-1 ring-teal-200">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            </div>
+          </div>
+          <div>
+            <div class="text-base font-extrabold text-slate-900 font-heading flex items-center gap-2">
+              <span class="text-emerald-600">● Live &amp; Healthy</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">Audit logs &amp; security encryption active</p>
+          </div>
+          <a href="/admin/pages" class="text-xs font-bold text-blue-700 hover:text-blue-900 mt-3 flex items-center gap-1">Open Page Builder &rarr;</a>
         </div>
       </div>
 
@@ -239,7 +284,22 @@
           document.getElementById('stat-downloads').textContent = s.downloads;
           document.getElementById('stat-active-downloads').textContent = `${s.activeDownloads} active files`;
           document.getElementById('stat-blogs').textContent = s.blogArticles;
-          document.getElementById('stat-blog-breakdown').textContent = `${s.publishedArticles} published, ${s.draftArticles} drafts`;
+          document.getElementById('stat-blog-breakdown').textContent = `${s.publishedArticles} published`;
+          document.getElementById('stat-blog-views').textContent = `👁️ ${Number(s.blogViews || 0).toLocaleString()} views`;
+
+          document.getElementById('stat-pages').textContent = s.customPages || 0;
+          document.getElementById('stat-page-breakdown').textContent = `${s.publishedPages || 0} published`;
+          document.getElementById('stat-page-views').textContent = `👁️ ${Number(s.pageViews || 0).toLocaleString()} views`;
+
+          document.getElementById('stat-posters').textContent = s.newsPosters || 0;
+          document.getElementById('stat-poster-breakdown').textContent = `${s.activePosters || 0} active`;
+          document.getElementById('stat-poster-views').textContent = `👁️ ${Number(s.posterViews || 0).toLocaleString()} views`;
+
+          document.getElementById('stat-jobs').textContent = s.jobVacancies || 0;
+          document.getElementById('stat-job-breakdown').textContent = `${s.activeVacancies || 0} active`;
+          document.getElementById('stat-job-views').textContent = `👁️ ${Number(s.jobViews || 0).toLocaleString()} views`;
+
+          document.getElementById('stat-total-downloads').textContent = `📥 ${Number(s.totalDownloads || 0).toLocaleString()} downloads`;
         }
       } catch (err) {
         console.error('Failed to load stats:', err);

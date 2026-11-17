@@ -146,6 +146,12 @@ async function countDownloads(onlyActive = false) {
   return res.rows[0].count;
 }
 
+async function getTotalDownloadCount() {
+  const query = 'SELECT COALESCE(SUM(download_count), 0)::int as total FROM download_resources;';
+  const res = await db.query(query);
+  return res.rows[0].total;
+}
+
 module.exports = {
   findAll,
   findById,
@@ -154,4 +160,5 @@ module.exports = {
   incrementDownloadCount,
   deleteDownload,
   countDownloads,
+  getTotalDownloadCount,
 };

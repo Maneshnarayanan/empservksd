@@ -280,7 +280,76 @@
             </div>
           </div>
 
-          <!-- 4. Latest Download Card (keralaservice.org Model in screenshot) -->
+          <!-- 4. Job Vacancy Card (Kerala PSC & District Employment Notifications) -->
+          <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-3.5 py-2 border-b border-slate-200 flex items-center justify-between">
+              <h4 class="font-extrabold text-xs uppercase tracking-wide text-slate-900 font-heading flex items-center gap-1.5">
+                <span class="text-emerald-600">💼</span>
+                <span>Job Vacancy</span>
+              </h4>
+              <div class="flex items-center gap-1.5">
+                <span class="bg-amber-100 text-amber-900 font-black text-[9px] uppercase px-1.5 py-0.2 rounded border border-amber-300">Govt &amp; PSC</span>
+                <a href="/jobs" class="text-[10px] text-blue-900 hover:underline font-bold">All &rarr;</a>
+              </div>
+            </div>
+            <div id="sidebar-job-vacancies-list" class="divide-y divide-slate-100 text-xs">
+              <!-- Rendered dynamically with instant static fallback -->
+              <a href="/jobs/kerala-psc-ldc-bill-collector-kasaragod-2026" class="block px-3.5 py-2.5 hover:bg-emerald-50/60 transition group">
+                <div class="flex items-start justify-between gap-1.5">
+                  <div class="font-bold text-blue-900 group-hover:text-blue-700 leading-snug line-clamp-2">
+                    Kerala PSC — Lower Division Clerk (LDC) / Bill Collector
+                  </div>
+                  <span class="bg-red-600 text-white font-black text-[9px] uppercase px-1.5 py-0.2 rounded shrink-0 animate-pulse">HOT</span>
+                </div>
+                <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono mt-1">
+                  <span class="text-emerald-700 font-semibold truncate max-w-[120px]">Kasaragod District</span>
+                  <span>•</span>
+                  <span class="text-amber-700 font-medium">Last: 24-12-2026</span>
+                </div>
+              </a>
+              <a href="/jobs/nhm-kasaragod-staff-nurse-medical-officer-2026" class="block px-3.5 py-2.5 hover:bg-emerald-50/60 transition group">
+                <div class="flex items-start justify-between gap-1.5">
+                  <div class="font-bold text-blue-900 group-hover:text-blue-700 leading-snug line-clamp-2">
+                    NHM Kasaragod — Staff Nurse &amp; Medical Officer (18 Posts)
+                  </div>
+                  <span class="bg-emerald-600 text-white font-black text-[9px] uppercase px-1.5 py-0.2 rounded shrink-0">NEW</span>
+                </div>
+                <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono mt-1">
+                  <span class="text-emerald-700 font-semibold truncate max-w-[120px]">Health Mission</span>
+                  <span>•</span>
+                  <span class="text-amber-700 font-medium">Last: 10-12-2026</span>
+                </div>
+              </a>
+              <a href="/jobs/kerala-psc-hst-high-school-teacher-education-kasaragod" class="block px-3.5 py-2.5 hover:bg-emerald-50/60 transition group">
+                <div class="font-bold text-blue-900 group-hover:text-blue-700 leading-snug line-clamp-2">
+                  High School Teacher (HST Natural Science) — Education Dept
+                </div>
+                <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono mt-1">
+                  <span class="text-emerald-700 font-semibold truncate max-w-[120px]">Kerala PSC</span>
+                  <span>•</span>
+                  <span class="text-amber-700 font-medium">Last: 31-12-2026</span>
+                </div>
+              </a>
+              <a href="/jobs/kseb-sub-engineer-meter-reader-malayalam-2026" class="block px-3.5 py-2.5 hover:bg-emerald-50/60 transition group">
+                <div class="font-bold text-blue-900 group-hover:text-blue-700 leading-snug line-clamp-2">
+                  കെ.എസ്.ഇ.ബി (KSEB) സബ് എൻജിനീയർ &amp; മീറ്റർ റീഡർ
+                </div>
+                <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono mt-1">
+                  <span class="text-emerald-700 font-semibold truncate max-w-[120px]">KSEB Limited</span>
+                  <span>•</span>
+                  <span class="text-amber-700 font-medium">Last: 05-01-2027</span>
+                </div>
+              </a>
+            </div>
+            <div class="bg-slate-50 px-3 py-1.5 border-t border-slate-100 text-center">
+              <a href="/jobs" class="text-[11px] font-bold text-emerald-800 hover:text-emerald-950 hover:underline flex items-center justify-center gap-1">
+                <span>View All Kerala &amp; District Vacancies</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- 5. Latest Download Card (keralaservice.org Model in screenshot) -->
           <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
             <div class="bg-slate-50 px-3.5 py-2 border-b border-slate-200 flex items-center justify-between">
               <h4 class="font-extrabold text-xs uppercase tracking-wide text-slate-900 font-heading flex items-center gap-1.5">
@@ -1194,6 +1263,67 @@
       }
 
       await initQuickLinks();
+
+      // 0.15 Job Vacancies Sidebar Card (Dynamic fetching from /api/v1/jobs/sidebar)
+      async function initSidebarJobVacancies() {
+        const container = document.getElementById('sidebar-job-vacancies-list');
+        if (!container) return;
+
+        const escapeSafe = (str) => {
+          if (!str) return '';
+          return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+        };
+
+        const formatShortDate = (dateStr) => {
+          if (!dateStr) return '';
+          const d = new Date(dateStr);
+          if (isNaN(d.getTime())) return dateStr;
+          const day = String(d.getDate()).padStart(2, '0');
+          const month = String(d.getMonth() + 1).padStart(2, '0');
+          const year = d.getFullYear();
+          return `${day}-${month}-${year}`;
+        };
+
+        try {
+          const res = await fetch('/api/v1/jobs/sidebar?limit=5');
+          const data = await res.json();
+          if (data && data.success && Array.isArray(data.data) && data.data.length > 0) {
+            container.innerHTML = data.data.map(item => {
+              const safeTitle = escapeSafe(item.title);
+              const safeSlug = encodeURIComponent(item.slug);
+              const safeDept = escapeSafe(item.department || 'Kerala Govt');
+              const formattedDate = item.last_date ? formatShortDate(item.last_date) : '';
+              const badgeHtml = item.is_featured
+                ? '<span class="bg-red-600 text-white font-black text-[9px] uppercase px-1.5 py-0.2 rounded shrink-0 animate-pulse">HOT</span>'
+                : '<span class="bg-emerald-600 text-white font-black text-[9px] uppercase px-1.5 py-0.2 rounded shrink-0">NEW</span>';
+
+              return `
+                <a href="/jobs/${safeSlug}" class="block px-3.5 py-2.5 hover:bg-emerald-50/60 transition group">
+                  <div class="flex items-start justify-between gap-1.5">
+                    <div class="font-bold text-blue-900 group-hover:text-blue-700 leading-snug line-clamp-2">
+                      ${safeTitle}
+                    </div>
+                    ${badgeHtml}
+                  </div>
+                  <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono mt-1">
+                    <span class="text-emerald-700 font-semibold truncate max-w-[130px]">${safeDept}</span>
+                    ${formattedDate ? '<span>•</span><span class="text-amber-700 font-medium">Last: ' + formattedDate + '</span>' : ''}
+                  </div>
+                </a>
+              `;
+            }).join('');
+          }
+        } catch (err) {
+          console.warn('Could not load dynamic job vacancies, keeping fallback list:', err);
+        }
+      }
+
+      await initSidebarJobVacancies();
 
       // 0.2 Latest Downloads (Dynamic fetching from /api/v1/downloads?limit=4)
       async function initLatestDownloads() {

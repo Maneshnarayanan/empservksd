@@ -22,6 +22,7 @@ const newsRoutes = require('./routes/api/v1/newsRoutes');
 const sliderRoutes = require('./routes/api/v1/sliderRoutes');
 const quickLinkRoutes = require('./routes/api/v1/quickLinkRoutes');
 const pageApiRoutes = require('./routes/api/v1/pageApiRoutes');
+const jobRoutes = require('./routes/api/v1/jobRoutes');
 const adminRoutes = require('./routes/api/v1/adminRoutes');
 const pageRoutes = require('./routes/pageRoutes');
 
@@ -122,6 +123,7 @@ app.use('/api/v1/news', newsRoutes);
 app.use('/api/v1/sliders', sliderRoutes);
 app.use('/api/v1/quick-links', quickLinkRoutes);
 app.use('/api/v1/pages', pageApiRoutes);
+app.use('/api/v1/jobs', jobRoutes);
 app.use('/api/v1/admin', adminRoutes);
 
 // Frontend Page Routes

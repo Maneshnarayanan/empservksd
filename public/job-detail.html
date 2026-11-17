@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Vacancy Details — Employees Services, Kasaragod</title>
+  <meta id="meta-desc" name="description" content="Official Kerala government job vacancy notifications, eligibility, qualification, and apply online links for Kasaragod and Kerala state employees.">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=2">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
+</head>
+<body class="bg-slate-100 text-slate-800 flex flex-col min-h-screen font-sans selection:bg-amber-400 selection:text-slate-900">
+
+  <!-- SHARED_HEADER -->
+
+  <main class="flex-grow py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <!-- Breadcrumb & Back navigation -->
+    <nav class="flex items-center justify-between text-xs text-slate-500 mb-6 bg-white px-4 py-2.5 rounded-xl border border-slate-200 shadow-2xs">
+      <div class="flex items-center gap-2 truncate">
+        <a href="/" class="text-blue-900 font-bold hover:underline">Home</a>
+        <span>/</span>
+        <a href="/jobs" class="text-blue-900 font-bold hover:underline">Job Vacancies</a>
+        <span>/</span>
+        <span id="breadcrumb-title" class="text-slate-700 font-medium truncate">Job Details</span>
+      </div>
+      <a href="/jobs" class="text-blue-900 font-bold hover:underline shrink-0 text-[11px] hidden sm:inline flex items-center gap-1">
+        &larr; View All Vacancies
+      </a>
+    </nav>
+
+    <!-- Main Container Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- LEFT 8 COLS: Job Details View -->
+      <div class="lg:col-span-8 space-y-6">
+        <div id="job-detail-card" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-8">
+          <div class="py-16 text-center text-slate-400 text-xs animate-pulse">
+            Loading job vacancy details...
+          </div>
+        </div>
+
+        <!-- How to Apply Card -->
+        <div id="how-to-apply-card" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-8 hidden">
+          <h3 class="text-base font-extrabold text-slate-900 font-heading mb-4 flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-sm">📝</span>
+            <span>How to Apply Step-by-Step</span>
+          </h3>
+          <div id="how-to-apply-content" class="prose prose-sm max-w-none text-slate-700 space-y-2 text-xs sm:text-sm"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT 4 COLS: Sidebar with Quick Summary & Other Vacancies -->
+      <aside class="lg:col-span-4 space-y-5">
+        <!-- Quick Action Sidebar Card -->
+        <div id="sidebar-action-card" class="bg-gradient-to-br from-blue-950 to-slate-900 text-white rounded-2xl p-5 shadow-md border border-blue-900/60 hidden">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-black text-[10px] uppercase tracking-wider">Fast Apply</span>
+            <span class="text-xs text-blue-200">Official Portal</span>
+          </div>
+          <h4 id="sidebar-apply-title" class="font-extrabold text-sm sm:text-base leading-snug mb-3">
+            Ready to submit application?
+          </h4>
+          <p class="text-xs text-blue-200/90 mb-4 leading-relaxed">
+            Ensure your Kerala PSC One Time Registration (OTR) profile is up to date before applying.
+          </p>
+          <div class="space-y-2.5">
+            <a id="btn-sidebar-apply" href="#" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-2.5 px-4 rounded-xl text-xs transition shadow-sm">
+              👉 Go to Application Portal
+            </a>
+            <a id="btn-sidebar-notification" href="#" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 px-4 rounded-xl text-xs border border-white/20 transition">
+              📄 Official Notification
+            </a>
+          </div>
+        </div>
+
+        <!-- Other Latest Vacancies Card -->
+        <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+          <div class="bg-slate-50 px-4 py-2.5 border-b border-slate-200 flex items-center justify-between">
+            <h4 class="font-extrabold text-xs uppercase tracking-wide text-slate-900 font-heading flex items-center gap-1.5">
+              <span class="text-emerald-600">💼</span>
+              <span>Other Latest Vacancies</span>
+            </h4>
+            <a href="/jobs" class="text-[10px] text-blue-900 hover:underline font-bold">All &rarr;</a>
+          </div>
+          <div id="sidebar-other-jobs-list" class="divide-y divide-slate-100 text-xs">
+            <div class="py-4 text-center text-slate-400 text-xs animate-pulse">Loading opportunities...</div>
+          </div>
+        </div>
+
+        <!-- District Help Desk Card -->
+        <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-4 text-xs space-y-2">
+          <div class="font-extrabold text-amber-950 flex items-center gap-1.5 font-heading">
+            <span>🏛️</span>
+            <span>Kasaragod Employee &amp; Candidate Guidance</span>
+          </div>
+          <p class="text-slate-700 leading-relaxed text-[11px]">
+            For assistance with SPARK profile updating, qualification certificates, or Kerala PSC OTR guidelines, reach out to our Kasaragod Help Desk.
+          </p>
+          <div class="pt-1 flex items-center gap-3 font-semibold text-blue-900">
+            <a href="tel:9447396181" class="hover:underline">📞 9447396181</a>
+            <span>•</span>
+            <a href="https://wa.me/919447396181" target="_blank" rel="noopener noreferrer" class="text-emerald-700 hover:underline">WhatsApp</a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- SHARED_FOOTER -->
+
+  <script>
+    const escapeSafe = (str) => {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    };
+
+    const formatDateDisplay = (dateStr) => {
+      if (!dateStr) return 'Not Specified';
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
+      return d.toLocaleDateString('en-IN', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+      });
+    };
+
+    const calculateDaysLeft = (dateStr) => {
+      if (!dateStr) return null;
+      const target = new Date(dateStr);
+      if (isNaN(target.getTime())) return null;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      target.setHours(0, 0, 0, 0);
+      const diffTime = target.getTime() - today.getTime();
+      return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    };
+
+    async function loadJobDetail() {
+      const parts = window.location.pathname.split('/');
+      const slug = parts[parts.length - 1] || parts[parts.length - 2];
+      const detailCard = document.getElementById('job-detail-card');
+
+      if (!slug || slug === 'jobs' || slug === 'vacancies') {
+        window.location.href = '/jobs';
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/v1/jobs/${encodeURIComponent(slug)}`);
+        const data = await res.json();
+
+        if (!res.ok || !data.success || !data.data) {
+          detailCard.innerHTML = `
+            <div class="py-12 text-center">
+              <div class="w-16 h-16 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">✕</div>
+              <h1 class="text-lg font-bold text-slate-900 mb-2">Job Vacancy Not Found</h1>
+              <p class="text-xs text-slate-500 mb-6">This vacancy notification does not exist or may have expired.</p>
+              <a href="/jobs" class="gov-blue-btn inline-flex items-center gap-1.5 text-xs px-5 py-2.5 rounded-xl font-bold">
+                &larr; View All Open Vacancies
+              </a>
+            </div>
+          `;
+          return;
+        }
+
+        const job = data.data;
+
+        // Set document title and metadata
+        document.title = `${job.title} — Employees Services, Kasaragod`;
+        const metaDesc = document.getElementById('meta-desc');
+        if (metaDesc && job.department) {
+          metaDesc.setAttribute('content', `${job.title} — ${job.department}. Last Date: ${formatDateDisplay(job.last_date)}. Scale of Pay: ${job.scale_of_pay || 'Standard Kerala Govt Scale'}.`);
+        }
+        document.getElementById('breadcrumb-title').textContent = job.title;
+
+        // Days left calculation
+        const daysLeft = calculateDaysLeft(job.last_date);
+        let urgencyBadge = '';
+        if (daysLeft !== null) {
+          if (daysLeft < 0) {
+            urgencyBadge = '<span class="bg-slate-200 text-slate-700 font-extrabold text-[11px] px-2.5 py-1 rounded-full uppercase">Application Closed</span>';
+          } else if (daysLeft <= 5) {
+            urgencyBadge = `<span class="bg-red-600 text-white font-extrabold text-[11px] px-2.5 py-1 rounded-full uppercase animate-pulse">Ending Soon (${daysLeft} Days Left)</span>`;
+          } else {
+            urgencyBadge = `<span class="bg-emerald-100 text-emerald-800 font-extrabold text-[11px] px-2.5 py-1 rounded-full uppercase">${daysLeft} Days Left to Apply</span>`;
+          }
+        }
+
+        // Render Main Detail Card
+        detailCard.innerHTML = `
+          <!-- Header & Top Badges -->
+          <div class="border-b border-slate-200 pb-6 mb-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="bg-blue-50 text-blue-900 border border-blue-200 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                  ${escapeSafe(job.department)}
+                </span>
+                ${job.category_no ? `
+                  <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2.5 py-1 rounded-full font-mono">
+                    ${escapeSafe(job.category_no)}
+                  </span>
+                ` : ''}
+              </div>
+              <div class="flex items-center gap-2">
+                ${urgencyBadge}
+                <span class="text-slate-400 font-mono text-xs flex items-center gap-1" title="Views">
+                  👁️ ${Number(job.view_count) || 0}
+                </span>
+              </div>
+            </div>
+
+            <h1 class="text-xl sm:text-2xl font-black text-slate-900 font-heading leading-snug">
+              ${escapeSafe(job.title)}
+            </h1>
+
+            <div class="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs text-slate-500 mt-3 pt-3 border-t border-slate-100">
+              <div class="flex items-center gap-1">
+                <span>📍</span>
+                <span class="font-medium text-slate-700">${escapeSafe(job.location || 'Kasaragod / Kerala')}</span>
+              </div>
+              <span>•</span>
+              <div class="flex items-center gap-1">
+                <span>💼</span>
+                <span class="font-medium text-slate-700">${escapeSafe(job.job_type || 'Permanent State Service')}</span>
+              </div>
+              <span>•</span>
+              <div class="flex items-center gap-1">
+                <span>📅</span>
+                <span>Last Date: <strong class="text-amber-800 font-mono font-bold">${formatDateDisplay(job.last_date)}</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Highlighted Key Information Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 mb-8">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Scale of Pay / Salary</div>
+              <div class="text-sm font-extrabold text-blue-900 mt-0.5 font-mono">
+                ${escapeSafe(job.scale_of_pay || 'Kerala State Scale')}
+              </div>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Total Vacancies</div>
+              <div class="text-sm font-extrabold text-emerald-800 mt-0.5">
+                ${escapeSafe(job.vacancy_count || 'Anticipated / District Quota')}
+              </div>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Application Fee</div>
+              <div class="text-sm font-extrabold text-slate-800 mt-0.5">
+                ${escapeSafe(job.application_fee || 'Free (Kerala PSC OTR)')}
+              </div>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 sm:col-span-2">
+              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Educational Qualification</div>
+              <div class="text-xs font-semibold text-slate-800 mt-1 leading-relaxed">
+                ${escapeSafe(job.qualification || 'As prescribed in official notification.')}
+              </div>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Age Limit</div>
+              <div class="text-xs font-semibold text-slate-800 mt-1 leading-relaxed">
+                ${escapeSafe(job.age_limit || '18 - 36 years (usual relaxation applicable)')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons Bar -->
+          <div class="flex flex-wrap items-center gap-3 p-4 bg-blue-50/70 border border-blue-200 rounded-xl mb-8">
+            <a href="${job.apply_url || 'https://thulasi.psc.kerala.gov.in'}" target="_blank" rel="noopener noreferrer" class="gov-gold-btn px-5 py-2.5 rounded-xl text-xs font-black flex items-center gap-2 shadow-sm transition hover:scale-[1.01]">
+              <span>👉 Apply Online (Official Portal)</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </a>
+
+            ${job.official_notification_url ? `
+              <a href="${job.official_notification_url}" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-100 text-blue-900 border border-blue-300 px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition">
+                <span>📄 Download Official Notification</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              </a>
+            ` : ''}
+
+            <button onclick="navigator.clipboard.writeText(window.location.href); alert('Vacancy link copied to clipboard!');" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition ml-auto cursor-pointer">
+              <span>🔗 Share</span>
+            </button>
+
+            <button onclick="window.print()" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer">
+              <span>🖨️ Print</span>
+            </button>
+          </div>
+
+          <!-- Detailed Job Description -->
+          <div class="prose prose-sm max-w-none text-slate-800 text-xs sm:text-sm leading-relaxed space-y-4">
+            <h3 class="text-base font-extrabold text-slate-900 font-heading border-b border-slate-100 pb-2">
+              Official Notification Summary &amp; Scope
+            </h3>
+            <div id="job-description-content">
+              ${job.description || '<p>Detailed notification guidelines and examination schedule are available on the official departmental portal.</p>'}
+            </div>
+          </div>
+        `;
+
+        // If How to Apply content exists, display how-to-apply card
+        if (job.how_to_apply && job.how_to_apply.trim()) {
+          const howCard = document.getElementById('how-to-apply-card');
+          const howContent = document.getElementById('how-to-apply-content');
+          howContent.innerHTML = job.how_to_apply;
+          howCard.classList.remove('hidden');
+        }
+
+        // Configure right sidebar quick apply links
+        const sidebarAction = document.getElementById('sidebar-action-card');
+        const sidebarBtnApply = document.getElementById('btn-sidebar-apply');
+        const sidebarBtnNotif = document.getElementById('btn-sidebar-notification');
+        sidebarBtnApply.href = job.apply_url || 'https://thulasi.psc.kerala.gov.in';
+        if (job.official_notification_url) {
+          sidebarBtnNotif.href = job.official_notification_url;
+          sidebarBtnNotif.classList.remove('hidden');
+        } else {
+          sidebarBtnNotif.classList.add('hidden');
+        }
+        sidebarAction.classList.remove('hidden');
+
+        // Load other vacancies into sidebar
+        loadOtherVacancies(job.id);
+
+      } catch (err) {
+        console.error('Error loading job detail:', err);
+        detailCard.innerHTML = `
+          <div class="py-10 text-center text-red-600 text-xs">
+            Failed to load vacancy details. Please check your internet connection or try refreshing.
+          </div>
+        `;
+      }
+    }
+
+    async function loadOtherVacancies(excludeId) {
+      const container = document.getElementById('sidebar-other-jobs-list');
+      try {
+        const res = await fetch('/api/v1/jobs?limit=5&onlyActive=true');
+        const data = await res.json();
+        if (data && data.success && Array.isArray(data.vacancies)) {
+          const filtered = data.vacancies.filter(j => j.id !== excludeId).slice(0, 4);
+          if (filtered.length === 0) {
+            container.innerHTML = '<div class="p-3 text-slate-400 text-center">No other vacancies currently listed.</div>';
+            return;
+          }
+          container.innerHTML = filtered.map(item => {
+            const formattedDate = item.last_date ? formatDateDisplay(item.last_date) : '';
+            return `
+              <a href="/jobs/${encodeURIComponent(item.slug)}" class="block px-3.5 py-2.5 hover:bg-emerald-50/50 transition group">
+                <div class="font-bold text-blue-900 group-hover:text-blue-700 leading-snug line-clamp-2">
+                  ${escapeSafe(item.title)}
+                </div>
+                <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono mt-1">
+                  <span class="text-emerald-700 font-semibold truncate max-w-[130px]">${escapeSafe(item.department)}</span>
+                  ${formattedDate ? '<span>•</span><span class="text-amber-800">Last: ' + formattedDate + '</span>' : ''}
+                </div>
+              </a>
+            `;
+          }).join('');
+        }
+      } catch (err) {
+        console.warn('Could not load other vacancies:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadJobDetail);
+  </script>
+</body>
+</html>
+

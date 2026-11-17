@@ -17,6 +17,8 @@ const RESERVED_SLUGS = new Set([
   'p',
   'page',
   'pages',
+  'jobs',
+  'vacancies',
   'favicon.ico',
 ]);
 
@@ -37,6 +39,7 @@ function hydratePage(row) {
 
   return {
     ...row,
+    view_count: Number(row.view_count) || 0,
     blocks,
     content_html: renderedHtml,
   };
@@ -87,7 +90,7 @@ async function findAll({ onlyPublished = false, search = null } = {}) {
   }
 
   const query = `
-    SELECT id, title, slug, subtitle, meta_description, layout_mode, blocks_json, content_html, show_in_nav, nav_order, is_published, created_at, updated_at
+    SELECT id, title, slug, subtitle, meta_description, layout_mode, blocks_json, content_html, show_in_nav, nav_order, is_published, view_count, created_at, updated_at
     FROM custom_pages
     ${whereClause}
     ORDER BY nav_order ASC, id DESC;
@@ -110,7 +113,7 @@ async function findNavPages() {
 
 async function findById(id) {
   const query = `
-    SELECT id, title, slug, subtitle, meta_description, layout_mode, blocks_json, content_html, show_in_nav, nav_order, is_published, created_at, updated_at
+    SELECT id, title, slug, subtitle, meta_description, layout_mode, blocks_json, content_html, show_in_nav, nav_order, is_published, view_count, created_at, updated_at
     FROM custom_pages
     WHERE id = $1;
   `;
@@ -120,7 +123,7 @@ async function findById(id) {
 
 async function findBySlug(slug, { onlyPublished = false } = {}) {
   let query = `
-    SELECT id, title, slug, subtitle, meta_description, layout_mode, blocks_json, content_html, show_in_nav, nav_order, is_published, created_at, updated_at
+    SELECT id, title, slug, subtitle, meta_description, layout_mode, blocks_json, content_html, show_in_nav, nav_order, is_published, view_count, created_at, updated_at
     FROM custom_pages
     WHERE slug = $1
   `;
@@ -133,6 +136,34 @@ async function findBySlug(slug, { onlyPublished = false } = {}) {
 
   const res = await db.query(`${query} LIMIT 1;`, params);
   return hydratePage(res.rows[0] || null);
+}
+
+async function incrementViewCount(id) {
+  const query = `
+    UPDATE custom_pages
+    SET view_count = COALESCE(view_count, 0) + 1
+    WHERE id = $1
+    RETURNING view_count;
+  `;
+  const res = await db.query(query, [id]);
+  return res.rows[0] ? res.rows[0].view_count : 0;
+}
+
+async function countPages() {
+  const query = `
+    SELECT
+      COUNT(*)::int AS total,
+      COALESCE(SUM(CASE WHEN is_published = true THEN 1 ELSE 0 END), 0)::int AS published,
+      COALESCE(SUM(view_count), 0)::int AS total_views
+    FROM custom_pages;
+  `;
+  const res = await db.query(query);
+  const row = res.rows[0] || {};
+  return {
+    total: parseInt(row.total || 0, 10),
+    published: parseInt(row.published || 0, 10),
+    totalViews: parseInt(row.total_views || 0, 10),
+  };
 }
 
 async function create({
@@ -262,6 +293,8 @@ module.exports = {
   update,
   deleteById,
   count,
+  countPages,
+  incrementViewCount,
   isReservedSlug,
 };
 

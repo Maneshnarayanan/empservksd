@@ -2,7 +2,9 @@ const express = require('express');
 const path = require('path');
 const router = express.Router();
 const { renderPage } = require('../utils/layout');
+const blogArticleRepo = require('../repositories/blogArticleRepository');
 const customPageRepo = require('../repositories/customPageRepository');
+const jobVacancyRepo = require('../repositories/jobVacancyRepository');
 const { escapeHtml } = require('../utils/pageRenderer');
 
 const PUBLIC_DIR = path.join(__dirname, '../../public');
@@ -21,7 +23,25 @@ router.get('/services', (req, res) => res.send(renderPage('services.html', 'serv
 router.get('/downloads', (req, res) => res.send(renderPage('downloads.html', 'downloads')));
 router.get('/news', (req, res) => res.send(renderPage('news.html', 'news')));
 router.get('/blogs', (req, res) => res.send(renderPage('blogs.html', 'blogs')));
-router.get('/blogs/:slug', (req, res) => res.send(renderPage('blog-detail.html', 'blogs')));
+router.get('/blogs/:slug', (req, res) => {
+  if (req.params.slug) {
+    blogArticleRepo.findBySlug(req.params.slug, true).then(art => {
+      if (art) blogArticleRepo.incrementViewCount(art.id).catch(() => {});
+    }).catch(() => {});
+  }
+  return res.send(renderPage('blog-detail.html', 'blogs'));
+});
+router.get('/jobs', (req, res) => res.send(renderPage('jobs.html', 'jobs')));
+router.get('/vacancies', (req, res) => res.redirect('/jobs'));
+router.get('/jobs/:slug', (req, res) => {
+  if (req.params.slug) {
+    jobVacancyRepo.findBySlug(req.params.slug, { onlyActive: true }).then(job => {
+      if (job) jobVacancyRepo.incrementViewCount(job.id).catch(() => {});
+    }).catch(() => {});
+  }
+  return res.send(renderPage('job-detail.html', 'jobs'));
+});
+router.get('/vacancies/:slug', (req, res) => res.redirect('/jobs/' + encodeURIComponent(req.params.slug)));
 router.get('/about', (req, res) => res.send(renderPage('about.html', 'about')));
 router.get('/contact', (req, res) => res.send(renderPage('contact.html', 'contact')));
 router.get('/privacy-policy', (req, res) => res.send(renderPage('privacy-policy.html', '')));
@@ -39,6 +59,7 @@ router.get('/admin/quick-links', (req, res) => res.sendFile(path.join(PUBLIC_DIR
 router.get('/admin/pages', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/pages.html')));
 router.get('/admin/blogs', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/blogs.html')));
 router.get('/admin/blog-categories', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/blog-categories.html')));
+router.get('/admin/jobs', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/jobs.html')));
 router.get('/admin/announcements', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/announcements.html')));
 router.get('/admin/settings', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin/settings.html')));
 
@@ -70,6 +91,19 @@ function buildSidebarHtml() {
       <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
         <div class="bg-slate-50 px-3.5 py-2 border-b border-slate-200 flex items-center justify-between">
           <h4 class="font-extrabold text-xs uppercase tracking-wide text-slate-900 font-heading flex items-center gap-1.5">
+            <span class="text-emerald-600">💼</span>
+            <span>Job Vacancy</span>
+          </h4>
+          <a href="/jobs" class="text-[10px] text-blue-900 hover:underline font-bold">All &rarr;</a>
+        </div>
+        <div id="sidebar-job-vacancies-list" class="divide-y divide-slate-100 text-xs">
+          <div class="px-3.5 py-3 text-slate-400 text-center">Loading vacancies...</div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+        <div class="bg-slate-50 px-3.5 py-2 border-b border-slate-200 flex items-center justify-between">
+          <h4 class="font-extrabold text-xs uppercase tracking-wide text-slate-900 font-heading flex items-center gap-1.5">
             <span>📥</span>
             <span>Latest Download</span>
           </h4>
@@ -94,6 +128,7 @@ async function handleDynamicPage(req, res, next) {
     if (!page) {
       return next();
     }
+    customPageRepo.incrementViewCount(page.id).catch(() => {});
 
     let html = renderPage('custom-page.html', '');
     const containerClass = page.layout_mode === 'standard' ? 'max-w-5xl' : 'max-w-7xl';

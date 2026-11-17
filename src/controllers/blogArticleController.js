@@ -30,6 +30,8 @@ async function getPublicArticleBySlug(req, res, next) {
         message: 'Article not found or not yet published.',
       });
     }
+    await blogArticleRepo.incrementViewCount(article.id);
+    article.view_count = (article.view_count || 0) + 1;
     return res.json({ success: true, data: article });
   } catch (err) {
     next(err);

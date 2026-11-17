@@ -100,6 +100,8 @@ async function getNewsById(req, res, next) {
     if (!poster) {
       return res.status(404).json({ success: false, message: 'News poster not found.' });
     }
+    await newsRepo.incrementViewCount(poster.id);
+    poster.view_count = (poster.view_count || 0) + 1;
     return res.json({
       success: true,
       data: {
@@ -107,6 +109,17 @@ async function getNewsById(req, res, next) {
         image_url: `/storage/news-posters/${poster.image_filename}`,
       },
     });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function recordNewsView(req, res, next) {
+  try {
+    const id = parseInt(req.params.id, 10);
+    if (!id) return res.status(400).json({ success: false, message: 'Invalid poster ID.' });
+    const count = await newsRepo.incrementViewCount(id);
+    return res.json({ success: true, view_count: count });
   } catch (err) {
     next(err);
   }
@@ -249,6 +262,7 @@ module.exports = {
   getLatestNews,
   getAllNews,
   getNewsById,
+  recordNewsView,
   createNews,
   updateNews,
   deleteNews,

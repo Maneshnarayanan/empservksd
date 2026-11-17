@@ -6,13 +6,14 @@ async function getPublicPages(req, res, next) {
     const pages = await customPageRepo.findAll({ onlyPublished: true });
     return res.json({
       success: true,
-      data: pages.map(({ id, title, slug, subtitle, layout_mode, show_in_nav, updated_at }) => ({
+      data: pages.map(({ id, title, slug, subtitle, layout_mode, show_in_nav, view_count, updated_at }) => ({
         id,
         title,
         slug,
         subtitle,
         layout_mode,
         show_in_nav,
+        view_count: view_count || 0,
         updated_at,
       })),
     });
@@ -39,6 +40,8 @@ async function getPublicPageBySlug(req, res, next) {
     if (!page) {
       return res.status(404).json({ success: false, message: 'Page not found.' });
     }
+    await customPageRepo.incrementViewCount(page.id);
+    page.view_count = (page.view_count || 0) + 1;
     return res.json({
       success: true,
       data: page,

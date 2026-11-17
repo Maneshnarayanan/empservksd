@@ -15,6 +15,7 @@ const newsPosterController = require('../../../controllers/newsPosterController'
 const sliderController = require('../../../controllers/sliderController');
 const quickLinkController = require('../../../controllers/quickLinkController');
 const customPageController = require('../../../controllers/customPageController');
+const jobVacancyController = require('../../../controllers/jobVacancyController');
 
 // All admin routes require authentication
 router.use(requireAuth);
@@ -104,5 +105,13 @@ router.post('/pages/upload-image', uploadPageImage.single('image'), customPageCo
 router.post('/pages/upload-attachment', uploadPageAttachment.single('file'), customPageController.uploadPageAsset);
 router.put('/pages/:id', customPageController.updatePage);
 router.delete('/pages/:id', customPageController.deletePage);
+
+// Job Vacancies CRUD
+router.get('/jobs', jobVacancyController.getAllJobs);
+router.get('/jobs/:id', jobVacancyController.getJobById);
+router.post('/jobs', jobVacancyController.createJob);
+router.put('/jobs/:id', jobVacancyController.updateJob);
+router.delete('/jobs/:id', jobVacancyController.deleteJob);
+router.patch('/jobs/:id/status', jobVacancyController.toggleJobStatus);
 
 module.exports = router;

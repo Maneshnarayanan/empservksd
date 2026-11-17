@@ -28,6 +28,10 @@
           <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
           Page Builder
         </a>
+        <a href="/admin/jobs" class="admin-nav-link">
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          Job Vacancies
+        </a>
         <a href="/admin/sliders" class="admin-nav-link">
           <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path></svg>
           Home Slider
@@ -125,7 +129,7 @@
          ============================================================ -->
     <div id="pages-list-view" class="p-6 sm:p-8 space-y-6 max-w-7xl mx-auto w-full">
       <!-- Stats & Info Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
           <div>
             <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Custom Pages</p>
@@ -146,6 +150,13 @@
             <p id="stat-nav" class="text-2xl font-extrabold text-amber-600 mt-1 font-heading">0</p>
           </div>
           <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">🧭</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center justify-between">
+          <div>
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Page Views</p>
+            <p id="stat-views" class="text-2xl font-extrabold text-blue-800 mt-1 font-heading">0</p>
+          </div>
+          <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-xl">👁️</div>
         </div>
       </div>
 
@@ -183,6 +194,7 @@
                 <th class="px-5 py-3.5">Page Title &amp; Route</th>
                 <th class="px-4 py-3.5">Layout</th>
                 <th class="px-4 py-3.5 text-center">Blocks</th>
+                <th class="px-4 py-3.5 text-center">Views</th>
                 <th class="px-4 py-3.5 text-center">Top Nav</th>
                 <th class="px-4 py-3.5 text-center">Status</th>
                 <th class="px-5 py-3.5 text-right">Actions</th>
@@ -190,7 +202,7 @@
             </thead>
             <tbody id="pages-table-body" class="divide-y divide-slate-100 text-sm">
               <tr>
-                <td colspan="6" class="px-6 py-10 text-center text-slate-400 text-xs">Loading dynamic pages...</td>
+                <td colspan="7" class="px-6 py-10 text-center text-slate-400 text-xs">Loading dynamic pages...</td>
               </tr>
             </tbody>
           </table>
@@ -263,7 +275,7 @@
             <span class="text-xs font-extrabold uppercase tracking-wider text-slate-700 font-heading">+ Add Content Block to Page</span>
             <span class="text-[11px] text-slate-500">Click any block to append it below</span>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-2">
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-2">
             <button type="button" onclick="addBlock('hero')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
               <span class="text-lg mb-1 group-hover:scale-110 transition-transform">🎯</span>
               <span class="text-[11px] font-bold text-slate-700">Hero Banner</span>
@@ -271,6 +283,10 @@
             <button type="button" onclick="addBlock('richtext')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
               <span class="text-lg mb-1 group-hover:scale-110 transition-transform">📝</span>
               <span class="text-[11px] font-bold text-slate-700">Rich Text</span>
+            </button>
+            <button type="button" onclick="addBlock('links')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
+              <span class="text-lg mb-1 group-hover:scale-110 transition-transform">🔗</span>
+              <span class="text-[11px] font-bold text-slate-700">Links / URLs</span>
             </button>
             <button type="button" onclick="addBlock('alert')" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/70 transition text-center cursor-pointer group">
               <span class="text-lg mb-1 group-hover:scale-110 transition-transform">⚠️</span>
@@ -342,6 +358,7 @@
     const BLOCK_META = {
       hero: { label: 'Hero Banner', icon: '🎯', color: 'border-l-blue-600' },
       richtext: { label: 'Rich Text Section', icon: '📝', color: 'border-l-emerald-600' },
+      links: { label: 'Links & Action Buttons', icon: '🔗', color: 'border-l-blue-600' },
       alert: { label: 'Notice / Alert Box', icon: '⚠️', color: 'border-l-amber-500' },
       cards: { label: 'Feature Cards Grid', icon: '🗂️', color: 'border-l-indigo-600' },
       table: { label: 'Data Table / Chart', icon: '📊', color: 'border-l-cyan-600' },
@@ -391,6 +408,9 @@
       document.getElementById('stat-total').textContent = allPages.length;
       document.getElementById('stat-published').textContent = allPages.filter(p => p.is_published).length;
       document.getElementById('stat-nav').textContent = allPages.filter(p => p.show_in_nav && p.is_published).length;
+      const totalViews = allPages.reduce((acc, p) => acc + (p.view_count || 0), 0);
+      const statViewsEl = document.getElementById('stat-views');
+      if (statViewsEl) statViewsEl.textContent = totalViews.toLocaleString();
     }
 
     function filterPages() {
@@ -410,7 +430,7 @@
     function renderPagesTable(items) {
       const tbody = document.getElementById('pages-table-body');
       if (!items.length) {
-        tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-10 text-center text-slate-400 text-xs">No dynamic pages found. Click "+ Create New Page" to build one!</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-10 text-center text-slate-400 text-xs">No dynamic pages found. Click "+ Create New Page" to build one!</td></tr>`;
         return;
       }
 
@@ -434,6 +454,11 @@
           </td>
           <td class="px-4 py-3.5 text-center font-mono text-xs font-bold text-slate-700">
             ${Array.isArray(page.blocks) ? page.blocks.length : 0}
+          </td>
+          <td class="px-4 py-3.5 text-center">
+            <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-blue-800 border border-blue-200" title="${page.view_count || 0} page views">
+              👁️ ${Number(page.view_count || 0).toLocaleString()}
+            </span>
           </td>
           <td class="px-4 py-3.5 text-center">
             ${page.show_in_nav
@@ -670,7 +695,16 @@
           ]
         },
         download_cta: { type: 'download_cta', title: 'Download Official Order / Form', description: 'Verified circular PDF ready for download.', buttonText: 'Download PDF', buttonUrl: '/downloads', newTab: false },
-        image: { type: 'image', src: '', alt: '', caption: '', align: 'center', maxWidth: 'lg' },
+        links: {
+          type: 'links',
+          heading: 'Important Links & Portals',
+          description: 'Quick access to official employee portals and guidelines.',
+          layout: 'buttons',
+          items: [
+            { title: 'Official Portal', url: 'https://', description: '', badge: '', variant: 'primary', targetBlank: true }
+          ]
+        },
+        image: { type: 'image', src: '', alt: '', caption: '', linkUrl: '', targetBlank: true, align: 'center', maxWidth: 'lg' },
         faq: {
           type: 'faq',
           heading: 'Frequently Asked Questions',
@@ -772,9 +806,9 @@
       const selected = textarea.value.substring(start, end) || 'Text';
       let insertion = `<${tag}>${selected}</${tag}>`;
       if (tag === 'a') {
-        const href = prompt('Enter URL (e.g. /downloads or https://...):', '/downloads');
+        const href = prompt('Enter URL (e.g. /downloads, /p/slug, or https://...):', '/downloads');
         if (!href) return;
-        insertion = `<a href="${href}">${selected}</a>`;
+        insertion = `<a href="${href}" target="_blank" rel="noopener noreferrer">${selected}</a>`;
       } else if (tag === 'ul') {
         insertion = `\n<ul>\n  <li>${selected}</li>\n  <li>Item 2</li>\n</ul>`;
       } else if (tag === 'p') {
@@ -782,6 +816,30 @@
       }
       textarea.value = textarea.value.substring(0, start) + insertion + textarea.value.substring(end);
       builderBlocks[blockIdx].body = textarea.value;
+    }
+
+    function addLinkItem(blockIdx) {
+      if (!builderBlocks[blockIdx].items) builderBlocks[blockIdx].items = [];
+      builderBlocks[blockIdx].items.push({
+        title: 'New Portal / Guideline',
+        url: 'https://',
+        description: '',
+        badge: '',
+        variant: 'primary',
+        targetBlank: true
+      });
+      renderBlocksCanvas();
+    }
+
+    function removeLinkItem(blockIdx, itemIdx) {
+      if (!builderBlocks[blockIdx].items) return;
+      builderBlocks[blockIdx].items.splice(itemIdx, 1);
+      renderBlocksCanvas();
+    }
+
+    function updateLinkItem(blockIdx, itemIdx, field, val) {
+      if (!builderBlocks[blockIdx].items || !builderBlocks[blockIdx].items[itemIdx]) return;
+      builderBlocks[blockIdx].items[itemIdx][field] = val;
     }
 
     function renderBlockBodyEditor(b, idx) {
@@ -984,6 +1042,16 @@
                     </label>
                   </div>
                 </div>
+                <div class="sm:col-span-2">
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">Click Link URL (Optional — Makes Image Clickable)</label>
+                  <div class="flex items-center gap-2">
+                    <input type="text" value="${escapeHtml(b.linkUrl || '')}" placeholder="https://... or /downloads or /p/..." oninput="updateBlockField(${idx}, 'linkUrl', this.value)" class="flex-1 min-w-0 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-mono">
+                    <label class="flex items-center gap-1.5 text-xs text-slate-700 font-semibold shrink-0 cursor-pointer">
+                      <input type="checkbox" ${b.targetBlank !== false ? 'checked' : ''} onchange="updateBlockField(${idx}, 'targetBlank', this.checked)" class="rounded text-blue-600">
+                      <span>New Tab</span>
+                    </label>
+                  </div>
+                </div>
                 <div>
                   <label class="block text-[11px] font-bold text-slate-600 mb-1">Alt Text (Accessibility)</label>
                   <input type="text" value="${escapeHtml(b.alt || '')}" placeholder="Describe the image" oninput="updateBlockField(${idx}, 'alt', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
@@ -1016,6 +1084,76 @@
                   <span class="text-[11px] text-slate-500 font-mono truncate flex-1">${escapeHtml(b.src)}</span>
                 </div>
               ` : ''}
+            </div>
+          `;
+
+        case 'links':
+          return `
+            <div class="space-y-3">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="sm:col-span-2">
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">Section Heading (Optional)</label>
+                  <input type="text" value="${escapeHtml(b.heading || '')}" placeholder="e.g. Important Links &amp; Portals" oninput="updateBlockField(${idx}, 'heading', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">Display Style</label>
+                  <select onchange="updateBlockField(${idx}, 'layout', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white font-medium">
+                    <option value="buttons" ${b.layout === 'buttons' ? 'selected' : ''}>🔘 Action Buttons Group</option>
+                    <option value="grid" ${b.layout === 'grid' ? 'selected' : ''}>🗂️ Resource Cards Grid</option>
+                    <option value="list" ${(!b.layout || b.layout === 'list') ? 'selected' : ''}>📋 Clean Link List</option>
+                  </select>
+                </div>
+                <div class="sm:col-span-3">
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">Sub-heading / Description (Optional)</label>
+                  <input type="text" value="${escapeHtml(b.description || '')}" placeholder="Short explanation text" oninput="updateBlockField(${idx}, 'description', this.value)" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
+                </div>
+              </div>
+
+              <div class="space-y-2.5 pt-1">
+                <label class="block text-[11px] font-bold text-slate-700">Links / URLs List</label>
+                ${(b.items || []).map((item, itemIdx) => `
+                  <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-2 items-center">
+                      <div class="sm:col-span-4">
+                        <input type="text" value="${escapeHtml(item.title || '')}" placeholder="Link Label / Title" oninput="updateLinkItem(${idx}, ${itemIdx}, 'title', this.value)" class="w-full px-2.5 py-1.5 rounded border border-slate-200 text-xs font-semibold bg-white">
+                      </div>
+                      <div class="sm:col-span-5">
+                        <input type="text" value="${escapeHtml(item.url || '')}" placeholder="URL: https://... or /downloads" oninput="updateLinkItem(${idx}, ${itemIdx}, 'url', this.value)" class="w-full px-2.5 py-1.5 rounded border border-slate-200 text-xs font-mono bg-white">
+                      </div>
+                      <div class="sm:col-span-2">
+                        <select onchange="updateLinkItem(${idx}, ${itemIdx}, 'variant', this.value)" class="w-full px-2 py-1.5 rounded border border-slate-200 text-xs bg-white">
+                          <option value="primary" ${item.variant === 'primary' ? 'selected' : ''}>Blue (Gov)</option>
+                          <option value="emerald" ${item.variant === 'emerald' ? 'selected' : ''}>Green</option>
+                          <option value="amber" ${item.variant === 'amber' ? 'selected' : ''}>Amber</option>
+                          <option value="outline" ${item.variant === 'outline' ? 'selected' : ''}>Outline</option>
+                          <option value="dark" ${item.variant === 'dark' ? 'selected' : ''}>Dark</option>
+                        </select>
+                      </div>
+                      <div class="sm:col-span-1 text-right">
+                        <button type="button" onclick="removeLinkItem(${idx}, ${itemIdx})" class="text-rose-600 hover:bg-rose-50 px-2 py-1 rounded text-xs font-bold cursor-pointer" title="Remove Link">✕</button>
+                      </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-2 items-center text-xs">
+                      <div class="sm:col-span-7">
+                        <input type="text" value="${escapeHtml(item.description || '')}" placeholder="Optional note or subtitle (shown in grid/list mode)" oninput="updateLinkItem(${idx}, ${itemIdx}, 'description', this.value)" class="w-full px-2.5 py-1 rounded border border-slate-200 text-xs bg-white text-slate-600">
+                      </div>
+                      <div class="sm:col-span-3">
+                        <input type="text" value="${escapeHtml(item.badge || '')}" placeholder="Badge (e.g. HOT, NEW, PDF)" oninput="updateLinkItem(${idx}, ${itemIdx}, 'badge', this.value)" class="w-full px-2.5 py-1 rounded border border-slate-200 text-xs bg-white font-mono uppercase">
+                      </div>
+                      <div class="sm:col-span-2 flex items-center">
+                        <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 font-medium">
+                          <input type="checkbox" ${item.targetBlank !== false ? 'checked' : ''} onchange="updateLinkItem(${idx}, ${itemIdx}, 'targetBlank', this.checked)" class="rounded text-blue-600">
+                          <span class="text-[11px]">New Tab</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+                <button type="button" onclick="addLinkItem(${idx})" class="px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-800 text-xs font-bold cursor-pointer inline-flex items-center gap-1.5">
+                  <span>+</span>
+                  <span>Add Another Link / URL</span>
+                </button>
+              </div>
             </div>
           `;
 

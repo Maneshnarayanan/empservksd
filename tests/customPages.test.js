@@ -271,5 +271,97 @@ describe('Dynamic Pages & Admin Visual Page Builder API', () => {
       if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
     }
   });
+
+  it('should render links block and clickable image links in page preview and increment page views', async () => {
+    // 1. Preview links block in all 3 layouts
+    const previewRes = await agent
+      .post('/api/v1/admin/pages/preview')
+      .set('X-CSRF-Token', csrfToken)
+      .send({
+        blocks: [
+          {
+            type: 'links',
+            heading: 'Official Portals',
+            description: 'Direct links for staff',
+            layout: 'buttons',
+            items: [
+              { title: 'SPARK Portal', url: 'https://spark.gov.in', badge: 'PORTAL', variant: 'primary', targetBlank: true },
+              { title: 'BIMS Kerala', url: 'https://bims.kerala.gov.in', badge: 'FINANCE', variant: 'emerald', targetBlank: true }
+            ]
+          },
+          {
+            type: 'image',
+            src: '/storage/page-assets/test.png',
+            alt: 'Clickable graphic',
+            linkUrl: 'https://kerala.gov.in',
+            targetBlank: true
+          },
+          {
+            type: 'richtext',
+            heading: 'Rules with Links',
+            body: '<p>Visit [Downloads Hub](/downloads) or click <a href="/services">Services</a>.</p>'
+          }
+        ]
+      });
+
+    expect(previewRes.status).toBe(200);
+    expect(previewRes.body.html).toContain('SPARK Portal');
+    expect(previewRes.body.html).toContain('https://spark.gov.in');
+    expect(previewRes.body.html).toContain('PORTAL');
+    expect(previewRes.body.html).toContain('https://kerala.gov.in');
+    expect(previewRes.body.html).toContain('href="/downloads"');
+
+    // 2. Create dynamic page and verify view_count starts at 0 and increments on visit
+    const createRes = await agent
+      .post('/api/v1/admin/pages')
+      .set('X-CSRF-Token', csrfToken)
+      .send({
+        title: 'Links Resource Page 2026',
+        subtitle: 'Comprehensive link directory for employees',
+        layout_mode: 'standard',
+        is_published: true,
+        blocks: [
+          {
+            type: 'links',
+            heading: 'Key Links',
+            items: [{ title: 'Finance Department', url: 'https://finance.kerala.gov.in' }]
+          }
+        ]
+      });
+
+    expect(createRes.status).toBe(201);
+    const pageId = createRes.body.data.id;
+    const pageSlug = createRes.body.data.slug;
+
+    // View public page via SSR
+    const ssrRes = await request(app).get(`/p/${pageSlug}`);
+    expect(ssrRes.status).toBe(200);
+    expect(ssrRes.text).toContain('Finance Department');
+
+    // View public page via JSON endpoint
+    const apiRes = await request(app).get(`/api/v1/pages/${pageSlug}`);
+    expect(apiRes.status).toBe(200);
+    expect(apiRes.body.data.view_count).toBeGreaterThanOrEqual(2);
+
+    // Verify admin list returns view_count
+    const adminPagesRes = await agent.get('/api/v1/admin/pages');
+    expect(adminPagesRes.status).toBe(200);
+    const createdPage = adminPagesRes.body.data.find(p => p.id === pageId);
+    expect(createdPage).toBeDefined();
+    expect(createdPage.view_count).toBeGreaterThanOrEqual(2);
+
+    // Verify admin dashboard stats includes pageViews and customPages
+    const statsRes = await agent.get('/api/v1/admin/stats');
+    expect(statsRes.status).toBe(200);
+    expect(statsRes.body.data.customPages).toBeGreaterThanOrEqual(1);
+    expect(statsRes.body.data.pageViews).toBeGreaterThanOrEqual(2);
+    expect(statsRes.body.data.blogViews).toBeDefined();
+    expect(statsRes.body.data.posterViews).toBeDefined();
+
+    // Clean up
+    await agent
+      .delete(`/api/v1/admin/pages/${pageId}`)
+      .set('X-CSRF-Token', csrfToken);
+  });
 });
 

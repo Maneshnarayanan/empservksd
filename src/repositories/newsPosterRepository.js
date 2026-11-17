@@ -21,7 +21,7 @@ async function findAll({ onlyActive = false, search = null, page = null, limit =
 
   // Ordered purely by published date descending, then created_at descending
   let query = `
-    SELECT id, title, caption, description, image_filename, original_filename, display_order, is_active, is_home_published, published_date, created_at, updated_at
+    SELECT id, title, caption, description, image_filename, original_filename, display_order, is_active, is_home_published, published_date, COALESCE(view_count, 0) as view_count, created_at, updated_at
     FROM news_posters
     ${baseWhere}
     ORDER BY published_date DESC, created_at DESC
@@ -52,7 +52,7 @@ async function findAll({ onlyActive = false, search = null, page = null, limit =
 
 async function getHomePosters({ limit = 3 } = {}) {
   const query = `
-    SELECT id, title, caption, description, image_filename, original_filename, display_order, is_active, is_home_published, published_date, created_at, updated_at
+    SELECT id, title, caption, description, image_filename, original_filename, display_order, is_active, is_home_published, published_date, COALESCE(view_count, 0) as view_count, created_at, updated_at
     FROM news_posters
     WHERE is_active = true AND is_home_published = true
     ORDER BY display_order ASC, published_date DESC, created_at DESC
@@ -64,7 +64,7 @@ async function getHomePosters({ limit = 3 } = {}) {
 
 async function getLatest() {
   const query = `
-    SELECT id, title, caption, description, image_filename, original_filename, display_order, is_active, is_home_published, published_date, created_at, updated_at
+    SELECT id, title, caption, description, image_filename, original_filename, display_order, is_active, is_home_published, published_date, COALESCE(view_count, 0) as view_count, created_at, updated_at
     FROM news_posters
     WHERE is_active = true AND is_home_published = true
     ORDER BY display_order ASC, published_date DESC, created_at DESC
@@ -87,12 +87,35 @@ async function countHomePublished(excludeId = null) {
 
 async function findById(id) {
   const query = `
-    SELECT id, title, caption, description, image_filename, original_filename, display_order, is_active, is_home_published, published_date, created_at, updated_at
+    SELECT id, title, caption, description, image_filename, original_filename, display_order, is_active, is_home_published, published_date, COALESCE(view_count, 0) as view_count, created_at, updated_at
     FROM news_posters
     WHERE id = $1;
   `;
   const res = await db.query(query, [id]);
   return res.rows[0] || null;
+}
+
+async function incrementViewCount(id) {
+  const query = `
+    UPDATE news_posters
+    SET view_count = COALESCE(view_count, 0) + 1
+    WHERE id = $1
+    RETURNING view_count;
+  `;
+  const res = await db.query(query, [id]);
+  return res.rows[0] ? res.rows[0].view_count : 0;
+}
+
+async function countPosters() {
+  const query = `
+    SELECT
+      COUNT(*)::int as total,
+      COALESCE(SUM(CASE WHEN is_active = true THEN 1 ELSE 0 END), 0)::int as active,
+      COALESCE(SUM(view_count), 0)::int as total_views
+    FROM news_posters;
+  `;
+  const res = await db.query(query);
+  return res.rows[0] || { total: 0, active: 0, total_views: 0 };
 }
 
 async function create({
@@ -191,4 +214,6 @@ module.exports = {
   create,
   update,
   deletePoster,
+  incrementViewCount,
+  countPosters,
 };

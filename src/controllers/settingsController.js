@@ -3,6 +3,9 @@ const categoryRepo = require('../repositories/serviceCategoryRepository');
 const linkRepo = require('../repositories/serviceLinkRepository');
 const downloadRepo = require('../repositories/downloadRepository');
 const blogArticleRepo = require('../repositories/blogArticleRepository');
+const customPageRepo = require('../repositories/customPageRepository');
+const newsRepo = require('../repositories/newsPosterRepository');
+const jobVacancyRepo = require('../repositories/jobVacancyRepository');
 
 async function getPublicSettings(req, res, next) {
   try {
@@ -53,13 +56,28 @@ async function updateSettings(req, res, next) {
 
 async function getDashboardStats(req, res, next) {
   try {
-    const [catCount, linkCount, confLinkCount, downloadCount, activeDownloadCount, blogStats] = await Promise.all([
+    const [
+      catCount,
+      linkCount,
+      confLinkCount,
+      downloadCount,
+      activeDownloadCount,
+      totalDownloads,
+      blogStats,
+      pageStats,
+      posterStats,
+      jobStats,
+    ] = await Promise.all([
       categoryRepo.countCategories(),
       linkRepo.countLinks(false),
       linkRepo.countLinks(true),
       downloadRepo.countDownloads(false),
       downloadRepo.countDownloads(true),
+      downloadRepo.getTotalDownloadCount(),
       blogArticleRepo.countArticles(),
+      customPageRepo.countPages(),
+      newsRepo.countPosters(),
+      jobVacancyRepo.countVacancies(),
     ]);
 
     return res.json({
@@ -71,9 +89,20 @@ async function getDashboardStats(req, res, next) {
         unconfiguredLinks: linkCount - confLinkCount,
         downloads: downloadCount,
         activeDownloads: activeDownloadCount,
+        totalDownloads,
         blogArticles: blogStats.total,
         publishedArticles: blogStats.published,
         draftArticles: blogStats.drafts,
+        blogViews: blogStats.total_views || 0,
+        customPages: pageStats.total,
+        publishedPages: pageStats.published,
+        pageViews: pageStats.totalViews || 0,
+        newsPosters: posterStats.total,
+        activePosters: posterStats.active,
+        posterViews: posterStats.total_views || 0,
+        jobVacancies: jobStats.total,
+        activeVacancies: jobStats.active,
+        jobViews: jobStats.total_views || 0,
       },
     });
   } catch (err) {

@@ -51,7 +51,7 @@ async function findAll({
   const dataParams = [...params, safeLimit, offset];
   const dataQuery = `
     SELECT a.id, a.title, a.slug, a.summary, a.category_id, a.featured_image, a.author_name,
-           a.status, a.published_at, a.created_at, a.updated_at,
+           a.status, a.published_at, COALESCE(a.view_count, 0) as view_count, a.created_at, a.updated_at,
            c.name as category_name, c.slug as category_slug
     FROM blog_articles a
     JOIN blog_categories c ON a.category_id = c.id
@@ -77,7 +77,7 @@ async function findAll({
 async function findById(id) {
   const query = `
     SELECT a.id, a.title, a.slug, a.summary, a.content, a.category_id, a.featured_image,
-           a.author_name, a.status, a.published_at, a.created_by, a.created_at, a.updated_at,
+           a.author_name, a.status, a.published_at, COALESCE(a.view_count, 0) as view_count, a.created_by, a.created_at, a.updated_at,
            c.name as category_name, c.slug as category_slug,
            adm.username as admin_username
     FROM blog_articles a
@@ -92,7 +92,7 @@ async function findById(id) {
 async function findBySlug(slug, onlyPublished = true) {
   let query = `
     SELECT a.id, a.title, a.slug, a.summary, a.content, a.category_id, a.featured_image,
-           a.author_name, a.status, a.published_at, a.created_by, a.created_at, a.updated_at,
+           a.author_name, a.status, a.published_at, COALESCE(a.view_count, 0) as view_count, a.created_by, a.created_at, a.updated_at,
            c.name as category_name, c.slug as category_slug,
            adm.username as admin_username
     FROM blog_articles a
@@ -222,12 +222,24 @@ async function deleteBlogArticle(id) {
   return res.rows[0] || null;
 }
 
+async function incrementViewCount(id) {
+  const query = `
+    UPDATE blog_articles
+    SET view_count = COALESCE(view_count, 0) + 1
+    WHERE id = $1
+    RETURNING view_count;
+  `;
+  const res = await db.query(query, [id]);
+  return res.rows[0] ? res.rows[0].view_count : 0;
+}
+
 async function countArticles() {
   const res = await db.query(`
     SELECT
       COUNT(*)::int as total,
       COUNT(CASE WHEN status = 'published' THEN 1 END)::int as published,
-      COUNT(CASE WHEN status = 'draft' THEN 1 END)::int as drafts
+      COUNT(CASE WHEN status = 'draft' THEN 1 END)::int as drafts,
+      COALESCE(SUM(view_count), 0)::int as total_views
     FROM blog_articles;
   `);
   return res.rows[0];
@@ -241,5 +253,6 @@ module.exports = {
   update,
   setPublicationStatus,
   deleteBlogArticle,
+  incrementViewCount,
   countArticles,
 };
