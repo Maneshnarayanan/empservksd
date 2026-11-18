@@ -78,26 +78,39 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-12">
         <!-- Desktop Nav Links -->
-        <div id="desktop-nav-links" class="hidden md:flex items-center space-x-1 text-xs uppercase tracking-wide flex-wrap">
-          <a href="/" class="gov-nav-item {{NAV_ACTIVE_HOME}}">
-            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+        <div id="desktop-nav-links" class="hidden md:flex items-center space-x-0.5 xl:space-x-1 text-xs uppercase tracking-tight xl:tracking-wide flex-nowrap min-w-0">
+          <a href="/" class="gov-nav-item {{NAV_ACTIVE_HOME}}" title="Home">
+            <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
             <span>Home</span>
           </a>
-          <a href="/services" class="gov-nav-item {{NAV_ACTIVE_SERVICES}}">Services Directory</a>
-          <a href="/downloads" class="gov-nav-item {{NAV_ACTIVE_DOWNLOADS}}">Downloads & Orders</a>
-          <a href="/news" class="gov-nav-item {{NAV_ACTIVE_NEWS}}">News & Posters</a>
-          <a href="/blogs" class="gov-nav-item {{NAV_ACTIVE_BLOGS}}">Blogs & Web</a>
-          <a href="/jobs" class="gov-nav-item {{NAV_ACTIVE_JOBS}} flex items-center gap-1">
+          <a href="/services" class="gov-nav-item {{NAV_ACTIVE_SERVICES}}" title="Services Directory">
+            <span>Services<span class="hidden xl:inline"> Directory</span></span>
+          </a>
+          <a href="/downloads" class="gov-nav-item {{NAV_ACTIVE_DOWNLOADS}}" title="Downloads & Orders">
+            <span>Downloads<span class="hidden xl:inline"> &amp; Orders</span></span>
+          </a>
+          <a href="/news" class="gov-nav-item {{NAV_ACTIVE_NEWS}}" title="News & Posters">
+            <span>News<span class="hidden xl:inline"> &amp; Posters</span></span>
+          </a>
+          <a href="/blogs" class="gov-nav-item {{NAV_ACTIVE_BLOGS}}" title="Blogs & Web">
+            <span>Blogs &amp; Web</span>
+          </a>
+          <a href="/jobs" class="gov-nav-item {{NAV_ACTIVE_JOBS}} flex items-center gap-1" title="Job Vacancies">
             <span>Job Vacancy</span>
             <span class="bg-amber-400 text-slate-950 font-black text-[9px] uppercase px-1 py-0.2 rounded shrink-0">NEW</span>
           </a>
-          <a href="/about" class="gov-nav-item {{NAV_ACTIVE_ABOUT}}">About Us</a>
-          <a href="/contact" class="gov-nav-item {{NAV_ACTIVE_CONTACT}}">Contact</a>
+          <a href="/about" class="gov-nav-item {{NAV_ACTIVE_ABOUT}}" title="About Us">
+            <span>About<span class="hidden xl:inline"> Us</span></span>
+          </a>
+          <a href="/contact" class="gov-nav-item {{NAV_ACTIVE_CONTACT}}" title="Contact">
+            <span>Contact</span>
+          </a>
         </div>
 
-        <div class="hidden md:flex items-center gap-2">
-          <a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" rel="noopener noreferrer" class="text-amber-300 hover:text-amber-200 text-xs font-bold flex items-center gap-1 px-2.5 py-1 rounded bg-black/20 border border-amber-400/40">
-            <span>SPARK Direct Login &rarr;</span>
+        <div class="hidden md:flex items-center gap-2 shrink-0 ml-2">
+          <a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" rel="noopener noreferrer" class="text-amber-300 hover:text-amber-200 text-xs font-bold flex items-center gap-1 px-2.5 py-1.5 rounded bg-black/25 hover:bg-black/40 border border-amber-400/40 transition shrink-0 whitespace-nowrap shadow-xs">
+            <span class="hidden xl:inline">SPARK Direct Login &rarr;</span>
+            <span class="inline xl:hidden">SPARK Login &rarr;</span>
           </a>
         </div>
 
