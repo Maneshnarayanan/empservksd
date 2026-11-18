@@ -691,10 +691,11 @@
         table: {
           type: 'table',
           heading: 'Data / Rate Chart',
-          headers: ['Column 1', 'Column 2', 'Column 3'],
+          headers: ['Date', 'Description', 'Official Order / Link'],
+          columnTypes: ['date', 'text', 'link'],
           rows: [
-            ['Row 1 A', 'Row 1 B', 'Row 1 C'],
-            ['Row 2 A', 'Row 2 B', 'Row 2 C']
+            ['2026-01-01', 'DA Revision enhancement to 37%', { text: 'Download GO(P) 108/2026', url: '/downloads', newTab: true }],
+            ['2025-07-01', 'Previous DA Revision to 35%', { text: 'Download GO(P) 54/2025', url: '/downloads', newTab: true }]
           ]
         },
         download_cta: { type: 'download_cta', title: 'Download Official Order / Form', description: 'Verified circular PDF ready for download.', buttonText: 'Download PDF', buttonUrl: '/downloads', newTab: false },
@@ -778,24 +779,74 @@
       builderBlocks[blockIdx].items[faqIdx][field] = val;
     }
 
+    function updateTableColumnType(blockIdx, colIdx, newType) {
+      const b = builderBlocks[blockIdx];
+      if (!b.columnTypes) {
+        b.columnTypes = b.headers.map(() => 'text');
+      }
+      b.columnTypes[colIdx] = newType;
+      if (newType === 'link') {
+        b.rows.forEach(row => {
+          const cell = row[colIdx];
+          if (typeof cell !== 'object' || cell === null) {
+            const str = String(cell || '');
+            const isUrl = str.startsWith('http://') || str.startsWith('https://') || str.startsWith('/');
+            row[colIdx] = {
+              text: isUrl ? 'View / Download' : (str || 'Link'),
+              url: isUrl ? str : '',
+              newTab: true
+            };
+          }
+        });
+      }
+      renderBlocksCanvas();
+    }
+
+    function updateTableCell(blockIdx, rowIdx, colIdx, val) {
+      builderBlocks[blockIdx].rows[rowIdx][colIdx] = val;
+    }
+
+    function updateTableCellLink(blockIdx, rowIdx, colIdx, field, val) {
+      let cell = builderBlocks[blockIdx].rows[rowIdx][colIdx];
+      if (typeof cell !== 'object' || cell === null) {
+        cell = { text: typeof cell === 'string' ? cell : '', url: '', newTab: true };
+        builderBlocks[blockIdx].rows[rowIdx][colIdx] = cell;
+      }
+      cell[field] = val;
+    }
+
     function addTableColumn(blockIdx) {
       const b = builderBlocks[blockIdx];
       b.headers.push(`Col ${b.headers.length + 1}`);
+      if (!b.columnTypes) {
+        b.columnTypes = b.headers.slice(0, -1).map(() => 'text');
+      }
+      b.columnTypes.push('text');
       b.rows.forEach(r => r.push(''));
       renderBlocksCanvas();
     }
+
     function removeTableColumn(blockIdx, colIdx) {
       const b = builderBlocks[blockIdx];
       if (b.headers.length <= 1) return;
       b.headers.splice(colIdx, 1);
+      if (b.columnTypes && b.columnTypes.length > colIdx) {
+        b.columnTypes.splice(colIdx, 1);
+      }
       b.rows.forEach(r => r.splice(colIdx, 1));
       renderBlocksCanvas();
     }
+
     function addTableRow(blockIdx) {
       const b = builderBlocks[blockIdx];
-      b.rows.push(new Array(b.headers.length).fill(''));
+      const colTypes = b.columnTypes || b.headers.map(() => 'text');
+      const newRow = b.headers.map((_, cIdx) => {
+        return colTypes[cIdx] === 'link' ? { text: '', url: '', newTab: true } : '';
+      });
+      b.rows.push(newRow);
       renderBlocksCanvas();
     }
+
     function removeTableRow(blockIdx, rowIdx) {
       builderBlocks[blockIdx].rows.splice(rowIdx, 1);
       renderBlocksCanvas();
@@ -959,7 +1010,13 @@
             </div>
           `;
 
-        case 'table':
+        case 'table': {
+          const headers = b.headers || [];
+          if (!b.columnTypes || b.columnTypes.length !== headers.length) {
+            b.columnTypes = headers.map((_, i) => (b.columnTypes && b.columnTypes[i]) || 'text');
+          }
+          const colTypes = b.columnTypes;
+
           return `
             <div class="space-y-3">
               <div class="flex flex-wrap items-center justify-between gap-2">
@@ -969,31 +1026,84 @@
                   <button type="button" onclick="addTableRow(${idx})" class="px-2.5 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-800 text-[11px] font-bold cursor-pointer">+ Row</button>
                 </div>
               </div>
-              <div class="overflow-x-auto border border-slate-200 rounded-xl">
+              <div class="overflow-x-auto border border-slate-200 rounded-xl bg-white shadow-2xs">
                 <table class="w-full text-xs">
                   <thead class="bg-slate-100">
                     <tr>
-                      ${(b.headers || []).map((h, hIdx) => `
-                        <th class="p-1.5 border-r border-slate-200">
-                          <div class="flex items-center gap-1">
-                            <input type="text" value="${escapeHtml(h)}" oninput="builderBlocks[${idx}].headers[${hIdx}] = this.value" class="w-full px-2 py-1 rounded border border-slate-200 bg-white font-bold text-[11px]">
-                            <button type="button" onclick="removeTableColumn(${idx}, ${hIdx})" class="text-rose-500 text-[10px] px-1 cursor-pointer" title="Remove column">✕</button>
+                      ${headers.map((h, hIdx) => {
+                        const type = colTypes[hIdx] || 'text';
+                        return `
+                        <th class="p-2 border-r border-slate-200 align-top">
+                          <div class="space-y-1.5 min-w-[140px]">
+                            <div class="flex items-center gap-1">
+                              <input type="text" value="${escapeHtml(h)}" oninput="builderBlocks[${idx}].headers[${hIdx}] = this.value" placeholder="Header ${hIdx + 1}" class="w-full px-2 py-1 rounded border border-slate-300 bg-white font-bold text-[11px]">
+                              <button type="button" onclick="removeTableColumn(${idx}, ${hIdx})" class="text-rose-500 hover:text-rose-700 hover:bg-rose-50 rounded text-xs px-1 py-0.5 cursor-pointer font-bold shrink-0" title="Remove column">✕</button>
+                            </div>
+                            <div class="flex items-center gap-1">
+                              <span class="text-[9px] uppercase tracking-wider text-slate-500 font-extrabold shrink-0">Type:</span>
+                              <select onchange="updateTableColumnType(${idx}, ${hIdx}, this.value)" class="w-full text-[10px] font-semibold rounded border border-slate-300 bg-slate-50 px-1.5 py-0.5 text-slate-800 cursor-pointer focus:ring-1 focus:ring-blue-500">
+                                <option value="text" ${type === 'text' ? 'selected' : ''}>📝 Text</option>
+                                <option value="date" ${type === 'date' ? 'selected' : ''}>📅 Date</option>
+                                <option value="link" ${type === 'link' ? 'selected' : ''}>🔗 Link / URL</option>
+                                <option value="badge" ${type === 'badge' ? 'selected' : ''}>🏷️ Badge</option>
+                              </select>
+                            </div>
                           </div>
                         </th>
-                      `).join('')}
-                      <th class="w-10"></th>
+                        `;
+                      }).join('')}
+                      <th class="w-10 p-2"></th>
                     </tr>
                   </thead>
                   <tbody class="divide-y divide-slate-200">
                     ${(b.rows || []).map((row, rIdx) => `
-                      <tr>
-                        ${row.map((cell, cIdx) => `
-                          <td class="p-1.5 border-r border-slate-200">
-                            <input type="text" value="${escapeHtml(cell)}" oninput="builderBlocks[${idx}].rows[${rIdx}][${cIdx}] = this.value" class="w-full px-2 py-1 rounded border border-slate-100 focus:border-blue-400 text-xs">
-                          </td>
-                        `).join('')}
-                        <td class="p-1.5 text-center">
-                          <button type="button" onclick="removeTableRow(${idx}, ${rIdx})" class="text-rose-600 hover:bg-rose-50 px-1.5 py-0.5 rounded text-xs font-bold cursor-pointer">✕</button>
+                      <tr class="hover:bg-slate-50/50">
+                        ${headers.map((_, cIdx) => {
+                          const type = colTypes[cIdx] || 'text';
+                          const cell = row[cIdx];
+
+                          if (type === 'link') {
+                            const isObj = typeof cell === 'object' && cell !== null;
+                            const textVal = isObj ? (cell.text || '') : (cell || '');
+                            const urlVal = isObj ? (cell.url || '') : (cell && (String(cell).startsWith('http') || String(cell).startsWith('/')) ? cell : '');
+                            return `
+                              <td class="p-2 border-r border-slate-200 min-w-[200px]">
+                                <div class="space-y-1">
+                                  <input type="text" value="${escapeHtml(textVal)}" placeholder="Link Label (e.g. Download PDF)" oninput="updateTableCellLink(${idx}, ${rIdx}, ${cIdx}, 'text', this.value)" class="w-full px-2 py-1 rounded border border-slate-200 text-xs bg-white font-medium">
+                                  <input type="text" value="${escapeHtml(urlVal)}" placeholder="URL (/downloads or https://...)" oninput="updateTableCellLink(${idx}, ${rIdx}, ${cIdx}, 'url', this.value)" class="w-full px-2 py-1 rounded border border-blue-200 text-xs font-mono bg-blue-50/50 text-blue-900">
+                                </div>
+                              </td>
+                            `;
+                          }
+
+                          if (type === 'date') {
+                            const dateVal = typeof cell === 'object' && cell !== null ? (cell.text || '') : (cell || '');
+                            return `
+                              <td class="p-2 border-r border-slate-200 min-w-[130px]">
+                                <input type="text" value="${escapeHtml(dateVal)}" placeholder="YYYY-MM-DD or DD/MM/YYYY" oninput="updateTableCell(${idx}, ${rIdx}, ${cIdx}, this.value)" class="w-full px-2 py-1 rounded border border-slate-200 text-xs font-mono">
+                              </td>
+                            `;
+                          }
+
+                          if (type === 'badge') {
+                            const badgeVal = typeof cell === 'object' && cell !== null ? (cell.text || '') : (cell || '');
+                            return `
+                              <td class="p-2 border-r border-slate-200 min-w-[120px]">
+                                <input type="text" value="${escapeHtml(badgeVal)}" placeholder="Active, Urgent, Sanctioned..." oninput="updateTableCell(${idx}, ${rIdx}, ${cIdx}, this.value)" class="w-full px-2 py-1 rounded border border-slate-200 text-xs font-bold text-slate-800">
+                              </td>
+                            `;
+                          }
+
+                          // Default: text
+                          const textVal = typeof cell === 'object' && cell !== null ? (cell.text || cell.url || '') : (cell || '');
+                          return `
+                            <td class="p-2 border-r border-slate-200 min-w-[140px]">
+                              <input type="text" value="${escapeHtml(textVal)}" placeholder="Text" oninput="updateTableCell(${idx}, ${rIdx}, ${cIdx}, this.value)" class="w-full px-2 py-1 rounded border border-slate-100 focus:border-blue-400 text-xs">
+                            </td>
+                          `;
+                        }).join('')}
+                        <td class="p-2 text-center align-middle">
+                          <button type="button" onclick="removeTableRow(${idx}, ${rIdx})" class="text-rose-600 hover:bg-rose-50 px-1.5 py-0.5 rounded text-xs font-bold cursor-pointer" title="Remove row">✕</button>
                         </td>
                       </tr>
                     `).join('')}
@@ -1002,6 +1112,7 @@
               </div>
             </div>
           `;
+        }
 
         case 'download_cta':
           return `

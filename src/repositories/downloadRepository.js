@@ -1,12 +1,17 @@
 const db = require('../config/database');
 
-async function findAll({ onlyActive = false, category = null, search = null, page = null, limit = null } = {}) {
+async function findAll({ onlyActive = false, onlyPublic = false, category = null, search = null, page = null, limit = null } = {}) {
   let baseWhere = ' WHERE 1=1';
   const params = [];
 
   if (onlyActive) {
     params.push(true);
     baseWhere += ` AND is_active = $${params.length}`;
+  }
+
+  if (onlyPublic) {
+    params.push(true);
+    baseWhere += ` AND show_in_downloads = $${params.length}`;
   }
 
   if (category && category !== 'ALL') {
@@ -26,7 +31,7 @@ async function findAll({ onlyActive = false, category = null, search = null, pag
 
   let query = `
     SELECT id, title, description, category, filename, original_filename,
-           mime_type, file_size, download_count, is_active, created_at, updated_at
+           mime_type, file_size, download_count, is_active, show_in_downloads, created_at, updated_at
     FROM download_resources
     ${baseWhere}
     ORDER BY created_at DESC
@@ -58,7 +63,7 @@ async function findAll({ onlyActive = false, category = null, search = null, pag
 async function findById(id) {
   const query = `
     SELECT id, title, description, category, filename, original_filename,
-           mime_type, file_size, download_count, is_active, created_at, updated_at
+           mime_type, file_size, download_count, is_active, show_in_downloads, created_at, updated_at
     FROM download_resources
     WHERE id = $1;
   `;
@@ -66,11 +71,11 @@ async function findById(id) {
   return res.rows[0] || null;
 }
 
-async function create({ title, description, category, filename, original_filename, mime_type, file_size, is_active }) {
+async function create({ title, description, category, filename, original_filename, mime_type, file_size, is_active, show_in_downloads }) {
   const query = `
     INSERT INTO download_resources (
-      title, description, category, filename, original_filename, mime_type, file_size, is_active
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      title, description, category, filename, original_filename, mime_type, file_size, is_active, show_in_downloads
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *;
   `;
   const res = await db.query(query, [
@@ -82,11 +87,12 @@ async function create({ title, description, category, filename, original_filenam
     mime_type,
     parseInt(file_size || 0, 10),
     is_active !== undefined ? Boolean(is_active) : true,
+    show_in_downloads !== undefined ? Boolean(show_in_downloads) : true,
   ]);
   return res.rows[0];
 }
 
-async function update(id, { title, description, category, filename, original_filename, mime_type, file_size, is_active }) {
+async function update(id, { title, description, category, filename, original_filename, mime_type, file_size, is_active, show_in_downloads }) {
   const existing = await findById(id);
   if (!existing) return null;
 
@@ -98,12 +104,13 @@ async function update(id, { title, description, category, filename, original_fil
   const finalMime = mime_type !== undefined ? mime_type : existing.mime_type;
   const finalSize = file_size !== undefined ? parseInt(file_size, 10) : existing.file_size;
   const finalActive = is_active !== undefined ? Boolean(is_active) : existing.is_active;
+  const finalShow = show_in_downloads !== undefined ? Boolean(show_in_downloads) : (existing.show_in_downloads !== undefined ? existing.show_in_downloads : true);
 
   const query = `
     UPDATE download_resources
     SET title = $1, description = $2, category = $3, filename = $4, original_filename = $5,
-        mime_type = $6, file_size = $7, is_active = $8, updated_at = CURRENT_TIMESTAMP
-    WHERE id = $9
+        mime_type = $6, file_size = $7, is_active = $8, show_in_downloads = $9, updated_at = CURRENT_TIMESTAMP
+    WHERE id = $10
     RETURNING *;
   `;
   const res = await db.query(query, [
@@ -115,6 +122,7 @@ async function update(id, { title, description, category, filename, original_fil
     finalMime,
     finalSize,
     finalActive,
+    finalShow,
     id,
   ]);
   return res.rows[0];

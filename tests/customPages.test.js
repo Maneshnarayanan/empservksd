@@ -363,5 +363,67 @@ describe('Dynamic Pages & Admin Visual Page Builder API', () => {
       .delete(`/api/v1/admin/pages/${pageId}`)
       .set('X-CSRF-Token', csrfToken);
   });
+
+  it('should render table block with typed columns (date, link, badge, text)', async () => {
+    const tableBlocks = [
+      {
+        type: 'table',
+        heading: 'Official Orders & Revised Allowances',
+        headers: ['Effective Date', 'Order Title', 'Status', 'Download Action'],
+        columnTypes: ['date', 'text', 'badge', 'link'],
+        rows: [
+          [
+            '2026-01-01',
+            'Dearness Allowance Revision GO(P) 108/2026',
+            'Active',
+            { text: 'Download PDF Order', url: '/api/v1/downloads/1/file', newTab: true }
+          ],
+          [
+            '2025-07-01',
+            'Previous Revision Circular',
+            'Archived',
+            'Previous Order|/downloads'
+          ]
+        ]
+      }
+    ];
+
+    const createRes = await agent
+      .post('/api/v1/admin/pages')
+      .set('X-CSRF-Token', csrfToken)
+      .send({
+        title: 'Table Column Types Test Page',
+        subtitle: 'Testing date, text, badge, and link column types',
+        layout_mode: 'standard',
+        show_in_nav: false,
+        is_published: true,
+        blocks: tableBlocks
+      });
+
+    expect(createRes.status).toBe(201);
+    expect(createRes.body.success).toBe(true);
+
+    const html = createRes.body.data.content_html;
+    // Verify date formatting with calendar icon
+    expect(html).toContain('📅');
+    expect(html).toContain('2026-01-01');
+    // Verify text
+    expect(html).toContain('Dearness Allowance Revision GO(P) 108/2026');
+    // Verify badge styling
+    expect(html).toContain('Active');
+    expect(html).toContain('bg-emerald-100');
+    // Verify link button
+    expect(html).toContain('Download PDF Order');
+    expect(html).toContain('/api/v1/downloads/1/file');
+    expect(html).toContain('target="_blank"');
+    // Verify pipe-separated string link
+    expect(html).toContain('Previous Order');
+    expect(html).toContain('/downloads');
+
+    // Clean up
+    await agent
+      .delete(`/api/v1/admin/pages/${createRes.body.data.id}`)
+      .set('X-CSRF-Token', csrfToken);
+  });
 });
 

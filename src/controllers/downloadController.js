@@ -9,6 +9,7 @@ async function getPublicDownloads(req, res, next) {
     const { category, search, page, limit } = req.query;
     const result = await downloadRepo.findAll({
       onlyActive: true,
+      onlyPublic: true,
       category,
       search,
       page,
@@ -154,6 +155,7 @@ async function createDownload(req, res, next) {
       mime_type: req.file.mimetype,
       file_size: req.file.size,
       is_active: req.body.is_active !== undefined ? req.body.is_active === 'true' || req.body.is_active === true : true,
+      show_in_downloads: req.body.show_in_downloads !== undefined ? req.body.show_in_downloads === 'true' || req.body.show_in_downloads === true : true,
     });
 
     return res.status(201).json({
@@ -188,6 +190,7 @@ async function updateDownload(req, res, next) {
       description: req.body.description,
       category: req.body.category,
       is_active: req.body.is_active !== undefined ? (req.body.is_active === 'true' || req.body.is_active === true) : undefined,
+      show_in_downloads: req.body.show_in_downloads !== undefined ? (req.body.show_in_downloads === 'true' || req.body.show_in_downloads === true) : undefined,
     };
 
     // If new file is uploaded to replace existing

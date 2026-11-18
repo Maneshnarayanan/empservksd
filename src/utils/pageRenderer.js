@@ -60,6 +60,97 @@ function safeUrl(url) {
   return escapeHtml(trimmed);
 }
 
+function renderTableCell(cell, type = 'text') {
+  // If cell is an object (e.g. { text, url, newTab })
+  if (typeof cell === 'object' && cell !== null) {
+    const text = cell.text || cell.url || 'Open Link';
+    const url = cell.url || '#';
+    const newTab = cell.newTab !== false;
+    return `
+      <td class="px-4 py-3 text-slate-700 font-medium">
+        <a href="${safeUrl(url)}" ${newTab ? 'target="_blank" rel="noopener noreferrer"' : ''} class="inline-flex items-center gap-1.5 font-bold text-blue-800 hover:text-blue-950 hover:underline bg-blue-50/90 hover:bg-blue-100 border border-blue-200 px-2.5 py-1 rounded-md text-xs transition">
+          <span>${escapeHtml(text)}</span>
+          <svg class="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+      </td>
+    `;
+  }
+
+  const str = String(cell ?? '');
+
+  if (type === 'link') {
+    if (!str.trim()) {
+      return '<td class="px-4 py-3 text-slate-400 italic text-xs">—</td>';
+    }
+    let label = str;
+    let url = str;
+    if (str.includes('|')) {
+      const parts = str.split('|');
+      label = parts[0].trim();
+      url = parts.slice(1).join('|').trim();
+    }
+    return `
+      <td class="px-4 py-3 text-slate-700 font-medium">
+        <a href="${safeUrl(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-bold text-blue-800 hover:text-blue-950 hover:underline bg-blue-50/90 hover:bg-blue-100 border border-blue-200 px-2.5 py-1 rounded-md text-xs transition">
+          <span>${escapeHtml(label)}</span>
+          <svg class="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+      </td>
+    `;
+  }
+
+  if (type === 'date') {
+    if (!str.trim()) {
+      return '<td class="px-4 py-3 text-slate-400 italic text-xs">—</td>';
+    }
+    return `
+      <td class="px-4 py-3 whitespace-nowrap text-slate-700 font-mono text-xs">
+        <span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-800 px-2 py-0.5 rounded border border-slate-200 font-medium">
+          <span class="text-slate-400 text-[11px]">📅</span>
+          <span>${escapeHtml(str)}</span>
+        </span>
+      </td>
+    `;
+  }
+
+  if (type === 'badge') {
+    if (!str.trim()) {
+      return '<td class="px-4 py-3 text-slate-400 italic text-xs">—</td>';
+    }
+    const lower = str.toLowerCase();
+    let badgeClass = 'bg-slate-100 text-slate-800 border-slate-300';
+    if (lower.includes('active') || lower.includes('approved') || lower.includes('verified') || lower.includes('open') || lower.includes('enhanced') || lower.includes('yes')) {
+      badgeClass = 'bg-emerald-100 text-emerald-800 border-emerald-300';
+    } else if (lower.includes('urgent') || lower.includes('closed') || lower.includes('expired') || lower.includes('no') || lower.includes('rejected')) {
+      badgeClass = 'bg-rose-100 text-rose-800 border-rose-300';
+    } else if (lower.includes('pending') || lower.includes('revision') || lower.includes('draft') || lower.includes('soon')) {
+      badgeClass = 'bg-amber-100 text-amber-800 border-amber-300';
+    } else {
+      badgeClass = 'bg-blue-100 text-blue-800 border-blue-300';
+    }
+    return `
+      <td class="px-4 py-3 whitespace-nowrap">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold border ${badgeClass}">
+          ${escapeHtml(str)}
+        </span>
+      </td>
+    `;
+  }
+
+  // If text starts with http://, https://, or /api/v1/downloads/, render as a link
+  if (str.startsWith('http://') || str.startsWith('https://') || str.startsWith('/api/v1/downloads/')) {
+    return `
+      <td class="px-4 py-3 text-slate-700 font-medium">
+        <a href="${safeUrl(str)}" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:text-blue-900 underline font-semibold text-xs">
+          ${escapeHtml(str)}
+        </a>
+      </td>
+    `;
+  }
+
+  return `<td class="px-4 py-3 text-slate-700 font-medium">${escapeHtml(str)}</td>`;
+}
+
 function renderSingleBlock(block) {
   if (!block || typeof block !== 'object') return '';
   const type = String(block.type || '').toLowerCase();
@@ -179,6 +270,7 @@ function renderSingleBlock(block) {
     case 'table': {
       const headers = Array.isArray(block.headers) ? block.headers : [];
       const rows = Array.isArray(block.rows) ? block.rows : [];
+      const colTypes = Array.isArray(block.columnTypes) ? block.columnTypes : [];
       return `
         <section class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden mb-6">
           ${block.heading ? `<div class="bg-slate-50 px-5 py-3.5 border-b border-slate-200"><h3 class="text-sm sm:text-base font-extrabold text-slate-900 font-heading">${escapeHtml(block.heading)}</h3></div>` : ''}
@@ -187,14 +279,17 @@ function renderSingleBlock(block) {
               ${headers.length > 0 ? `
                 <thead>
                   <tr class="bg-blue-950 text-white">
-                    ${headers.map(h => `<th class="px-4 py-3 font-bold uppercase tracking-wider text-[11px] border-r border-blue-900 last:border-r-0">${escapeHtml(h)}</th>`).join('')}
+                    ${headers.map((h, i) => `<th class="px-4 py-3 font-bold uppercase tracking-wider text-[11px] border-r border-blue-900 last:border-r-0">${escapeHtml(h)}</th>`).join('')}
                   </tr>
                 </thead>
               ` : ''}
               <tbody class="divide-y divide-slate-100">
                 ${rows.map((row, idx) => `
                   <tr class="${idx % 2 === 1 ? 'bg-slate-50/70' : 'bg-white'} hover:bg-blue-50/50 transition">
-                    ${(Array.isArray(row) ? row : []).map(cell => `<td class="px-4 py-3 text-slate-700 font-medium">${escapeHtml(cell)}</td>`).join('')}
+                    ${(Array.isArray(row) ? row : []).map((cell, cIdx) => {
+                      const type = colTypes[cIdx] || 'text';
+                      return renderTableCell(cell, type);
+                    }).join('')}
                   </tr>
                 `).join('')}
               </tbody>
