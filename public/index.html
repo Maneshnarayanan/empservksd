@@ -23,7 +23,7 @@
         <!-- Prev / Next Ticker Controls -->
         <div class="hidden sm:flex items-center gap-1 text-slate-400">
           <button id="ticker-prev" class="px-1.5 py-0.5 rounded hover:bg-slate-700 hover:text-white" title="Previous circular">&larr; Prev</button>
-          <span id="ticker-counter" class="text-[11px] font-mono text-amber-300">1/3</span>
+          <span id="ticker-counter" class="text-[11px] font-mono text-amber-300">--</span>
           <button id="ticker-next" class="px-1.5 py-0.5 rounded hover:bg-slate-700 hover:text-white" title="Next circular">Next &rarr;</button>
           <button id="ticker-toggle-pause" class="px-1.5 py-0.5 rounded hover:bg-slate-700 hover:text-white" title="Pause or Resume">&#10074;&#10074;</button>
         </div>
@@ -32,9 +32,7 @@
       <!-- Live Ticker Message Container -->
       <div class="flex-grow overflow-hidden relative h-5">
         <div id="ticker-content" class="transition-all duration-300 text-slate-200 font-medium truncate flex items-center gap-2">
-          <span class="text-amber-400 font-bold">[SPARK]:</span>
-          <span>Annual Property Return (APR) submission window is open for Kerala State Employees.</span>
-          <a href="/services" class="underline text-amber-300 hover:text-white ml-2 text-[11px]">View Details</a>
+          <span class="text-slate-400 text-xs animate-pulse">Loading circulars...</span>
         </div>
       </div>
 
@@ -220,7 +218,7 @@
               </h4>
               <div class="flex items-center gap-1">
                 <button id="live-feed-prev" class="w-5 h-5 rounded hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold cursor-pointer" title="Previous Notice">&larr;</button>
-                <span id="live-feed-counter" class="text-[9px] font-mono text-blue-900 bg-blue-50 px-1 rounded font-bold border border-blue-200">1/4</span>
+                <span id="live-feed-counter" class="text-[9px] font-mono text-blue-900 bg-blue-50 px-1 rounded font-bold border border-blue-200">--</span>
                 <button id="live-feed-next" class="w-5 h-5 rounded hover:bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold cursor-pointer" title="Next Notice">&rarr;</button>
               </div>
             </div>
@@ -1503,12 +1501,9 @@
         tabContentCirculars.classList.add('hidden');
       });
 
-      // 3. Ticker Carousel logic
-      let announcements = [
-        { title: 'SPARK', message: 'Annual Property Return (APR) submission window is active on SPARK portal for Kerala State Employees.', link_url: 'https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx' },
-        { title: 'MEDISEP', message: 'MEDISEP Phase II: Updated empanelled hospitals list and grievance redressal helpline details for Kasaragod.', link_url: '/downloads' },
-        { title: 'GPF Kerala', message: 'GPF Annual Accounts Statements for current financial year are ready for download and verification.', link_url: '/services' }
-      ];
+      // 3. Ticker Carousel & Important Notices logic (Dynamic from Announcements API)
+      let announcements = [];
+      let liveOrders = [];
       let currentTickerIdx = 0;
       let tickerTimer = null;
       let isTickerPaused = false;
@@ -1518,133 +1513,118 @@
       const tickerTogglePause = document.getElementById('ticker-toggle-pause');
 
       function renderTicker(idx) {
-        if (!tickerContent || announcements.length === 0) return;
-        const item = announcements[idx];
+        if (!tickerContent) return;
+        if (!announcements || announcements.length === 0) {
+          tickerContent.innerHTML = `<span class="text-slate-400 italic text-xs">No active circulars or announcements added yet.</span>`;
+          if (tickerCounter) tickerCounter.textContent = '0/0';
+          return;
+        }
+        const safeIdx = idx % announcements.length;
+        const item = announcements[safeIdx];
         tickerContent.innerHTML = `
           <span class="text-amber-400 font-bold">[${item.title}]:</span>
           <span class="truncate">${item.message}</span>
-          ${item.link_url ? `<a href="${item.link_url}" ${item.link_url.startsWith('http') ? 'target="_blank"' : ''} class="underline text-amber-300 hover:text-white ml-2 text-[11px] shrink-0 font-bold">Open Portal &rarr;</a>` : ''}
+          ${item.link_url ? `<a href="${item.link_url}" ${item.link_url.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="underline text-amber-300 hover:text-white ml-2 text-[11px] shrink-0 font-bold">Open Portal &rarr;</a>` : ''}
         `;
-        if (tickerCounter) tickerCounter.textContent = `${idx + 1}/${announcements.length}`;
+        if (tickerCounter) tickerCounter.textContent = `${safeIdx + 1}/${announcements.length}`;
       }
 
       function nextTicker() {
+        if (!announcements || announcements.length <= 1) return;
         currentTickerIdx = (currentTickerIdx + 1) % announcements.length;
         renderTicker(currentTickerIdx);
       }
 
       function prevTicker() {
+        if (!announcements || announcements.length <= 1) return;
         currentTickerIdx = (currentTickerIdx - 1 + announcements.length) % announcements.length;
         renderTicker(currentTickerIdx);
       }
 
       function startTicker() {
         if (tickerTimer) clearInterval(tickerTimer);
+        if (!announcements || announcements.length <= 1) return;
         tickerTimer = setInterval(() => {
           if (!isTickerPaused) nextTicker();
         }, 6000);
       }
 
-      document.getElementById('ticker-next')?.addEventListener('click', nextTicker);
-      document.getElementById('ticker-prev')?.addEventListener('click', prevTicker);
+      document.getElementById('ticker-next')?.addEventListener('click', () => {
+        nextTicker();
+        startTicker();
+      });
+      document.getElementById('ticker-prev')?.addEventListener('click', () => {
+        prevTicker();
+        startTicker();
+      });
       tickerTogglePause?.addEventListener('click', () => {
         isTickerPaused = !isTickerPaused;
         tickerTogglePause.textContent = isTickerPaused ? '▶' : '❚❚';
       });
 
-      // 3b. Attractive Animated Live Updates & DDO Orders Stream
+      // 3b. Important Notices Stream (Mapped directly from Announcements)
       function mapAnnouncementToOrder(ann) {
-        let badge = 'Official Notice';
-        let tagClass = 'bg-blue-100 text-blue-900 border-blue-200';
-        let urgentPill = (ann.type || 'URGENT').toUpperCase();
-        let actionText = 'Open Link &rarr;';
-        const link = ann.link_url || '/downloads';
-        const isExternal = link.startsWith('http');
+        let badge = 'Notice';
+        let tagClass = 'bg-blue-100 text-blue-900 border-blue-300';
+        let urgentPill = 'OFFICIAL';
+
+        switch (ann.type) {
+          case 'urgent':
+            urgentPill = 'URGENT DDO';
+            tagClass = 'bg-rose-100 text-rose-900 border-rose-300';
+            break;
+          case 'warning':
+            urgentPill = 'ATTENTION';
+            tagClass = 'bg-amber-100 text-amber-900 border-amber-300';
+            break;
+          case 'success':
+            urgentPill = 'NEW UPDATE';
+            tagClass = 'bg-emerald-100 text-emerald-900 border-emerald-300';
+            break;
+          case 'info':
+          default:
+            urgentPill = 'CIRCULAR';
+            tagClass = 'bg-blue-100 text-blue-900 border-blue-300';
+            break;
+        }
 
         const titleLower = (ann.title || '').toLowerCase();
         if (titleLower.includes('spark')) {
           badge = 'SPARK Direct';
-          tagClass = 'bg-amber-100 text-amber-900 border-amber-300';
-          urgentPill = 'URGENT DDO';
-          actionText = 'Proceed to SPARK Direct &rarr;';
         } else if (titleLower.includes('medisep')) {
-          badge = 'MEDISEP II';
-          tagClass = 'bg-emerald-100 text-emerald-900 border-emerald-300';
-          urgentPill = 'NEW ORDER';
-          actionText = 'Download Hospital Directory &rarr;';
+          badge = 'MEDISEP';
         } else if (titleLower.includes('gpf')) {
           badge = 'GPF Kerala';
-          tagClass = 'bg-blue-100 text-blue-900 border-blue-300';
-          urgentPill = 'CIRCULAR';
-          actionText = 'Access GPF Portal &rarr;';
-        } else if (titleLower.includes('bims') || titleLower.includes('dsc') || titleLower.includes('treasury')) {
+        } else if (titleLower.includes('bims') || titleLower.includes('treasury')) {
           badge = 'BIMS Treasury';
-          tagClass = 'bg-indigo-100 text-indigo-900 border-indigo-300';
-          urgentPill = 'DDO ADVISORY';
-          actionText = 'Open BIMS Processing &rarr;';
+        } else if (titleLower.includes('ksr') || titleLower.includes('leave')) {
+          badge = 'KSR Rules';
+        } else if (titleLower.includes('da') || titleLower.includes('salary') || titleLower.includes('pay')) {
+          badge = 'Finance Dept';
         } else {
-          actionText = isExternal ? 'Open Portal &rarr;' : 'View Resource &rarr;';
+          badge = 'Official Notice';
         }
 
+        const link = ann.link_url || '/downloads';
+        const isExternal = link.startsWith('http');
+        const actionText = isExternal ? 'Access Portal &rarr;' : 'View Resource &rarr;';
+
+        const dateStr = ann.created_at
+          ? new Date(ann.created_at).toLocaleDateString('en-GB')
+          : new Date().toLocaleDateString('en-GB');
+
         return {
-          date: ann.created_at ? new Date(ann.created_at).toLocaleDateString('en-GB') : '26/10/2026',
+          date: dateStr,
           badge,
           tagClass,
           urgentPill,
-          title: ann.title,
-          desc: ann.message,
+          title: ann.title || 'Official Announcement',
+          desc: ann.message || '',
           actionText,
           actionUrl: link,
           isExternal
         };
       }
-
-      let liveOrders = [
-        {
-          date: '26/10/2026',
-          badge: 'SPARK Direct',
-          tagClass: 'bg-amber-100 text-amber-900 border-amber-300',
-          urgentPill: 'URGENT DDO',
-          title: 'Attention DDOs: Annual Property Return (APR) Submission',
-          desc: 'Ensure all gazetted and non-gazetted submissions are completed before quarterly cutoff. Access direct login portal.',
-          actionText: 'Proceed to SPARK Direct &rarr;',
-          actionUrl: 'https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx',
-          isExternal: true
-        },
-        {
-          date: '25/10/2026',
-          badge: 'MEDISEP II',
-          tagClass: 'bg-emerald-100 text-emerald-900 border-emerald-300',
-          urgentPill: 'NEW ORDER',
-          title: 'MEDISEP Phase II: Hospital Network & Cashless Claims',
-          desc: 'Updated directory of cashless empanelled private and government hospitals in Kasaragod and Mangalore regions.',
-          actionText: 'Download Hospital Directory &rarr;',
-          actionUrl: '/downloads',
-          isExternal: false
-        },
-        {
-          date: '24/10/2026',
-          badge: 'GPF Kerala',
-          tagClass: 'bg-blue-100 text-blue-900 border-blue-300',
-          urgentPill: 'CIRCULAR',
-          title: 'GPF Annual Credit Cards & Interest Calculations',
-          desc: 'Annual accounts statements are available for employee verification via the AG portal with instant ledger reconciliation.',
-          actionText: 'Access GPF Portal &rarr;',
-          actionUrl: '/services',
-          isExternal: false
-        },
-        {
-          date: '22/10/2026',
-          badge: 'BIMS Treasury',
-          tagClass: 'bg-indigo-100 text-indigo-900 border-indigo-300',
-          urgentPill: 'DDO ADVISORY',
-          title: 'Monthly Establishment Bill Processing & DSC Verification',
-          desc: 'All DDOs must ensure digital signature certificate (DSC) validity and timely token submission before the cutoff.',
-          actionText: 'Open BIMS Processing &rarr;',
-          actionUrl: 'https://bims.kerala.gov.in',
-          isExternal: true
-        }
-      ];
 
       let currentLiveIdx = 0;
       let liveFeedTimer = null;
@@ -1656,17 +1636,29 @@
       const liveFeedNext = document.getElementById('live-feed-next');
 
       function renderLiveFeed(highlightIdx) {
-        if (!liveFeedContainer || liveOrders.length === 0) return;
+        if (!liveFeedContainer) return;
+        if (!liveOrders || liveOrders.length === 0) {
+          if (liveFeedCounter) liveFeedCounter.textContent = '0/0';
+          liveFeedContainer.innerHTML = `
+            <div class="py-6 px-4 text-center rounded-lg bg-slate-50 border border-slate-200">
+              <svg class="w-8 h-8 mx-auto text-slate-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+              <div class="font-bold text-slate-700 text-xs">No active notices</div>
+              <div class="text-[11px] text-slate-500 mt-1">Click "+ Add Announcement" in Admin to create one.</div>
+            </div>
+          `;
+          return;
+        }
+
         const total = liveOrders.length;
         const safeIdx = highlightIdx % total;
         if (liveFeedCounter) {
           liveFeedCounter.textContent = `${safeIdx + 1}/${total}`;
         }
 
-        // Render 3 visible cards starting with active highlight
+        // Render active highlight card + up to 2 secondary cards if available
         const activeItem = liveOrders[safeIdx];
-        const nextItem1 = liveOrders[(safeIdx + 1) % total];
-        const nextItem2 = liveOrders[(safeIdx + 2) % total];
+        const nextItem1 = total > 1 ? liveOrders[(safeIdx + 1) % total] : null;
+        const nextItem2 = total > 2 ? liveOrders[(safeIdx + 2) % total] : null;
 
         liveFeedContainer.innerHTML = `
           <!-- Active Highlight Card with Glowing Gradient Border & Dynamic Pill -->
@@ -1713,7 +1705,7 @@
           ` : ''}
 
           <!-- Secondary Order Item 2 -->
-          ${nextItem2 && nextItem2 !== nextItem1 ? `
+          ${nextItem2 ? `
           <div class="p-2.5 rounded-lg bg-white/95 border border-slate-200 shadow-xs hover:border-blue-400 hover:bg-blue-50/40 transition-all duration-300">
             <div class="flex items-center justify-between text-[10px] mb-1">
               <span class="text-slate-400 font-semibold">${nextItem2.date}</span>
@@ -1728,19 +1720,20 @@
       }
 
       function nextLiveFeed() {
-        if (liveOrders.length === 0) return;
+        if (!liveOrders || liveOrders.length <= 1) return;
         currentLiveIdx = (currentLiveIdx + 1) % liveOrders.length;
         renderLiveFeed(currentLiveIdx);
       }
 
       function prevLiveFeed() {
-        if (liveOrders.length === 0) return;
+        if (!liveOrders || liveOrders.length <= 1) return;
         currentLiveIdx = (currentLiveIdx - 1 + liveOrders.length) % liveOrders.length;
         renderLiveFeed(currentLiveIdx);
       }
 
       function startLiveFeedTimer() {
         if (liveFeedTimer) clearInterval(liveFeedTimer);
+        if (!liveOrders || liveOrders.length <= 1) return;
         liveFeedTimer = setInterval(() => {
           if (!isLiveFeedPaused) {
             nextLiveFeed();
@@ -1769,31 +1762,33 @@
       liveFeedContainer?.addEventListener('mouseleave', () => {
         isLiveFeedPaused = false;
         if (liveFeedStatus) {
-          liveFeedStatus.textContent = 'Real-Time DDO Stream';
+          liveFeedStatus.textContent = 'Important Notices';
           liveFeedStatus.classList.remove('text-amber-600');
         }
       });
-
-      renderLiveFeed(0);
-      startLiveFeedTimer();
 
       // Fetch live announcements from DB as authoritative source
       try {
         const annRes = await fetch('/api/v1/announcements');
         const annData = await annRes.json();
-        if (annData.success && annData.data && annData.data.length > 0) {
-          announcements = annData.data;
-          // Map DB announcements directly to live orders so admin changes reflect immediately!
-          liveOrders = annData.data.map(mapAnnouncementToOrder);
-          currentLiveIdx = 0;
-          renderLiveFeed(0);
-          renderTicker(0);
+        if (annData.success && Array.isArray(annData.data)) {
+          announcements = annData.data.filter(a => a.is_active !== false);
+          liveOrders = announcements.map(mapAnnouncementToOrder);
+        } else {
+          announcements = [];
+          liveOrders = [];
         }
       } catch (e) {
-        console.warn('Using default announcements:', e);
+        console.warn('Failed to load announcements from API:', e);
+        announcements = [];
+        liveOrders = [];
       }
+      currentLiveIdx = 0;
+      currentTickerIdx = 0;
+      renderLiveFeed(0);
       renderTicker(0);
-      startTicker();
+      if (liveOrders.length > 1) startLiveFeedTimer();
+      if (announcements.length > 1) startTicker();
 
       // 4. Fetch & display Categories
       try {

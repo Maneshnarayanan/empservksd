@@ -78,43 +78,43 @@
     <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
       <div class="flex items-center justify-between h-12 gap-2">
         <!-- Desktop Nav Links -->
-        <div id="desktop-nav-links" class="hidden md:flex items-center gap-0.5 xl:gap-1 text-xs uppercase tracking-tight flex-nowrap min-w-0 flex-1 overflow-x-auto scrollbar-none py-1">
+        <div id="desktop-nav-links" class="hidden lg:flex items-center gap-0.5 xl:gap-1 text-xs uppercase tracking-tight flex-nowrap min-w-0 flex-1 overflow-x-auto scrollbar-none py-1">
           <a href="/" class="gov-nav-item {{NAV_ACTIVE_HOME}}" title="Home">
             <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
             <span>Home</span>
           </a>
           <a href="/services" class="gov-nav-item {{NAV_ACTIVE_SERVICES}}" title="Services">
-            <span>Services<span class="hidden 2xl:inline"> Directory</span></span>
+            <span>Services<span class="hidden xl:inline"> Directory</span></span>
           </a>
           <a href="/downloads" class="gov-nav-item {{NAV_ACTIVE_DOWNLOADS}}" title="Downloads">
-            <span>Downloads<span class="hidden 2xl:inline"> &amp; Orders</span></span>
+            <span>Downloads<span class="hidden xl:inline"> &amp; Orders</span></span>
           </a>
           <a href="/news" class="gov-nav-item {{NAV_ACTIVE_NEWS}}" title="News">
-            <span>News<span class="hidden 2xl:inline"> &amp; Posters</span></span>
+            <span>News<span class="hidden xl:inline"> &amp; Posters</span></span>
           </a>
           <a href="/blogs" class="gov-nav-item {{NAV_ACTIVE_BLOGS}}" title="Blogs">
-            <span>Blogs<span class="hidden 2xl:inline"> &amp; Web</span></span>
+            <span>Blogs<span class="hidden xl:inline"> &amp; Web</span></span>
           </a>
           <a href="/jobs" class="gov-nav-item {{NAV_ACTIVE_JOBS}} flex items-center gap-1" title="Job Vacancies">
             <span>Job Vacancy</span>
             <span class="bg-amber-400 text-slate-950 font-black text-[9px] uppercase px-1 py-0.2 rounded shrink-0">NEW</span>
           </a>
           <a href="/about" class="gov-nav-item {{NAV_ACTIVE_ABOUT}}" title="About Us">
-            <span>About<span class="hidden 2xl:inline"> Us</span></span>
+            <span>About<span class="hidden xl:inline"> Us</span></span>
           </a>
           <a href="/contact" class="gov-nav-item {{NAV_ACTIVE_CONTACT}}" title="Contact">
             <span>Contact</span>
           </a>
         </div>
 
-        <div class="hidden md:flex items-center shrink-0 ml-auto pl-2">
+        <div class="hidden lg:flex items-center shrink-0 ml-auto pl-2">
           <a href="https://www.spark.gov.in/webspark/(S(4w1zscqlzcwfuk3ipqncyhnb))/sparklogin.aspx" target="_blank" rel="noopener noreferrer" class="text-amber-300 hover:text-amber-200 text-xs font-bold flex items-center gap-1 px-3 py-1.5 rounded bg-black/25 hover:bg-black/40 border border-amber-400/40 transition shrink-0 whitespace-nowrap shadow-xs">
             <span>SPARK Login &rarr;</span>
           </a>
         </div>
 
         <!-- Mobile Header Bar: Menu Button + SPARK Direct Action -->
-        <div class="flex md:hidden items-center justify-between w-full">
+        <div class="flex lg:hidden items-center justify-between w-full">
           <button id="mobile-menu-btn" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-white hover:bg-white/10 border border-white/20 active:bg-white/20 transition shadow-xs" aria-label="Toggle navigation">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             <span class="text-xs font-bold uppercase tracking-wider">Menu</span>
@@ -128,7 +128,7 @@
       </div>
 
       <!-- Mobile Dropdown -->
-      <div id="mobile-menu" class="hidden md:hidden pb-3 pt-2 border-t border-blue-900/60 space-y-1 text-sm font-semibold">
+      <div id="mobile-menu" class="hidden lg:hidden pb-3 pt-2 border-t border-blue-900/60 space-y-1 text-sm font-semibold">
         <a href="/" class="block px-3 py-2 rounded {{MOB_ACTIVE_HOME}}">Home</a>
         <a href="/services" class="block px-3 py-2 rounded {{MOB_ACTIVE_SERVICES}}">Services Directory</a>
         <a href="/downloads" class="block px-3 py-2 rounded {{MOB_ACTIVE_DOWNLOADS}}">Downloads & Orders</a>
