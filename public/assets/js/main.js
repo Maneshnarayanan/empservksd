@@ -325,11 +325,16 @@ async function initDynamicNavPages() {
       const isAct = currentPath === decodedHref || currentPath === `/${page.slug}`.normalize('NFC');
 
       if (desktopNav) {
+        const contactLink = desktopNav.querySelector('a[href="/contact"]');
         const link = document.createElement('a');
         link.href = targetHref;
         link.className = `gov-nav-item ${isAct ? 'active font-bold' : ''}`;
         link.textContent = page.title;
-        desktopNav.appendChild(link);
+        if (contactLink) {
+          desktopNav.insertBefore(link, contactLink);
+        } else {
+          desktopNav.appendChild(link);
+        }
       }
 
       if (mobileMenu) {
