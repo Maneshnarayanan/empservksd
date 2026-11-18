@@ -75,7 +75,11 @@ describe('Downloads Management & Secure File Delivery', () => {
   it('should stream file through controlled download route and increment count', async () => {
     const res = await request(app).get(`/api/v1/downloads/${createdDownloadId}/file`);
     expect(res.status).toBe(200);
-    expect(res.headers['content-disposition']).toContain('attachment');
+    expect(res.headers['content-disposition']).toContain('inline');
+
+    const forceRes = await request(app).get(`/api/v1/downloads/${createdDownloadId}/file?download=true`);
+    expect(forceRes.status).toBe(200);
+    expect(forceRes.headers['content-disposition']).toContain('attachment');
 
     // Verify download count incremented
     const detailRes = await request(app).get('/api/v1/downloads');

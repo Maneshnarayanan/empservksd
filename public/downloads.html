@@ -377,7 +377,11 @@
                   ${item.category || 'General'}
                 </span>
               </div>
-              <h3 class="font-black text-slate-900 text-xs leading-snug mb-2 font-heading">${item.title}</h3>
+              <h3 class="font-black text-slate-900 text-xs leading-snug mb-2 font-heading">
+                <a href="/api/v1/downloads/${item.id}/file" target="_blank" rel="noopener noreferrer" class="hover:text-blue-900 hover:underline transition">
+                  ${item.title}
+                </a>
+              </h3>
               <p class="text-xs text-slate-600 line-clamp-3 mb-3 leading-relaxed">${item.description || 'Downloadable official resource file.'}</p>
             </div>
 
@@ -385,11 +389,11 @@
               <div class="flex items-center gap-2 text-[10px] font-semibold text-slate-500">
                 <span>${formatBytes(item.file_size)}</span>
                 <span>•</span>
-                <span>${item.download_count || 0} downloads</span>
+                <span>${item.download_count || 0} views</span>
               </div>
-              <a href="/api/v1/downloads/${item.id}/file" class="gov-blue-btn px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs hover:shadow-sm">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                <span>Download</span>
+              <a href="/api/v1/downloads/${item.id}/file" target="_blank" rel="noopener noreferrer" class="gov-blue-btn px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-xs hover:shadow-sm" title="Open in new tab">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                <span>${ext === 'PDF' ? 'Open PDF' : 'Download'} &rarr;</span>
               </a>
             </div>
           </div>

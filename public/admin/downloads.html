@@ -222,7 +222,7 @@
             }
           </td>
           <td class="px-6 py-3.5 text-right space-x-2">
-            <a href="/api/v1/downloads/${item.id}/file" class="text-blue-600 hover:text-blue-800 font-semibold" target="_blank">Download</a>
+            <a href="/api/v1/downloads/${item.id}/file" class="text-blue-600 hover:text-blue-800 font-semibold" target="_blank" rel="noopener noreferrer">Open / View</a>
             <button onclick="openEditDownloadModal(${item.id})" class="text-emerald-700 hover:text-emerald-900 font-semibold">Edit</button>
             <button onclick="handleDeleteDownload(${item.id}, '${item.title.replace(/'/g, "\\'")}')" class="text-rose-600 hover:text-rose-800 font-semibold">Delete</button>
           </td>

@@ -109,9 +109,24 @@ async function downloadFile(req, res, next) {
     // Increment count asynchronously
     downloadRepo.incrementDownloadCount(download.id).catch(() => {});
 
-    // Set appropriate headers and send file safely
-    res.setHeader('Content-Type', download.mime_type || 'application/octet-stream');
-    res.download(filePath, download.original_filename);
+    // For PDF documents and viewable media, display inline in new tab by default.
+    // Force attachment download only if ?download=true or for non-inlineable formats.
+    const forceDownload = req.query.download === 'true' || req.query.download === '1';
+    const isInlineViewable = download.mime_type === 'application/pdf' ||
+                             download.mime_type?.startsWith('image/') ||
+                             download.mime_type === 'text/plain';
+
+    if (forceDownload || !isInlineViewable) {
+      res.setHeader('Content-Type', download.mime_type || 'application/octet-stream');
+      return res.download(filePath, download.original_filename);
+    } else {
+      res.setHeader('Content-Type', download.mime_type || 'application/pdf');
+      res.setHeader(
+        'Content-Disposition',
+        `inline; filename="${encodeURIComponent(download.original_filename || 'document.pdf')}"`
+      );
+      return res.sendFile(filePath);
+    }
   } catch (err) {
     next(err);
   }
