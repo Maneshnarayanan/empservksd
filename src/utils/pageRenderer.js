@@ -61,14 +61,19 @@ function safeUrl(url) {
 }
 
 function renderTableCell(cell, type = 'text') {
+  const isLinkOrAttachment = type === 'link' || type === 'attachment' || type === 'file';
+
   // If cell is an object (e.g. { text, url, newTab })
   if (typeof cell === 'object' && cell !== null) {
-    const text = cell.text || cell.url || 'Open Link';
+    const text = cell.text || cell.url || (isLinkOrAttachment ? 'Download / View File' : 'Open Link');
     const url = cell.url || '#';
     const newTab = cell.newTab !== false;
+    const isDoc = url.endsWith('.pdf') || url.endsWith('.docx') || url.endsWith('.xlsx') || url.includes('/storage/page-assets/') || url.includes('/downloads/');
+    const icon = isDoc ? '📄' : '🔗';
     return `
       <td class="px-4 py-3 text-slate-700 font-medium">
         <a href="${safeUrl(url)}" ${newTab ? 'target="_blank" rel="noopener noreferrer"' : ''} class="inline-flex items-center gap-1.5 font-bold text-blue-800 hover:text-blue-950 hover:underline bg-blue-50/90 hover:bg-blue-100 border border-blue-200 px-2.5 py-1 rounded-md text-xs transition">
+          <span>${icon}</span>
           <span>${escapeHtml(text)}</span>
           <svg class="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
         </a>
@@ -78,7 +83,7 @@ function renderTableCell(cell, type = 'text') {
 
   const str = String(cell ?? '');
 
-  if (type === 'link') {
+  if (isLinkOrAttachment) {
     if (!str.trim()) {
       return '<td class="px-4 py-3 text-slate-400 italic text-xs">—</td>';
     }
@@ -89,9 +94,12 @@ function renderTableCell(cell, type = 'text') {
       label = parts[0].trim();
       url = parts.slice(1).join('|').trim();
     }
+    const isDoc = url.endsWith('.pdf') || url.endsWith('.docx') || url.endsWith('.xlsx') || url.includes('/storage/page-assets/') || url.includes('/downloads/');
+    const icon = isDoc ? '📄' : '🔗';
     return `
       <td class="px-4 py-3 text-slate-700 font-medium">
         <a href="${safeUrl(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-bold text-blue-800 hover:text-blue-950 hover:underline bg-blue-50/90 hover:bg-blue-100 border border-blue-200 px-2.5 py-1 rounded-md text-xs transition">
+          <span>${icon}</span>
           <span>${escapeHtml(label)}</span>
           <svg class="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
         </a>

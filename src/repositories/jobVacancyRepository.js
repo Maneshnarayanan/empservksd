@@ -6,8 +6,19 @@ const { slugify } = require('../utils/slugify');
  */
 function hydrateJob(row) {
   if (!row) return null;
+  let parsedBlocks = [];
+  if (Array.isArray(row.blocks)) {
+    parsedBlocks = row.blocks;
+  } else if (typeof row.blocks === 'string') {
+    try {
+      parsedBlocks = JSON.parse(row.blocks);
+    } catch (_) {
+      parsedBlocks = [];
+    }
+  }
   return {
     ...row,
+    blocks: parsedBlocks,
     view_count: Number(row.view_count) || 0,
     display_order: Number(row.display_order) || 0,
     is_featured: Boolean(row.is_featured),
@@ -90,7 +101,7 @@ async function findAll({
     SELECT id, title, slug, department, category_no, scale_of_pay, qualification, age_limit,
            last_date, vacancy_count, job_type, application_fee, location, description, how_to_apply,
            official_notification_url, apply_url, is_featured, is_active, display_order,
-           COALESCE(view_count, 0) as view_count, created_at, updated_at
+           COALESCE(view_count, 0) as view_count, blocks, created_at, updated_at
     FROM job_vacancies
     ${whereStr}
     ORDER BY display_order ASC, is_featured DESC, last_date ASC NULLS LAST, id DESC
@@ -135,7 +146,7 @@ async function findBySlug(slug, { onlyActive = false } = {}) {
     SELECT id, title, slug, department, category_no, scale_of_pay, qualification, age_limit,
            last_date, vacancy_count, job_type, application_fee, location, description, how_to_apply,
            official_notification_url, apply_url, is_featured, is_active, display_order,
-           COALESCE(view_count, 0) as view_count, created_at, updated_at
+           COALESCE(view_count, 0) as view_count, blocks, created_at, updated_at
     FROM job_vacancies
     WHERE slug = $1
   `;
@@ -159,7 +170,7 @@ async function findById(id) {
     SELECT id, title, slug, department, category_no, scale_of_pay, qualification, age_limit,
            last_date, vacancy_count, job_type, application_fee, location, description, how_to_apply,
            official_notification_url, apply_url, is_featured, is_active, display_order,
-           COALESCE(view_count, 0) as view_count, created_at, updated_at
+           COALESCE(view_count, 0) as view_count, blocks, created_at, updated_at
     FROM job_vacancies
     WHERE id = $1;
   `;
@@ -172,15 +183,17 @@ async function findById(id) {
  */
 async function create(data) {
   const finalSlug = await ensureUniqueSlug(data.slug || data.title);
+  const blocksJson = data.blocks !== undefined ? JSON.stringify(data.blocks) : '[]';
+
   const query = `
     INSERT INTO job_vacancies (
       title, slug, department, category_no, scale_of_pay, qualification, age_limit,
       last_date, vacancy_count, job_type, application_fee, location, description, how_to_apply,
-      official_notification_url, apply_url, is_featured, is_active, display_order, view_count
+      official_notification_url, apply_url, is_featured, is_active, display_order, view_count, blocks
     ) VALUES (
       $1, $2, $3, $4, $5, $6, $7,
       $8, $9, $10, $11, $12, $13, $14,
-      $15, $16, $17, $18, $19, 0
+      $15, $16, $17, $18, $19, 0, $20
     )
     RETURNING *;
   `;
@@ -205,6 +218,7 @@ async function create(data) {
     Boolean(data.is_featured),
     data.is_active !== undefined ? Boolean(data.is_active) : true,
     parseInt(data.display_order, 10) || 0,
+    blocksJson,
   ];
 
   const res = await db.query(query, values);
@@ -242,8 +256,9 @@ async function update(id, data) {
       is_featured = COALESCE($17, is_featured),
       is_active = COALESCE($18, is_active),
       display_order = COALESCE($19, display_order),
+      blocks = CASE WHEN $20::text IS NOT NULL THEN $20::jsonb ELSE blocks END,
       updated_at = CURRENT_TIMESTAMP
-    WHERE id = $20
+    WHERE id = $21
     RETURNING *;
   `;
 
@@ -267,6 +282,7 @@ async function update(id, data) {
     data.is_featured !== undefined ? Boolean(data.is_featured) : null,
     data.is_active !== undefined ? Boolean(data.is_active) : null,
     data.display_order !== undefined ? parseInt(data.display_order, 10) : null,
+    data.blocks !== undefined ? JSON.stringify(data.blocks) : null,
     id,
   ];
 

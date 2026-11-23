@@ -815,6 +815,71 @@
       cell[field] = val;
     }
 
+    function clearTableCellLink(blockIdx, rowIdx, colIdx) {
+      let cell = builderBlocks[blockIdx].rows[rowIdx][colIdx];
+      if (typeof cell === 'object' && cell !== null) {
+        cell.url = '';
+      } else {
+        builderBlocks[blockIdx].rows[rowIdx][colIdx] = '';
+      }
+      renderBlocksCanvas();
+    }
+
+    async function uploadTableCellAsset(blockIdx, rowIdx, colIdx, inputEl) {
+      const file = inputEl.files && inputEl.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const labelBtn = inputEl.closest('label');
+      const originalText = labelBtn ? labelBtn.innerHTML : '';
+      if (labelBtn) {
+        labelBtn.innerHTML = '<span>⏳ Uploading...</span>';
+        labelBtn.classList.add('opacity-75', 'pointer-events-none');
+      }
+
+      try {
+        const res = await fetch('/api/v1/admin/pages/upload-attachment', {
+          method: 'POST',
+          headers: { 'X-CSRF-Token': csrfToken },
+          body: formData,
+        });
+        const json = await res.json();
+        if (!res.ok || !json.success) {
+          alert(json.message || 'File upload failed.');
+          return;
+        }
+
+        let cell = builderBlocks[blockIdx].rows[rowIdx][colIdx];
+        if (typeof cell !== 'object' || cell === null) {
+          cell = { text: '', url: '', newTab: true };
+          builderBlocks[blockIdx].rows[rowIdx][colIdx] = cell;
+        }
+
+        cell.url = json.url;
+        // If label is blank, set a friendly label from filename
+        if (!cell.text || !cell.text.trim()) {
+          const rawName = (json.original_name || file.name).replace(/\.[^/.]+$/, '').replace(/[-_]+/g, ' ');
+          const ext = (file.name.split('.').pop() || '').toUpperCase();
+          cell.text = `Download ${rawName} (${ext})`;
+        }
+        cell.newTab = true;
+
+        renderBlocksCanvas();
+        showToast(`File "${file.name}" attached successfully!`, 'success');
+      } catch (err) {
+        console.error(err);
+        alert('Error uploading file attachment. Please try again.');
+      } finally {
+        if (labelBtn) {
+          labelBtn.innerHTML = originalText;
+          labelBtn.classList.remove('opacity-75', 'pointer-events-none');
+        }
+        inputEl.value = '';
+      }
+    }
+
     function addTableColumn(blockIdx) {
       const b = builderBlocks[blockIdx];
       b.headers.push(`Col ${b.headers.length + 1}`);
@@ -1044,7 +1109,7 @@
                               <select onchange="updateTableColumnType(${idx}, ${hIdx}, this.value)" class="w-full text-[10px] font-semibold rounded border border-slate-300 bg-slate-50 px-1.5 py-0.5 text-slate-800 cursor-pointer focus:ring-1 focus:ring-blue-500">
                                 <option value="text" ${type === 'text' ? 'selected' : ''}>📝 Text</option>
                                 <option value="date" ${type === 'date' ? 'selected' : ''}>📅 Date</option>
-                                <option value="link" ${type === 'link' ? 'selected' : ''}>🔗 Link / URL</option>
+                                <option value="link" ${type === 'link' || type === 'attachment' ? 'selected' : ''}>🔗 Link / Attachment</option>
                                 <option value="badge" ${type === 'badge' ? 'selected' : ''}>🏷️ Badge</option>
                               </select>
                             </div>
@@ -1062,15 +1127,32 @@
                           const type = colTypes[cIdx] || 'text';
                           const cell = row[cIdx];
 
-                          if (type === 'link') {
+                          if (type === 'link' || type === 'attachment') {
                             const isObj = typeof cell === 'object' && cell !== null;
                             const textVal = isObj ? (cell.text || '') : (cell || '');
                             const urlVal = isObj ? (cell.url || '') : (cell && (String(cell).startsWith('http') || String(cell).startsWith('/')) ? cell : '');
+                            const hasUrl = Boolean(urlVal && String(urlVal).trim());
+
                             return `
-                              <td class="p-2 border-r border-slate-200 min-w-[200px]">
-                                <div class="space-y-1">
-                                  <input type="text" value="${escapeHtml(textVal)}" placeholder="Link Label (e.g. Download PDF)" oninput="updateTableCellLink(${idx}, ${rIdx}, ${cIdx}, 'text', this.value)" class="w-full px-2 py-1 rounded border border-slate-200 text-xs bg-white font-medium">
-                                  <input type="text" value="${escapeHtml(urlVal)}" placeholder="URL (/downloads or https://...)" oninput="updateTableCellLink(${idx}, ${rIdx}, ${cIdx}, 'url', this.value)" class="w-full px-2 py-1 rounded border border-blue-200 text-xs font-mono bg-blue-50/50 text-blue-900">
+                              <td class="p-2 border-r border-slate-200 min-w-[240px]">
+                                <div class="space-y-1.5">
+                                  <input type="text" value="${escapeHtml(textVal)}" placeholder="Link / Button Label (e.g. Order PDF)" oninput="updateTableCellLink(${idx}, ${rIdx}, ${cIdx}, 'text', this.value)" class="w-full px-2 py-1 rounded border border-slate-200 text-xs bg-white font-medium focus:border-blue-400">
+                                  <div class="flex items-center gap-1.5">
+                                    <input type="text" value="${escapeHtml(urlVal)}" placeholder="URL or Attached File Path" oninput="updateTableCellLink(${idx}, ${rIdx}, ${cIdx}, 'url', this.value)" class="flex-1 min-w-0 px-2 py-1 rounded border border-blue-200 text-xs font-mono bg-blue-50/40 text-blue-900 focus:border-blue-500">
+                                    <label class="px-2.5 py-1 rounded-lg bg-sky-100 hover:bg-sky-200 text-sky-900 border border-sky-300 text-[11px] font-bold cursor-pointer shrink-0 inline-flex items-center gap-1 shadow-2xs transition" title="Directly upload and attach a PDF or document from your computer">
+                                      <span>📎</span>
+                                      <span>Attach</span>
+                                      <input type="file" accept=".pdf,.docx,.xlsx,.zip,.jpg,.jpeg,.png,.txt" class="hidden" onchange="uploadTableCellAsset(${idx}, ${rIdx}, ${cIdx}, this)">
+                                    </label>
+                                  </div>
+                                  ${hasUrl ? `
+                                    <div class="flex items-center justify-between text-[10px] text-slate-500 pt-0.5 px-0.5">
+                                      <a href="${escapeHtml(urlVal)}" target="_blank" class="text-blue-700 hover:underline inline-flex items-center gap-0.5 font-semibold truncate max-w-[170px]" title="Test attachment in new tab">
+                                        <span>📄 Test File ↗</span>
+                                      </a>
+                                      <button type="button" onclick="clearTableCellLink(${idx}, ${rIdx}, ${cIdx})" class="text-rose-500 hover:text-rose-700 hover:underline cursor-pointer">Clear</button>
+                                    </div>
+                                  ` : ''}
                                 </div>
                               </td>
                             `;
