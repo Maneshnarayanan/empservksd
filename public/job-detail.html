@@ -141,6 +141,236 @@
       return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     };
 
+    function renderDynamicJobContent(job) {
+      if (Array.isArray(job.blocks) && job.blocks.length > 0) {
+        return job.blocks.map(b => {
+          if (!b || typeof b !== 'object') return '';
+          const type = b.type;
+
+          if (type === 'metrics' || type === 'key_details') {
+            const items = Array.isArray(b.items) ? b.items.filter(it => it && (it.value || '').trim()) : [];
+            if (!items.length) return '';
+            return `
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 mb-8">
+                ${items.map(it => {
+                  const label = escapeSafe(it.label || 'Detail');
+                  const val = escapeSafe(it.value || '');
+                  const spanClass = it.fullWidth ? 'sm:col-span-2 md:col-span-3' : (it.span2 ? 'sm:col-span-2' : '');
+                  return `
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 ${spanClass}">
+                      <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">${label}</div>
+                      <div class="text-xs sm:text-sm font-extrabold text-slate-900 mt-1 leading-relaxed ${it.mono ? 'font-mono' : ''}">
+                        ${val}
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            `;
+          }
+
+          if (type === 'qualification') {
+            const text = (b.text || b.qualification || '').trim();
+            if (!text) return '';
+            return `
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 mb-8">
+                <h4 class="text-xs font-black uppercase tracking-wider text-slate-800 font-heading mb-2 flex items-center gap-1.5">
+                  <span>🎓</span>
+                  <span>${escapeSafe(b.heading || 'Educational Qualification Requirements')}</span>
+                </h4>
+                <div class="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                  ${escapeSafe(text)}
+                </div>
+              </div>
+            `;
+          }
+
+          if (type === 'description' || type === 'richtext') {
+            const body = (b.body || b.text || b.description || '').trim();
+            if (!body) return '';
+            return `
+              <div class="mb-8 prose prose-sm max-w-none text-slate-800 text-xs sm:text-sm leading-relaxed space-y-3">
+                ${b.heading ? `<h3 class="text-base font-extrabold text-slate-900 font-heading border-b border-slate-100 pb-2">${escapeSafe(b.heading)}</h3>` : ''}
+                <div>${body}</div>
+              </div>
+            `;
+          }
+
+          if (type === 'how_to_apply') {
+            const steps = (b.steps || b.body || b.how_to_apply || '').trim();
+            if (!steps) return '';
+            return `
+              <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 mb-8">
+                <h3 class="text-base font-extrabold text-slate-900 font-heading mb-4 flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-sm">📝</span>
+                  <span>${escapeSafe(b.heading || 'How to Apply Step-by-Step')}</span>
+                </h3>
+                <div class="prose prose-sm max-w-none text-slate-700 space-y-2 text-xs sm:text-sm">
+                  ${steps}
+                </div>
+              </div>
+            `;
+          }
+
+          if (type === 'table') {
+            const headers = Array.isArray(b.headers) ? b.headers : [];
+            const rows = Array.isArray(b.rows) ? b.rows : [];
+            const colTypes = Array.isArray(b.columnTypes) ? b.columnTypes : [];
+            if (!rows.length) return '';
+            return `
+              <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden mb-8">
+                ${b.heading ? `<div class="bg-slate-50 px-5 py-3 border-b border-slate-200"><h3 class="text-xs sm:text-sm font-extrabold text-slate-900 font-heading">${escapeSafe(b.heading)}</h3></div>` : ''}
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                    ${headers.length ? `
+                      <thead class="bg-blue-950 text-white">
+                        <tr>
+                          ${headers.map(h => `<th class="px-4 py-2.5 font-bold uppercase tracking-wider text-[11px] border-r border-blue-900 last:border-r-0">${escapeSafe(h)}</th>`).join('')}
+                        </tr>
+                      </thead>
+                    ` : ''}
+                    <tbody class="divide-y divide-slate-100">
+                      ${rows.map((row, rIdx) => `
+                        <tr class="${rIdx % 2 === 1 ? 'bg-slate-50/70' : 'bg-white'} hover:bg-blue-50/40 transition">
+                          ${(Array.isArray(row) ? row : []).map((cell, cIdx) => {
+                            const cType = colTypes[cIdx] || 'text';
+                            if (cType === 'link' || (typeof cell === 'object' && cell !== null && cell.url)) {
+                              const url = typeof cell === 'object' ? (cell.url || '#') : String(cell);
+                              const label = typeof cell === 'object' ? (cell.text || 'View File') : String(cell);
+                              return `
+                                <td class="px-4 py-3 text-slate-700 font-medium">
+                                  <a href="${escapeSafe(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-bold text-blue-800 hover:underline bg-blue-50 border border-blue-200 px-2.5 py-1 rounded-md text-xs">
+                                    <span>📄</span>
+                                    <span>${escapeSafe(label)}</span>
+                                    <span>↗</span>
+                                  </a>
+                                </td>
+                              `;
+                            }
+                            if (cType === 'badge') {
+                              return `<td class="px-4 py-3"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">${escapeSafe(cell)}</span></td>`;
+                            }
+                            return `<td class="px-4 py-3 text-slate-700">${escapeSafe(cell)}</td>`;
+                          }).join('')}
+                        </tr>
+                      `).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            `;
+          }
+
+          if (type === 'alert') {
+            const colors = {
+              urgent: 'bg-red-50 border-red-300 text-red-900',
+              warning: 'bg-amber-50 border-amber-300 text-amber-900',
+              info: 'bg-blue-50 border-blue-300 text-blue-900',
+              success: 'bg-emerald-50 border-emerald-300 text-emerald-900'
+            };
+            const alertClass = colors[b.variant] || colors.info;
+            return `
+              <div class="rounded-xl border p-4 mb-6 ${alertClass}">
+                ${b.title ? `<h4 class="font-bold text-xs sm:text-sm mb-1">${escapeSafe(b.title)}</h4>` : ''}
+                <div class="text-xs leading-relaxed">${escapeSafe(b.message || '')}</div>
+              </div>
+            `;
+          }
+
+          if (type === 'faq') {
+            const items = Array.isArray(b.items) ? b.items : [];
+            if (!items.length) return '';
+            return `
+              <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs mb-8">
+                ${b.heading ? `<h3 class="text-sm sm:text-base font-extrabold text-slate-900 font-heading mb-4">${escapeSafe(b.heading)}</h3>` : ''}
+                <div class="space-y-2.5">
+                  ${items.map(f => `
+                    <details class="group border border-slate-200 rounded-xl bg-slate-50/50 open:bg-white open:border-blue-300 transition">
+                      <summary class="px-4 py-3 text-xs sm:text-sm font-bold text-slate-900 cursor-pointer flex items-center justify-between list-none">
+                        <span>${escapeSafe(f.question || '')}</span>
+                        <span class="text-blue-900 font-black group-open:rotate-180 transition-transform">&darr;</span>
+                      </summary>
+                      <div class="px-4 pb-3.5 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        ${escapeSafe(f.answer || '')}
+                      </div>
+                    </details>
+                  `).join('')}
+                </div>
+              </div>
+            `;
+          }
+
+          if (type === 'download_cta') {
+            return `
+              <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <h4 class="font-extrabold text-sm text-slate-900">${escapeSafe(b.title || 'Official Document / Form')}</h4>
+                  ${b.description ? `<p class="text-xs text-slate-600 mt-0.5">${escapeSafe(b.description)}</p>` : ''}
+                </div>
+                ${b.buttonUrl ? `
+                  <a href="${escapeSafe(b.buttonUrl)}" target="_blank" rel="noopener noreferrer" class="gov-blue-btn px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5 shrink-0">
+                    <span>📄</span>
+                    <span>${escapeSafe(b.buttonText || 'Download File')}</span>
+                    <span>↗</span>
+                  </a>
+                ` : ''}
+              </div>
+            `;
+          }
+
+          return '';
+        }).join('');
+      }
+
+      // Legacy fallback: render ONLY non-empty fields (no forced dummy defaults!)
+      const metrics = [];
+      if (job.scale_of_pay && job.scale_of_pay.trim()) {
+        metrics.push({ label: 'Scale of Pay / Salary', value: job.scale_of_pay, mono: true });
+      }
+      if (job.vacancy_count && job.vacancy_count.trim()) {
+        metrics.push({ label: 'Total Vacancies', value: job.vacancy_count });
+      }
+      if (job.application_fee && job.application_fee.trim()) {
+        metrics.push({ label: 'Application Fee', value: job.application_fee });
+      }
+      if (job.age_limit && job.age_limit.trim()) {
+        metrics.push({ label: 'Age Limit', value: job.age_limit });
+      }
+      if (job.qualification && job.qualification.trim()) {
+        metrics.push({ label: 'Educational Qualification', value: job.qualification, span2: true });
+      }
+
+      let metricsHtml = '';
+      if (metrics.length > 0) {
+        metricsHtml = `
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 mb-8">
+            ${metrics.map(m => `
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 ${m.span2 ? 'sm:col-span-2' : ''}">
+                <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">${escapeSafe(m.label)}</div>
+                <div class="text-xs sm:text-sm font-extrabold text-slate-900 mt-1 leading-relaxed ${m.mono ? 'font-mono' : ''}">
+                  ${escapeSafe(m.value)}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      let descHtml = '';
+      if (job.description && job.description.trim()) {
+        descHtml = `
+          <div class="prose prose-sm max-w-none text-slate-800 text-xs sm:text-sm leading-relaxed space-y-4 mb-8">
+            <h3 class="text-base font-extrabold text-slate-900 font-heading border-b border-slate-100 pb-2">
+              Official Notification Summary &amp; Scope
+            </h3>
+            <div>${job.description}</div>
+          </div>
+        `;
+      }
+
+      return metricsHtml + descHtml;
+    }
+
     async function loadJobDetail() {
       const parts = window.location.pathname.split('/');
       const slug = parts[parts.length - 1] || parts[parts.length - 2];
@@ -209,9 +439,6 @@
               </div>
               <div class="flex items-center gap-2">
                 ${urgencyBadge}
-                <span class="text-slate-400 font-mono text-xs flex items-center gap-1" title="Views">
-                  👁️ ${Number(job.view_count) || 0}
-                </span>
               </div>
             </div>
 
@@ -237,53 +464,17 @@
             </div>
           </div>
 
-          <!-- Highlighted Key Information Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 mb-8">
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
-              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Scale of Pay / Salary</div>
-              <div class="text-sm font-extrabold text-blue-900 mt-0.5 font-mono">
-                ${escapeSafe(job.scale_of_pay || 'Kerala State Scale')}
-              </div>
-            </div>
-
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
-              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Total Vacancies</div>
-              <div class="text-sm font-extrabold text-emerald-800 mt-0.5">
-                ${escapeSafe(job.vacancy_count || 'Anticipated / District Quota')}
-              </div>
-            </div>
-
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
-              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Application Fee</div>
-              <div class="text-sm font-extrabold text-slate-800 mt-0.5">
-                ${escapeSafe(job.application_fee || 'Free (Kerala PSC OTR)')}
-              </div>
-            </div>
-
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 sm:col-span-2">
-              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Educational Qualification</div>
-              <div class="text-xs font-semibold text-slate-800 mt-1 leading-relaxed">
-                ${escapeSafe(job.qualification || 'As prescribed in official notification.')}
-              </div>
-            </div>
-
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
-              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Age Limit</div>
-              <div class="text-xs font-semibold text-slate-800 mt-1 leading-relaxed">
-                ${escapeSafe(job.age_limit || '18 - 36 years (usual relaxation applicable)')}
-              </div>
-            </div>
-          </div>
-
           <!-- Action Buttons Bar -->
           <div class="flex flex-wrap items-center gap-3 p-4 bg-blue-50/70 border border-blue-200 rounded-xl mb-8">
-            <a href="${job.apply_url || 'https://thulasi.psc.kerala.gov.in'}" target="_blank" rel="noopener noreferrer" class="gov-gold-btn px-5 py-2.5 rounded-xl text-xs font-black flex items-center gap-2 shadow-sm transition hover:scale-[1.01]">
-              <span>👉 Apply Online (Official Portal)</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-            </a>
+            ${job.apply_url ? `
+              <a href="${escapeSafe(job.apply_url)}" target="_blank" rel="noopener noreferrer" class="gov-gold-btn px-5 py-2.5 rounded-xl text-xs font-black flex items-center gap-2 shadow-sm transition hover:scale-[1.01]">
+                <span>👉 Apply Online (Official Portal)</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+              </a>
+            ` : ''}
 
             ${job.official_notification_url ? `
-              <a href="${job.official_notification_url}" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-100 text-blue-900 border border-blue-300 px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition">
+              <a href="${escapeSafe(job.official_notification_url)}" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-slate-100 text-blue-900 border border-blue-300 px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition">
                 <span>📄 Download Official Notification</span>
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
               </a>
@@ -298,23 +489,21 @@
             </button>
           </div>
 
-          <!-- Detailed Job Description -->
-          <div class="prose prose-sm max-w-none text-slate-800 text-xs sm:text-sm leading-relaxed space-y-4">
-            <h3 class="text-base font-extrabold text-slate-900 font-heading border-b border-slate-100 pb-2">
-              Official Notification Summary &amp; Scope
-            </h3>
-            <div id="job-description-content">
-              ${job.description || '<p>Detailed notification guidelines and examination schedule are available on the official departmental portal.</p>'}
-            </div>
+          <!-- Dynamic Blocks / Content Area -->
+          <div id="job-dynamic-content" class="space-y-6">
+            ${renderDynamicJobContent(job)}
           </div>
         `;
 
-        // If How to Apply content exists, display how-to-apply card
-        if (job.how_to_apply && job.how_to_apply.trim()) {
+        // If How to Apply content exists outside blocks, display how-to-apply card
+        const hasHowToApplyInBlocks = Array.isArray(job.blocks) && job.blocks.some(b => b && b.type === 'how_to_apply');
+        if (!hasHowToApplyInBlocks && job.how_to_apply && job.how_to_apply.trim()) {
           const howCard = document.getElementById('how-to-apply-card');
           const howContent = document.getElementById('how-to-apply-content');
           howContent.innerHTML = job.how_to_apply;
           howCard.classList.remove('hidden');
+        } else {
+          document.getElementById('how-to-apply-card').classList.add('hidden');
         }
 
         // Configure right sidebar quick apply links

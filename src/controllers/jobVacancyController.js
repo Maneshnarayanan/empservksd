@@ -108,6 +108,14 @@ async function createJob(req, res, next) {
       return res.status(400).json({ success: false, message: 'Department/Organization name is required.' });
     }
 
+    if (req.body.blocks && typeof req.body.blocks === 'string') {
+      try {
+        req.body.blocks = JSON.parse(req.body.blocks);
+      } catch (_) {
+        req.body.blocks = [];
+      }
+    }
+
     const job = await jobVacancyRepo.create(req.body);
     return res.status(201).json({
       success: true,
@@ -136,6 +144,14 @@ async function updateJob(req, res, next) {
     }
     if (department !== undefined && !department.trim()) {
       return res.status(400).json({ success: false, message: 'Department cannot be empty.' });
+    }
+
+    if (req.body.blocks && typeof req.body.blocks === 'string') {
+      try {
+        req.body.blocks = JSON.parse(req.body.blocks);
+      } catch (_) {
+        req.body.blocks = [];
+      }
     }
 
     const updated = await jobVacancyRepo.update(id, req.body);

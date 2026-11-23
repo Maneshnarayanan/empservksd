@@ -425,5 +425,45 @@ describe('Dynamic Pages & Admin Visual Page Builder API', () => {
       .delete(`/api/v1/admin/pages/${createRes.body.data.id}`)
       .set('X-CSRF-Token', csrfToken);
   });
+
+  it('should support direct file attachment upload for page builder table cells', async () => {
+    // 1. Upload a file directly via /api/v1/admin/pages/upload-attachment
+    const uploadRes = await agent
+      .post('/api/v1/admin/pages/upload-attachment')
+      .set('X-CSRF-Token', csrfToken)
+      .attach('file', Buffer.from('%PDF-1.4 table attachment direct test'), 'Pay_Revision_Order_2026.pdf');
+
+    expect(uploadRes.status).toBe(200);
+    expect(uploadRes.body.success).toBe(true);
+    expect(uploadRes.body.url).toMatch(/^\/storage\/page-assets\//);
+    expect(uploadRes.body.original_name).toBe('Pay_Revision_Order_2026.pdf');
+
+    const uploadedUrl = uploadRes.body.url;
+
+    // 2. Preview / Render table block using the attached file in a link cell
+    const previewRes = await agent
+      .post('/api/v1/admin/pages/preview')
+      .set('X-CSRF-Token', csrfToken)
+      .send({
+        blocks: [
+          {
+            type: 'table',
+            heading: 'Direct Attachment Table',
+            headers: ['Order No', 'Download File'],
+            columnTypes: ['text', 'link'],
+            rows: [
+              ['GO(P) 12/2026', { text: 'Download Order (PDF)', url: uploadedUrl, newTab: true }]
+            ]
+          }
+        ]
+      });
+
+    expect(previewRes.status).toBe(200);
+    expect(previewRes.body.success).toBe(true);
+    expect(previewRes.body.html).toContain('📄');
+    expect(previewRes.body.html).toContain('Download Order (PDF)');
+    expect(previewRes.body.html).toContain(uploadedUrl);
+    expect(previewRes.body.html).toContain('target="_blank"');
+  });
 });
 

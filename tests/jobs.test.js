@@ -213,6 +213,59 @@ describe('Job Vacancies & Public/Admin Recruitment Desk APIs', () => {
       expect(res.body.data.jobVacancies).toBeGreaterThanOrEqual(5);
     });
 
+    it('should create and retrieve a job vacancy with modular dynamic blocks', async () => {
+      const dynamicJob = {
+        title: 'District Assistant Project Coordinator — KSD 2026',
+        department: 'District Planning Office Kasaragod',
+        blocks: [
+          { type: 'alert', title: 'Special Notice', text: 'Walk-in interview on 15th December 2026 at Collectorate Kasaragod.' },
+          { type: 'qualification', title: 'Educational Qualifications', text: 'Master Degree in Social Work / Economics with 55% marks.' },
+          {
+            type: 'table',
+            title: 'Schedule of Vacancies & Remuneration',
+            headers: ['Post Name', 'Vacancy', 'Honorarium', 'Attachment'],
+            rows: [
+              ['Project Coordinator', '01', '₹35,000/mo', 'https://example.com/notification.pdf'],
+            ],
+          },
+        ],
+        is_active: true,
+      };
+
+      const createRes = await agent
+        .post('/api/v1/admin/jobs')
+        .set('X-CSRF-Token', csrfToken)
+        .send(dynamicJob);
+
+      expect(createRes.status).toBe(201);
+      expect(createRes.body.success).toBe(true);
+      expect(createRes.body.data.id).toBeDefined();
+      const dynId = createRes.body.data.id;
+      const dynSlug = createRes.body.data.slug;
+
+      // Check admin retrieval
+      const adminGetRes = await agent.get(`/api/v1/admin/jobs/${dynId}`);
+      expect(adminGetRes.status).toBe(200);
+      expect(Array.isArray(adminGetRes.body.data.blocks)).toBe(true);
+      expect(adminGetRes.body.data.blocks.length).toBe(3);
+      expect(adminGetRes.body.data.blocks[0].type).toBe('alert');
+
+      // Check public retrieval
+      const pubRes = await request(app).get(`/api/v1/jobs/${dynSlug}`);
+      expect(pubRes.status).toBe(200);
+      expect(pubRes.body.data.blocks).toBeDefined();
+      expect(pubRes.body.data.blocks[1].type).toBe('qualification');
+
+      // Check page rendering returns 200 with job detail container
+      const pageRes = await request(app).get(`/jobs/${dynSlug}`);
+      expect(pageRes.status).toBe(200);
+      expect(pageRes.text).toContain('job-detail-card');
+      expect(pageRes.text).toContain('EMPLOYEES SERVICES');
+
+      // Cleanup
+      await agent.delete(`/api/v1/admin/jobs/${dynId}`).set('X-CSRF-Token', csrfToken);
+    });
+
     it('should delete vacancy via DELETE /api/v1/admin/jobs/:id', async () => {
       const res = await agent
         .delete(`/api/v1/admin/jobs/${createdJobId}`)
